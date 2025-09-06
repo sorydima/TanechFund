@@ -11,6 +11,10 @@
   [![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS%20%7C%20Web%20%7C%20Desktop-lightgrey.svg)](https://flutter.dev/)
 </div>
 
+https://api.codemagic.io/apps/68bc414a6623c271121c1cd9/68bc414a6623c271121c1cd8/status_badge.svg
+
+[![Codemagic build status](https://api.codemagic.io/apps/68bc414a6623c271121c1cd9/68bc414a6623c271121c1cd8/status_badge.svg)](https://codemagic.io/app/68bc414a6623c271121c1cd9/68bc414a6623c271121c1cd8/latest_build)
+
 ## 🌟 Overview
 
 REChain®️ VC Lab is a revolutionary Flutter application that implements the complete evolution of the internet: **Web3 (Ownership) → Web4 (Movement) → Web5 (Creation)**. Built on the philosophy of Katya AI Systems LLC, this platform empowers users to own their digital world, create movement trajectories, and collaborate with AI to build new digital realities.
