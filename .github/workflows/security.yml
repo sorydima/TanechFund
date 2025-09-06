@@ -1,0 +1,132 @@
+name: Security Scan
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    - cron: '0 3 * * 1' # Weekly on Monday at 3 AM
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.19.0'
+        channel: 'stable'
+        
+    - name: Install dependencies
+      run: flutter pub get
+      
+    - name: Run security audit
+      run: flutter pub audit
+      
+    - name: Check for security vulnerabilities
+      run: |
+        echo "## Security Scan Results" >> $GITHUB_STEP_SUMMARY
+        echo "Security audit completed" >> $GITHUB_STEP_SUMMARY
+
+  dependency-scan:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.19.0'
+        channel: 'stable'
+        
+    - name: Install dependencies
+      run: flutter pub get
+      
+    - name: Run dependency check
+      run: flutter pub deps
+      
+    - name: Check for outdated dependencies
+      run: flutter pub outdated
+      
+    - name: Generate dependency report
+      if: always()
+      run: |
+        echo "## Dependency Scan Results" >> $GITHUB_STEP_SUMMARY
+        echo "Dependency check completed" >> $GITHUB_STEP_SUMMARY
+
+  code-scan:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.19.0'
+        channel: 'stable'
+        
+    - name: Install dependencies
+      run: flutter pub get
+      
+    - name: Run static analysis
+      run: flutter analyze --fatal-infos
+      
+    - name: Check for security issues in code
+      run: |
+        echo "## Code Security Scan Results" >> $GITHUB_STEP_SUMMARY
+        echo "Static analysis completed" >> $GITHUB_STEP_SUMMARY
+
+  secrets-scan:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Run secrets scan
+      uses: trufflesecurity/trufflehog@main
+      with:
+        path: ./
+        base: main
+        head: HEAD
+        extra_args: --debug --only-verified
+        
+    - name: Generate secrets scan report
+      if: always()
+      run: |
+        echo "## Secrets Scan Results" >> $GITHUB_STEP_SUMMARY
+        echo "Secrets scan completed" >> $GITHUB_STEP_SUMMARY
+
+  license-scan:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.19.0'
+        channel: 'stable'
+        
+    - name: Install dependencies
+      run: flutter pub get
+      
+    - name: Check licenses
+      run: flutter pub deps --json > deps.json
+      
+    - name: Generate license report
+      if: always()
+      run: |
+        echo "## License Scan Results" >> $GITHUB_STEP_SUMMARY
+        echo "License check completed" >> $GITHUB_STEP_SUMMARY

@@ -1,0 +1,45 @@
+# Configuration for Stale bot
+# Number of days of inactivity before an issue becomes stale
+daysUntilStale: 60
+# Number of days of inactivity before a stale issue is closed
+daysUntilClose: 7
+# Issues with these labels will never be considered stale
+exemptLabels:
+  - pinned
+  - security
+  - bug
+  - enhancement
+  - good first issue
+  - help wanted
+  - priority: high
+  - priority: critical
+# Label to use when marking an issue as stale
+staleLabel: stale
+# Comment to post when marking an issue as stale
+markComment: >
+  This issue has been automatically marked as stale because it has not had
+  recent activity. It will be closed if no further activity occurs. Thank you
+  for your contributions.
+# Comment to post when closing a stale issue
+closeComment: >
+  This issue has been automatically closed due to inactivity. If you think
+  this issue is still relevant, please feel free to reopen it or create a new one.
+# Set to true to ignore issues in a project (defaults to false)
+exemptProjects: false
+# Set to true to ignore issues in a milestone (defaults to false)
+exemptMilestones: false
+# Set to true to ignore issues with an assignee (defaults to false)
+exemptAssignees: false
+# Limit to only `issues` or `pulls`
+only: issues
+# Optionally, specify configuration settings that are specific to just 'pulls':
+pulls:
+  daysUntilStale: 30
+  daysUntilClose: 3
+  markComment: >
+    This pull request has been automatically marked as stale because it has not had
+    recent activity. It will be closed if no further activity occurs. Thank you
+    for your contributions.
+  closeComment: >
+    This pull request has been automatically closed due to inactivity. If you think
+    this pull request is still relevant, please feel free to reopen it or create a new one.

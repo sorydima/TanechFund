@@ -1,0 +1,53 @@
+# Configuration for closing inactive pull requests
+# This file is used by the close-inactive-prs action
+
+# Number of days of inactivity before a PR becomes stale
+daysUntilStale: 30
+
+# Number of days of inactivity before a stale PR is closed
+daysUntilClose: 7
+
+# PRs with these labels will never be considered stale
+exemptLabels:
+  - pinned
+  - security
+  - bug
+  - enhancement
+  - good first issue
+  - help wanted
+  - priority: high
+  - priority: critical
+  - needs-review
+  - in-progress
+
+# Label to use when marking a PR as stale
+staleLabel: stale
+
+# Comment to post when marking a PR as stale
+markComment: >
+  This pull request has been automatically marked as stale because it has not had
+  recent activity. It will be closed if no further activity occurs. Thank you
+  for your contributions.
+
+# Comment to post when closing a stale PR
+closeComment: >
+  This pull request has been automatically closed due to inactivity. If you think
+  this pull request is still relevant, please feel free to reopen it or create a new one.
+
+# Set to true to ignore PRs in a project (defaults to false)
+exemptProjects: false
+
+# Set to true to ignore PRs in a milestone (defaults to false)
+exemptMilestones: false
+
+# Set to true to ignore PRs with an assignee (defaults to false)
+exemptAssignees: false
+
+# Set to true to ignore PRs with a reviewer (defaults to false)
+exemptReviewers: false
+
+# Set to true to ignore draft PRs (defaults to false)
+exemptDraft: true
+
+# Set to true to ignore PRs that are ready for review (defaults to false)
+exemptReadyForReview: false

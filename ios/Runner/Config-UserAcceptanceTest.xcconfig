@@ -1,0 +1,519 @@
+// REChain VC Lab iOS User Acceptance Test Configuration
+// This file contains user acceptance test-specific build configuration settings
+
+// Include base configuration
+#include "Config.xcconfig"
+
+// User Acceptance Test-specific overrides
+FLUTTER_BUILD_MODE = profile
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+ENABLE_TESTABILITY = NO
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+
+// Swift User Acceptance Test Settings
+SWIFT_OPTIMIZATION_LEVEL = -O
+SWIFT_COMPILATION_MODE = wholemodule
+
+// Code Signing User Acceptance Test
+CODE_SIGN_IDENTITY = Apple Development
+CODE_SIGN_STYLE = Automatic
+
+// User Acceptance Test Build Settings
+IPHONEOS_DEPLOYMENT_TARGET = 12.0
+TARGETED_DEVICE_FAMILY = 1,2
+SUPPORTED_PLATFORMS = iphoneos iphonesimulator
+
+// User Acceptance Test Architecture
+ARCHS = arm64
+VALID_ARCHS = arm64 armv7 armv7s
+
+// User Acceptance Test Flutter Settings
+FLUTTER_BUILD_NAME = 1.0.0-user-acceptance-test
+FLUTTER_BUILD_NUMBER = 1
+
+// User Acceptance Test App Configuration
+PRODUCT_NAME = REChain VC Lab User Acceptance Test
+PRODUCT_BUNDLE_IDENTIFIER = com.rechain.vc.user-acceptance-test
+PRODUCT_DISPLAY_NAME = REChain VC Lab User Acceptance Test
+PRODUCT_VERSION = 1.0.0
+PRODUCT_BUILD_NUMBER = 1
+
+// User Acceptance Test Development Team
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+
+// User Acceptance Test Provisioning
+PROVISIONING_PROFILE_SPECIFIER = 
+
+// User Acceptance Test Entitlements
+CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements
+
+// User Acceptance Test App Transport Security
+NSAppTransportSecurity = YES
+NSAllowsArbitraryLoads = YES
+
+// User Acceptance Test Background Modes
+UIBackgroundModes = background-processing background-fetch
+
+// User Acceptance Test Associated Domains
+ASSOCIATED_DOMAINS = applinks:rechain.vc applinks:www.rechain.vc applinks:app.rechain.vc
+
+// User Acceptance Test CloudKit
+CLOUDKIT_CONTAINER = iCloud.com.rechain.vc.user-acceptance-test
+
+// User Acceptance Test Push Notifications
+ENABLE_PUSH_NOTIFICATIONS = YES
+
+// User Acceptance Test In-App Purchases
+ENABLE_IN_APP_PURCHASES = YES
+
+// User Acceptance Test Apple Sign In
+ENABLE_APPLE_SIGN_IN = YES
+
+// User Acceptance Test Siri
+ENABLE_SIRI = YES
+
+// User Acceptance Test Spotlight
+ENABLE_SPOTLIGHT = YES
+
+// User Acceptance Test Widgets
+ENABLE_WIDGETS = YES
+
+// User Acceptance Test App Clips
+ENABLE_APP_CLIPS = NO
+
+// User Acceptance Test TestFlight
+ENABLE_TESTFLIGHT = YES
+
+// User Acceptance Test Analytics
+ENABLE_ANALYTICS = YES
+ENABLE_CRASHLYTICS = YES
+
+// User Acceptance Test Performance
+ENABLE_PERFORMANCE_MONITORING = YES
+
+// User Acceptance Test Remote Config
+ENABLE_REMOTE_CONFIG = YES
+
+// User Acceptance Test Dynamic Links
+ENABLE_DYNAMIC_LINKS = YES
+
+// User Acceptance Test Authentication
+ENABLE_FIREBASE_AUTH = YES
+ENABLE_GOOGLE_SIGN_IN = YES
+ENABLE_FACEBOOK_SIGN_IN = YES
+
+// User Acceptance Test Storage
+ENABLE_FIREBASE_STORAGE = YES
+ENABLE_CLOUD_FIRESTORE = YES
+
+// User Acceptance Test Functions
+ENABLE_CLOUD_FUNCTIONS = YES
+
+// User Acceptance Test Messaging
+ENABLE_FIREBASE_MESSAGING = YES
+
+// User Acceptance Test ML Kit
+ENABLE_ML_KIT = YES
+
+// User Acceptance Test Vision
+ENABLE_VISION = YES
+
+// User Acceptance Test Natural Language
+ENABLE_NATURAL_LANGUAGE = YES
+
+// User Acceptance Test Core ML
+ENABLE_CORE_ML = YES
+
+// User Acceptance Test ARKit
+ENABLE_ARKIT = NO
+
+// User Acceptance Test Core Location
+ENABLE_CORE_LOCATION = YES
+
+// User Acceptance Test MapKit
+ENABLE_MAPKIT = YES
+
+// User Acceptance Test Contacts
+ENABLE_CONTACTS = YES
+
+// User Acceptance Test Calendar
+ENABLE_CALENDAR = YES
+
+// User Acceptance Test Photos
+ENABLE_PHOTOS = YES
+
+// User Acceptance Test Camera
+ENABLE_CAMERA = YES
+
+// User Acceptance Test Microphone
+ENABLE_MICROPHONE = YES
+
+// User Acceptance Test Face ID / Touch ID
+ENABLE_BIOMETRIC_AUTH = YES
+
+// User Acceptance Test Keychain
+ENABLE_KEYCHAIN = YES
+
+// User Acceptance Test User Defaults
+ENABLE_USER_DEFAULTS = YES
+
+// User Acceptance Test Core Data
+ENABLE_CORE_DATA = YES
+
+// User Acceptance Test SQLite
+ENABLE_SQLITE = YES
+
+// User Acceptance Test Network
+ENABLE_NETWORK = YES
+ENABLE_WEBSOCKETS = YES
+
+// User Acceptance Test WebView
+ENABLE_WEBVIEW = YES
+
+// User Acceptance Test PDF
+ENABLE_PDF = YES
+
+// User Acceptance Test Printing
+ENABLE_PRINTING = YES
+
+// User Acceptance Test AirPrint
+ENABLE_AIRPRINT = YES
+
+// User Acceptance Test Handoff
+ENABLE_HANDOFF = YES
+
+// User Acceptance Test Spotlight Search
+ENABLE_SPOTLIGHT_SEARCH = YES
+
+// User Acceptance Test Siri Shortcuts
+ENABLE_SIRI_SHORTCUTS = YES
+
+// User Acceptance Test Intents
+ENABLE_INTENTS = YES
+
+// User Acceptance Test CallKit
+ENABLE_CALLKIT = NO
+
+// User Acceptance Test PushKit
+ENABLE_PUSHKIT = YES
+
+// User Acceptance Test UserNotifications
+ENABLE_USER_NOTIFICATIONS = YES
+
+// User Acceptance Test Background App Refresh
+ENABLE_BACKGROUND_APP_REFRESH = YES
+
+// User Acceptance Test Background Processing
+ENABLE_BACKGROUND_PROCESSING = YES
+
+// User Acceptance Test Background Fetch
+ENABLE_BACKGROUND_FETCH = YES
+
+// User Acceptance Test Background Modes
+ENABLE_BACKGROUND_MODES = YES
+
+// User Acceptance Test App Extensions
+ENABLE_APP_EXTENSIONS = YES
+
+// User Acceptance Test Today Extensions
+ENABLE_TODAY_EXTENSIONS = YES
+
+// User Acceptance Test Share Extensions
+ENABLE_SHARE_EXTENSIONS = YES
+
+// User Acceptance Test Action Extensions
+ENABLE_ACTION_EXTENSIONS = YES
+
+// User Acceptance Test Photo Editing Extensions
+ENABLE_PHOTO_EDITING_EXTENSIONS = NO
+
+// User Acceptance Test Broadcast Extensions
+ENABLE_BROADCAST_EXTENSIONS = NO
+
+// User Acceptance Test Network Extensions
+ENABLE_NETWORK_EXTENSIONS = NO
+
+// User Acceptance Test VPN Extensions
+ENABLE_VPN_EXTENSIONS = NO
+
+// User Acceptance Test Intents Extensions
+ENABLE_INTENTS_EXTENSIONS = YES
+
+// User Acceptance Test Siri Intents Extensions
+ENABLE_SIRI_INTENTS_EXTENSIONS = YES
+
+// User Acceptance Test Widget Extensions
+ENABLE_WIDGET_EXTENSIONS = YES
+
+// User Acceptance Test App Clip Extensions
+ENABLE_APP_CLIP_EXTENSIONS = NO
+
+// User Acceptance Test DriverKit Extensions
+ENABLE_DRIVERKIT_EXTENSIONS = NO
+
+// User Acceptance Test System Extensions
+ENABLE_SYSTEM_EXTENSIONS = NO
+
+// User Acceptance Test Endpoint Security Extensions
+ENABLE_ENDPOINT_SECURITY_EXTENSIONS = NO
+
+// User Acceptance Test Network Extensions
+ENABLE_NETWORK_EXTENSIONS = NO
+
+// User Acceptance Test VPN Extensions
+ENABLE_VPN_EXTENSIONS = NO
+
+// User Acceptance Test Packet Tunnel Extensions
+ENABLE_PACKET_TUNNEL_EXTENSIONS = NO
+
+// User Acceptance Test App Proxy Extensions
+ENABLE_APP_PROXY_EXTENSIONS = NO
+
+// User Acceptance Test Content Filter Extensions
+ENABLE_CONTENT_FILTER_EXTENSIONS = NO
+
+// User Acceptance Test DNS Proxy Extensions
+ENABLE_DNS_PROXY_EXTENSIONS = NO
+
+// User Acceptance Test Endpoint Security Extensions
+ENABLE_ENDPOINT_SECURITY_EXTENSIONS = NO
+
+// User Acceptance Test System Extensions
+ENABLE_SYSTEM_EXTENSIONS = NO
+
+// User Acceptance Test DriverKit Extensions
+ENABLE_DRIVERKIT_EXTENSIONS = NO
+
+// User Acceptance Test App Clip Extensions
+ENABLE_APP_CLIP_EXTENSIONS = NO
+
+// User Acceptance Test Widget Extensions
+ENABLE_WIDGET_EXTENSIONS = YES
+
+// User Acceptance Test Siri Intents Extensions
+ENABLE_SIRI_INTENTS_EXTENSIONS = YES
+
+// User Acceptance Test Intents Extensions
+ENABLE_INTENTS_EXTENSIONS = YES
+
+// User Acceptance Test Action Extensions
+ENABLE_ACTION_EXTENSIONS = YES
+
+// User Acceptance Test Share Extensions
+ENABLE_SHARE_EXTENSIONS = YES
+
+// User Acceptance Test Today Extensions
+ENABLE_TODAY_EXTENSIONS = YES
+
+// User Acceptance Test App Extensions
+ENABLE_APP_EXTENSIONS = YES
+
+// User Acceptance Test Background Fetch
+ENABLE_BACKGROUND_FETCH = YES
+
+// User Acceptance Test Background Processing
+ENABLE_BACKGROUND_PROCESSING = YES
+
+// User Acceptance Test Background App Refresh
+ENABLE_BACKGROUND_APP_REFRESH = YES
+
+// User Acceptance Test UserNotifications
+ENABLE_USER_NOTIFICATIONS = YES
+
+// User Acceptance Test PushKit
+ENABLE_PUSHKIT = YES
+
+// User Acceptance Test CallKit
+ENABLE_CALLKIT = NO
+
+// User Acceptance Test Intents
+ENABLE_INTENTS = YES
+
+// User Acceptance Test Siri Shortcuts
+ENABLE_SIRI_SHORTCUTS = YES
+
+// User Acceptance Test Spotlight Search
+ENABLE_SPOTLIGHT_SEARCH = YES
+
+// User Acceptance Test Handoff
+ENABLE_HANDOFF = YES
+
+// User Acceptance Test AirPrint
+ENABLE_AIRPRINT = YES
+
+// User Acceptance Test Printing
+ENABLE_PRINTING = YES
+
+// User Acceptance Test PDF
+ENABLE_PDF = YES
+
+// User Acceptance Test WebView
+ENABLE_WEBVIEW = YES
+
+// User Acceptance Test Network
+ENABLE_NETWORK = YES
+ENABLE_WEBSOCKETS = YES
+
+// User Acceptance Test SQLite
+ENABLE_SQLITE = YES
+
+// User Acceptance Test Core Data
+ENABLE_CORE_DATA = YES
+
+// User Acceptance Test User Defaults
+ENABLE_USER_DEFAULTS = YES
+
+// User Acceptance Test Keychain
+ENABLE_KEYCHAIN = YES
+
+// User Acceptance Test Face ID / Touch ID
+ENABLE_BIOMETRIC_AUTH = YES
+
+// User Acceptance Test Microphone
+ENABLE_MICROPHONE = YES
+
+// User Acceptance Test Camera
+ENABLE_CAMERA = YES
+
+// User Acceptance Test Photos
+ENABLE_PHOTOS = YES
+
+// User Acceptance Test Calendar
+ENABLE_CALENDAR = YES
+
+// User Acceptance Test Contacts
+ENABLE_CONTACTS = YES
+
+// User Acceptance Test MapKit
+ENABLE_MAPKIT = YES
+
+// User Acceptance Test Core Location
+ENABLE_CORE_LOCATION = YES
+
+// User Acceptance Test ARKit
+ENABLE_ARKIT = NO
+
+// User Acceptance Test Core ML
+ENABLE_CORE_ML = YES
+
+// User Acceptance Test Natural Language
+ENABLE_NATURAL_LANGUAGE = YES
+
+// User Acceptance Test Vision
+ENABLE_VISION = YES
+
+// User Acceptance Test ML Kit
+ENABLE_ML_KIT = YES
+
+// User Acceptance Test Messaging
+ENABLE_FIREBASE_MESSAGING = YES
+
+// User Acceptance Test Functions
+ENABLE_CLOUD_FUNCTIONS = YES
+
+// User Acceptance Test Storage
+ENABLE_FIREBASE_STORAGE = YES
+ENABLE_CLOUD_FIRESTORE = YES
+
+// User Acceptance Test Authentication
+ENABLE_FIREBASE_AUTH = YES
+ENABLE_GOOGLE_SIGN_IN = YES
+ENABLE_FACEBOOK_SIGN_IN = YES
+
+// User Acceptance Test Dynamic Links
+ENABLE_DYNAMIC_LINKS = YES
+
+// User Acceptance Test Remote Config
+ENABLE_REMOTE_CONFIG = YES
+
+// User Acceptance Test Performance
+ENABLE_PERFORMANCE_MONITORING = YES
+
+// User Acceptance Test Analytics
+ENABLE_ANALYTICS = YES
+ENABLE_CRASHLYTICS = YES
+
+// User Acceptance Test TestFlight
+ENABLE_TESTFLIGHT = YES
+
+// User Acceptance Test App Clips
+ENABLE_APP_CLIPS = NO
+
+// User Acceptance Test Widgets
+ENABLE_WIDGETS = YES
+
+// User Acceptance Test Spotlight
+ENABLE_SPOTLIGHT = YES
+
+// User Acceptance Test Siri
+ENABLE_SIRI = YES
+
+// User Acceptance Test Apple Sign In
+ENABLE_APPLE_SIGN_IN = YES
+
+// User Acceptance Test In-App Purchases
+ENABLE_IN_APP_PURCHASES = YES
+
+// User Acceptance Test Push Notifications
+ENABLE_PUSH_NOTIFICATIONS = YES
+
+// User Acceptance Test CloudKit
+CLOUDKIT_CONTAINER = iCloud.com.rechain.vc.user-acceptance-test
+
+// User Acceptance Test Associated Domains
+ASSOCIATED_DOMAINS = applinks:rechain.vc applinks:www.rechain.vc applinks:app.rechain.vc
+
+// User Acceptance Test Background Modes
+UIBackgroundModes = background-processing background-fetch
+
+// User Acceptance Test App Transport Security
+NSAppTransportSecurity = YES
+NSAllowsArbitraryLoads = YES
+
+// User Acceptance Test Flutter Settings
+FLUTTER_BUILD_MODE = profile
+FLUTTER_BUILD_NAME = 1.0.0-user-acceptance-test
+FLUTTER_BUILD_NUMBER = 1
+
+// User Acceptance Test Release Settings
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+
+// User Acceptance Test Debug Settings
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+ENABLE_TESTABILITY = NO
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+
+// User Acceptance Test Architecture
+ARCHS = arm64
+VALID_ARCHS = arm64 armv7 armv7s
+
+// User Acceptance Test Swift Settings
+SWIFT_VERSION = 5.0
+SWIFT_OPTIMIZATION_LEVEL = -O
+SWIFT_COMPILATION_MODE = wholemodule
+
+// User Acceptance Test Build Settings
+IPHONEOS_DEPLOYMENT_TARGET = 12.0
+TARGETED_DEVICE_FAMILY = 1,2
+SUPPORTED_PLATFORMS = iphoneos iphonesimulator
+
+// User Acceptance Test Code Signing
+CODE_SIGN_STYLE = Automatic
+CODE_SIGN_IDENTITY = Apple Development
+PROVISIONING_PROFILE_SPECIFIER = 
+
+// User Acceptance Test Development Team
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+
+// User Acceptance Test App Configuration
+PRODUCT_NAME = REChain VC Lab User Acceptance Test
+PRODUCT_BUNDLE_IDENTIFIER = com.rechain.vc.user-acceptance-test
+PRODUCT_DISPLAY_NAME = REChain VC Lab User Acceptance Test
+PRODUCT_VERSION = 1.0.0
+PRODUCT_BUILD_NUMBER = 1

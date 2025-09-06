@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>REChain VC Lab</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIconFile</key>
+	<string></string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>REChain VC Lab</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(FLUTTER_BUILD_NAME)</string>
+	<key>CFBundleVersion</key>
+	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright © 2025 REChain VC Lab. All rights reserved.</string>
+	<key>NSMainNibFile</key>
+	<string>MainMenu</string>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+	
+	<!-- App Transport Security -->
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>localhost</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
+	
+	<!-- Camera permission -->
+	<key>NSCameraUsageDescription</key>
+	<string>REChain VC Lab needs camera access to scan QR codes and take photos for your Web3 profile.</string>
+	
+	<!-- Microphone permission -->
+	<key>NSMicrophoneUsageDescription</key>
+	<string>REChain VC Lab needs microphone access for voice features and Web3 interactions.</string>
+	
+	<!-- Location permission -->
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>REChain VC Lab needs location access to provide location-based Web3 services.</string>
+	
+	<!-- Contacts permission -->
+	<key>NSContactsUsageDescription</key>
+	<string>REChain VC Lab needs contacts access to help you connect with other Web3 users.</string>
+	
+	<!-- File access permission -->
+	<key>NSDocumentsFolderUsageDescription</key>
+	<string>REChain VC Lab needs access to documents folder to save and manage Web3 files.</string>
+	
+	<!-- Downloads folder permission -->
+	<key>NSDownloadsFolderUsageDescription</key>
+	<string>REChain VC Lab needs access to downloads folder to manage downloaded Web3 assets.</string>
+	
+	<!-- Desktop folder permission -->
+	<key>NSDesktopFolderUsageDescription</key>
+	<string>REChain VC Lab needs access to desktop folder to save Web3 documents and assets.</string>
+	
+	<!-- Network volumes permission -->
+	<key>NSNetworkVolumesUsageDescription</key>
+	<string>REChain VC Lab needs access to network volumes for Web3 data synchronization.</string>
+	
+	<!-- Removable volumes permission -->
+	<key>NSRemovableVolumesUsageDescription</key>
+	<string>REChain VC Lab needs access to removable volumes for Web3 data backup and transfer.</string>
+	
+	<!-- User tracking permission -->
+	<key>NSUserTrackingUsageDescription</key>
+	<string>REChain VC Lab uses tracking to provide personalized Web3 experiences and analytics.</string>
+	
+	<!-- Background modes -->
+	<key>LSBackgroundOnly</key>
+	<false/>
+	
+	<!-- URL Schemes -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.rechain.vc</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>rechain</string>
+				<string>rechainvc</string>
+			</array>
+		</dict>
+	</array>
+	
+	<!-- Document types -->
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>Web3 Document</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>public.json</string>
+				<string>public.text</string>
+			</array>
+		</dict>
+	</array>
+	
+	<!-- High resolution support -->
+	<key>NSHighResolutionCapable</key>
+	<true/>
+	
+	<!-- Dark mode support -->
+	<key>NSRequiresAquaSystemAppearance</key>
+	<false/>
+	
+	<!-- Sandboxing -->
+	<key>NSSupportsAutomaticTermination</key>
+	<true/>
+	<key>NSSupportsSuddenTermination</key>
+	<true/>
+	
+	<!-- Menu bar -->
+	<key>LSUIElement</key>
+	<false/>
+	
+	<!-- File associations -->
+	<key>CFBundleTypeRole</key>
+	<string>Editor</string>
+	
+	<!-- Apple Events -->
+	<key>NSAppleEventsUsageDescription</key>
+	<string>REChain VC Lab needs Apple Events access for Web3 automation and scripting.</string>
+	
+	<!-- System Events -->
+	<key>NSSystemAdministrationUsageDescription</key>
+	<string>REChain VC Lab needs system administration access for advanced Web3 features.</string>
+	
+	<!-- Full disk access -->
+	<key>NSFullDiskAccessUsageDescription</key>
+	<string>REChain VC Lab needs full disk access for comprehensive Web3 data management.</string>
+	
+	<!-- Screen recording -->
+	<key>NSScreenCaptureUsageDescription</key>
+	<string>REChain VC Lab needs screen capture access for Web3 presentation and recording features.</string>
+	
+	<!-- Accessibility -->
+	<key>NSAccessibilityUsageDescription</key>
+	<string>REChain VC Lab needs accessibility access for enhanced Web3 user experience.</string>
+</dict>
+</plist>

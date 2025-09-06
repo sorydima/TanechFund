@@ -1,0 +1,244 @@
+name: Build Matrix
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    - cron: '0 2 * * 1' # Weekly on Monday at 2 AM
+
+jobs:
+  build-matrix:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        flutter-version: ['3.35.2', '3.36.0']
+        include:
+          - os: ubuntu-latest
+            platform: linux
+            build-command: 'flutter build linux --release'
+          - os: windows-latest
+            platform: windows
+            build-command: 'flutter build windows --release'
+          - os: macos-latest
+            platform: macos
+            build-command: 'flutter build macos --release'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: ${{ matrix.flutter-version }}
+        channel: 'stable'
+        cache: true
+
+    - name: Install dependencies
+      run: flutter pub get
+
+    - name: Run tests
+      run: flutter test
+
+    - name: Analyze code
+      run: flutter analyze
+
+    - name: Build ${{ matrix.platform }}
+      run: ${{ matrix.build-command }}
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-${{ matrix.platform }}-${{ matrix.flutter-version }}
+        path: build/${{ matrix.platform }}/
+        retention-days: 30
+
+  web-build:
+    runs-on: ubuntu-latest
+    needs: build-matrix
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.35.2'
+        channel: 'stable'
+        cache: true
+
+    - name: Install dependencies
+      run: flutter pub get
+
+    - name: Build web
+      run: |
+        flutter build web --release --no-tree-shake-icons
+        # Remove CanvasKit to force HTML renderer
+        rm -rf build/web/canvaskit
+
+    - name: Upload web build
+      uses: actions/upload-artifact@v4
+      with:
+        name: web-build
+        path: build/web/
+        retention-days: 30
+
+  android-build:
+    runs-on: ubuntu-latest
+    needs: build-matrix
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.35.2'
+        channel: 'stable'
+        cache: true
+
+    - name: Install dependencies
+      run: flutter pub get
+
+    - name: Build Android APK
+      run: flutter build apk --release
+
+    - name: Build Android App Bundle
+      run: flutter build appbundle --release
+
+    - name: Upload Android builds
+      uses: actions/upload-artifact@v4
+      with:
+        name: android-builds
+        path: |
+          build/app/outputs/flutter-apk/
+          build/app/outputs/bundle/
+        retention-days: 30
+
+  ios-build:
+    runs-on: macos-latest
+    needs: build-matrix
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.35.2'
+        channel: 'stable'
+        cache: true
+
+    - name: Install dependencies
+      run: flutter pub get
+
+    - name: Build iOS
+      run: flutter build ios --release --no-codesign
+
+    - name: Upload iOS build
+      uses: actions/upload-artifact@v4
+      with:
+        name: ios-build
+        path: build/ios/
+        retention-days: 30
+
+  security-scan:
+    runs-on: ubuntu-latest
+    needs: build-matrix
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'fs'
+        scan-ref: '.'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+
+    - name: Upload Trivy scan results
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: 'trivy-results.sarif'
+
+  performance-test:
+    runs-on: ubuntu-latest
+    needs: [build-matrix, web-build]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.35.2'
+        channel: 'stable'
+        cache: true
+
+    - name: Install dependencies
+      run: flutter pub get
+
+    - name: Run performance tests
+      run: |
+        flutter test --coverage
+        flutter test integration_test/
+
+    - name: Upload coverage reports
+      uses: codecov/codecov-action@v4
+      with:
+        file: coverage/lcov.info
+        flags: unittests
+        name: codecov-umbrella
+
+  deploy-preview:
+    runs-on: ubuntu-latest
+    needs: [web-build, security-scan]
+    if: github.event_name == 'pull_request'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Download web build
+      uses: actions/download-artifact@v4
+      with:
+        name: web-build
+        path: build/web/
+
+    - name: Deploy to preview
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: build/web/
+        destination_dir: preview/pr-${{ github.event.number }}
+
+  notify-completion:
+    runs-on: ubuntu-latest
+    needs: [build-matrix, web-build, android-build, ios-build, security-scan, performance-test]
+    if: always()
+
+    steps:
+    - name: Notify completion
+      run: |
+        echo "Build matrix completed with status: ${{ needs.build-matrix.result }}"
+        echo "Web build: ${{ needs.web-build.result }}"
+        echo "Android build: ${{ needs.android-build.result }}"
+        echo "iOS build: ${{ needs.ios-build.result }}"
+        echo "Security scan: ${{ needs.security-scan.result }}"
+        echo "Performance test: ${{ needs.performance-test.result }}"

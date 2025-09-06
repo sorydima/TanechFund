@@ -1,0 +1,519 @@
+// REChain VC Lab iOS Smoke Test Configuration
+// This file contains smoke test-specific build configuration settings
+
+// Include base configuration
+#include "Config.xcconfig"
+
+// Smoke Test-specific overrides
+FLUTTER_BUILD_MODE = profile
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+ENABLE_TESTABILITY = NO
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+
+// Swift Smoke Test Settings
+SWIFT_OPTIMIZATION_LEVEL = -O
+SWIFT_COMPILATION_MODE = wholemodule
+
+// Code Signing Smoke Test
+CODE_SIGN_IDENTITY = Apple Development
+CODE_SIGN_STYLE = Automatic
+
+// Smoke Test Build Settings
+IPHONEOS_DEPLOYMENT_TARGET = 12.0
+TARGETED_DEVICE_FAMILY = 1,2
+SUPPORTED_PLATFORMS = iphoneos iphonesimulator
+
+// Smoke Test Architecture
+ARCHS = arm64
+VALID_ARCHS = arm64 armv7 armv7s
+
+// Smoke Test Flutter Settings
+FLUTTER_BUILD_NAME = 1.0.0-smoke-test
+FLUTTER_BUILD_NUMBER = 1
+
+// Smoke Test App Configuration
+PRODUCT_NAME = REChain VC Lab Smoke Test
+PRODUCT_BUNDLE_IDENTIFIER = com.rechain.vc.smoke-test
+PRODUCT_DISPLAY_NAME = REChain VC Lab Smoke Test
+PRODUCT_VERSION = 1.0.0
+PRODUCT_BUILD_NUMBER = 1
+
+// Smoke Test Development Team
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+
+// Smoke Test Provisioning
+PROVISIONING_PROFILE_SPECIFIER = 
+
+// Smoke Test Entitlements
+CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements
+
+// Smoke Test App Transport Security
+NSAppTransportSecurity = YES
+NSAllowsArbitraryLoads = YES
+
+// Smoke Test Background Modes
+UIBackgroundModes = background-processing background-fetch
+
+// Smoke Test Associated Domains
+ASSOCIATED_DOMAINS = applinks:rechain.vc applinks:www.rechain.vc applinks:app.rechain.vc
+
+// Smoke Test CloudKit
+CLOUDKIT_CONTAINER = iCloud.com.rechain.vc.smoke-test
+
+// Smoke Test Push Notifications
+ENABLE_PUSH_NOTIFICATIONS = YES
+
+// Smoke Test In-App Purchases
+ENABLE_IN_APP_PURCHASES = YES
+
+// Smoke Test Apple Sign In
+ENABLE_APPLE_SIGN_IN = YES
+
+// Smoke Test Siri
+ENABLE_SIRI = YES
+
+// Smoke Test Spotlight
+ENABLE_SPOTLIGHT = YES
+
+// Smoke Test Widgets
+ENABLE_WIDGETS = YES
+
+// Smoke Test App Clips
+ENABLE_APP_CLIPS = NO
+
+// Smoke Test TestFlight
+ENABLE_TESTFLIGHT = YES
+
+// Smoke Test Analytics
+ENABLE_ANALYTICS = YES
+ENABLE_CRASHLYTICS = YES
+
+// Smoke Test Performance
+ENABLE_PERFORMANCE_MONITORING = YES
+
+// Smoke Test Remote Config
+ENABLE_REMOTE_CONFIG = YES
+
+// Smoke Test Dynamic Links
+ENABLE_DYNAMIC_LINKS = YES
+
+// Smoke Test Authentication
+ENABLE_FIREBASE_AUTH = YES
+ENABLE_GOOGLE_SIGN_IN = YES
+ENABLE_FACEBOOK_SIGN_IN = YES
+
+// Smoke Test Storage
+ENABLE_FIREBASE_STORAGE = YES
+ENABLE_CLOUD_FIRESTORE = YES
+
+// Smoke Test Functions
+ENABLE_CLOUD_FUNCTIONS = YES
+
+// Smoke Test Messaging
+ENABLE_FIREBASE_MESSAGING = YES
+
+// Smoke Test ML Kit
+ENABLE_ML_KIT = YES
+
+// Smoke Test Vision
+ENABLE_VISION = YES
+
+// Smoke Test Natural Language
+ENABLE_NATURAL_LANGUAGE = YES
+
+// Smoke Test Core ML
+ENABLE_CORE_ML = YES
+
+// Smoke Test ARKit
+ENABLE_ARKIT = NO
+
+// Smoke Test Core Location
+ENABLE_CORE_LOCATION = YES
+
+// Smoke Test MapKit
+ENABLE_MAPKIT = YES
+
+// Smoke Test Contacts
+ENABLE_CONTACTS = YES
+
+// Smoke Test Calendar
+ENABLE_CALENDAR = YES
+
+// Smoke Test Photos
+ENABLE_PHOTOS = YES
+
+// Smoke Test Camera
+ENABLE_CAMERA = YES
+
+// Smoke Test Microphone
+ENABLE_MICROPHONE = YES
+
+// Smoke Test Face ID / Touch ID
+ENABLE_BIOMETRIC_AUTH = YES
+
+// Smoke Test Keychain
+ENABLE_KEYCHAIN = YES
+
+// Smoke Test User Defaults
+ENABLE_USER_DEFAULTS = YES
+
+// Smoke Test Core Data
+ENABLE_CORE_DATA = YES
+
+// Smoke Test SQLite
+ENABLE_SQLITE = YES
+
+// Smoke Test Network
+ENABLE_NETWORK = YES
+ENABLE_WEBSOCKETS = YES
+
+// Smoke Test WebView
+ENABLE_WEBVIEW = YES
+
+// Smoke Test PDF
+ENABLE_PDF = YES
+
+// Smoke Test Printing
+ENABLE_PRINTING = YES
+
+// Smoke Test AirPrint
+ENABLE_AIRPRINT = YES
+
+// Smoke Test Handoff
+ENABLE_HANDOFF = YES
+
+// Smoke Test Spotlight Search
+ENABLE_SPOTLIGHT_SEARCH = YES
+
+// Smoke Test Siri Shortcuts
+ENABLE_SIRI_SHORTCUTS = YES
+
+// Smoke Test Intents
+ENABLE_INTENTS = YES
+
+// Smoke Test CallKit
+ENABLE_CALLKIT = NO
+
+// Smoke Test PushKit
+ENABLE_PUSHKIT = YES
+
+// Smoke Test UserNotifications
+ENABLE_USER_NOTIFICATIONS = YES
+
+// Smoke Test Background App Refresh
+ENABLE_BACKGROUND_APP_REFRESH = YES
+
+// Smoke Test Background Processing
+ENABLE_BACKGROUND_PROCESSING = YES
+
+// Smoke Test Background Fetch
+ENABLE_BACKGROUND_FETCH = YES
+
+// Smoke Test Background Modes
+ENABLE_BACKGROUND_MODES = YES
+
+// Smoke Test App Extensions
+ENABLE_APP_EXTENSIONS = YES
+
+// Smoke Test Today Extensions
+ENABLE_TODAY_EXTENSIONS = YES
+
+// Smoke Test Share Extensions
+ENABLE_SHARE_EXTENSIONS = YES
+
+// Smoke Test Action Extensions
+ENABLE_ACTION_EXTENSIONS = YES
+
+// Smoke Test Photo Editing Extensions
+ENABLE_PHOTO_EDITING_EXTENSIONS = NO
+
+// Smoke Test Broadcast Extensions
+ENABLE_BROADCAST_EXTENSIONS = NO
+
+// Smoke Test Network Extensions
+ENABLE_NETWORK_EXTENSIONS = NO
+
+// Smoke Test VPN Extensions
+ENABLE_VPN_EXTENSIONS = NO
+
+// Smoke Test Intents Extensions
+ENABLE_INTENTS_EXTENSIONS = YES
+
+// Smoke Test Siri Intents Extensions
+ENABLE_SIRI_INTENTS_EXTENSIONS = YES
+
+// Smoke Test Widget Extensions
+ENABLE_WIDGET_EXTENSIONS = YES
+
+// Smoke Test App Clip Extensions
+ENABLE_APP_CLIP_EXTENSIONS = NO
+
+// Smoke Test DriverKit Extensions
+ENABLE_DRIVERKIT_EXTENSIONS = NO
+
+// Smoke Test System Extensions
+ENABLE_SYSTEM_EXTENSIONS = NO
+
+// Smoke Test Endpoint Security Extensions
+ENABLE_ENDPOINT_SECURITY_EXTENSIONS = NO
+
+// Smoke Test Network Extensions
+ENABLE_NETWORK_EXTENSIONS = NO
+
+// Smoke Test VPN Extensions
+ENABLE_VPN_EXTENSIONS = NO
+
+// Smoke Test Packet Tunnel Extensions
+ENABLE_PACKET_TUNNEL_EXTENSIONS = NO
+
+// Smoke Test App Proxy Extensions
+ENABLE_APP_PROXY_EXTENSIONS = NO
+
+// Smoke Test Content Filter Extensions
+ENABLE_CONTENT_FILTER_EXTENSIONS = NO
+
+// Smoke Test DNS Proxy Extensions
+ENABLE_DNS_PROXY_EXTENSIONS = NO
+
+// Smoke Test Endpoint Security Extensions
+ENABLE_ENDPOINT_SECURITY_EXTENSIONS = NO
+
+// Smoke Test System Extensions
+ENABLE_SYSTEM_EXTENSIONS = NO
+
+// Smoke Test DriverKit Extensions
+ENABLE_DRIVERKIT_EXTENSIONS = NO
+
+// Smoke Test App Clip Extensions
+ENABLE_APP_CLIP_EXTENSIONS = NO
+
+// Smoke Test Widget Extensions
+ENABLE_WIDGET_EXTENSIONS = YES
+
+// Smoke Test Siri Intents Extensions
+ENABLE_SIRI_INTENTS_EXTENSIONS = YES
+
+// Smoke Test Intents Extensions
+ENABLE_INTENTS_EXTENSIONS = YES
+
+// Smoke Test Action Extensions
+ENABLE_ACTION_EXTENSIONS = YES
+
+// Smoke Test Share Extensions
+ENABLE_SHARE_EXTENSIONS = YES
+
+// Smoke Test Today Extensions
+ENABLE_TODAY_EXTENSIONS = YES
+
+// Smoke Test App Extensions
+ENABLE_APP_EXTENSIONS = YES
+
+// Smoke Test Background Fetch
+ENABLE_BACKGROUND_FETCH = YES
+
+// Smoke Test Background Processing
+ENABLE_BACKGROUND_PROCESSING = YES
+
+// Smoke Test Background App Refresh
+ENABLE_BACKGROUND_APP_REFRESH = YES
+
+// Smoke Test UserNotifications
+ENABLE_USER_NOTIFICATIONS = YES
+
+// Smoke Test PushKit
+ENABLE_PUSHKIT = YES
+
+// Smoke Test CallKit
+ENABLE_CALLKIT = NO
+
+// Smoke Test Intents
+ENABLE_INTENTS = YES
+
+// Smoke Test Siri Shortcuts
+ENABLE_SIRI_SHORTCUTS = YES
+
+// Smoke Test Spotlight Search
+ENABLE_SPOTLIGHT_SEARCH = YES
+
+// Smoke Test Handoff
+ENABLE_HANDOFF = YES
+
+// Smoke Test AirPrint
+ENABLE_AIRPRINT = YES
+
+// Smoke Test Printing
+ENABLE_PRINTING = YES
+
+// Smoke Test PDF
+ENABLE_PDF = YES
+
+// Smoke Test WebView
+ENABLE_WEBVIEW = YES
+
+// Smoke Test Network
+ENABLE_NETWORK = YES
+ENABLE_WEBSOCKETS = YES
+
+// Smoke Test SQLite
+ENABLE_SQLITE = YES
+
+// Smoke Test Core Data
+ENABLE_CORE_DATA = YES
+
+// Smoke Test User Defaults
+ENABLE_USER_DEFAULTS = YES
+
+// Smoke Test Keychain
+ENABLE_KEYCHAIN = YES
+
+// Smoke Test Face ID / Touch ID
+ENABLE_BIOMETRIC_AUTH = YES
+
+// Smoke Test Microphone
+ENABLE_MICROPHONE = YES
+
+// Smoke Test Camera
+ENABLE_CAMERA = YES
+
+// Smoke Test Photos
+ENABLE_PHOTOS = YES
+
+// Smoke Test Calendar
+ENABLE_CALENDAR = YES
+
+// Smoke Test Contacts
+ENABLE_CONTACTS = YES
+
+// Smoke Test MapKit
+ENABLE_MAPKIT = YES
+
+// Smoke Test Core Location
+ENABLE_CORE_LOCATION = YES
+
+// Smoke Test ARKit
+ENABLE_ARKIT = NO
+
+// Smoke Test Core ML
+ENABLE_CORE_ML = YES
+
+// Smoke Test Natural Language
+ENABLE_NATURAL_LANGUAGE = YES
+
+// Smoke Test Vision
+ENABLE_VISION = YES
+
+// Smoke Test ML Kit
+ENABLE_ML_KIT = YES
+
+// Smoke Test Messaging
+ENABLE_FIREBASE_MESSAGING = YES
+
+// Smoke Test Functions
+ENABLE_CLOUD_FUNCTIONS = YES
+
+// Smoke Test Storage
+ENABLE_FIREBASE_STORAGE = YES
+ENABLE_CLOUD_FIRESTORE = YES
+
+// Smoke Test Authentication
+ENABLE_FIREBASE_AUTH = YES
+ENABLE_GOOGLE_SIGN_IN = YES
+ENABLE_FACEBOOK_SIGN_IN = YES
+
+// Smoke Test Dynamic Links
+ENABLE_DYNAMIC_LINKS = YES
+
+// Smoke Test Remote Config
+ENABLE_REMOTE_CONFIG = YES
+
+// Smoke Test Performance
+ENABLE_PERFORMANCE_MONITORING = YES
+
+// Smoke Test Analytics
+ENABLE_ANALYTICS = YES
+ENABLE_CRASHLYTICS = YES
+
+// Smoke Test TestFlight
+ENABLE_TESTFLIGHT = YES
+
+// Smoke Test App Clips
+ENABLE_APP_CLIPS = NO
+
+// Smoke Test Widgets
+ENABLE_WIDGETS = YES
+
+// Smoke Test Spotlight
+ENABLE_SPOTLIGHT = YES
+
+// Smoke Test Siri
+ENABLE_SIRI = YES
+
+// Smoke Test Apple Sign In
+ENABLE_APPLE_SIGN_IN = YES
+
+// Smoke Test In-App Purchases
+ENABLE_IN_APP_PURCHASES = YES
+
+// Smoke Test Push Notifications
+ENABLE_PUSH_NOTIFICATIONS = YES
+
+// Smoke Test CloudKit
+CLOUDKIT_CONTAINER = iCloud.com.rechain.vc.smoke-test
+
+// Smoke Test Associated Domains
+ASSOCIATED_DOMAINS = applinks:rechain.vc applinks:www.rechain.vc applinks:app.rechain.vc
+
+// Smoke Test Background Modes
+UIBackgroundModes = background-processing background-fetch
+
+// Smoke Test App Transport Security
+NSAppTransportSecurity = YES
+NSAllowsArbitraryLoads = YES
+
+// Smoke Test Flutter Settings
+FLUTTER_BUILD_MODE = profile
+FLUTTER_BUILD_NAME = 1.0.0-smoke-test
+FLUTTER_BUILD_NUMBER = 1
+
+// Smoke Test Release Settings
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+
+// Smoke Test Debug Settings
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+ENABLE_TESTABILITY = NO
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+
+// Smoke Test Architecture
+ARCHS = arm64
+VALID_ARCHS = arm64 armv7 armv7s
+
+// Smoke Test Swift Settings
+SWIFT_VERSION = 5.0
+SWIFT_OPTIMIZATION_LEVEL = -O
+SWIFT_COMPILATION_MODE = wholemodule
+
+// Smoke Test Build Settings
+IPHONEOS_DEPLOYMENT_TARGET = 12.0
+TARGETED_DEVICE_FAMILY = 1,2
+SUPPORTED_PLATFORMS = iphoneos iphonesimulator
+
+// Smoke Test Code Signing
+CODE_SIGN_STYLE = Automatic
+CODE_SIGN_IDENTITY = Apple Development
+PROVISIONING_PROFILE_SPECIFIER = 
+
+// Smoke Test Development Team
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+
+// Smoke Test App Configuration
+PRODUCT_NAME = REChain VC Lab Smoke Test
+PRODUCT_BUNDLE_IDENTIFIER = com.rechain.vc.smoke-test
+PRODUCT_DISPLAY_NAME = REChain VC Lab Smoke Test
+PRODUCT_VERSION = 1.0.0
+PRODUCT_BUILD_NUMBER = 1

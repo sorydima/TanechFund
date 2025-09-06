@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REChain VC Lab - Debug</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #8B5CF6 0%, #6366F1 100%);
+            color: white;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .test-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #10B981;
+        }
+
+        .test-item.error {
+            border-left-color: #EF4444;
+        }
+
+        .test-item.warning {
+            border-left-color: #F59E0B;
+        }
+
+        .status {
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .success {
+            color: #10B981;
+        }
+
+        .error {
+            color: #EF4444;
+        }
+
+        .warning {
+            color: #F59E0B;
+        }
+
+        button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .log {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🔧 REChain VC Lab - Debug Console</h1>
+
+        <div id="tests">
+            <div class="test-item">
+                <strong>Browser Compatibility:</strong>
+                <span class="status" id="browser-status">Testing...</span>
+            </div>
+
+            <div class="test-item">
+                <strong>JavaScript Support:</strong>
+                <span class="status" id="js-status">Testing...</span>
+            </div>
+
+            <div class="test-item">
+                <strong>WebAssembly Support:</strong>
+                <span class="status" id="wasm-status">Testing...</span>
+            </div>
+
+            <div class="test-item">
+                <strong>Canvas Support:</strong>
+                <span class="status" id="canvas-status">Testing...</span>
+            </div>
+
+            <div class="test-item">
+                <strong>Service Worker Support:</strong>
+                <span class="status" id="sw-status">Testing...</span>
+            </div>
+
+            <div class="test-item">
+                <strong>Local Storage:</strong>
+                <span class="status" id="storage-status">Testing...</span>
+            </div>
+
+            <div class="test-item">
+                <strong>Network Connectivity:</strong>
+                <span class="status" id="network-status">Testing...</span>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <button onclick="runAllTests()">🔄 Run All Tests</button>
+            <button onclick="clearLog()">🗑️ Clear Log</button>
+            <button onclick="window.location.href='index.html'">🏠 Go to App</button>
+        </div>
+
+        <div class="log" id="log">
+            <div>Debug console initialized...</div>
+        </div>
+    </div>
+
+    <script>
+        function log(message, type = 'info') {
+            const logDiv = document.getElementById('log');
+            const timestamp = new Date().toLocaleTimeString();
+            const color = type === 'error' ? '#EF4444' : type === 'warning' ? '#F59E0B' : '#10B981';
+            logDiv.innerHTML += `<div style="color: ${color}">[${timestamp}] ${message}</div>`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+
+        function clearLog() {
+            document.getElementById('log').innerHTML = '<div>Debug console cleared...</div>';
+        }
+
+        function setStatus(id, status, type = 'success') {
+            const element = document.getElementById(id);
+            element.textContent = status;
+            element.className = `status ${type}`;
+
+            const testItem = element.closest('.test-item');
+            testItem.className = `test-item ${type === 'success' ? '' : type}`;
+        }
+
+        function testBrowserCompatibility() {
+            log('Testing browser compatibility...');
+
+            const userAgent = navigator.userAgent;
+            const isChrome = userAgent.includes('Chrome');
+            const isFirefox = userAgent.includes('Firefox');
+            const isSafari = userAgent.includes('Safari') && !userAgent.includes('Chrome');
+            const isEdge = userAgent.includes('Edge');
+
+            if (isChrome || isFirefox || isSafari || isEdge) {
+                setStatus('browser-status', 'Supported', 'success');
+                log(`Browser detected: ${isChrome ? 'Chrome' : isFirefox ? 'Firefox' : isSafari ? 'Safari' : 'Edge'}`, 'success');
+            } else {
+                setStatus('browser-status', 'Unsupported', 'error');
+                log('Unsupported browser detected', 'error');
+            }
+        }
+
+        function testJavaScript() {
+            log('Testing JavaScript support...');
+
+            try {
+                // Test basic JavaScript features
+                const testObj = { test: 'value' };
+                const testArray = [1, 2, 3];
+                const testFunction = () => 'test';
+
+                if (testObj.test === 'value' && testArray.length === 3 && testFunction() === 'test') {
+                    setStatus('js-status', 'Working', 'success');
+                    log('JavaScript is working correctly', 'success');
+                } else {
+                    setStatus('js-status', 'Issues detected', 'warning');
+                    log('JavaScript has some issues', 'warning');
+                }
+            } catch (error) {
+                setStatus('js-status', 'Failed', 'error');
+                log(`JavaScript error: ${error.message}`, 'error');
+            }
+        }
+
+        function testWebAssembly() {
+            log('Testing WebAssembly support...');
+
+            if (typeof WebAssembly === 'object') {
+                setStatus('wasm-status', 'Supported', 'success');
+                log('WebAssembly is supported', 'success');
+            } else {
+                setStatus('wasm-status', 'Not supported', 'warning');
+                log('WebAssembly is not supported', 'warning');
+            }
+        }
+
+        function testCanvas() {
+            log('Testing Canvas support...');
+
+            try {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+
+                if (ctx) {
+                    setStatus('canvas-status', 'Supported', 'success');
+                    log('Canvas 2D is supported', 'success');
+                } else {
+                    setStatus('canvas-status', 'Not supported', 'error');
+                    log('Canvas 2D is not supported', 'error');
+                }
+            } catch (error) {
+                setStatus('canvas-status', 'Failed', 'error');
+                log(`Canvas error: ${error.message}`, 'error');
+            }
+        }
+
+        function testServiceWorker() {
+            log('Testing Service Worker support...');
+
+            if ('serviceWorker' in navigator) {
+                setStatus('sw-status', 'Supported', 'success');
+                log('Service Worker is supported', 'success');
+            } else {
+                setStatus('sw-status', 'Not supported', 'warning');
+                log('Service Worker is not supported', 'warning');
+            }
+        }
+
+        function testLocalStorage() {
+            log('Testing Local Storage...');
+
+            try {
+                localStorage.setItem('test', 'value');
+                const retrieved = localStorage.getItem('test');
+                localStorage.removeItem('test');
+
+                if (retrieved === 'value') {
+                    setStatus('storage-status', 'Working', 'success');
+                    log('Local Storage is working', 'success');
+                } else {
+                    setStatus('storage-status', 'Issues detected', 'warning');
+                    log('Local Storage has issues', 'warning');
+                }
+            } catch (error) {
+                setStatus('storage-status', 'Failed', 'error');
+                log(`Local Storage error: ${error.message}`, 'error');
+            }
+        }
+
+        function testNetwork() {
+            log('Testing network connectivity...');
+
+            fetch('/manifest.json')
+                .then(response => {
+                    if (response.ok) {
+                        setStatus('network-status', 'Connected', 'success');
+                        log('Network connectivity is working', 'success');
+                    } else {
+                        setStatus('network-status', 'Issues detected', 'warning');
+                        log('Network has some issues', 'warning');
+                    }
+                })
+                .catch(error => {
+                    setStatus('network-status', 'Failed', 'error');
+                    log(`Network error: ${error.message}`, 'error');
+                });
+        }
+
+        function runAllTests() {
+            log('Running all diagnostic tests...', 'info');
+            clearLog();
+
+            testBrowserCompatibility();
+            setTimeout(() => testJavaScript(), 100);
+            setTimeout(() => testWebAssembly(), 200);
+            setTimeout(() => testCanvas(), 300);
+            setTimeout(() => testServiceWorker(), 400);
+            setTimeout(() => testLocalStorage(), 500);
+            setTimeout(() => testNetwork(), 600);
+
+            setTimeout(() => {
+                log('All tests completed!', 'success');
+            }, 1000);
+        }
+
+        // Run tests on page load
+        window.addEventListener('load', () => {
+            runAllTests();
+        });
+
+        // Log any JavaScript errors
+        window.addEventListener('error', (event) => {
+            log(`JavaScript Error: ${event.error.message} at ${event.filename}:${event.lineno}`, 'error');
+        });
+
+        // Log unhandled promise rejections
+        window.addEventListener('unhandledrejection', (event) => {
+            log(`Unhandled Promise Rejection: ${event.reason}`, 'error');
+        });
+    </script>
+</body>
+
+</html>

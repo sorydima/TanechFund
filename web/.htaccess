@@ -1,0 +1,130 @@
+# REChain VC Lab - Apache Configuration
+# This file configures Apache server for Flutter Web hosting
+
+# Enable rewrite engine
+RewriteEngine On
+
+# Force HTTPS (uncomment if you have SSL certificate)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Handle Flutter Web routing - redirect all requests to index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /index.html [L]
+
+# Enable GZIP compression
+<IfModule mod_deflate.c>
+    # Compress HTML, CSS, JavaScript, Text, XML and fonts
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/x-font-ttf
+    AddOutputFilterByType DEFLATE application/x-web-app-manifest+json
+    AddOutputFilterByType DEFLATE font/opentype
+    AddOutputFilterByType DEFLATE image/svg+xml
+    AddOutputFilterByType DEFLATE image/x-icon
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/xml
+</IfModule>
+
+# Set cache headers for static assets
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # Cache static assets for 1 year
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType application/json "access plus 1 year"
+    ExpiresByType application/x-web-app-manifest+json "access plus 1 year"
+    ExpiresByType font/opentype "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType text/javascript "access plus 1 year"
+    
+    # Cache HTML files for 1 hour
+    ExpiresByType text/html "access plus 1 hour"
+</IfModule>
+
+# Set cache control headers
+<IfModule mod_headers.c>
+    # Cache static assets for 1 year
+    <FilesMatch "\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+    
+    # Cache HTML files for 1 hour
+    <FilesMatch "\.(html)$">
+        Header set Cache-Control "public, max-age=3600"
+    </FilesMatch>
+    
+    # Set security headers
+    Header always set X-Content-Type-Options nosniff
+    Header always set X-Frame-Options DENY
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # CORS headers for Flutter Web
+    Header always set Access-Control-Allow-Origin "*"
+    Header always set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+    Header always set Access-Control-Allow-Headers "Content-Type, Authorization"
+</IfModule>
+
+# MIME types for Flutter Web
+<IfModule mod_mime.c>
+    # JavaScript
+    AddType application/javascript .js
+    AddType text/javascript .js
+    
+    # JSON
+    AddType application/json .json
+    
+    # Web App Manifest
+    AddType application/x-web-app-manifest+json .webapp
+    AddType application/x-web-app-manifest+json .manifest
+    
+    # Fonts
+    AddType font/opentype .otf
+    AddType font/truetype .ttf
+    AddType application/font-woff .woff
+    AddType application/font-woff2 .woff2
+    
+    # Images
+    AddType image/svg+xml .svg
+    AddType image/x-icon .ico
+    
+    # WebAssembly
+    AddType application/wasm .wasm
+    
+    # CanvasKit specific files
+    AddType application/javascript .js.symbols
+    AddType application/octet-stream .wasm
+</IfModule>
+
+# Error pages
+ErrorDocument 404 /index.html
+ErrorDocument 500 /index.html
+
+# Disable directory browsing
+Options -Indexes
+
+# Prevent access to sensitive files
+<FilesMatch "\.(htaccess|htpasswd|ini|log|sh|inc|bak)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Prevent access to build files
+<FilesMatch "^(build|\.dart_tool|\.packages|pubspec\.yaml|pubspec\.lock)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>

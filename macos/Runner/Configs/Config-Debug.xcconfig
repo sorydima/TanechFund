@@ -1,0 +1,43 @@
+// Debug configuration for REChain VC Lab macOS app
+#include "Config.xcconfig"
+
+// Debug-specific settings
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) FLUTTER_BUILD_MODE=debug DEBUG=1
+
+// Optimization
+GCC_OPTIMIZATION_LEVEL = 0
+SWIFT_OPTIMIZATION_LEVEL = -Onone
+SWIFT_COMPILATION_MODE = singlefile
+
+// Debug information
+DEBUG_INFORMATION_FORMAT = dwarf
+ENABLE_TESTABILITY = YES
+
+// Code signing
+CODE_SIGN_IDENTITY = - 
+CODE_SIGN_STYLE = Automatic
+
+// Entitlements
+CODE_SIGN_ENTITLEMENTS = Runner/DebugProfile.entitlements
+
+// Build settings
+ONLY_ACTIVE_ARCH = YES
+ENABLE_APP_SANDBOX = YES
+ENABLE_HARDENED_RUNTIME = YES
+
+// Warnings
+GCC_WARN_INHIBIT_ALL_WARNINGS = NO
+CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO
+
+// Performance
+ENABLE_BITCODE = NO
+VALIDATE_PRODUCT = NO
+
+// Swift settings
+SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG
+SWIFT_DISABLE_SAFETY_CHECKS = NO
+
+// Flutter settings
+FLUTTER_BUILD_MODE = debug
+FLUTTER_BUILD_NAME = 1.0.0
+FLUTTER_BUILD_NUMBER = 1

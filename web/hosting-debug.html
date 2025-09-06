@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REChain VC Lab - Hosting Debug</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #8B5CF6 0%, #6366F1 100%);
+            color: white;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .test-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 12px;
+            border-left: 4px solid #10B981;
+        }
+
+        .test-section.error {
+            border-left-color: #EF4444;
+        }
+
+        .test-section.warning {
+            border-left-color: #F59E0B;
+        }
+
+        .test-item {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status {
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .success {
+            background: #10B981;
+        }
+
+        .error {
+            background: #EF4444;
+        }
+
+        .warning {
+            background: #F59E0B;
+        }
+
+        .info {
+            background: #3B82F6;
+        }
+
+        button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .log {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .file-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .file-item {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🌐 REChain VC Lab - Hosting Debug</h1>
+
+        <div class="test-section">
+            <h2>📊 Environment Information</h2>
+            <div class="test-item">
+                <span>Current URL:</span>
+                <span class="status info" id="current-url">Loading...</span>
+            </div>
+            <div class="test-item">
+                <span>Base Path:</span>
+                <span class="status info" id="base-path">Loading...</span>
+            </div>
+            <div class="test-item">
+                <span>Protocol:</span>
+                <span class="status info" id="protocol">Loading...</span>
+            </div>
+            <div class="test-item">
+                <span>Host:</span>
+                <span class="status info" id="host">Loading...</span>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>📁 File Accessibility Test</h2>
+            <div class="file-list" id="file-list">
+                <!-- Files will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>🔧 Server Configuration Test</h2>
+            <div class="test-item">
+                <span>HTTPS Support:</span>
+                <span class="status" id="https-status">Testing...</span>
+            </div>
+            <div class="test-item">
+                <span>GZIP Compression:</span>
+                <span class="status" id="gzip-status">Testing...</span>
+            </div>
+            <div class="test-item">
+                <span>CORS Headers:</span>
+                <span class="status" id="cors-status">Testing...</span>
+            </div>
+            <div class="test-item">
+                <span>Cache Headers:</span>
+                <span class="status" id="cache-status">Testing...</span>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>🚀 Flutter Web Test</h2>
+            <div class="test-item">
+                <span>Flutter Bootstrap:</span>
+                <span class="status" id="flutter-bootstrap-status">Testing...</span>
+            </div>
+            <div class="test-item">
+                <span>Main Dart JS:</span>
+                <span class="status" id="main-dart-status">Testing...</span>
+            </div>
+            <div class="test-item">
+                <span>Flutter Engine:</span>
+                <span class="status" id="flutter-engine-status">Testing...</span>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <button onclick="runAllTests()">🔄 Run All Tests</button>
+            <button onclick="clearLog()">🗑️ Clear Log</button>
+            <button onclick="testFlutterLoad()">🚀 Test Flutter Load</button>
+            <button onclick="window.location.href='index.html'">🏠 Go to App</button>
+        </div>
+
+        <div class="log" id="log">
+            <div>Hosting debug console initialized...</div>
+        </div>
+    </div>
+
+    <script>
+        const criticalFiles = [
+            'index.html',
+            'flutter_bootstrap.js',
+            'main.dart.js',
+            'flutter.js',
+            'manifest.json',
+            'favicon.png',
+            'icons/Icon-192.png',
+            'icons/Icon-512.png'
+        ];
+
+        function log(message, type = 'info') {
+            const logDiv = document.getElementById('log');
+            const timestamp = new Date().toLocaleTimeString();
+            const color = type === 'error' ? '#EF4444' : type === 'warning' ? '#F59E0B' : type === 'success' ? '#10B981' : '#3B82F6';
+            logDiv.innerHTML += `<div style="color: ${color}">[${timestamp}] ${message}</div>`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+
+        function clearLog() {
+            document.getElementById('log').innerHTML = '<div>Debug console cleared...</div>';
+        }
+
+        function setStatus(id, status, type = 'info') {
+            const element = document.getElementById(id);
+            element.textContent = status;
+            element.className = `status ${type}`;
+        }
+
+        function testEnvironment() {
+            log('Testing environment information...');
+
+            const url = window.location.href;
+            const basePath = window.location.pathname;
+            const protocol = window.location.protocol;
+            const host = window.location.host;
+
+            document.getElementById('current-url').textContent = url;
+            document.getElementById('base-path').textContent = basePath;
+            document.getElementById('protocol').textContent = protocol;
+            document.getElementById('host').textContent = host;
+
+            log(`Environment: ${protocol}//${host}${basePath}`, 'success');
+        }
+
+        function testFileAccessibility() {
+            log('Testing file accessibility...');
+
+            const fileList = document.getElementById('file-list');
+            fileList.innerHTML = '';
+
+            criticalFiles.forEach(file => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.innerHTML = `
+                    <div>${file}</div>
+                    <div class="status" id="file-${file.replace(/[^a-zA-Z0-9]/g, '-')}">Testing...</div>
+                `;
+                fileList.appendChild(fileItem);
+
+                testFile(file);
+            });
+        }
+
+        function testFile(filename) {
+            const fileId = `file-${filename.replace(/[^a-zA-Z0-9]/g, '-')}`;
+
+            fetch(filename)
+                .then(response => {
+                    if (response.ok) {
+                        setStatus(fileId, 'OK', 'success');
+                        log(`✅ ${filename} accessible`, 'success');
+                    } else {
+                        setStatus(fileId, `HTTP ${response.status}`, 'error');
+                        log(`❌ ${filename} failed: HTTP ${response.status}`, 'error');
+                    }
+                })
+                .catch(error => {
+                    setStatus(fileId, 'Failed', 'error');
+                    log(`❌ ${filename} failed: ${error.message}`, 'error');
+                });
+        }
+
+        function testServerConfiguration() {
+            log('Testing server configuration...');
+
+            // Test HTTPS
+            if (window.location.protocol === 'https:') {
+                setStatus('https-status', 'Enabled', 'success');
+                log('✅ HTTPS is enabled', 'success');
+            } else {
+                setStatus('https-status', 'Disabled', 'warning');
+                log('⚠️ HTTPS is disabled', 'warning');
+            }
+
+            // Test GZIP
+            fetch('main.dart.js', { method: 'HEAD' })
+                .then(response => {
+                    const contentEncoding = response.headers.get('content-encoding');
+                    if (contentEncoding && contentEncoding.includes('gzip')) {
+                        setStatus('gzip-status', 'Enabled', 'success');
+                        log('✅ GZIP compression is enabled', 'success');
+                    } else {
+                        setStatus('gzip-status', 'Disabled', 'warning');
+                        log('⚠️ GZIP compression is disabled', 'warning');
+                    }
+                })
+                .catch(() => {
+                    setStatus('gzip-status', 'Unknown', 'warning');
+                    log('⚠️ Could not test GZIP compression', 'warning');
+                });
+
+            // Test CORS
+            fetch('manifest.json')
+                .then(response => {
+                    const cors = response.headers.get('access-control-allow-origin');
+                    if (cors) {
+                        setStatus('cors-status', 'Configured', 'success');
+                        log('✅ CORS headers are configured', 'success');
+                    } else {
+                        setStatus('cors-status', 'Not configured', 'info');
+                        log('ℹ️ CORS headers not configured (may be OK)', 'info');
+                    }
+                })
+                .catch(() => {
+                    setStatus('cors-status', 'Unknown', 'warning');
+                    log('⚠️ Could not test CORS headers', 'warning');
+                });
+
+            // Test Cache
+            fetch('main.dart.js', { method: 'HEAD' })
+                .then(response => {
+                    const cacheControl = response.headers.get('cache-control');
+                    if (cacheControl) {
+                        setStatus('cache-status', 'Configured', 'success');
+                        log('✅ Cache headers are configured', 'success');
+                    } else {
+                        setStatus('cache-status', 'Not configured', 'warning');
+                        log('⚠️ Cache headers not configured', 'warning');
+                    }
+                })
+                .catch(() => {
+                    setStatus('cache-status', 'Unknown', 'warning');
+                    log('⚠️ Could not test cache headers', 'warning');
+                });
+        }
+
+        function testFlutterWeb() {
+            log('Testing Flutter Web components...');
+
+            // Test Flutter Bootstrap
+            fetch('flutter_bootstrap.js')
+                .then(response => {
+                    if (response.ok) {
+                        setStatus('flutter-bootstrap-status', 'OK', 'success');
+                        log('✅ Flutter Bootstrap accessible', 'success');
+                    } else {
+                        setStatus('flutter-bootstrap-status', `HTTP ${response.status}`, 'error');
+                        log(`❌ Flutter Bootstrap failed: HTTP ${response.status}`, 'error');
+                    }
+                })
+                .catch(error => {
+                    setStatus('flutter-bootstrap-status', 'Failed', 'error');
+                    log(`❌ Flutter Bootstrap failed: ${error.message}`, 'error');
+                });
+
+            // Test Main Dart JS
+            fetch('main.dart.js')
+                .then(response => {
+                    if (response.ok) {
+                        setStatus('main-dart-status', 'OK', 'success');
+                        log('✅ Main Dart JS accessible', 'success');
+                    } else {
+                        setStatus('main-dart-status', `HTTP ${response.status}`, 'error');
+                        log(`❌ Main Dart JS failed: HTTP ${response.status}`, 'error');
+                    }
+                })
+                .catch(error => {
+                    setStatus('main-dart-status', 'Failed', 'error');
+                    log(`❌ Main Dart JS failed: ${error.message}`, 'error');
+                });
+
+            // Test Flutter Engine
+            fetch('flutter.js')
+                .then(response => {
+                    if (response.ok) {
+                        setStatus('flutter-engine-status', 'OK', 'success');
+                        log('✅ Flutter Engine accessible', 'success');
+                    } else {
+                        setStatus('flutter-engine-status', `HTTP ${response.status}`, 'error');
+                        log(`❌ Flutter Engine failed: HTTP ${response.status}`, 'error');
+                    }
+                })
+                .catch(error => {
+                    setStatus('flutter-engine-status', 'Failed', 'error');
+                    log(`❌ Flutter Engine failed: ${error.message}`, 'error');
+                });
+        }
+
+        function testFlutterLoad() {
+            log('Testing Flutter application load...');
+
+            // Create a test iframe to load the main app
+            const iframe = document.createElement('iframe');
+            iframe.style.width = '100%';
+            iframe.style.height = '400px';
+            iframe.style.border = 'none';
+            iframe.style.borderRadius = '8px';
+            iframe.style.background = 'white';
+            iframe.src = 'index.html';
+
+            const logDiv = document.getElementById('log');
+            logDiv.appendChild(iframe);
+
+            iframe.onload = function () {
+                log('✅ Flutter app iframe loaded successfully', 'success');
+            };
+
+            iframe.onerror = function () {
+                log('❌ Flutter app iframe failed to load', 'error');
+            };
+
+            // Remove iframe after 10 seconds
+            setTimeout(() => {
+                if (iframe.parentNode) {
+                    iframe.parentNode.removeChild(iframe);
+                }
+            }, 10000);
+        }
+
+        function runAllTests() {
+            log('Running all hosting diagnostic tests...', 'info');
+            clearLog();
+
+            testEnvironment();
+            setTimeout(() => testFileAccessibility(), 100);
+            setTimeout(() => testServerConfiguration(), 200);
+            setTimeout(() => testFlutterWeb(), 300);
+
+            setTimeout(() => {
+                log('All hosting tests completed!', 'success');
+            }, 1000);
+        }
+
+        // Run tests on page load
+        window.addEventListener('load', () => {
+            runAllTests();
+        });
+
+        // Log any JavaScript errors
+        window.addEventListener('error', (event) => {
+            log(`JavaScript Error: ${event.error.message} at ${event.filename}:${event.lineno}`, 'error');
+        });
+
+        // Log unhandled promise rejections
+        window.addEventListener('unhandledrejection', (event) => {
+            log(`Unhandled Promise Rejection: ${event.reason}`, 'error');
+        });
+    </script>
+</body>
+
+</html>

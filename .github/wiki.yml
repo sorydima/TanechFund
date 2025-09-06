@@ -1,0 +1,193 @@
+# Configuration for automatic wiki creation
+# This file is used by the wiki action
+
+# Wiki configuration
+wiki:
+  # Enable automatic wiki creation
+  enabled: true
+  
+  # Wiki title
+  title: "REChain VC Lab Wiki"
+  
+  # Wiki description
+  description: "Comprehensive documentation for REChain VC Lab project"
+  
+  # Wiki sidebar
+  sidebar: |
+    # REChain VC Lab Wiki
+    
+    ## Getting Started
+    - [Installation](Installation)
+    - [Quick Start](Quick-Start)
+    - [Configuration](Configuration)
+    
+    ## Features
+    - [Web3 Features](Web3-Features)
+    - [Web4 Movement](Web4-Movement)
+    - [Web5 Creation](Web5-Creation)
+    
+    ## Development
+    - [Development Setup](Development-Setup)
+    - [Contributing](Contributing)
+    - [Code Style](Code-Style)
+    - [Testing](Testing)
+    
+    ## Deployment
+    - [Android](Android-Deployment)
+    - [iOS](iOS-Deployment)
+    - [Web](Web-Deployment)
+    - [Desktop](Desktop-Deployment)
+    
+    ## API Reference
+    - [Providers](Providers)
+    - [Models](Models)
+    - [Screens](Screens)
+    - [Widgets](Widgets)
+    
+    ## Troubleshooting
+    - [Common Issues](Common-Issues)
+    - [FAQ](FAQ)
+    - [Support](Support)
+
+# Auto-create wiki pages from documentation
+autoCreate:
+  enabled: true
+  sources:
+    - path: "docs/"
+      pattern: "*.md"
+      destination: "docs/"
+    - path: "README.md"
+      destination: "Home"
+    - path: "CONTRIBUTING.md"
+      destination: "Contributing"
+    - path: "CHANGELOG.md"
+      destination: "Changelog"
+
+# Wiki page templates
+templates:
+  feature:
+    title: "{{ featureName }}"
+    content: |
+      # {{ featureName }}
+      
+      ## Overview
+      {{ featureDescription }}
+      
+      ## Usage
+      ```dart
+      // Example usage
+      ```
+      
+      ## API Reference
+      ### Methods
+      - `method1()` - Description
+      - `method2()` - Description
+      
+      ## Examples
+      ### Basic Example
+      ```dart
+      // Basic example
+      ```
+      
+      ### Advanced Example
+      ```dart
+      // Advanced example
+      ```
+      
+      ## Related
+      - [Link 1](Link1)
+      - [Link 2](Link2)
+  
+  api:
+    title: "{{ apiName }}"
+    content: |
+      # {{ apiName }}
+      
+      ## Overview
+      {{ apiDescription }}
+      
+      ## Methods
+      {{ #each methods }}
+      ### {{ name }}
+      {{ description }}
+      
+      **Parameters:**
+      {{ #each parameters }}
+      - `{{ name }}` ({{ type }}) - {{ description }}
+      {{ /each }}
+      
+      **Returns:** {{ returnType }}
+      
+      **Example:**
+      ```dart
+      {{ example }}
+      ```
+      {{ /each }}
+      
+      ## Related
+      - [Link 1](Link1)
+      - [Link 2](Link2)
+
+# Auto-update wiki from code changes
+autoUpdate:
+  enabled: true
+  triggers:
+    - "push"
+    - "pull_request"
+    - "release"
+  paths:
+    - "lib/"
+    - "docs/"
+    - "README.md"
+    - "CONTRIBUTING.md"
+    - "CHANGELOG.md"
+
+# Wiki search configuration
+search:
+  enabled: true
+  index:
+    - "*.md"
+    - "*.rst"
+    - "*.txt"
+  exclude:
+    - "node_modules/"
+    - ".git/"
+    - "build/"
+
+# Wiki permissions
+permissions:
+  read: "public"
+  write: "collaborators"
+  admin: "maintainers"
+
+# Wiki backup
+backup:
+  enabled: true
+  frequency: "daily"
+  retention: 30 # days
+  location: "wiki-backup/"
+
+# Wiki analytics
+analytics:
+  enabled: true
+  track:
+    - "page-views"
+    - "search-queries"
+    - "user-activity"
+  retention: 90 # days
+
+# Wiki integration
+integrations:
+  github:
+    enabled: true
+    syncIssues: true
+    syncPullRequests: true
+    syncReleases: true
+  slack:
+    enabled: false
+    webhook: ""
+    channels: []
+  discord:
+    enabled: false
+    webhook: ""
+    channels: []

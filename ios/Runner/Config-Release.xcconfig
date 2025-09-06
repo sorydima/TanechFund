@@ -1,0 +1,519 @@
+// REChain VC Lab iOS Release Configuration
+// This file contains release-specific build configuration settings
+
+// Include base configuration
+#include "Config.xcconfig"
+
+// Release-specific overrides
+FLUTTER_BUILD_MODE = release
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+ENABLE_TESTABILITY = NO
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+
+// Swift Release Settings
+SWIFT_OPTIMIZATION_LEVEL = -O
+SWIFT_COMPILATION_MODE = wholemodule
+
+// Code Signing Release
+CODE_SIGN_IDENTITY = Apple Development
+CODE_SIGN_STYLE = Automatic
+
+// Release Build Settings
+IPHONEOS_DEPLOYMENT_TARGET = 12.0
+TARGETED_DEVICE_FAMILY = 1,2
+SUPPORTED_PLATFORMS = iphoneos iphonesimulator
+
+// Release Architecture
+ARCHS = arm64
+VALID_ARCHS = arm64 armv7 armv7s
+
+// Release Flutter Settings
+FLUTTER_BUILD_NAME = 1.0.0-release
+FLUTTER_BUILD_NUMBER = 1
+
+// Release App Configuration
+PRODUCT_NAME = REChain VC Lab Release
+PRODUCT_BUNDLE_IDENTIFIER = com.rechain.vc.release
+PRODUCT_DISPLAY_NAME = REChain VC Lab Release
+PRODUCT_VERSION = 1.0.0
+PRODUCT_BUILD_NUMBER = 1
+
+// Release Development Team
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+
+// Release Provisioning
+PROVISIONING_PROFILE_SPECIFIER = 
+
+// Release Entitlements
+CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements
+
+// Release App Transport Security
+NSAppTransportSecurity = YES
+NSAllowsArbitraryLoads = YES
+
+// Release Background Modes
+UIBackgroundModes = background-processing background-fetch
+
+// Release Associated Domains
+ASSOCIATED_DOMAINS = applinks:rechain.vc applinks:www.rechain.vc applinks:app.rechain.vc
+
+// Release CloudKit
+CLOUDKIT_CONTAINER = iCloud.com.rechain.vc.release
+
+// Release Push Notifications
+ENABLE_PUSH_NOTIFICATIONS = YES
+
+// Release In-App Purchases
+ENABLE_IN_APP_PURCHASES = YES
+
+// Release Apple Sign In
+ENABLE_APPLE_SIGN_IN = YES
+
+// Release Siri
+ENABLE_SIRI = YES
+
+// Release Spotlight
+ENABLE_SPOTLIGHT = YES
+
+// Release Widgets
+ENABLE_WIDGETS = YES
+
+// Release App Clips
+ENABLE_APP_CLIPS = NO
+
+// Release TestFlight
+ENABLE_TESTFLIGHT = YES
+
+// Release Analytics
+ENABLE_ANALYTICS = YES
+ENABLE_CRASHLYTICS = YES
+
+// Release Performance
+ENABLE_PERFORMANCE_MONITORING = YES
+
+// Release Remote Config
+ENABLE_REMOTE_CONFIG = YES
+
+// Release Dynamic Links
+ENABLE_DYNAMIC_LINKS = YES
+
+// Release Authentication
+ENABLE_FIREBASE_AUTH = YES
+ENABLE_GOOGLE_SIGN_IN = YES
+ENABLE_FACEBOOK_SIGN_IN = YES
+
+// Release Storage
+ENABLE_FIREBASE_STORAGE = YES
+ENABLE_CLOUD_FIRESTORE = YES
+
+// Release Functions
+ENABLE_CLOUD_FUNCTIONS = YES
+
+// Release Messaging
+ENABLE_FIREBASE_MESSAGING = YES
+
+// Release ML Kit
+ENABLE_ML_KIT = YES
+
+// Release Vision
+ENABLE_VISION = YES
+
+// Release Natural Language
+ENABLE_NATURAL_LANGUAGE = YES
+
+// Release Core ML
+ENABLE_CORE_ML = YES
+
+// Release ARKit
+ENABLE_ARKIT = NO
+
+// Release Core Location
+ENABLE_CORE_LOCATION = YES
+
+// Release MapKit
+ENABLE_MAPKIT = YES
+
+// Release Contacts
+ENABLE_CONTACTS = YES
+
+// Release Calendar
+ENABLE_CALENDAR = YES
+
+// Release Photos
+ENABLE_PHOTOS = YES
+
+// Release Camera
+ENABLE_CAMERA = YES
+
+// Release Microphone
+ENABLE_MICROPHONE = YES
+
+// Release Face ID / Touch ID
+ENABLE_BIOMETRIC_AUTH = YES
+
+// Release Keychain
+ENABLE_KEYCHAIN = YES
+
+// Release User Defaults
+ENABLE_USER_DEFAULTS = YES
+
+// Release Core Data
+ENABLE_CORE_DATA = YES
+
+// Release SQLite
+ENABLE_SQLITE = YES
+
+// Release Network
+ENABLE_NETWORK = YES
+ENABLE_WEBSOCKETS = YES
+
+// Release WebView
+ENABLE_WEBVIEW = YES
+
+// Release PDF
+ENABLE_PDF = YES
+
+// Release Printing
+ENABLE_PRINTING = YES
+
+// Release AirPrint
+ENABLE_AIRPRINT = YES
+
+// Release Handoff
+ENABLE_HANDOFF = YES
+
+// Release Spotlight Search
+ENABLE_SPOTLIGHT_SEARCH = YES
+
+// Release Siri Shortcuts
+ENABLE_SIRI_SHORTCUTS = YES
+
+// Release Intents
+ENABLE_INTENTS = YES
+
+// Release CallKit
+ENABLE_CALLKIT = NO
+
+// Release PushKit
+ENABLE_PUSHKIT = YES
+
+// Release UserNotifications
+ENABLE_USER_NOTIFICATIONS = YES
+
+// Release Background App Refresh
+ENABLE_BACKGROUND_APP_REFRESH = YES
+
+// Release Background Processing
+ENABLE_BACKGROUND_PROCESSING = YES
+
+// Release Background Fetch
+ENABLE_BACKGROUND_FETCH = YES
+
+// Release Background Modes
+ENABLE_BACKGROUND_MODES = YES
+
+// Release App Extensions
+ENABLE_APP_EXTENSIONS = YES
+
+// Release Today Extensions
+ENABLE_TODAY_EXTENSIONS = YES
+
+// Release Share Extensions
+ENABLE_SHARE_EXTENSIONS = YES
+
+// Release Action Extensions
+ENABLE_ACTION_EXTENSIONS = YES
+
+// Release Photo Editing Extensions
+ENABLE_PHOTO_EDITING_EXTENSIONS = NO
+
+// Release Broadcast Extensions
+ENABLE_BROADCAST_EXTENSIONS = NO
+
+// Release Network Extensions
+ENABLE_NETWORK_EXTENSIONS = NO
+
+// Release VPN Extensions
+ENABLE_VPN_EXTENSIONS = NO
+
+// Release Intents Extensions
+ENABLE_INTENTS_EXTENSIONS = YES
+
+// Release Siri Intents Extensions
+ENABLE_SIRI_INTENTS_EXTENSIONS = YES
+
+// Release Widget Extensions
+ENABLE_WIDGET_EXTENSIONS = YES
+
+// Release App Clip Extensions
+ENABLE_APP_CLIP_EXTENSIONS = NO
+
+// Release DriverKit Extensions
+ENABLE_DRIVERKIT_EXTENSIONS = NO
+
+// Release System Extensions
+ENABLE_SYSTEM_EXTENSIONS = NO
+
+// Release Endpoint Security Extensions
+ENABLE_ENDPOINT_SECURITY_EXTENSIONS = NO
+
+// Release Network Extensions
+ENABLE_NETWORK_EXTENSIONS = NO
+
+// Release VPN Extensions
+ENABLE_VPN_EXTENSIONS = NO
+
+// Release Packet Tunnel Extensions
+ENABLE_PACKET_TUNNEL_EXTENSIONS = NO
+
+// Release App Proxy Extensions
+ENABLE_APP_PROXY_EXTENSIONS = NO
+
+// Release Content Filter Extensions
+ENABLE_CONTENT_FILTER_EXTENSIONS = NO
+
+// Release DNS Proxy Extensions
+ENABLE_DNS_PROXY_EXTENSIONS = NO
+
+// Release Endpoint Security Extensions
+ENABLE_ENDPOINT_SECURITY_EXTENSIONS = NO
+
+// Release System Extensions
+ENABLE_SYSTEM_EXTENSIONS = NO
+
+// Release DriverKit Extensions
+ENABLE_DRIVERKIT_EXTENSIONS = NO
+
+// Release App Clip Extensions
+ENABLE_APP_CLIP_EXTENSIONS = NO
+
+// Release Widget Extensions
+ENABLE_WIDGET_EXTENSIONS = YES
+
+// Release Siri Intents Extensions
+ENABLE_SIRI_INTENTS_EXTENSIONS = YES
+
+// Release Intents Extensions
+ENABLE_INTENTS_EXTENSIONS = YES
+
+// Release Action Extensions
+ENABLE_ACTION_EXTENSIONS = YES
+
+// Release Share Extensions
+ENABLE_SHARE_EXTENSIONS = YES
+
+// Release Today Extensions
+ENABLE_TODAY_EXTENSIONS = YES
+
+// Release App Extensions
+ENABLE_APP_EXTENSIONS = YES
+
+// Release Background Fetch
+ENABLE_BACKGROUND_FETCH = YES
+
+// Release Background Processing
+ENABLE_BACKGROUND_PROCESSING = YES
+
+// Release Background App Refresh
+ENABLE_BACKGROUND_APP_REFRESH = YES
+
+// Release UserNotifications
+ENABLE_USER_NOTIFICATIONS = YES
+
+// Release PushKit
+ENABLE_PUSHKIT = YES
+
+// Release CallKit
+ENABLE_CALLKIT = NO
+
+// Release Intents
+ENABLE_INTENTS = YES
+
+// Release Siri Shortcuts
+ENABLE_SIRI_SHORTCUTS = YES
+
+// Release Spotlight Search
+ENABLE_SPOTLIGHT_SEARCH = YES
+
+// Release Handoff
+ENABLE_HANDOFF = YES
+
+// Release AirPrint
+ENABLE_AIRPRINT = YES
+
+// Release Printing
+ENABLE_PRINTING = YES
+
+// Release PDF
+ENABLE_PDF = YES
+
+// Release WebView
+ENABLE_WEBVIEW = YES
+
+// Release Network
+ENABLE_NETWORK = YES
+ENABLE_WEBSOCKETS = YES
+
+// Release SQLite
+ENABLE_SQLITE = YES
+
+// Release Core Data
+ENABLE_CORE_DATA = YES
+
+// Release User Defaults
+ENABLE_USER_DEFAULTS = YES
+
+// Release Keychain
+ENABLE_KEYCHAIN = YES
+
+// Release Face ID / Touch ID
+ENABLE_BIOMETRIC_AUTH = YES
+
+// Release Microphone
+ENABLE_MICROPHONE = YES
+
+// Release Camera
+ENABLE_CAMERA = YES
+
+// Release Photos
+ENABLE_PHOTOS = YES
+
+// Release Calendar
+ENABLE_CALENDAR = YES
+
+// Release Contacts
+ENABLE_CONTACTS = YES
+
+// Release MapKit
+ENABLE_MAPKIT = YES
+
+// Release Core Location
+ENABLE_CORE_LOCATION = YES
+
+// Release ARKit
+ENABLE_ARKIT = NO
+
+// Release Core ML
+ENABLE_CORE_ML = YES
+
+// Release Natural Language
+ENABLE_NATURAL_LANGUAGE = YES
+
+// Release Vision
+ENABLE_VISION = YES
+
+// Release ML Kit
+ENABLE_ML_KIT = YES
+
+// Release Messaging
+ENABLE_FIREBASE_MESSAGING = YES
+
+// Release Functions
+ENABLE_CLOUD_FUNCTIONS = YES
+
+// Release Storage
+ENABLE_FIREBASE_STORAGE = YES
+ENABLE_CLOUD_FIRESTORE = YES
+
+// Release Authentication
+ENABLE_FIREBASE_AUTH = YES
+ENABLE_GOOGLE_SIGN_IN = YES
+ENABLE_FACEBOOK_SIGN_IN = YES
+
+// Release Dynamic Links
+ENABLE_DYNAMIC_LINKS = YES
+
+// Release Remote Config
+ENABLE_REMOTE_CONFIG = YES
+
+// Release Performance
+ENABLE_PERFORMANCE_MONITORING = YES
+
+// Release Analytics
+ENABLE_ANALYTICS = YES
+ENABLE_CRASHLYTICS = YES
+
+// Release TestFlight
+ENABLE_TESTFLIGHT = YES
+
+// Release App Clips
+ENABLE_APP_CLIPS = NO
+
+// Release Widgets
+ENABLE_WIDGETS = YES
+
+// Release Spotlight
+ENABLE_SPOTLIGHT = YES
+
+// Release Siri
+ENABLE_SIRI = YES
+
+// Release Apple Sign In
+ENABLE_APPLE_SIGN_IN = YES
+
+// Release In-App Purchases
+ENABLE_IN_APP_PURCHASES = YES
+
+// Release Push Notifications
+ENABLE_PUSH_NOTIFICATIONS = YES
+
+// Release CloudKit
+CLOUDKIT_CONTAINER = iCloud.com.rechain.vc.release
+
+// Release Associated Domains
+ASSOCIATED_DOMAINS = applinks:rechain.vc applinks:www.rechain.vc applinks:app.rechain.vc
+
+// Release Background Modes
+UIBackgroundModes = background-processing background-fetch
+
+// Release App Transport Security
+NSAppTransportSecurity = YES
+NSAllowsArbitraryLoads = YES
+
+// Release Flutter Settings
+FLUTTER_BUILD_MODE = release
+FLUTTER_BUILD_NAME = 1.0.0-release
+FLUTTER_BUILD_NUMBER = 1
+
+// Release Release Settings
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+
+// Release Debug Settings
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+ENABLE_TESTABILITY = NO
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+
+// Release Architecture
+ARCHS = arm64
+VALID_ARCHS = arm64 armv7 armv7s
+
+// Release Swift Settings
+SWIFT_VERSION = 5.0
+SWIFT_OPTIMIZATION_LEVEL = -O
+SWIFT_COMPILATION_MODE = wholemodule
+
+// Release Build Settings
+IPHONEOS_DEPLOYMENT_TARGET = 12.0
+TARGETED_DEVICE_FAMILY = 1,2
+SUPPORTED_PLATFORMS = iphoneos iphonesimulator
+
+// Release Code Signing
+CODE_SIGN_STYLE = Automatic
+CODE_SIGN_IDENTITY = Apple Development
+PROVISIONING_PROFILE_SPECIFIER = 
+
+// Release Development Team
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+
+// Release App Configuration
+PRODUCT_NAME = REChain VC Lab Release
+PRODUCT_BUNDLE_IDENTIFIER = com.rechain.vc.release
+PRODUCT_DISPLAY_NAME = REChain VC Lab Release
+PRODUCT_VERSION = 1.0.0
+PRODUCT_BUILD_NUMBER = 1

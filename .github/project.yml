@@ -1,0 +1,168 @@
+# Configuration for automatic project creation
+# This file is used by the project action
+
+# Project configuration
+projects:
+  # Main project board
+  main:
+    name: "REChain VC Lab Development"
+    description: "Main development board for REChain VC Lab project"
+    state: "open"
+    columns:
+      - name: "Backlog"
+        description: "Ideas and future work"
+        position: 1
+      - name: "To Do"
+        description: "Ready to be worked on"
+        position: 2
+      - name: "In Progress"
+        description: "Currently being worked on"
+        position: 3
+      - name: "In Review"
+        description: "Under review"
+        position: 4
+      - name: "Done"
+        description: "Completed work"
+        position: 5
+
+  # Bug tracking project
+  bugs:
+    name: "Bug Tracking"
+    description: "Track and manage bugs"
+    state: "open"
+    columns:
+      - name: "New Bugs"
+        description: "Newly reported bugs"
+        position: 1
+      - name: "Triaged"
+        description: "Bugs that have been triaged"
+        position: 2
+      - name: "In Progress"
+        description: "Bugs being fixed"
+        position: 3
+      - name: "Testing"
+        description: "Bugs being tested"
+        position: 4
+      - name: "Fixed"
+        description: "Bugs that have been fixed"
+        position: 5
+
+  # Feature requests project
+  features:
+    name: "Feature Requests"
+    description: "Track feature requests and enhancements"
+    state: "open"
+    columns:
+      - name: "New Requests"
+        description: "New feature requests"
+        position: 1
+      - name: "Under Consideration"
+        description: "Being evaluated"
+        position: 2
+      - name: "Planned"
+        description: "Planned for future release"
+        position: 3
+      - name: "In Development"
+        description: "Being developed"
+        position: 4
+      - name: "Completed"
+        description: "Feature completed"
+        position: 5
+
+# Auto-assign issues to projects based on labels
+autoAssign:
+  enabled: true
+  rules:
+    - labels: ["bug"]
+      project: "bugs"
+      column: "New Bugs"
+    - labels: ["enhancement", "feature"]
+      project: "features"
+      column: "New Requests"
+    - labels: ["web3", "web4", "web5"]
+      project: "main"
+      column: "To Do"
+    - labels: ["priority: high"]
+      project: "main"
+      column: "To Do"
+    - labels: ["priority: critical"]
+      project: "main"
+      column: "To Do"
+
+# Auto-move issues between columns based on status
+autoMove:
+  enabled: true
+  rules:
+    - labels: ["in-progress"]
+      column: "In Progress"
+    - labels: ["needs-review"]
+      column: "In Review"
+    - labels: ["done", "completed"]
+      column: "Done"
+    - labels: ["triaged"]
+      column: "Triaged"
+    - labels: ["planned"]
+      column: "Planned"
+    - labels: ["in-development"]
+      column: "In Development"
+
+# Project templates
+templates:
+  web3:
+    name: "Web3 Features"
+    description: "Web3 related features and improvements"
+    columns:
+      - "Backlog"
+      - "In Progress"
+      - "Testing"
+      - "Done"
+  web4:
+    name: "Web4 Movement"
+    description: "Web4 movement features and improvements"
+    columns:
+      - "Backlog"
+      - "In Progress"
+      - "Testing"
+      - "Done"
+  web5:
+    name: "Web5 Creation"
+    description: "Web5 creation features and improvements"
+    columns:
+      - "Backlog"
+      - "In Progress"
+      - "Testing"
+      - "Done"
+
+# Notification settings
+notifications:
+  enabled: true
+  channels:
+    - "github"
+    - "email"
+  triggers:
+    - "project-created"
+    - "issue-moved"
+    - "milestone-reached"
+
+# Progress tracking
+progress:
+  enabled: true
+  showProgress: true
+  progressFormat: "{{ completed }}/{{ total }} ({{ percentage }}%)"
+  updateFrequency: "daily"
+
+# Integration settings
+integrations:
+  github:
+    enabled: true
+    syncIssues: true
+    syncPullRequests: true
+    syncMilestones: true
+  slack:
+    enabled: false
+    webhook: ""
+    channels: []
+  discord:
+    enabled: false
+    webhook: ""
+    channels: []

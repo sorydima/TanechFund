@@ -1,0 +1,519 @@
+// REChain VC Lab iOS UI Test Configuration
+// This file contains UI test-specific build configuration settings
+
+// Include base configuration
+#include "Config.xcconfig"
+
+// UI Test-specific overrides
+FLUTTER_BUILD_MODE = profile
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+ENABLE_TESTABILITY = NO
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+
+// Swift UI Test Settings
+SWIFT_OPTIMIZATION_LEVEL = -O
+SWIFT_COMPILATION_MODE = wholemodule
+
+// Code Signing UI Test
+CODE_SIGN_IDENTITY = Apple Development
+CODE_SIGN_STYLE = Automatic
+
+// UI Test Build Settings
+IPHONEOS_DEPLOYMENT_TARGET = 12.0
+TARGETED_DEVICE_FAMILY = 1,2
+SUPPORTED_PLATFORMS = iphoneos iphonesimulator
+
+// UI Test Architecture
+ARCHS = arm64
+VALID_ARCHS = arm64 armv7 armv7s
+
+// UI Test Flutter Settings
+FLUTTER_BUILD_NAME = 1.0.0-ui-test
+FLUTTER_BUILD_NUMBER = 1
+
+// UI Test App Configuration
+PRODUCT_NAME = REChain VC Lab UI Test
+PRODUCT_BUNDLE_IDENTIFIER = com.rechain.vc.ui-test
+PRODUCT_DISPLAY_NAME = REChain VC Lab UI Test
+PRODUCT_VERSION = 1.0.0
+PRODUCT_BUILD_NUMBER = 1
+
+// UI Test Development Team
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+
+// UI Test Provisioning
+PROVISIONING_PROFILE_SPECIFIER = 
+
+// UI Test Entitlements
+CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements
+
+// UI Test App Transport Security
+NSAppTransportSecurity = YES
+NSAllowsArbitraryLoads = YES
+
+// UI Test Background Modes
+UIBackgroundModes = background-processing background-fetch
+
+// UI Test Associated Domains
+ASSOCIATED_DOMAINS = applinks:rechain.vc applinks:www.rechain.vc applinks:app.rechain.vc
+
+// UI Test CloudKit
+CLOUDKIT_CONTAINER = iCloud.com.rechain.vc.ui-test
+
+// UI Test Push Notifications
+ENABLE_PUSH_NOTIFICATIONS = YES
+
+// UI Test In-App Purchases
+ENABLE_IN_APP_PURCHASES = YES
+
+// UI Test Apple Sign In
+ENABLE_APPLE_SIGN_IN = YES
+
+// UI Test Siri
+ENABLE_SIRI = YES
+
+// UI Test Spotlight
+ENABLE_SPOTLIGHT = YES
+
+// UI Test Widgets
+ENABLE_WIDGETS = YES
+
+// UI Test App Clips
+ENABLE_APP_CLIPS = NO
+
+// UI Test TestFlight
+ENABLE_TESTFLIGHT = YES
+
+// UI Test Analytics
+ENABLE_ANALYTICS = YES
+ENABLE_CRASHLYTICS = YES
+
+// UI Test Performance
+ENABLE_PERFORMANCE_MONITORING = YES
+
+// UI Test Remote Config
+ENABLE_REMOTE_CONFIG = YES
+
+// UI Test Dynamic Links
+ENABLE_DYNAMIC_LINKS = YES
+
+// UI Test Authentication
+ENABLE_FIREBASE_AUTH = YES
+ENABLE_GOOGLE_SIGN_IN = YES
+ENABLE_FACEBOOK_SIGN_IN = YES
+
+// UI Test Storage
+ENABLE_FIREBASE_STORAGE = YES
+ENABLE_CLOUD_FIRESTORE = YES
+
+// UI Test Functions
+ENABLE_CLOUD_FUNCTIONS = YES
+
+// UI Test Messaging
+ENABLE_FIREBASE_MESSAGING = YES
+
+// UI Test ML Kit
+ENABLE_ML_KIT = YES
+
+// UI Test Vision
+ENABLE_VISION = YES
+
+// UI Test Natural Language
+ENABLE_NATURAL_LANGUAGE = YES
+
+// UI Test Core ML
+ENABLE_CORE_ML = YES
+
+// UI Test ARKit
+ENABLE_ARKIT = NO
+
+// UI Test Core Location
+ENABLE_CORE_LOCATION = YES
+
+// UI Test MapKit
+ENABLE_MAPKIT = YES
+
+// UI Test Contacts
+ENABLE_CONTACTS = YES
+
+// UI Test Calendar
+ENABLE_CALENDAR = YES
+
+// UI Test Photos
+ENABLE_PHOTOS = YES
+
+// UI Test Camera
+ENABLE_CAMERA = YES
+
+// UI Test Microphone
+ENABLE_MICROPHONE = YES
+
+// UI Test Face ID / Touch ID
+ENABLE_BIOMETRIC_AUTH = YES
+
+// UI Test Keychain
+ENABLE_KEYCHAIN = YES
+
+// UI Test User Defaults
+ENABLE_USER_DEFAULTS = YES
+
+// UI Test Core Data
+ENABLE_CORE_DATA = YES
+
+// UI Test SQLite
+ENABLE_SQLITE = YES
+
+// UI Test Network
+ENABLE_NETWORK = YES
+ENABLE_WEBSOCKETS = YES
+
+// UI Test WebView
+ENABLE_WEBVIEW = YES
+
+// UI Test PDF
+ENABLE_PDF = YES
+
+// UI Test Printing
+ENABLE_PRINTING = YES
+
+// UI Test AirPrint
+ENABLE_AIRPRINT = YES
+
+// UI Test Handoff
+ENABLE_HANDOFF = YES
+
+// UI Test Spotlight Search
+ENABLE_SPOTLIGHT_SEARCH = YES
+
+// UI Test Siri Shortcuts
+ENABLE_SIRI_SHORTCUTS = YES
+
+// UI Test Intents
+ENABLE_INTENTS = YES
+
+// UI Test CallKit
+ENABLE_CALLKIT = NO
+
+// UI Test PushKit
+ENABLE_PUSHKIT = YES
+
+// UI Test UserNotifications
+ENABLE_USER_NOTIFICATIONS = YES
+
+// UI Test Background App Refresh
+ENABLE_BACKGROUND_APP_REFRESH = YES
+
+// UI Test Background Processing
+ENABLE_BACKGROUND_PROCESSING = YES
+
+// UI Test Background Fetch
+ENABLE_BACKGROUND_FETCH = YES
+
+// UI Test Background Modes
+ENABLE_BACKGROUND_MODES = YES
+
+// UI Test App Extensions
+ENABLE_APP_EXTENSIONS = YES
+
+// UI Test Today Extensions
+ENABLE_TODAY_EXTENSIONS = YES
+
+// UI Test Share Extensions
+ENABLE_SHARE_EXTENSIONS = YES
+
+// UI Test Action Extensions
+ENABLE_ACTION_EXTENSIONS = YES
+
+// UI Test Photo Editing Extensions
+ENABLE_PHOTO_EDITING_EXTENSIONS = NO
+
+// UI Test Broadcast Extensions
+ENABLE_BROADCAST_EXTENSIONS = NO
+
+// UI Test Network Extensions
+ENABLE_NETWORK_EXTENSIONS = NO
+
+// UI Test VPN Extensions
+ENABLE_VPN_EXTENSIONS = NO
+
+// UI Test Intents Extensions
+ENABLE_INTENTS_EXTENSIONS = YES
+
+// UI Test Siri Intents Extensions
+ENABLE_SIRI_INTENTS_EXTENSIONS = YES
+
+// UI Test Widget Extensions
+ENABLE_WIDGET_EXTENSIONS = YES
+
+// UI Test App Clip Extensions
+ENABLE_APP_CLIP_EXTENSIONS = NO
+
+// UI Test DriverKit Extensions
+ENABLE_DRIVERKIT_EXTENSIONS = NO
+
+// UI Test System Extensions
+ENABLE_SYSTEM_EXTENSIONS = NO
+
+// UI Test Endpoint Security Extensions
+ENABLE_ENDPOINT_SECURITY_EXTENSIONS = NO
+
+// UI Test Network Extensions
+ENABLE_NETWORK_EXTENSIONS = NO
+
+// UI Test VPN Extensions
+ENABLE_VPN_EXTENSIONS = NO
+
+// UI Test Packet Tunnel Extensions
+ENABLE_PACKET_TUNNEL_EXTENSIONS = NO
+
+// UI Test App Proxy Extensions
+ENABLE_APP_PROXY_EXTENSIONS = NO
+
+// UI Test Content Filter Extensions
+ENABLE_CONTENT_FILTER_EXTENSIONS = NO
+
+// UI Test DNS Proxy Extensions
+ENABLE_DNS_PROXY_EXTENSIONS = NO
+
+// UI Test Endpoint Security Extensions
+ENABLE_ENDPOINT_SECURITY_EXTENSIONS = NO
+
+// UI Test System Extensions
+ENABLE_SYSTEM_EXTENSIONS = NO
+
+// UI Test DriverKit Extensions
+ENABLE_DRIVERKIT_EXTENSIONS = NO
+
+// UI Test App Clip Extensions
+ENABLE_APP_CLIP_EXTENSIONS = NO
+
+// UI Test Widget Extensions
+ENABLE_WIDGET_EXTENSIONS = YES
+
+// UI Test Siri Intents Extensions
+ENABLE_SIRI_INTENTS_EXTENSIONS = YES
+
+// UI Test Intents Extensions
+ENABLE_INTENTS_EXTENSIONS = YES
+
+// UI Test Action Extensions
+ENABLE_ACTION_EXTENSIONS = YES
+
+// UI Test Share Extensions
+ENABLE_SHARE_EXTENSIONS = YES
+
+// UI Test Today Extensions
+ENABLE_TODAY_EXTENSIONS = YES
+
+// UI Test App Extensions
+ENABLE_APP_EXTENSIONS = YES
+
+// UI Test Background Fetch
+ENABLE_BACKGROUND_FETCH = YES
+
+// UI Test Background Processing
+ENABLE_BACKGROUND_PROCESSING = YES
+
+// UI Test Background App Refresh
+ENABLE_BACKGROUND_APP_REFRESH = YES
+
+// UI Test UserNotifications
+ENABLE_USER_NOTIFICATIONS = YES
+
+// UI Test PushKit
+ENABLE_PUSHKIT = YES
+
+// UI Test CallKit
+ENABLE_CALLKIT = NO
+
+// UI Test Intents
+ENABLE_INTENTS = YES
+
+// UI Test Siri Shortcuts
+ENABLE_SIRI_SHORTCUTS = YES
+
+// UI Test Spotlight Search
+ENABLE_SPOTLIGHT_SEARCH = YES
+
+// UI Test Handoff
+ENABLE_HANDOFF = YES
+
+// UI Test AirPrint
+ENABLE_AIRPRINT = YES
+
+// UI Test Printing
+ENABLE_PRINTING = YES
+
+// UI Test PDF
+ENABLE_PDF = YES
+
+// UI Test WebView
+ENABLE_WEBVIEW = YES
+
+// UI Test Network
+ENABLE_NETWORK = YES
+ENABLE_WEBSOCKETS = YES
+
+// UI Test SQLite
+ENABLE_SQLITE = YES
+
+// UI Test Core Data
+ENABLE_CORE_DATA = YES
+
+// UI Test User Defaults
+ENABLE_USER_DEFAULTS = YES
+
+// UI Test Keychain
+ENABLE_KEYCHAIN = YES
+
+// UI Test Face ID / Touch ID
+ENABLE_BIOMETRIC_AUTH = YES
+
+// UI Test Microphone
+ENABLE_MICROPHONE = YES
+
+// UI Test Camera
+ENABLE_CAMERA = YES
+
+// UI Test Photos
+ENABLE_PHOTOS = YES
+
+// UI Test Calendar
+ENABLE_CALENDAR = YES
+
+// UI Test Contacts
+ENABLE_CONTACTS = YES
+
+// UI Test MapKit
+ENABLE_MAPKIT = YES
+
+// UI Test Core Location
+ENABLE_CORE_LOCATION = YES
+
+// UI Test ARKit
+ENABLE_ARKIT = NO
+
+// UI Test Core ML
+ENABLE_CORE_ML = YES
+
+// UI Test Natural Language
+ENABLE_NATURAL_LANGUAGE = YES
+
+// UI Test Vision
+ENABLE_VISION = YES
+
+// UI Test ML Kit
+ENABLE_ML_KIT = YES
+
+// UI Test Messaging
+ENABLE_FIREBASE_MESSAGING = YES
+
+// UI Test Functions
+ENABLE_CLOUD_FUNCTIONS = YES
+
+// UI Test Storage
+ENABLE_FIREBASE_STORAGE = YES
+ENABLE_CLOUD_FIRESTORE = YES
+
+// UI Test Authentication
+ENABLE_FIREBASE_AUTH = YES
+ENABLE_GOOGLE_SIGN_IN = YES
+ENABLE_FACEBOOK_SIGN_IN = YES
+
+// UI Test Dynamic Links
+ENABLE_DYNAMIC_LINKS = YES
+
+// UI Test Remote Config
+ENABLE_REMOTE_CONFIG = YES
+
+// UI Test Performance
+ENABLE_PERFORMANCE_MONITORING = YES
+
+// UI Test Analytics
+ENABLE_ANALYTICS = YES
+ENABLE_CRASHLYTICS = YES
+
+// UI Test TestFlight
+ENABLE_TESTFLIGHT = YES
+
+// UI Test App Clips
+ENABLE_APP_CLIPS = NO
+
+// UI Test Widgets
+ENABLE_WIDGETS = YES
+
+// UI Test Spotlight
+ENABLE_SPOTLIGHT = YES
+
+// UI Test Siri
+ENABLE_SIRI = YES
+
+// UI Test Apple Sign In
+ENABLE_APPLE_SIGN_IN = YES
+
+// UI Test In-App Purchases
+ENABLE_IN_APP_PURCHASES = YES
+
+// UI Test Push Notifications
+ENABLE_PUSH_NOTIFICATIONS = YES
+
+// UI Test CloudKit
+CLOUDKIT_CONTAINER = iCloud.com.rechain.vc.ui-test
+
+// UI Test Associated Domains
+ASSOCIATED_DOMAINS = applinks:rechain.vc applinks:www.rechain.vc applinks:app.rechain.vc
+
+// UI Test Background Modes
+UIBackgroundModes = background-processing background-fetch
+
+// UI Test App Transport Security
+NSAppTransportSecurity = YES
+NSAllowsArbitraryLoads = YES
+
+// UI Test Flutter Settings
+FLUTTER_BUILD_MODE = profile
+FLUTTER_BUILD_NAME = 1.0.0-ui-test
+FLUTTER_BUILD_NUMBER = 1
+
+// UI Test Release Settings
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+
+// UI Test Debug Settings
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+ENABLE_TESTABILITY = NO
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+
+// UI Test Architecture
+ARCHS = arm64
+VALID_ARCHS = arm64 armv7 armv7s
+
+// UI Test Swift Settings
+SWIFT_VERSION = 5.0
+SWIFT_OPTIMIZATION_LEVEL = -O
+SWIFT_COMPILATION_MODE = wholemodule
+
+// UI Test Build Settings
+IPHONEOS_DEPLOYMENT_TARGET = 12.0
+TARGETED_DEVICE_FAMILY = 1,2
+SUPPORTED_PLATFORMS = iphoneos iphonesimulator
+
+// UI Test Code Signing
+CODE_SIGN_STYLE = Automatic
+CODE_SIGN_IDENTITY = Apple Development
+PROVISIONING_PROFILE_SPECIFIER = 
+
+// UI Test Development Team
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+
+// UI Test App Configuration
+PRODUCT_NAME = REChain VC Lab UI Test
+PRODUCT_BUNDLE_IDENTIFIER = com.rechain.vc.ui-test
+PRODUCT_DISPLAY_NAME = REChain VC Lab UI Test
+PRODUCT_VERSION = 1.0.0
+PRODUCT_BUILD_NUMBER = 1

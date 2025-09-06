@@ -1,0 +1,112 @@
+# Configuration for automatic changelog generation
+# This file is used by the changelog action
+
+# Changelog configuration
+changelog:
+  # Path to the changelog file
+  path: "CHANGELOG.md"
+  
+  # Template for changelog entries
+  template: |
+    ## [{{ version }}] - {{ date }}
+    
+    ### Added
+    {{ #each added }}
+    - {{ this }}
+    {{ /each }}
+    
+    ### Changed
+    {{ #each changed }}
+    - {{ this }}
+    {{ /each }}
+    
+    ### Fixed
+    {{ #each fixed }}
+    - {{ this }}
+    {{ /each }}
+    
+    ### Security
+    {{ #each security }}
+    - {{ this }}
+    {{ /each }}
+    
+    ### Removed
+    {{ #each removed }}
+    - {{ this }}
+    {{ /each }}
+    
+    ### Deprecated
+    {{ #each deprecated }}
+    - {{ this }}
+    {{ /each }}
+
+# Commit message patterns for categorizing changes
+commitPatterns:
+  added:
+    - "feat:"
+    - "add:"
+    - "new:"
+  changed:
+    - "change:"
+    - "update:"
+    - "modify:"
+  fixed:
+    - "fix:"
+    - "bug:"
+    - "resolve:"
+  security:
+    - "security:"
+    - "vuln:"
+  removed:
+    - "remove:"
+    - "delete:"
+    - "drop:"
+  deprecated:
+    - "deprecate:"
+    - "deprecated:"
+
+# Ignore certain commit types
+ignoreCommits:
+  - "chore:"
+  - "docs:"
+  - "style:"
+  - "refactor:"
+  - "test:"
+  - "ci:"
+  - "build:"
+
+# Date format for changelog entries
+dateFormat: "YYYY-MM-DD"
+
+# Version format
+versionFormat: "v{{ version }}"
+
+# Include commit hash in changelog
+includeCommitHash: false
+
+# Include commit author in changelog
+includeAuthor: false
+
+# Include commit date in changelog
+includeDate: true
+
+# Sort commits by date
+sortCommits: true
+
+# Group commits by type
+groupCommits: true
+
+# Maximum number of commits to include per type
+maxCommitsPerType: 50
+
+# Skip empty sections
+skipEmptySections: true
+
+# Add links to commits
+addCommitLinks: true
+
+# Add links to issues
+addIssueLinks: true
+
+# Add links to pull requests
+addPullRequestLinks: true

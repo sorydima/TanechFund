@@ -1,0 +1,264 @@
+# Codemagic CI/CD Configuration for REChain VC Lab
+# This configuration builds and deploys the Flutter web application
+
+workflows:
+  # Web Build Workflow
+  web-build:
+    name: REChain VC Lab - Web Build
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+      vars:
+        # Build configuration
+        FLUTTER_BUILD_MODE: "release"
+        FLUTTER_WEB_RENDERER: "auto"
+        # Deployment configuration
+        DEPLOY_BUCKET: "your-s3-bucket"
+        DEPLOY_REGION: "us-east-1"
+        # Optional: Custom domain
+        CUSTOM_DOMAIN: "vc.rechain.network"
+    scripts:
+      - name: Set up local.properties
+        script: |
+          echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
+      - name: Get Flutter packages
+        script: |
+          flutter packages pub get
+      - name: Install web dependencies
+        script: |
+          flutter packages pub get
+      - name: Run Flutter analyze
+        script: |
+          flutter analyze
+      - name: Run Flutter tests
+        script: |
+          flutter test
+      - name: Build Flutter web app
+        script: |
+          # Use standard index.html for CI/CD
+          cp web/index-codemagic.html web/index.html
+          
+          # Build with standard configuration
+          flutter build web \
+            --release \
+            --no-tree-shake-icons \
+            --dart-define=FLUTTER_WEB_RENDERER=auto \
+            --base-href="/" \
+            --web-renderer=auto
+          
+          # Verify build output
+          ls -la build/web/
+          echo "Build completed successfully"
+      - name: Prepare deployment files
+        script: |
+          # Copy additional files for deployment
+          cp web/.htaccess build/web/ 2>/dev/null || echo "No .htaccess file found"
+          cp web/manifest.json build/web/ 2>/dev/null || echo "No manifest.json file found"
+          
+          # Create deployment info
+          echo "Build Date: $(date)" > build/web/build-info.txt
+          echo "Commit: $CM_COMMIT" >> build/web/build-info.txt
+          echo "Branch: $CM_BRANCH" >> build/web/build-info.txt
+          echo "Build Number: $CM_BUILD_ID" >> build/web/build-info.txt
+          
+          # Show build size
+          du -sh build/web/
+          echo "Build size calculated"
+      - name: Upload build artifacts
+        script: |
+          # Create archive for download
+          cd build
+          tar -czf ../web-build-${CM_BUILD_ID}.tar.gz web/
+          cd ..
+          
+          # Upload to Codemagic artifacts
+          echo "Build artifacts prepared for download"
+    artifacts:
+      - build/web/**
+      - web-build-*.tar.gz
+    publishing:
+      # Email notification
+      email:
+        recipients:
+          - your-email@example.com
+        notify:
+          success: true
+          failure: true
+      # Slack notification (optional)
+      slack:
+        channel: '#deployments'
+        notify_on_build_start: true
+        notify:
+          success: true
+          failure: true
+
+  # Android Build Workflow
+  android-build:
+    name: REChain VC Lab - Android Build
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      android_signing:
+        - keystore_reference
+      vars:
+        FLUTTER_BUILD_MODE: "release"
+    scripts:
+      - name: Set up local.properties
+        script: |
+          echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
+      - name: Get Flutter packages
+        script: |
+          flutter packages pub get
+      - name: Run Flutter analyze
+        script: |
+          flutter analyze
+      - name: Run Flutter tests
+        script: |
+          flutter test
+      - name: Build Android App Bundle
+        script: |
+          flutter build appbundle --release
+      - name: Build Android APK
+        script: |
+          flutter build apk --release
+    artifacts:
+      - build/app/outputs/bundle/release/*.aab
+      - build/app/outputs/flutter-apk/*.apk
+    publishing:
+      google_play:
+        credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
+        track: internal
+        submit_as_draft: true
+      email:
+        recipients:
+          - your-email@example.com
+        notify:
+          success: true
+          failure: true
+
+  # iOS Build Workflow
+  ios-build:
+    name: REChain VC Lab - iOS Build
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.rechain.vc
+    scripts:
+      - name: Set up code signing settings on Xcode project
+        script: |
+          xcode-project use-profiles
+      - name: Get Flutter packages
+        script: |
+          flutter packages pub get
+      - name: Run Flutter analyze
+        script: |
+          flutter analyze
+      - name: Run Flutter tests
+        script: |
+          flutter test
+      - name: Build iOS app
+        script: |
+          flutter build ios --release --no-codesign
+      - name: Build iOS archive
+        script: |
+          xcode-project build-ipa \
+            --workspace ios/Runner.xcworkspace \
+            --scheme Runner
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - flutter_drive.log
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
+        beta_groups:
+          - group name 1
+          - group name 2
+      email:
+        recipients:
+          - your-email@example.com
+        notify:
+          success: true
+          failure: true
+
+  # Multi-platform Build Workflow
+  multi-platform-build:
+    name: REChain VC Lab - Multi-platform Build
+    max_build_duration: 120
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+      vars:
+        FLUTTER_BUILD_MODE: "release"
+    scripts:
+      - name: Set up local.properties
+        script: |
+          echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
+      - name: Get Flutter packages
+        script: |
+          flutter packages pub get
+      - name: Run Flutter analyze
+        script: |
+          flutter analyze
+      - name: Run Flutter tests
+        script: |
+          flutter test
+      - name: Build Web App
+        script: |
+          cp web/index-codemagic.html web/index.html
+          flutter build web --release --no-tree-shake-icons
+      - name: Build Android App Bundle
+        script: |
+          flutter build appbundle --release
+      - name: Build Android APK
+        script: |
+          flutter build apk --release
+      - name: Build iOS App
+        script: |
+          flutter build ios --release --no-codesign
+      - name: Build macOS App
+        script: |
+          flutter build macos --release
+      - name: Build Windows App
+        script: |
+          flutter build windows --release
+      - name: Build Linux App
+        script: |
+          flutter build linux --release
+      - name: Prepare multi-platform artifacts
+        script: |
+          # Create platform-specific archives
+          cd build
+          tar -czf ../web-build.tar.gz web/
+          tar -czf ../android-build.tar.gz app/
+          tar -czf ../ios-build.tar.gz ios/
+          tar -czf ../macos-build.tar.gz macos/
+          tar -czf ../windows-build.tar.gz windows/
+          tar -czf ../linux-build.tar.gz linux/
+          cd ..
+          
+          echo "Multi-platform build completed"
+    artifacts:
+      - build/web/**
+      - build/app/outputs/bundle/release/*.aab
+      - build/app/outputs/flutter-apk/*.apk
+      - build/ios/**
+      - build/macos/**
+      - build/windows/**
+      - build/linux/**
+      - *-build.tar.gz
+    publishing:
+      email:
+        recipients:
+          - your-email@example.com
+        notify:
+          success: true
+          failure: true

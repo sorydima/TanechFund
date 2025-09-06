@@ -1,0 +1,519 @@
+// REChain VC Lab iOS Profile Configuration
+// This file contains profile-specific build configuration settings
+
+// Include base configuration
+#include "Config.xcconfig"
+
+// Profile-specific overrides
+FLUTTER_BUILD_MODE = profile
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+ENABLE_TESTABILITY = NO
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+
+// Swift Profile Settings
+SWIFT_OPTIMIZATION_LEVEL = -O
+SWIFT_COMPILATION_MODE = wholemodule
+
+// Code Signing Profile
+CODE_SIGN_IDENTITY = Apple Development
+CODE_SIGN_STYLE = Automatic
+
+// Profile Build Settings
+IPHONEOS_DEPLOYMENT_TARGET = 12.0
+TARGETED_DEVICE_FAMILY = 1,2
+SUPPORTED_PLATFORMS = iphoneos iphonesimulator
+
+// Profile Architecture
+ARCHS = arm64
+VALID_ARCHS = arm64 armv7 armv7s
+
+// Profile Flutter Settings
+FLUTTER_BUILD_NAME = 1.0.0-profile
+FLUTTER_BUILD_NUMBER = 1
+
+// Profile App Configuration
+PRODUCT_NAME = REChain VC Lab Profile
+PRODUCT_BUNDLE_IDENTIFIER = com.rechain.vc.profile
+PRODUCT_DISPLAY_NAME = REChain VC Lab Profile
+PRODUCT_VERSION = 1.0.0
+PRODUCT_BUILD_NUMBER = 1
+
+// Profile Development Team
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+
+// Profile Provisioning
+PROVISIONING_PROFILE_SPECIFIER = 
+
+// Profile Entitlements
+CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements
+
+// Profile App Transport Security
+NSAppTransportSecurity = YES
+NSAllowsArbitraryLoads = YES
+
+// Profile Background Modes
+UIBackgroundModes = background-processing background-fetch
+
+// Profile Associated Domains
+ASSOCIATED_DOMAINS = applinks:rechain.vc applinks:www.rechain.vc applinks:app.rechain.vc
+
+// Profile CloudKit
+CLOUDKIT_CONTAINER = iCloud.com.rechain.vc.profile
+
+// Profile Push Notifications
+ENABLE_PUSH_NOTIFICATIONS = YES
+
+// Profile In-App Purchases
+ENABLE_IN_APP_PURCHASES = YES
+
+// Profile Apple Sign In
+ENABLE_APPLE_SIGN_IN = YES
+
+// Profile Siri
+ENABLE_SIRI = YES
+
+// Profile Spotlight
+ENABLE_SPOTLIGHT = YES
+
+// Profile Widgets
+ENABLE_WIDGETS = YES
+
+// Profile App Clips
+ENABLE_APP_CLIPS = NO
+
+// Profile TestFlight
+ENABLE_TESTFLIGHT = YES
+
+// Profile Analytics
+ENABLE_ANALYTICS = YES
+ENABLE_CRASHLYTICS = YES
+
+// Profile Performance
+ENABLE_PERFORMANCE_MONITORING = YES
+
+// Profile Remote Config
+ENABLE_REMOTE_CONFIG = YES
+
+// Profile Dynamic Links
+ENABLE_DYNAMIC_LINKS = YES
+
+// Profile Authentication
+ENABLE_FIREBASE_AUTH = YES
+ENABLE_GOOGLE_SIGN_IN = YES
+ENABLE_FACEBOOK_SIGN_IN = YES
+
+// Profile Storage
+ENABLE_FIREBASE_STORAGE = YES
+ENABLE_CLOUD_FIRESTORE = YES
+
+// Profile Functions
+ENABLE_CLOUD_FUNCTIONS = YES
+
+// Profile Messaging
+ENABLE_FIREBASE_MESSAGING = YES
+
+// Profile ML Kit
+ENABLE_ML_KIT = YES
+
+// Profile Vision
+ENABLE_VISION = YES
+
+// Profile Natural Language
+ENABLE_NATURAL_LANGUAGE = YES
+
+// Profile Core ML
+ENABLE_CORE_ML = YES
+
+// Profile ARKit
+ENABLE_ARKIT = NO
+
+// Profile Core Location
+ENABLE_CORE_LOCATION = YES
+
+// Profile MapKit
+ENABLE_MAPKIT = YES
+
+// Profile Contacts
+ENABLE_CONTACTS = YES
+
+// Profile Calendar
+ENABLE_CALENDAR = YES
+
+// Profile Photos
+ENABLE_PHOTOS = YES
+
+// Profile Camera
+ENABLE_CAMERA = YES
+
+// Profile Microphone
+ENABLE_MICROPHONE = YES
+
+// Profile Face ID / Touch ID
+ENABLE_BIOMETRIC_AUTH = YES
+
+// Profile Keychain
+ENABLE_KEYCHAIN = YES
+
+// Profile User Defaults
+ENABLE_USER_DEFAULTS = YES
+
+// Profile Core Data
+ENABLE_CORE_DATA = YES
+
+// Profile SQLite
+ENABLE_SQLITE = YES
+
+// Profile Network
+ENABLE_NETWORK = YES
+ENABLE_WEBSOCKETS = YES
+
+// Profile WebView
+ENABLE_WEBVIEW = YES
+
+// Profile PDF
+ENABLE_PDF = YES
+
+// Profile Printing
+ENABLE_PRINTING = YES
+
+// Profile AirPrint
+ENABLE_AIRPRINT = YES
+
+// Profile Handoff
+ENABLE_HANDOFF = YES
+
+// Profile Spotlight Search
+ENABLE_SPOTLIGHT_SEARCH = YES
+
+// Profile Siri Shortcuts
+ENABLE_SIRI_SHORTCUTS = YES
+
+// Profile Intents
+ENABLE_INTENTS = YES
+
+// Profile CallKit
+ENABLE_CALLKIT = NO
+
+// Profile PushKit
+ENABLE_PUSHKIT = YES
+
+// Profile UserNotifications
+ENABLE_USER_NOTIFICATIONS = YES
+
+// Profile Background App Refresh
+ENABLE_BACKGROUND_APP_REFRESH = YES
+
+// Profile Background Processing
+ENABLE_BACKGROUND_PROCESSING = YES
+
+// Profile Background Fetch
+ENABLE_BACKGROUND_FETCH = YES
+
+// Profile Background Modes
+ENABLE_BACKGROUND_MODES = YES
+
+// Profile App Extensions
+ENABLE_APP_EXTENSIONS = YES
+
+// Profile Today Extensions
+ENABLE_TODAY_EXTENSIONS = YES
+
+// Profile Share Extensions
+ENABLE_SHARE_EXTENSIONS = YES
+
+// Profile Action Extensions
+ENABLE_ACTION_EXTENSIONS = YES
+
+// Profile Photo Editing Extensions
+ENABLE_PHOTO_EDITING_EXTENSIONS = NO
+
+// Profile Broadcast Extensions
+ENABLE_BROADCAST_EXTENSIONS = NO
+
+// Profile Network Extensions
+ENABLE_NETWORK_EXTENSIONS = NO
+
+// Profile VPN Extensions
+ENABLE_VPN_EXTENSIONS = NO
+
+// Profile Intents Extensions
+ENABLE_INTENTS_EXTENSIONS = YES
+
+// Profile Siri Intents Extensions
+ENABLE_SIRI_INTENTS_EXTENSIONS = YES
+
+// Profile Widget Extensions
+ENABLE_WIDGET_EXTENSIONS = YES
+
+// Profile App Clip Extensions
+ENABLE_APP_CLIP_EXTENSIONS = NO
+
+// Profile DriverKit Extensions
+ENABLE_DRIVERKIT_EXTENSIONS = NO
+
+// Profile System Extensions
+ENABLE_SYSTEM_EXTENSIONS = NO
+
+// Profile Endpoint Security Extensions
+ENABLE_ENDPOINT_SECURITY_EXTENSIONS = NO
+
+// Profile Network Extensions
+ENABLE_NETWORK_EXTENSIONS = NO
+
+// Profile VPN Extensions
+ENABLE_VPN_EXTENSIONS = NO
+
+// Profile Packet Tunnel Extensions
+ENABLE_PACKET_TUNNEL_EXTENSIONS = NO
+
+// Profile App Proxy Extensions
+ENABLE_APP_PROXY_EXTENSIONS = NO
+
+// Profile Content Filter Extensions
+ENABLE_CONTENT_FILTER_EXTENSIONS = NO
+
+// Profile DNS Proxy Extensions
+ENABLE_DNS_PROXY_EXTENSIONS = NO
+
+// Profile Endpoint Security Extensions
+ENABLE_ENDPOINT_SECURITY_EXTENSIONS = NO
+
+// Profile System Extensions
+ENABLE_SYSTEM_EXTENSIONS = NO
+
+// Profile DriverKit Extensions
+ENABLE_DRIVERKIT_EXTENSIONS = NO
+
+// Profile App Clip Extensions
+ENABLE_APP_CLIP_EXTENSIONS = NO
+
+// Profile Widget Extensions
+ENABLE_WIDGET_EXTENSIONS = YES
+
+// Profile Siri Intents Extensions
+ENABLE_SIRI_INTENTS_EXTENSIONS = YES
+
+// Profile Intents Extensions
+ENABLE_INTENTS_EXTENSIONS = YES
+
+// Profile Action Extensions
+ENABLE_ACTION_EXTENSIONS = YES
+
+// Profile Share Extensions
+ENABLE_SHARE_EXTENSIONS = YES
+
+// Profile Today Extensions
+ENABLE_TODAY_EXTENSIONS = YES
+
+// Profile App Extensions
+ENABLE_APP_EXTENSIONS = YES
+
+// Profile Background Fetch
+ENABLE_BACKGROUND_FETCH = YES
+
+// Profile Background Processing
+ENABLE_BACKGROUND_PROCESSING = YES
+
+// Profile Background App Refresh
+ENABLE_BACKGROUND_APP_REFRESH = YES
+
+// Profile UserNotifications
+ENABLE_USER_NOTIFICATIONS = YES
+
+// Profile PushKit
+ENABLE_PUSHKIT = YES
+
+// Profile CallKit
+ENABLE_CALLKIT = NO
+
+// Profile Intents
+ENABLE_INTENTS = YES
+
+// Profile Siri Shortcuts
+ENABLE_SIRI_SHORTCUTS = YES
+
+// Profile Spotlight Search
+ENABLE_SPOTLIGHT_SEARCH = YES
+
+// Profile Handoff
+ENABLE_HANDOFF = YES
+
+// Profile AirPrint
+ENABLE_AIRPRINT = YES
+
+// Profile Printing
+ENABLE_PRINTING = YES
+
+// Profile PDF
+ENABLE_PDF = YES
+
+// Profile WebView
+ENABLE_WEBVIEW = YES
+
+// Profile Network
+ENABLE_NETWORK = YES
+ENABLE_WEBSOCKETS = YES
+
+// Profile SQLite
+ENABLE_SQLITE = YES
+
+// Profile Core Data
+ENABLE_CORE_DATA = YES
+
+// Profile User Defaults
+ENABLE_USER_DEFAULTS = YES
+
+// Profile Keychain
+ENABLE_KEYCHAIN = YES
+
+// Profile Face ID / Touch ID
+ENABLE_BIOMETRIC_AUTH = YES
+
+// Profile Microphone
+ENABLE_MICROPHONE = YES
+
+// Profile Camera
+ENABLE_CAMERA = YES
+
+// Profile Photos
+ENABLE_PHOTOS = YES
+
+// Profile Calendar
+ENABLE_CALENDAR = YES
+
+// Profile Contacts
+ENABLE_CONTACTS = YES
+
+// Profile MapKit
+ENABLE_MAPKIT = YES
+
+// Profile Core Location
+ENABLE_CORE_LOCATION = YES
+
+// Profile ARKit
+ENABLE_ARKIT = NO
+
+// Profile Core ML
+ENABLE_CORE_ML = YES
+
+// Profile Natural Language
+ENABLE_NATURAL_LANGUAGE = YES
+
+// Profile Vision
+ENABLE_VISION = YES
+
+// Profile ML Kit
+ENABLE_ML_KIT = YES
+
+// Profile Messaging
+ENABLE_FIREBASE_MESSAGING = YES
+
+// Profile Functions
+ENABLE_CLOUD_FUNCTIONS = YES
+
+// Profile Storage
+ENABLE_FIREBASE_STORAGE = YES
+ENABLE_CLOUD_FIRESTORE = YES
+
+// Profile Authentication
+ENABLE_FIREBASE_AUTH = YES
+ENABLE_GOOGLE_SIGN_IN = YES
+ENABLE_FACEBOOK_SIGN_IN = YES
+
+// Profile Dynamic Links
+ENABLE_DYNAMIC_LINKS = YES
+
+// Profile Remote Config
+ENABLE_REMOTE_CONFIG = YES
+
+// Profile Performance
+ENABLE_PERFORMANCE_MONITORING = YES
+
+// Profile Analytics
+ENABLE_ANALYTICS = YES
+ENABLE_CRASHLYTICS = YES
+
+// Profile TestFlight
+ENABLE_TESTFLIGHT = YES
+
+// Profile App Clips
+ENABLE_APP_CLIPS = NO
+
+// Profile Widgets
+ENABLE_WIDGETS = YES
+
+// Profile Spotlight
+ENABLE_SPOTLIGHT = YES
+
+// Profile Siri
+ENABLE_SIRI = YES
+
+// Profile Apple Sign In
+ENABLE_APPLE_SIGN_IN = YES
+
+// Profile In-App Purchases
+ENABLE_IN_APP_PURCHASES = YES
+
+// Profile Push Notifications
+ENABLE_PUSH_NOTIFICATIONS = YES
+
+// Profile CloudKit
+CLOUDKIT_CONTAINER = iCloud.com.rechain.vc.profile
+
+// Profile Associated Domains
+ASSOCIATED_DOMAINS = applinks:rechain.vc applinks:www.rechain.vc applinks:app.rechain.vc
+
+// Profile Background Modes
+UIBackgroundModes = background-processing background-fetch
+
+// Profile App Transport Security
+NSAppTransportSecurity = YES
+NSAllowsArbitraryLoads = YES
+
+// Profile Flutter Settings
+FLUTTER_BUILD_MODE = profile
+FLUTTER_BUILD_NAME = 1.0.0-profile
+FLUTTER_BUILD_NUMBER = 1
+
+// Profile Release Settings
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+
+// Profile Debug Settings
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+ENABLE_TESTABILITY = NO
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+
+// Profile Architecture
+ARCHS = arm64
+VALID_ARCHS = arm64 armv7 armv7s
+
+// Profile Swift Settings
+SWIFT_VERSION = 5.0
+SWIFT_OPTIMIZATION_LEVEL = -O
+SWIFT_COMPILATION_MODE = wholemodule
+
+// Profile Build Settings
+IPHONEOS_DEPLOYMENT_TARGET = 12.0
+TARGETED_DEVICE_FAMILY = 1,2
+SUPPORTED_PLATFORMS = iphoneos iphonesimulator
+
+// Profile Code Signing
+CODE_SIGN_STYLE = Automatic
+CODE_SIGN_IDENTITY = Apple Development
+PROVISIONING_PROFILE_SPECIFIER = 
+
+// Profile Development Team
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+
+// Profile App Configuration
+PRODUCT_NAME = REChain VC Lab Profile
+PRODUCT_BUNDLE_IDENTIFIER = com.rechain.vc.profile
+PRODUCT_DISPLAY_NAME = REChain VC Lab Profile
+PRODUCT_VERSION = 1.0.0
+PRODUCT_BUILD_NUMBER = 1

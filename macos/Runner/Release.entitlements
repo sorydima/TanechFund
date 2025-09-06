@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- App Sandbox -->
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	
+	<!-- Network -->
+	<key>com.apple.security.network.client</key>
+	<true/>
+	<key>com.apple.security.network.server</key>
+	<true/>
+	
+	<!-- File Access -->
+	<key>com.apple.security.files.user-selected.read-write</key>
+	<true/>
+	<key>com.apple.security.files.downloads.read-write</key>
+	<true/>
+	<key>com.apple.security.files.pictures.read-write</key>
+	<true/>
+	
+	<!-- Hardware -->
+	<key>com.apple.security.device.camera</key>
+	<true/>
+	<key>com.apple.security.device.microphone</key>
+	<true/>
+	
+	<!-- Printing -->
+	<key>com.apple.security.print</key>
+	<true/>
+	
+	<!-- Address Book -->
+	<key>com.apple.security.personal-information.addressbook</key>
+	<true/>
+	
+	<!-- Location -->
+	<key>com.apple.security.personal-information.location</key>
+	<true/>
+	
+	<!-- Apple Events -->
+	<key>com.apple.security.automation.apple-events</key>
+	<true/>
+	
+	<!-- CloudKit -->
+	<key>com.apple.developer.icloud-container-identifiers</key>
+	<array>
+		<string>iCloud.com.rechain.vc</string>
+	</array>
+	<key>com.apple.developer.icloud-services</key>
+	<array>
+		<string>CloudKit</string>
+		<string>CloudDocuments</string>
+	</array>
+	
+	<!-- Push Notifications -->
+	<key>com.apple.developer.usernotifications.communication</key>
+	<true/>
+	
+	<!-- Sign in with Apple -->
+	<key>com.apple.developer.applesignin</key>
+	<array>
+		<string>Default</string>
+	</array>
+	
+	<!-- Associated Domains -->
+	<key>com.apple.developer.associated-domains</key>
+	<array>
+		<string>applinks:rechain.vc</string>
+		<string>applinks:www.rechain.vc</string>
+		<string>webcredentials:rechain.vc</string>
+	</array>
+	
+	<!-- Team ID -->
+	<key>com.apple.developer.team-identifier</key>
+	<string>$(DEVELOPMENT_TEAM)</string>
+</dict>
+</plist>

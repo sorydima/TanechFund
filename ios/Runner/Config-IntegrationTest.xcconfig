@@ -1,0 +1,519 @@
+// REChain VC Lab iOS Integration Test Configuration
+// This file contains integration test-specific build configuration settings
+
+// Include base configuration
+#include "Config.xcconfig"
+
+// Integration Test-specific overrides
+FLUTTER_BUILD_MODE = profile
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+ENABLE_TESTABILITY = NO
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+
+// Swift Integration Test Settings
+SWIFT_OPTIMIZATION_LEVEL = -O
+SWIFT_COMPILATION_MODE = wholemodule
+
+// Code Signing Integration Test
+CODE_SIGN_IDENTITY = Apple Development
+CODE_SIGN_STYLE = Automatic
+
+// Integration Test Build Settings
+IPHONEOS_DEPLOYMENT_TARGET = 12.0
+TARGETED_DEVICE_FAMILY = 1,2
+SUPPORTED_PLATFORMS = iphoneos iphonesimulator
+
+// Integration Test Architecture
+ARCHS = arm64
+VALID_ARCHS = arm64 armv7 armv7s
+
+// Integration Test Flutter Settings
+FLUTTER_BUILD_NAME = 1.0.0-integration-test
+FLUTTER_BUILD_NUMBER = 1
+
+// Integration Test App Configuration
+PRODUCT_NAME = REChain VC Lab Integration Test
+PRODUCT_BUNDLE_IDENTIFIER = com.rechain.vc.integration-test
+PRODUCT_DISPLAY_NAME = REChain VC Lab Integration Test
+PRODUCT_VERSION = 1.0.0
+PRODUCT_BUILD_NUMBER = 1
+
+// Integration Test Development Team
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+
+// Integration Test Provisioning
+PROVISIONING_PROFILE_SPECIFIER = 
+
+// Integration Test Entitlements
+CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements
+
+// Integration Test App Transport Security
+NSAppTransportSecurity = YES
+NSAllowsArbitraryLoads = YES
+
+// Integration Test Background Modes
+UIBackgroundModes = background-processing background-fetch
+
+// Integration Test Associated Domains
+ASSOCIATED_DOMAINS = applinks:rechain.vc applinks:www.rechain.vc applinks:app.rechain.vc
+
+// Integration Test CloudKit
+CLOUDKIT_CONTAINER = iCloud.com.rechain.vc.integration-test
+
+// Integration Test Push Notifications
+ENABLE_PUSH_NOTIFICATIONS = YES
+
+// Integration Test In-App Purchases
+ENABLE_IN_APP_PURCHASES = YES
+
+// Integration Test Apple Sign In
+ENABLE_APPLE_SIGN_IN = YES
+
+// Integration Test Siri
+ENABLE_SIRI = YES
+
+// Integration Test Spotlight
+ENABLE_SPOTLIGHT = YES
+
+// Integration Test Widgets
+ENABLE_WIDGETS = YES
+
+// Integration Test App Clips
+ENABLE_APP_CLIPS = NO
+
+// Integration Test TestFlight
+ENABLE_TESTFLIGHT = YES
+
+// Integration Test Analytics
+ENABLE_ANALYTICS = YES
+ENABLE_CRASHLYTICS = YES
+
+// Integration Test Performance
+ENABLE_PERFORMANCE_MONITORING = YES
+
+// Integration Test Remote Config
+ENABLE_REMOTE_CONFIG = YES
+
+// Integration Test Dynamic Links
+ENABLE_DYNAMIC_LINKS = YES
+
+// Integration Test Authentication
+ENABLE_FIREBASE_AUTH = YES
+ENABLE_GOOGLE_SIGN_IN = YES
+ENABLE_FACEBOOK_SIGN_IN = YES
+
+// Integration Test Storage
+ENABLE_FIREBASE_STORAGE = YES
+ENABLE_CLOUD_FIRESTORE = YES
+
+// Integration Test Functions
+ENABLE_CLOUD_FUNCTIONS = YES
+
+// Integration Test Messaging
+ENABLE_FIREBASE_MESSAGING = YES
+
+// Integration Test ML Kit
+ENABLE_ML_KIT = YES
+
+// Integration Test Vision
+ENABLE_VISION = YES
+
+// Integration Test Natural Language
+ENABLE_NATURAL_LANGUAGE = YES
+
+// Integration Test Core ML
+ENABLE_CORE_ML = YES
+
+// Integration Test ARKit
+ENABLE_ARKIT = NO
+
+// Integration Test Core Location
+ENABLE_CORE_LOCATION = YES
+
+// Integration Test MapKit
+ENABLE_MAPKIT = YES
+
+// Integration Test Contacts
+ENABLE_CONTACTS = YES
+
+// Integration Test Calendar
+ENABLE_CALENDAR = YES
+
+// Integration Test Photos
+ENABLE_PHOTOS = YES
+
+// Integration Test Camera
+ENABLE_CAMERA = YES
+
+// Integration Test Microphone
+ENABLE_MICROPHONE = YES
+
+// Integration Test Face ID / Touch ID
+ENABLE_BIOMETRIC_AUTH = YES
+
+// Integration Test Keychain
+ENABLE_KEYCHAIN = YES
+
+// Integration Test User Defaults
+ENABLE_USER_DEFAULTS = YES
+
+// Integration Test Core Data
+ENABLE_CORE_DATA = YES
+
+// Integration Test SQLite
+ENABLE_SQLITE = YES
+
+// Integration Test Network
+ENABLE_NETWORK = YES
+ENABLE_WEBSOCKETS = YES
+
+// Integration Test WebView
+ENABLE_WEBVIEW = YES
+
+// Integration Test PDF
+ENABLE_PDF = YES
+
+// Integration Test Printing
+ENABLE_PRINTING = YES
+
+// Integration Test AirPrint
+ENABLE_AIRPRINT = YES
+
+// Integration Test Handoff
+ENABLE_HANDOFF = YES
+
+// Integration Test Spotlight Search
+ENABLE_SPOTLIGHT_SEARCH = YES
+
+// Integration Test Siri Shortcuts
+ENABLE_SIRI_SHORTCUTS = YES
+
+// Integration Test Intents
+ENABLE_INTENTS = YES
+
+// Integration Test CallKit
+ENABLE_CALLKIT = NO
+
+// Integration Test PushKit
+ENABLE_PUSHKIT = YES
+
+// Integration Test UserNotifications
+ENABLE_USER_NOTIFICATIONS = YES
+
+// Integration Test Background App Refresh
+ENABLE_BACKGROUND_APP_REFRESH = YES
+
+// Integration Test Background Processing
+ENABLE_BACKGROUND_PROCESSING = YES
+
+// Integration Test Background Fetch
+ENABLE_BACKGROUND_FETCH = YES
+
+// Integration Test Background Modes
+ENABLE_BACKGROUND_MODES = YES
+
+// Integration Test App Extensions
+ENABLE_APP_EXTENSIONS = YES
+
+// Integration Test Today Extensions
+ENABLE_TODAY_EXTENSIONS = YES
+
+// Integration Test Share Extensions
+ENABLE_SHARE_EXTENSIONS = YES
+
+// Integration Test Action Extensions
+ENABLE_ACTION_EXTENSIONS = YES
+
+// Integration Test Photo Editing Extensions
+ENABLE_PHOTO_EDITING_EXTENSIONS = NO
+
+// Integration Test Broadcast Extensions
+ENABLE_BROADCAST_EXTENSIONS = NO
+
+// Integration Test Network Extensions
+ENABLE_NETWORK_EXTENSIONS = NO
+
+// Integration Test VPN Extensions
+ENABLE_VPN_EXTENSIONS = NO
+
+// Integration Test Intents Extensions
+ENABLE_INTENTS_EXTENSIONS = YES
+
+// Integration Test Siri Intents Extensions
+ENABLE_SIRI_INTENTS_EXTENSIONS = YES
+
+// Integration Test Widget Extensions
+ENABLE_WIDGET_EXTENSIONS = YES
+
+// Integration Test App Clip Extensions
+ENABLE_APP_CLIP_EXTENSIONS = NO
+
+// Integration Test DriverKit Extensions
+ENABLE_DRIVERKIT_EXTENSIONS = NO
+
+// Integration Test System Extensions
+ENABLE_SYSTEM_EXTENSIONS = NO
+
+// Integration Test Endpoint Security Extensions
+ENABLE_ENDPOINT_SECURITY_EXTENSIONS = NO
+
+// Integration Test Network Extensions
+ENABLE_NETWORK_EXTENSIONS = NO
+
+// Integration Test VPN Extensions
+ENABLE_VPN_EXTENSIONS = NO
+
+// Integration Test Packet Tunnel Extensions
+ENABLE_PACKET_TUNNEL_EXTENSIONS = NO
+
+// Integration Test App Proxy Extensions
+ENABLE_APP_PROXY_EXTENSIONS = NO
+
+// Integration Test Content Filter Extensions
+ENABLE_CONTENT_FILTER_EXTENSIONS = NO
+
+// Integration Test DNS Proxy Extensions
+ENABLE_DNS_PROXY_EXTENSIONS = NO
+
+// Integration Test Endpoint Security Extensions
+ENABLE_ENDPOINT_SECURITY_EXTENSIONS = NO
+
+// Integration Test System Extensions
+ENABLE_SYSTEM_EXTENSIONS = NO
+
+// Integration Test DriverKit Extensions
+ENABLE_DRIVERKIT_EXTENSIONS = NO
+
+// Integration Test App Clip Extensions
+ENABLE_APP_CLIP_EXTENSIONS = NO
+
+// Integration Test Widget Extensions
+ENABLE_WIDGET_EXTENSIONS = YES
+
+// Integration Test Siri Intents Extensions
+ENABLE_SIRI_INTENTS_EXTENSIONS = YES
+
+// Integration Test Intents Extensions
+ENABLE_INTENTS_EXTENSIONS = YES
+
+// Integration Test Action Extensions
+ENABLE_ACTION_EXTENSIONS = YES
+
+// Integration Test Share Extensions
+ENABLE_SHARE_EXTENSIONS = YES
+
+// Integration Test Today Extensions
+ENABLE_TODAY_EXTENSIONS = YES
+
+// Integration Test App Extensions
+ENABLE_APP_EXTENSIONS = YES
+
+// Integration Test Background Fetch
+ENABLE_BACKGROUND_FETCH = YES
+
+// Integration Test Background Processing
+ENABLE_BACKGROUND_PROCESSING = YES
+
+// Integration Test Background App Refresh
+ENABLE_BACKGROUND_APP_REFRESH = YES
+
+// Integration Test UserNotifications
+ENABLE_USER_NOTIFICATIONS = YES
+
+// Integration Test PushKit
+ENABLE_PUSHKIT = YES
+
+// Integration Test CallKit
+ENABLE_CALLKIT = NO
+
+// Integration Test Intents
+ENABLE_INTENTS = YES
+
+// Integration Test Siri Shortcuts
+ENABLE_SIRI_SHORTCUTS = YES
+
+// Integration Test Spotlight Search
+ENABLE_SPOTLIGHT_SEARCH = YES
+
+// Integration Test Handoff
+ENABLE_HANDOFF = YES
+
+// Integration Test AirPrint
+ENABLE_AIRPRINT = YES
+
+// Integration Test Printing
+ENABLE_PRINTING = YES
+
+// Integration Test PDF
+ENABLE_PDF = YES
+
+// Integration Test WebView
+ENABLE_WEBVIEW = YES
+
+// Integration Test Network
+ENABLE_NETWORK = YES
+ENABLE_WEBSOCKETS = YES
+
+// Integration Test SQLite
+ENABLE_SQLITE = YES
+
+// Integration Test Core Data
+ENABLE_CORE_DATA = YES
+
+// Integration Test User Defaults
+ENABLE_USER_DEFAULTS = YES
+
+// Integration Test Keychain
+ENABLE_KEYCHAIN = YES
+
+// Integration Test Face ID / Touch ID
+ENABLE_BIOMETRIC_AUTH = YES
+
+// Integration Test Microphone
+ENABLE_MICROPHONE = YES
+
+// Integration Test Camera
+ENABLE_CAMERA = YES
+
+// Integration Test Photos
+ENABLE_PHOTOS = YES
+
+// Integration Test Calendar
+ENABLE_CALENDAR = YES
+
+// Integration Test Contacts
+ENABLE_CONTACTS = YES
+
+// Integration Test MapKit
+ENABLE_MAPKIT = YES
+
+// Integration Test Core Location
+ENABLE_CORE_LOCATION = YES
+
+// Integration Test ARKit
+ENABLE_ARKIT = NO
+
+// Integration Test Core ML
+ENABLE_CORE_ML = YES
+
+// Integration Test Natural Language
+ENABLE_NATURAL_LANGUAGE = YES
+
+// Integration Test Vision
+ENABLE_VISION = YES
+
+// Integration Test ML Kit
+ENABLE_ML_KIT = YES
+
+// Integration Test Messaging
+ENABLE_FIREBASE_MESSAGING = YES
+
+// Integration Test Functions
+ENABLE_CLOUD_FUNCTIONS = YES
+
+// Integration Test Storage
+ENABLE_FIREBASE_STORAGE = YES
+ENABLE_CLOUD_FIRESTORE = YES
+
+// Integration Test Authentication
+ENABLE_FIREBASE_AUTH = YES
+ENABLE_GOOGLE_SIGN_IN = YES
+ENABLE_FACEBOOK_SIGN_IN = YES
+
+// Integration Test Dynamic Links
+ENABLE_DYNAMIC_LINKS = YES
+
+// Integration Test Remote Config
+ENABLE_REMOTE_CONFIG = YES
+
+// Integration Test Performance
+ENABLE_PERFORMANCE_MONITORING = YES
+
+// Integration Test Analytics
+ENABLE_ANALYTICS = YES
+ENABLE_CRASHLYTICS = YES
+
+// Integration Test TestFlight
+ENABLE_TESTFLIGHT = YES
+
+// Integration Test App Clips
+ENABLE_APP_CLIPS = NO
+
+// Integration Test Widgets
+ENABLE_WIDGETS = YES
+
+// Integration Test Spotlight
+ENABLE_SPOTLIGHT = YES
+
+// Integration Test Siri
+ENABLE_SIRI = YES
+
+// Integration Test Apple Sign In
+ENABLE_APPLE_SIGN_IN = YES
+
+// Integration Test In-App Purchases
+ENABLE_IN_APP_PURCHASES = YES
+
+// Integration Test Push Notifications
+ENABLE_PUSH_NOTIFICATIONS = YES
+
+// Integration Test CloudKit
+CLOUDKIT_CONTAINER = iCloud.com.rechain.vc.integration-test
+
+// Integration Test Associated Domains
+ASSOCIATED_DOMAINS = applinks:rechain.vc applinks:www.rechain.vc applinks:app.rechain.vc
+
+// Integration Test Background Modes
+UIBackgroundModes = background-processing background-fetch
+
+// Integration Test App Transport Security
+NSAppTransportSecurity = YES
+NSAllowsArbitraryLoads = YES
+
+// Integration Test Flutter Settings
+FLUTTER_BUILD_MODE = profile
+FLUTTER_BUILD_NAME = 1.0.0-integration-test
+FLUTTER_BUILD_NUMBER = 1
+
+// Integration Test Release Settings
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+
+// Integration Test Debug Settings
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+ENABLE_TESTABILITY = NO
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+
+// Integration Test Architecture
+ARCHS = arm64
+VALID_ARCHS = arm64 armv7 armv7s
+
+// Integration Test Swift Settings
+SWIFT_VERSION = 5.0
+SWIFT_OPTIMIZATION_LEVEL = -O
+SWIFT_COMPILATION_MODE = wholemodule
+
+// Integration Test Build Settings
+IPHONEOS_DEPLOYMENT_TARGET = 12.0
+TARGETED_DEVICE_FAMILY = 1,2
+SUPPORTED_PLATFORMS = iphoneos iphonesimulator
+
+// Integration Test Code Signing
+CODE_SIGN_STYLE = Automatic
+CODE_SIGN_IDENTITY = Apple Development
+PROVISIONING_PROFILE_SPECIFIER = 
+
+// Integration Test Development Team
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+
+// Integration Test App Configuration
+PRODUCT_NAME = REChain VC Lab Integration Test
+PRODUCT_BUNDLE_IDENTIFIER = com.rechain.vc.integration-test
+PRODUCT_DISPLAY_NAME = REChain VC Lab Integration Test
+PRODUCT_VERSION = 1.0.0
+PRODUCT_BUILD_NUMBER = 1

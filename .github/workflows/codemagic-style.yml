@@ -1,0 +1,294 @@
+# GitHub Actions workflow that mimics Codemagic CI/CD
+# This provides an alternative to Codemagic for building Flutter apps
+
+name: REChain VC Lab - Codemagic-style Build
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      build_mode:
+        description: 'Build mode (debug/release)'
+        required: true
+        default: 'release'
+        type: choice
+        options:
+        - release
+        - debug
+      platforms:
+        description: 'Platforms to build'
+        required: true
+        default: 'web'
+        type: choice
+        options:
+        - web
+        - android
+        - ios
+        - all
+
+env:
+  FLUTTER_VERSION: '3.24.0'
+  BUILD_MODE: ${{ github.event.inputs.build_mode || 'release' }}
+  TARGET_PLATFORMS: ${{ github.event.inputs.platforms || 'web' }}
+
+jobs:
+  # Web Build Job
+  web-build:
+    if: ${{ env.TARGET_PLATFORMS == 'web' || env.TARGET_PLATFORMS == 'all' }}
+    name: Build Web App
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: ${{ env.FLUTTER_VERSION }}
+        channel: 'stable'
+        cache: true
+        
+    - name: Setup Java (for Android builds)
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'zulu'
+        java-version: '17'
+        
+    - name: Get Flutter packages
+      run: flutter packages pub get
+      
+    - name: Run Flutter analyze
+      run: flutter analyze
+      
+    - name: Run Flutter tests
+      run: flutter test
+      
+    - name: Setup web build
+      run: |
+        # Use Codemagic-style index.html
+        if [ -f "web/index-codemagic.html" ]; then
+          cp web/index-codemagic.html web/index.html
+          echo "Using Codemagic-style index.html"
+        fi
+        
+    - name: Build Flutter web app
+      run: |
+        flutter build web \
+          --${{ env.BUILD_MODE }} \
+          --no-tree-shake-icons \
+          --dart-define=FLUTTER_WEB_RENDERER=auto \
+          --base-href="/" \
+          --web-renderer=auto
+          
+    - name: Prepare web deployment
+      run: |
+        # Copy additional files
+        cp web/.htaccess build/web/ 2>/dev/null || echo "No .htaccess file found"
+        cp web/manifest.json build/web/ 2>/dev/null || echo "No manifest.json file found"
+        
+        # Create build info
+        cat > build/web/build-info.txt << EOF
+        Build Date: $(date)
+        Commit: ${{ github.sha }}
+        Branch: ${{ github.ref_name }}
+        Build Number: ${{ github.run_number }}
+        Flutter Version: ${{ env.FLUTTER_VERSION }}
+        Build Mode: ${{ env.BUILD_MODE }}
+        Platform: Web
+        EOF
+        
+        # Show build size
+        du -sh build/web/
+        
+    - name: Upload web artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: web-build-${{ github.run_number }}
+        path: build/web/
+        retention-days: 30
+        
+    - name: Create web archive
+      run: |
+        cd build
+        tar -czf ../web-build-${{ github.run_number }}.tar.gz web/
+        cd ..
+        
+    - name: Upload web archive
+      uses: actions/upload-artifact@v4
+      with:
+        name: web-archive-${{ github.run_number }}
+        path: web-build-${{ github.run_number }}.tar.gz
+        retention-days: 30
+
+  # Android Build Job
+  android-build:
+    if: ${{ env.TARGET_PLATFORMS == 'android' || env.TARGET_PLATFORMS == 'all' }}
+    name: Build Android App
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: ${{ env.FLUTTER_VERSION }}
+        channel: 'stable'
+        cache: true
+        
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'zulu'
+        java-version: '17'
+        
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+      
+    - name: Get Flutter packages
+      run: flutter packages pub get
+      
+    - name: Run Flutter analyze
+      run: flutter analyze
+      
+    - name: Run Flutter tests
+      run: flutter test
+      
+    - name: Build Android App Bundle
+      run: flutter build appbundle --${{ env.BUILD_MODE }}
+      
+    - name: Build Android APK
+      run: flutter build apk --${{ env.BUILD_MODE }}
+      
+    - name: Upload Android artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: android-build-${{ github.run_number }}
+        path: |
+          build/app/outputs/bundle/${{ env.BUILD_MODE }}/*.aab
+          build/app/outputs/flutter-apk/*.apk
+        retention-days: 30
+
+  # iOS Build Job
+  ios-build:
+    if: ${{ env.TARGET_PLATFORMS == 'ios' || env.TARGET_PLATFORMS == 'all' }}
+    name: Build iOS App
+    runs-on: macos-latest
+    timeout-minutes: 45
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: ${{ env.FLUTTER_VERSION }}
+        channel: 'stable'
+        cache: true
+        
+    - name: Setup Xcode
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
+        
+    - name: Get Flutter packages
+      run: flutter packages pub get
+      
+    - name: Run Flutter analyze
+      run: flutter analyze
+      
+    - name: Run Flutter tests
+      run: flutter test
+      
+    - name: Build iOS app
+      run: flutter build ios --${{ env.BUILD_MODE }} --no-codesign
+      
+    - name: Upload iOS artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: ios-build-${{ github.run_number }}
+        path: build/ios/
+        retention-days: 30
+
+  # Multi-platform Build Job
+  multi-platform:
+    if: ${{ env.TARGET_PLATFORMS == 'all' }}
+    name: Build All Platforms
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: ${{ env.FLUTTER_VERSION }}
+        channel: 'stable'
+        cache: true
+        
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'zulu'
+        java-version: '17'
+        
+    - name: Get Flutter packages
+      run: flutter packages pub get
+      
+    - name: Run Flutter analyze
+      run: flutter analyze
+      
+    - name: Run Flutter tests
+      run: flutter test
+      
+    - name: Build all platforms
+      run: |
+        # Web
+        cp web/index-codemagic.html web/index.html
+        flutter build web --${{ env.BUILD_MODE }} --no-tree-shake-icons
+        
+        # Android
+        flutter build appbundle --${{ env.BUILD_MODE }}
+        flutter build apk --${{ env.BUILD_MODE }}
+        
+        # Linux
+        flutter build linux --${{ env.BUILD_MODE }}
+        
+    - name: Upload multi-platform artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: multi-platform-build-${{ github.run_number }}
+        path: build/
+        retention-days: 30
+
+  # Deployment Job (optional)
+  deploy:
+    if: github.ref == 'refs/heads/main' && env.TARGET_PLATFORMS == 'web'
+    name: Deploy Web App
+    needs: web-build
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Download web artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: web-build-${{ github.run_number }}
+        path: build/web/
+        
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      if: github.ref == 'refs/heads/main'
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./build/web
+        cname: vc.rechain.network  # Optional: custom domain

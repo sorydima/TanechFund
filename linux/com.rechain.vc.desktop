@@ -1,0 +1,15 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=REChain VC Lab
+Comment=Web3 Venture Capital Laboratory
+Exec=REChain_VC_Lab
+Icon=com.rechain.vc
+Terminal=false
+Categories=Network;Finance;Office;
+Keywords=Web3;Blockchain;Venture Capital;Finance;Investment;
+StartupWMClass=REChain_VC_Lab
+MimeType=application/x-rechain;
+StartupNotify=true
+NoDisplay=false
+Hidden=false

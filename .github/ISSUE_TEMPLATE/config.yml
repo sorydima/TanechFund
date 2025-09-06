@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: GitHub Community Support
+    url: https://github.com/yourusername/rechain-vc-lab/discussions
+    about: Please ask and answer questions here.
+  - name: Discord Community
+    url: https://discord.gg/your-discord-invite
+    about: Join our Discord community for real-time discussions.
+  - name: Documentation
+    url: https://github.com/yourusername/rechain-vc-lab/wiki
+    about: Check our documentation for guides and tutorials.

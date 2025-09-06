@@ -1,0 +1,56 @@
+name: Documentation
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'docs/**'
+      - 'README.md'
+      - 'CONTRIBUTING.md'
+      - 'CHANGELOG.md'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'docs/**'
+      - 'README.md'
+      - 'CONTRIBUTING.md'
+      - 'CHANGELOG.md'
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install markdownlint
+        run: npm install -g markdownlint-cli
+
+      - name: Lint markdown files
+        run: |
+          markdownlint README.md CONTRIBUTING.md CHANGELOG.md
+          find docs -name "*.md" -exec markdownlint {} \;
+
+      - name: Check for broken links
+        uses: gaurav-nelson/github-action-markdown-link-check@v1
+        with:
+          use-quiet-mode: 'yes'
+          use-verbose-mode: 'yes'
+          config-file: '.github/markdown-link-check.json'
+
+      - name: Generate documentation
+        run: |
+          echo "Generating documentation..."
+          # Add documentation generation commands here
+          # For example: dart doc, or custom documentation tools
+
+      - name: Upload documentation artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: documentation
+          path: docs/

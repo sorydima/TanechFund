@@ -1,0 +1,75 @@
+name: Idea Discussion
+description: Discuss a new idea or concept for the project
+title: "[IDEA] "
+labels: ["idea", "discussion"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Share your ideas and get feedback from the community!
+
+  - type: textarea
+    id: idea
+    attributes:
+      label: What is your idea?
+      description: Describe your idea in detail
+      placeholder: What new feature or improvement would you like to see?
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: Why is this idea important? What problem does it solve?
+      placeholder: What problem does this solve? Why is it needed?
+    validations:
+      required: true
+
+  - type: textarea
+    id: implementation
+    attributes:
+      label: Implementation Thoughts
+      description: Any thoughts on how this could be implemented?
+      placeholder: How do you think this could be implemented?
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: What category does this idea fall under?
+      options:
+        - Web3 Features
+        - Web4 Movement
+        - Web5 Creation
+        - UI/UX
+        - Performance
+        - Security
+        - Developer Experience
+        - Documentation
+        - Community
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Impact Level
+      description: What level of impact would this have?
+      options:
+        - Small - Minor improvement
+        - Medium - Noticeable enhancement
+        - Large - Significant feature
+        - Major - Game-changing addition
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this idea, you agree to follow our Code of Conduct
+      options:
+        - label: I agree to follow the Code of Conduct
+          required: true

@@ -1,0 +1,519 @@
+// REChain VC Lab iOS Performance Test Configuration
+// This file contains performance test-specific build configuration settings
+
+// Include base configuration
+#include "Config.xcconfig"
+
+// Performance Test-specific overrides
+FLUTTER_BUILD_MODE = profile
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+ENABLE_TESTABILITY = NO
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+
+// Swift Performance Test Settings
+SWIFT_OPTIMIZATION_LEVEL = -O
+SWIFT_COMPILATION_MODE = wholemodule
+
+// Code Signing Performance Test
+CODE_SIGN_IDENTITY = Apple Development
+CODE_SIGN_STYLE = Automatic
+
+// Performance Test Build Settings
+IPHONEOS_DEPLOYMENT_TARGET = 12.0
+TARGETED_DEVICE_FAMILY = 1,2
+SUPPORTED_PLATFORMS = iphoneos iphonesimulator
+
+// Performance Test Architecture
+ARCHS = arm64
+VALID_ARCHS = arm64 armv7 armv7s
+
+// Performance Test Flutter Settings
+FLUTTER_BUILD_NAME = 1.0.0-performance-test
+FLUTTER_BUILD_NUMBER = 1
+
+// Performance Test App Configuration
+PRODUCT_NAME = REChain VC Lab Performance Test
+PRODUCT_BUNDLE_IDENTIFIER = com.rechain.vc.performance-test
+PRODUCT_DISPLAY_NAME = REChain VC Lab Performance Test
+PRODUCT_VERSION = 1.0.0
+PRODUCT_BUILD_NUMBER = 1
+
+// Performance Test Development Team
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+
+// Performance Test Provisioning
+PROVISIONING_PROFILE_SPECIFIER = 
+
+// Performance Test Entitlements
+CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements
+
+// Performance Test App Transport Security
+NSAppTransportSecurity = YES
+NSAllowsArbitraryLoads = YES
+
+// Performance Test Background Modes
+UIBackgroundModes = background-processing background-fetch
+
+// Performance Test Associated Domains
+ASSOCIATED_DOMAINS = applinks:rechain.vc applinks:www.rechain.vc applinks:app.rechain.vc
+
+// Performance Test CloudKit
+CLOUDKIT_CONTAINER = iCloud.com.rechain.vc.performance-test
+
+// Performance Test Push Notifications
+ENABLE_PUSH_NOTIFICATIONS = YES
+
+// Performance Test In-App Purchases
+ENABLE_IN_APP_PURCHASES = YES
+
+// Performance Test Apple Sign In
+ENABLE_APPLE_SIGN_IN = YES
+
+// Performance Test Siri
+ENABLE_SIRI = YES
+
+// Performance Test Spotlight
+ENABLE_SPOTLIGHT = YES
+
+// Performance Test Widgets
+ENABLE_WIDGETS = YES
+
+// Performance Test App Clips
+ENABLE_APP_CLIPS = NO
+
+// Performance Test TestFlight
+ENABLE_TESTFLIGHT = YES
+
+// Performance Test Analytics
+ENABLE_ANALYTICS = YES
+ENABLE_CRASHLYTICS = YES
+
+// Performance Test Performance
+ENABLE_PERFORMANCE_MONITORING = YES
+
+// Performance Test Remote Config
+ENABLE_REMOTE_CONFIG = YES
+
+// Performance Test Dynamic Links
+ENABLE_DYNAMIC_LINKS = YES
+
+// Performance Test Authentication
+ENABLE_FIREBASE_AUTH = YES
+ENABLE_GOOGLE_SIGN_IN = YES
+ENABLE_FACEBOOK_SIGN_IN = YES
+
+// Performance Test Storage
+ENABLE_FIREBASE_STORAGE = YES
+ENABLE_CLOUD_FIRESTORE = YES
+
+// Performance Test Functions
+ENABLE_CLOUD_FUNCTIONS = YES
+
+// Performance Test Messaging
+ENABLE_FIREBASE_MESSAGING = YES
+
+// Performance Test ML Kit
+ENABLE_ML_KIT = YES
+
+// Performance Test Vision
+ENABLE_VISION = YES
+
+// Performance Test Natural Language
+ENABLE_NATURAL_LANGUAGE = YES
+
+// Performance Test Core ML
+ENABLE_CORE_ML = YES
+
+// Performance Test ARKit
+ENABLE_ARKIT = NO
+
+// Performance Test Core Location
+ENABLE_CORE_LOCATION = YES
+
+// Performance Test MapKit
+ENABLE_MAPKIT = YES
+
+// Performance Test Contacts
+ENABLE_CONTACTS = YES
+
+// Performance Test Calendar
+ENABLE_CALENDAR = YES
+
+// Performance Test Photos
+ENABLE_PHOTOS = YES
+
+// Performance Test Camera
+ENABLE_CAMERA = YES
+
+// Performance Test Microphone
+ENABLE_MICROPHONE = YES
+
+// Performance Test Face ID / Touch ID
+ENABLE_BIOMETRIC_AUTH = YES
+
+// Performance Test Keychain
+ENABLE_KEYCHAIN = YES
+
+// Performance Test User Defaults
+ENABLE_USER_DEFAULTS = YES
+
+// Performance Test Core Data
+ENABLE_CORE_DATA = YES
+
+// Performance Test SQLite
+ENABLE_SQLITE = YES
+
+// Performance Test Network
+ENABLE_NETWORK = YES
+ENABLE_WEBSOCKETS = YES
+
+// Performance Test WebView
+ENABLE_WEBVIEW = YES
+
+// Performance Test PDF
+ENABLE_PDF = YES
+
+// Performance Test Printing
+ENABLE_PRINTING = YES
+
+// Performance Test AirPrint
+ENABLE_AIRPRINT = YES
+
+// Performance Test Handoff
+ENABLE_HANDOFF = YES
+
+// Performance Test Spotlight Search
+ENABLE_SPOTLIGHT_SEARCH = YES
+
+// Performance Test Siri Shortcuts
+ENABLE_SIRI_SHORTCUTS = YES
+
+// Performance Test Intents
+ENABLE_INTENTS = YES
+
+// Performance Test CallKit
+ENABLE_CALLKIT = NO
+
+// Performance Test PushKit
+ENABLE_PUSHKIT = YES
+
+// Performance Test UserNotifications
+ENABLE_USER_NOTIFICATIONS = YES
+
+// Performance Test Background App Refresh
+ENABLE_BACKGROUND_APP_REFRESH = YES
+
+// Performance Test Background Processing
+ENABLE_BACKGROUND_PROCESSING = YES
+
+// Performance Test Background Fetch
+ENABLE_BACKGROUND_FETCH = YES
+
+// Performance Test Background Modes
+ENABLE_BACKGROUND_MODES = YES
+
+// Performance Test App Extensions
+ENABLE_APP_EXTENSIONS = YES
+
+// Performance Test Today Extensions
+ENABLE_TODAY_EXTENSIONS = YES
+
+// Performance Test Share Extensions
+ENABLE_SHARE_EXTENSIONS = YES
+
+// Performance Test Action Extensions
+ENABLE_ACTION_EXTENSIONS = YES
+
+// Performance Test Photo Editing Extensions
+ENABLE_PHOTO_EDITING_EXTENSIONS = NO
+
+// Performance Test Broadcast Extensions
+ENABLE_BROADCAST_EXTENSIONS = NO
+
+// Performance Test Network Extensions
+ENABLE_NETWORK_EXTENSIONS = NO
+
+// Performance Test VPN Extensions
+ENABLE_VPN_EXTENSIONS = NO
+
+// Performance Test Intents Extensions
+ENABLE_INTENTS_EXTENSIONS = YES
+
+// Performance Test Siri Intents Extensions
+ENABLE_SIRI_INTENTS_EXTENSIONS = YES
+
+// Performance Test Widget Extensions
+ENABLE_WIDGET_EXTENSIONS = YES
+
+// Performance Test App Clip Extensions
+ENABLE_APP_CLIP_EXTENSIONS = NO
+
+// Performance Test DriverKit Extensions
+ENABLE_DRIVERKIT_EXTENSIONS = NO
+
+// Performance Test System Extensions
+ENABLE_SYSTEM_EXTENSIONS = NO
+
+// Performance Test Endpoint Security Extensions
+ENABLE_ENDPOINT_SECURITY_EXTENSIONS = NO
+
+// Performance Test Network Extensions
+ENABLE_NETWORK_EXTENSIONS = NO
+
+// Performance Test VPN Extensions
+ENABLE_VPN_EXTENSIONS = NO
+
+// Performance Test Packet Tunnel Extensions
+ENABLE_PACKET_TUNNEL_EXTENSIONS = NO
+
+// Performance Test App Proxy Extensions
+ENABLE_APP_PROXY_EXTENSIONS = NO
+
+// Performance Test Content Filter Extensions
+ENABLE_CONTENT_FILTER_EXTENSIONS = NO
+
+// Performance Test DNS Proxy Extensions
+ENABLE_DNS_PROXY_EXTENSIONS = NO
+
+// Performance Test Endpoint Security Extensions
+ENABLE_ENDPOINT_SECURITY_EXTENSIONS = NO
+
+// Performance Test System Extensions
+ENABLE_SYSTEM_EXTENSIONS = NO
+
+// Performance Test DriverKit Extensions
+ENABLE_DRIVERKIT_EXTENSIONS = NO
+
+// Performance Test App Clip Extensions
+ENABLE_APP_CLIP_EXTENSIONS = NO
+
+// Performance Test Widget Extensions
+ENABLE_WIDGET_EXTENSIONS = YES
+
+// Performance Test Siri Intents Extensions
+ENABLE_SIRI_INTENTS_EXTENSIONS = YES
+
+// Performance Test Intents Extensions
+ENABLE_INTENTS_EXTENSIONS = YES
+
+// Performance Test Action Extensions
+ENABLE_ACTION_EXTENSIONS = YES
+
+// Performance Test Share Extensions
+ENABLE_SHARE_EXTENSIONS = YES
+
+// Performance Test Today Extensions
+ENABLE_TODAY_EXTENSIONS = YES
+
+// Performance Test App Extensions
+ENABLE_APP_EXTENSIONS = YES
+
+// Performance Test Background Fetch
+ENABLE_BACKGROUND_FETCH = YES
+
+// Performance Test Background Processing
+ENABLE_BACKGROUND_PROCESSING = YES
+
+// Performance Test Background App Refresh
+ENABLE_BACKGROUND_APP_REFRESH = YES
+
+// Performance Test UserNotifications
+ENABLE_USER_NOTIFICATIONS = YES
+
+// Performance Test PushKit
+ENABLE_PUSHKIT = YES
+
+// Performance Test CallKit
+ENABLE_CALLKIT = NO
+
+// Performance Test Intents
+ENABLE_INTENTS = YES
+
+// Performance Test Siri Shortcuts
+ENABLE_SIRI_SHORTCUTS = YES
+
+// Performance Test Spotlight Search
+ENABLE_SPOTLIGHT_SEARCH = YES
+
+// Performance Test Handoff
+ENABLE_HANDOFF = YES
+
+// Performance Test AirPrint
+ENABLE_AIRPRINT = YES
+
+// Performance Test Printing
+ENABLE_PRINTING = YES
+
+// Performance Test PDF
+ENABLE_PDF = YES
+
+// Performance Test WebView
+ENABLE_WEBVIEW = YES
+
+// Performance Test Network
+ENABLE_NETWORK = YES
+ENABLE_WEBSOCKETS = YES
+
+// Performance Test SQLite
+ENABLE_SQLITE = YES
+
+// Performance Test Core Data
+ENABLE_CORE_DATA = YES
+
+// Performance Test User Defaults
+ENABLE_USER_DEFAULTS = YES
+
+// Performance Test Keychain
+ENABLE_KEYCHAIN = YES
+
+// Performance Test Face ID / Touch ID
+ENABLE_BIOMETRIC_AUTH = YES
+
+// Performance Test Microphone
+ENABLE_MICROPHONE = YES
+
+// Performance Test Camera
+ENABLE_CAMERA = YES
+
+// Performance Test Photos
+ENABLE_PHOTOS = YES
+
+// Performance Test Calendar
+ENABLE_CALENDAR = YES
+
+// Performance Test Contacts
+ENABLE_CONTACTS = YES
+
+// Performance Test MapKit
+ENABLE_MAPKIT = YES
+
+// Performance Test Core Location
+ENABLE_CORE_LOCATION = YES
+
+// Performance Test ARKit
+ENABLE_ARKIT = NO
+
+// Performance Test Core ML
+ENABLE_CORE_ML = YES
+
+// Performance Test Natural Language
+ENABLE_NATURAL_LANGUAGE = YES
+
+// Performance Test Vision
+ENABLE_VISION = YES
+
+// Performance Test ML Kit
+ENABLE_ML_KIT = YES
+
+// Performance Test Messaging
+ENABLE_FIREBASE_MESSAGING = YES
+
+// Performance Test Functions
+ENABLE_CLOUD_FUNCTIONS = YES
+
+// Performance Test Storage
+ENABLE_FIREBASE_STORAGE = YES
+ENABLE_CLOUD_FIRESTORE = YES
+
+// Performance Test Authentication
+ENABLE_FIREBASE_AUTH = YES
+ENABLE_GOOGLE_SIGN_IN = YES
+ENABLE_FACEBOOK_SIGN_IN = YES
+
+// Performance Test Dynamic Links
+ENABLE_DYNAMIC_LINKS = YES
+
+// Performance Test Remote Config
+ENABLE_REMOTE_CONFIG = YES
+
+// Performance Test Performance
+ENABLE_PERFORMANCE_MONITORING = YES
+
+// Performance Test Analytics
+ENABLE_ANALYTICS = YES
+ENABLE_CRASHLYTICS = YES
+
+// Performance Test TestFlight
+ENABLE_TESTFLIGHT = YES
+
+// Performance Test App Clips
+ENABLE_APP_CLIPS = NO
+
+// Performance Test Widgets
+ENABLE_WIDGETS = YES
+
+// Performance Test Spotlight
+ENABLE_SPOTLIGHT = YES
+
+// Performance Test Siri
+ENABLE_SIRI = YES
+
+// Performance Test Apple Sign In
+ENABLE_APPLE_SIGN_IN = YES
+
+// Performance Test In-App Purchases
+ENABLE_IN_APP_PURCHASES = YES
+
+// Performance Test Push Notifications
+ENABLE_PUSH_NOTIFICATIONS = YES
+
+// Performance Test CloudKit
+CLOUDKIT_CONTAINER = iCloud.com.rechain.vc.performance-test
+
+// Performance Test Associated Domains
+ASSOCIATED_DOMAINS = applinks:rechain.vc applinks:www.rechain.vc applinks:app.rechain.vc
+
+// Performance Test Background Modes
+UIBackgroundModes = background-processing background-fetch
+
+// Performance Test App Transport Security
+NSAppTransportSecurity = YES
+NSAllowsArbitraryLoads = YES
+
+// Performance Test Flutter Settings
+FLUTTER_BUILD_MODE = profile
+FLUTTER_BUILD_NAME = 1.0.0-performance-test
+FLUTTER_BUILD_NUMBER = 1
+
+// Performance Test Release Settings
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+
+// Performance Test Debug Settings
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+ENABLE_TESTABILITY = NO
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+
+// Performance Test Architecture
+ARCHS = arm64
+VALID_ARCHS = arm64 armv7 armv7s
+
+// Performance Test Swift Settings
+SWIFT_VERSION = 5.0
+SWIFT_OPTIMIZATION_LEVEL = -O
+SWIFT_COMPILATION_MODE = wholemodule
+
+// Performance Test Build Settings
+IPHONEOS_DEPLOYMENT_TARGET = 12.0
+TARGETED_DEVICE_FAMILY = 1,2
+SUPPORTED_PLATFORMS = iphoneos iphonesimulator
+
+// Performance Test Code Signing
+CODE_SIGN_STYLE = Automatic
+CODE_SIGN_IDENTITY = Apple Development
+PROVISIONING_PROFILE_SPECIFIER = 
+
+// Performance Test Development Team
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+
+// Performance Test App Configuration
+PRODUCT_NAME = REChain VC Lab Performance Test
+PRODUCT_BUNDLE_IDENTIFIER = com.rechain.vc.performance-test
+PRODUCT_DISPLAY_NAME = REChain VC Lab Performance Test
+PRODUCT_VERSION = 1.0.0
+PRODUCT_BUILD_NUMBER = 1

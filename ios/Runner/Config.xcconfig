@@ -1,0 +1,492 @@
+// REChain VC Lab iOS Base Configuration
+// This file contains base build configuration settings
+
+// Base Flutter Settings
+FLUTTER_BUILD_MODE = debug
+FLUTTER_BUILD_NAME = 1.0.0
+FLUTTER_BUILD_NUMBER = 1
+
+// Base App Configuration
+PRODUCT_NAME = REChain VC Lab
+PRODUCT_BUNDLE_IDENTIFIER = com.rechain.vc
+PRODUCT_DISPLAY_NAME = REChain VC Lab
+PRODUCT_VERSION = 1.0.0
+PRODUCT_BUILD_NUMBER = 1
+
+// Base Development Team
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+
+// Base Provisioning
+PROVISIONING_PROFILE_SPECIFIER = 
+
+// Base Entitlements
+CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements
+
+// Base App Transport Security
+NSAppTransportSecurity = YES
+NSAllowsArbitraryLoads = YES
+
+// Base Background Modes
+UIBackgroundModes = background-processing background-fetch
+
+// Base Associated Domains
+ASSOCIATED_DOMAINS = applinks:rechain.vc applinks:www.rechain.vc applinks:app.rechain.vc
+
+// Base CloudKit
+CLOUDKIT_CONTAINER = iCloud.com.rechain.vc
+
+// Base Push Notifications
+ENABLE_PUSH_NOTIFICATIONS = YES
+
+// Base In-App Purchases
+ENABLE_IN_APP_PURCHASES = YES
+
+// Base Apple Sign In
+ENABLE_APPLE_SIGN_IN = YES
+
+// Base Siri
+ENABLE_SIRI = YES
+
+// Base Spotlight
+ENABLE_SPOTLIGHT = YES
+
+// Base Widgets
+ENABLE_WIDGETS = YES
+
+// Base App Clips
+ENABLE_APP_CLIPS = NO
+
+// Base TestFlight
+ENABLE_TESTFLIGHT = YES
+
+// Base Analytics
+ENABLE_ANALYTICS = YES
+ENABLE_CRASHLYTICS = YES
+
+// Base Performance
+ENABLE_PERFORMANCE_MONITORING = YES
+
+// Base Remote Config
+ENABLE_REMOTE_CONFIG = YES
+
+// Base Dynamic Links
+ENABLE_DYNAMIC_LINKS = YES
+
+// Base Authentication
+ENABLE_FIREBASE_AUTH = YES
+ENABLE_GOOGLE_SIGN_IN = YES
+ENABLE_FACEBOOK_SIGN_IN = YES
+
+// Base Storage
+ENABLE_FIREBASE_STORAGE = YES
+ENABLE_CLOUD_FIRESTORE = YES
+
+// Base Functions
+ENABLE_CLOUD_FUNCTIONS = YES
+
+// Base Messaging
+ENABLE_FIREBASE_MESSAGING = YES
+
+// Base ML Kit
+ENABLE_ML_KIT = YES
+
+// Base Vision
+ENABLE_VISION = YES
+
+// Base Natural Language
+ENABLE_NATURAL_LANGUAGE = YES
+
+// Base Core ML
+ENABLE_CORE_ML = YES
+
+// Base ARKit
+ENABLE_ARKIT = NO
+
+// Base Core Location
+ENABLE_CORE_LOCATION = YES
+
+// Base MapKit
+ENABLE_MAPKIT = YES
+
+// Base Contacts
+ENABLE_CONTACTS = YES
+
+// Base Calendar
+ENABLE_CALENDAR = YES
+
+// Base Photos
+ENABLE_PHOTOS = YES
+
+// Base Camera
+ENABLE_CAMERA = YES
+
+// Base Microphone
+ENABLE_MICROPHONE = YES
+
+// Base Face ID / Touch ID
+ENABLE_BIOMETRIC_AUTH = YES
+
+// Base Keychain
+ENABLE_KEYCHAIN = YES
+
+// Base User Defaults
+ENABLE_USER_DEFAULTS = YES
+
+// Base Core Data
+ENABLE_CORE_DATA = YES
+
+// Base SQLite
+ENABLE_SQLITE = YES
+
+// Base Network
+ENABLE_NETWORK = YES
+ENABLE_WEBSOCKETS = YES
+
+// Base WebView
+ENABLE_WEBVIEW = YES
+
+// Base PDF
+ENABLE_PDF = YES
+
+// Base Printing
+ENABLE_PRINTING = YES
+
+// Base AirPrint
+ENABLE_AIRPRINT = YES
+
+// Base Handoff
+ENABLE_HANDOFF = YES
+
+// Base Spotlight Search
+ENABLE_SPOTLIGHT_SEARCH = YES
+
+// Base Siri Shortcuts
+ENABLE_SIRI_SHORTCUTS = YES
+
+// Base Intents
+ENABLE_INTENTS = YES
+
+// Base CallKit
+ENABLE_CALLKIT = NO
+
+// Base PushKit
+ENABLE_PUSHKIT = YES
+
+// Base UserNotifications
+ENABLE_USER_NOTIFICATIONS = YES
+
+// Base Background App Refresh
+ENABLE_BACKGROUND_APP_REFRESH = YES
+
+// Base Background Processing
+ENABLE_BACKGROUND_PROCESSING = YES
+
+// Base Background Fetch
+ENABLE_BACKGROUND_FETCH = YES
+
+// Base Background Modes
+ENABLE_BACKGROUND_MODES = YES
+
+// Base App Extensions
+ENABLE_APP_EXTENSIONS = YES
+
+// Base Today Extensions
+ENABLE_TODAY_EXTENSIONS = YES
+
+// Base Share Extensions
+ENABLE_SHARE_EXTENSIONS = YES
+
+// Base Action Extensions
+ENABLE_ACTION_EXTENSIONS = YES
+
+// Base Photo Editing Extensions
+ENABLE_PHOTO_EDITING_EXTENSIONS = NO
+
+// Base Broadcast Extensions
+ENABLE_BROADCAST_EXTENSIONS = NO
+
+// Base Network Extensions
+ENABLE_NETWORK_EXTENSIONS = NO
+
+// Base VPN Extensions
+ENABLE_VPN_EXTENSIONS = NO
+
+// Base Intents Extensions
+ENABLE_INTENTS_EXTENSIONS = YES
+
+// Base Siri Intents Extensions
+ENABLE_SIRI_INTENTS_EXTENSIONS = YES
+
+// Base Widget Extensions
+ENABLE_WIDGET_EXTENSIONS = YES
+
+// Base App Clip Extensions
+ENABLE_APP_CLIP_EXTENSIONS = NO
+
+// Base DriverKit Extensions
+ENABLE_DRIVERKIT_EXTENSIONS = NO
+
+// Base System Extensions
+ENABLE_SYSTEM_EXTENSIONS = NO
+
+// Base Endpoint Security Extensions
+ENABLE_ENDPOINT_SECURITY_EXTENSIONS = NO
+
+// Base Network Extensions
+ENABLE_NETWORK_EXTENSIONS = NO
+
+// Base VPN Extensions
+ENABLE_VPN_EXTENSIONS = NO
+
+// Base Packet Tunnel Extensions
+ENABLE_PACKET_TUNNEL_EXTENSIONS = NO
+
+// Base App Proxy Extensions
+ENABLE_APP_PROXY_EXTENSIONS = NO
+
+// Base Content Filter Extensions
+ENABLE_CONTENT_FILTER_EXTENSIONS = NO
+
+// Base DNS Proxy Extensions
+ENABLE_DNS_PROXY_EXTENSIONS = NO
+
+// Base Endpoint Security Extensions
+ENABLE_ENDPOINT_SECURITY_EXTENSIONS = NO
+
+// Base System Extensions
+ENABLE_SYSTEM_EXTENSIONS = NO
+
+// Base DriverKit Extensions
+ENABLE_DRIVERKIT_EXTENSIONS = NO
+
+// Base App Clip Extensions
+ENABLE_APP_CLIP_EXTENSIONS = NO
+
+// Base Widget Extensions
+ENABLE_WIDGET_EXTENSIONS = YES
+
+// Base Siri Intents Extensions
+ENABLE_SIRI_INTENTS_EXTENSIONS = YES
+
+// Base Intents Extensions
+ENABLE_INTENTS_EXTENSIONS = YES
+
+// Base Action Extensions
+ENABLE_ACTION_EXTENSIONS = YES
+
+// Base Share Extensions
+ENABLE_SHARE_EXTENSIONS = YES
+
+// Base Today Extensions
+ENABLE_TODAY_EXTENSIONS = YES
+
+// Base App Extensions
+ENABLE_APP_EXTENSIONS = YES
+
+// Base Background Fetch
+ENABLE_BACKGROUND_FETCH = YES
+
+// Base Background Processing
+ENABLE_BACKGROUND_PROCESSING = YES
+
+// Base Background App Refresh
+ENABLE_BACKGROUND_APP_REFRESH = YES
+
+// Base UserNotifications
+ENABLE_USER_NOTIFICATIONS = YES
+
+// Base PushKit
+ENABLE_PUSHKIT = YES
+
+// Base CallKit
+ENABLE_CALLKIT = NO
+
+// Base Intents
+ENABLE_INTENTS = YES
+
+// Base Siri Shortcuts
+ENABLE_SIRI_SHORTCUTS = YES
+
+// Base Spotlight Search
+ENABLE_SPOTLIGHT_SEARCH = YES
+
+// Base Handoff
+ENABLE_HANDOFF = YES
+
+// Base AirPrint
+ENABLE_AIRPRINT = YES
+
+// Base Printing
+ENABLE_PRINTING = YES
+
+// Base PDF
+ENABLE_PDF = YES
+
+// Base WebView
+ENABLE_WEBVIEW = YES
+
+// Base Network
+ENABLE_NETWORK = YES
+ENABLE_WEBSOCKETS = YES
+
+// Base SQLite
+ENABLE_SQLITE = YES
+
+// Base Core Data
+ENABLE_CORE_DATA = YES
+
+// Base User Defaults
+ENABLE_USER_DEFAULTS = YES
+
+// Base Keychain
+ENABLE_KEYCHAIN = YES
+
+// Base Face ID / Touch ID
+ENABLE_BIOMETRIC_AUTH = YES
+
+// Base Microphone
+ENABLE_MICROPHONE = YES
+
+// Base Camera
+ENABLE_CAMERA = YES
+
+// Base Photos
+ENABLE_PHOTOS = YES
+
+// Base Calendar
+ENABLE_CALENDAR = YES
+
+// Base Contacts
+ENABLE_CONTACTS = YES
+
+// Base MapKit
+ENABLE_MAPKIT = YES
+
+// Base Core Location
+ENABLE_CORE_LOCATION = YES
+
+// Base ARKit
+ENABLE_ARKIT = NO
+
+// Base Core ML
+ENABLE_CORE_ML = YES
+
+// Base Natural Language
+ENABLE_NATURAL_LANGUAGE = YES
+
+// Base Vision
+ENABLE_VISION = YES
+
+// Base ML Kit
+ENABLE_ML_KIT = YES
+
+// Base Messaging
+ENABLE_FIREBASE_MESSAGING = YES
+
+// Base Functions
+ENABLE_CLOUD_FUNCTIONS = YES
+
+// Base Storage
+ENABLE_FIREBASE_STORAGE = YES
+ENABLE_CLOUD_FIRESTORE = YES
+
+// Base Authentication
+ENABLE_FIREBASE_AUTH = YES
+ENABLE_GOOGLE_SIGN_IN = YES
+ENABLE_FACEBOOK_SIGN_IN = YES
+
+// Base Dynamic Links
+ENABLE_DYNAMIC_LINKS = YES
+
+// Base Remote Config
+ENABLE_REMOTE_CONFIG = YES
+
+// Base Performance
+ENABLE_PERFORMANCE_MONITORING = YES
+
+// Base Analytics
+ENABLE_ANALYTICS = YES
+ENABLE_CRASHLYTICS = YES
+
+// Base TestFlight
+ENABLE_TESTFLIGHT = YES
+
+// Base App Clips
+ENABLE_APP_CLIPS = NO
+
+// Base Widgets
+ENABLE_WIDGETS = YES
+
+// Base Spotlight
+ENABLE_SPOTLIGHT = YES
+
+// Base Siri
+ENABLE_SIRI = YES
+
+// Base Apple Sign In
+ENABLE_APPLE_SIGN_IN = YES
+
+// Base In-App Purchases
+ENABLE_IN_APP_PURCHASES = YES
+
+// Base Push Notifications
+ENABLE_PUSH_NOTIFICATIONS = YES
+
+// Base CloudKit
+CLOUDKIT_CONTAINER = iCloud.com.rechain.vc
+
+// Base Associated Domains
+ASSOCIATED_DOMAINS = applinks:rechain.vc applinks:www.rechain.vc applinks:app.rechain.vc
+
+// Base Background Modes
+UIBackgroundModes = background-processing background-fetch
+
+// Base App Transport Security
+NSAppTransportSecurity = YES
+NSAllowsArbitraryLoads = YES
+
+// Base Flutter Settings
+FLUTTER_BUILD_MODE = debug
+FLUTTER_BUILD_NAME = 1.0.0
+FLUTTER_BUILD_NUMBER = 1
+
+// Base Release Settings
+GCC_OPTIMIZATION_LEVEL = 0
+GCC_FAST_MATH = NO
+ENABLE_BITCODE = NO
+
+// Base Debug Settings
+GCC_OPTIMIZATION_LEVEL = 0
+GCC_FAST_MATH = NO
+ENABLE_BITCODE = NO
+ENABLE_TESTABILITY = YES
+DEBUG_INFORMATION_FORMAT = dwarf
+
+// Base Architecture
+ARCHS = arm64
+VALID_ARCHS = arm64 armv7 armv7s
+
+// Base Swift Settings
+SWIFT_VERSION = 5.0
+SWIFT_OPTIMIZATION_LEVEL = -Onone
+SWIFT_COMPILATION_MODE = singlefile
+
+// Base Build Settings
+IPHONEOS_DEPLOYMENT_TARGET = 12.0
+TARGETED_DEVICE_FAMILY = 1,2
+SUPPORTED_PLATFORMS = iphoneos iphonesimulator
+
+// Base Code Signing
+CODE_SIGN_STYLE = Automatic
+CODE_SIGN_IDENTITY = Apple Development
+PROVISIONING_PROFILE_SPECIFIER = 
+
+// Base Development Team
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+
+// Base App Configuration
+PRODUCT_NAME = REChain VC Lab
+PRODUCT_BUNDLE_IDENTIFIER = com.rechain.vc
+PRODUCT_DISPLAY_NAME = REChain VC Lab
+PRODUCT_VERSION = 1.0.0
+PRODUCT_BUILD_NUMBER = 1

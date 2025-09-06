@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REChain VC Lab - HTML Renderer Fallback</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #8B5CF6 0%, #6366F1 100%);
+            color: white;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        .warning {
+            background: rgba(245, 158, 11, 0.2);
+            border: 2px solid #F59E0B;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .info {
+            background: rgba(59, 130, 246, 0.2);
+            border: 2px solid #3B82F6;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🔄 HTML Renderer Active</h1>
+
+        <div class="warning">
+            <h2>CanvasKit Disabled - Using HTML Renderer</h2>
+            <p>This application is now configured to use HTML renderer instead of CanvasKit to ensure maximum
+                compatibility. This means:</p>
+            <ul style="text-align: left;">
+                <li>✅ Better compatibility with all browsers</li>
+                <li>✅ No dependency on external CDN resources</li>
+                <li>✅ Faster initial loading</li>
+                <li>✅ More reliable performance</li>
+            </ul>
+        </div>
+
+        <div class="info">
+            <h3>🎯 HTML Renderer Benefits:</h3>
+            <ol>
+                <li><strong>Universal Compatibility:</strong> Works on all browsers and devices</li>
+                <li><strong>No External Dependencies:</strong> No need for CanvasKit or WebGL</li>
+                <li><strong>Faster Loading:</strong> Smaller bundle size and quicker startup</li>
+                <li><strong>Better Accessibility:</strong> Screen readers and assistive technologies work better</li>
+                <li><strong>More Reliable:</strong> No CanvasKit loading issues</li>
+            </ol>
+        </div>
+
+        <div style="margin: 30px 0;">
+            <button onclick="window.location.href='index.html'">🏠 Go to App (HTML Renderer)</button>
+            <button onclick="window.location.href='hosting-debug.html'">🔍 Check Diagnostics</button>
+        </div>
+
+        <div class="info">
+            <h3>📊 Technical Details:</h3>
+            <p><strong>Renderer:</strong> HTML Renderer (DOM-based) - Active</p>
+            <p><strong>CanvasKit:</strong> Disabled (no longer used)</p>
+            <p><strong>Performance:</strong> Optimized for compatibility and reliability</p>
+            <p><strong>Bundle Size:</strong> Smaller without CanvasKit dependencies</p>
+            <p><strong>Loading Time:</strong> Faster initial load</p>
+        </div>
+    </div>
+
+    <script>
+        // HTML renderer is now the default configuration
+        console.log('HTML Renderer is active - no CanvasKit dependencies');
+
+        // Show current renderer status
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('CanvasKit fallback page loaded - HTML renderer is active');
+        });
+    </script>
+</body>
+
+</html>

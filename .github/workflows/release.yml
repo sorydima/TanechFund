@@ -1,0 +1,73 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+      id-token: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.2'
+          channel: 'stable'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run tests
+        run: flutter test
+
+      - name: Build APK
+        run: flutter build apk --release
+
+      - name: Build Web
+        run: flutter build web --release
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Release ${{ github.ref_name }}
+          body: |
+            ## What's Changed
+            
+            See the [CHANGELOG](CHANGELOG.md) for detailed information about this release.
+            
+            ## Downloads
+            
+            - **Android APK**: Download the APK file below
+            - **Web Version**: Available at [GitHub Pages](https://yourusername.github.io/rechain-vc-lab)
+            
+            ## Installation
+            
+            ### Android
+            1. Download the APK file
+            2. Enable "Install from unknown sources" in your device settings
+            3. Install the APK
+            
+            ### Web
+            Visit the web version in your browser
+            
+            ## Support
+            
+            If you encounter any issues, please:
+            - Check the [documentation](README.md)
+            - Search [existing issues](https://github.com/yourusername/rechain-vc-lab/issues)
+            - Create a [new issue](https://github.com/yourusername/rechain-vc-lab/issues/new) if needed
+          files: |
+            build/app/outputs/flutter-apk/app-release.apk
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

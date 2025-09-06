@@ -1,0 +1,49 @@
+name: rechain_vc_lab
+description: REChain®️ VC Group Lab - Venture Builder, Incubator, and Startup Studio
+publish_to: 'none'
+version: 1.0.1+2
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  http: ^1.2.2
+  provider: ^6.1.2
+  shared_preferences: ^2.3.2
+  url_launcher: ^6.3.1
+  flutter_svg: ^2.0.10+1
+  cached_network_image: ^3.4.1
+  intl: ^0.19.0
+  web3dart: ^2.7.3
+  crypto: ^3.0.5
+  qr_flutter: ^4.1.0
+  flutter_animate: ^4.5.0
+  lottie: ^3.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  
+  # assets:
+  #   - assets/images/
+  #   - assets/icons/
+  #   - assets/animations/
+  #   - assets/logos/
+  
+  # fonts:
+  #   - family: Inter
+  #     fonts:
+  #       - asset: assets/fonts/Inter-Regular.ttf
+  #       - asset: assets/fonts/Inter-Medium.ttf
+  #         weight: 500
+  #       - asset: assets/fonts/Inter-SemiBold.ttf
+  #         weight: 600
+  #       - asset: assets/fonts/Inter-Bold.ttf
+  #         weight: 700

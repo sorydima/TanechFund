@@ -1,0 +1,52 @@
+# Configuration for creating issues from comments
+# This file is used by the create-issue-from-comment action
+
+# Keywords that trigger issue creation
+keywords:
+  - "create issue"
+  - "create bug report"
+  - "create feature request"
+  - "report bug"
+  - "request feature"
+
+# Template to use for created issues
+template: |
+  ## Issue Created from Comment
+  
+  **Original Comment:** ${{ comment.body }}
+  
+  **Commenter:** @${{ comment.user.login }}
+  
+  **Original Context:** [View Comment](${{ comment.html_url }})
+  
+  ---
+  
+  Please provide additional details about this issue:
+  
+  - [ ] I have searched for existing issues
+  - [ ] I have provided all necessary information
+  - [ ] I have tested this on the latest version
+
+# Labels to add to created issues
+labels:
+  - "from-comment"
+  - "needs-triage"
+
+# Assignees for created issues
+assignees:
+  - "yourusername"
+
+# Milestone for created issues (optional)
+milestone: null
+
+# Project for created issues (optional)
+project: null
+
+# Close the original comment after creating the issue
+closeComment: true
+
+# Comment to post when closing the original comment
+closeCommentMessage: |
+  I've created an issue for this: #${{ issue.number }}
+  
+  The original comment has been closed to keep the discussion focused on the new issue.

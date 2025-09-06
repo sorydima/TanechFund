@@ -1,0 +1,92 @@
+# Configuration for automatic milestone creation
+# This file is used by the milestone action
+
+# Milestone configuration
+milestones:
+  # Current milestone
+  current:
+    title: "v1.1.0"
+    description: "Next minor release with new features and improvements"
+    dueDate: "2025-12-31"
+    state: "open"
+    
+  # Upcoming milestones
+  upcoming:
+    - title: "v1.2.0"
+      description: "Major feature release"
+      dueDate: "2026-03-31"
+      state: "open"
+    - title: "v2.0.0"
+      description: "Major version with breaking changes"
+      dueDate: "2026-06-30"
+      state: "open"
+
+# Auto-assign issues to milestones based on labels
+autoAssign:
+  enabled: true
+  rules:
+    - labels: ["priority: critical", "bug"]
+      milestone: "v1.1.0"
+    - labels: ["priority: high", "enhancement"]
+      milestone: "v1.2.0"
+    - labels: ["breaking-change"]
+      milestone: "v2.0.0"
+    - labels: ["good first issue", "help wanted"]
+      milestone: "v1.1.0"
+
+# Auto-close milestone when all issues are closed
+autoClose:
+  enabled: true
+  delay: 7 # days
+
+# Auto-create next milestone when current is closed
+autoCreateNext:
+  enabled: true
+  template:
+    title: "v{{ nextVersion }}"
+    description: "Next release milestone"
+    dueDate: "{{ nextDueDate }}"
+    state: "open"
+
+# Milestone templates
+templates:
+  major:
+    title: "v{{ version }}.0.0"
+    description: "Major release with breaking changes"
+    dueDate: "{{ dueDate }}"
+    state: "open"
+  minor:
+    title: "v{{ version }}.0"
+    description: "Minor release with new features"
+    dueDate: "{{ dueDate }}"
+    state: "open"
+  patch:
+    title: "v{{ version }}"
+    description: "Patch release with bug fixes"
+    dueDate: "{{ dueDate }}"
+    state: "open"
+
+# Notification settings
+notifications:
+  enabled: true
+  channels:
+    - "github"
+    - "email"
+  triggers:
+    - "milestone-created"
+    - "milestone-closed"
+    - "milestone-due-soon"
+    - "milestone-overdue"
+
+# Due date warnings
+dueDateWarnings:
+  enabled: true
+  warningDays: [7, 3, 1] # days before due date
+  overdueDays: 1 # days after due date
+
+# Progress tracking
+progress:
+  enabled: true
+  showProgress: true
+  progressFormat: "{{ completed }}/{{ total }} ({{ percentage }}%)"
+  updateFrequency: "daily"

@@ -1,0 +1,205 @@
+# Discord Integration Configuration for REChain®️ VC Lab
+# This configuration enables Discord notifications for GitHub events
+
+name: Discord Integration
+
+# Discord Bot Configuration
+discord:
+  # Bot token (store in GitHub Secrets as DISCORD_BOT_TOKEN)
+  bot_token: ${{ secrets.DISCORD_BOT_TOKEN }}
+  
+  # Server ID (store in GitHub Secrets as DISCORD_SERVER_ID)
+  server_id: ${{ secrets.DISCORD_SERVER_ID }}
+  
+  # Channel configurations
+  channels:
+    # General notifications
+    general: "general"
+    
+    # Development notifications
+    development: "development"
+    
+    # Release notifications
+    releases: "releases"
+    
+    # Security notifications
+    security: "security"
+    
+    # CI/CD notifications
+    ci: "ci-cd"
+
+# Notification Settings
+notifications:
+  # Issue events
+  issues:
+    created: true
+    closed: true
+    assigned: true
+    labeled: true
+    commented: true
+    
+  # Pull request events
+  pull_requests:
+    opened: true
+    closed: true
+    merged: true
+    reviewed: true
+    commented: true
+    
+  # Release events
+  releases:
+    published: true
+    prereleased: true
+    
+  # Workflow events
+  workflows:
+    success: true
+    failure: true
+    cancelled: true
+    
+  # Security events
+  security:
+    vulnerability: true
+    dependency: true
+    secret: true
+
+# Message Templates
+templates:
+  issue_created: |
+    🐛 **New Issue**: [{title}]({url})
+    **Repository**: {repository}
+    **Author**: {author}
+    **Labels**: {labels}
+    
+  issue_closed: |
+    ✅ **Issue Closed**: [{title}]({url})
+    **Repository**: {repository}
+    **Closed by**: {closed_by}
+    
+  pr_opened: |
+    🔄 **New Pull Request**: [{title}]({url})
+    **Repository**: {repository}
+    **Author**: {author}
+    **Base**: {base} ← **Head**: {head}
+    
+  pr_merged: |
+    🎉 **Pull Request Merged**: [{title}]({url})
+    **Repository**: {repository}
+    **Merged by**: {merged_by}
+    
+  release_published: |
+    🚀 **New Release**: [{name}]({url})
+    **Repository**: {repository}
+    **Tag**: {tag}
+    **Author**: {author}
+    
+  workflow_success: |
+    ✅ **Workflow Success**: {workflow}
+    **Repository**: {repository}
+    **Branch**: {branch}
+    **Commit**: {commit}
+    
+  workflow_failure: |
+    ❌ **Workflow Failed**: {workflow}
+    **Repository**: {repository}
+    **Branch**: {branch}
+    **Commit**: {commit}
+    [View Details]({url})
+
+# Embed Configuration
+embeds:
+  # Use Discord embeds for rich formatting
+  enabled: true
+  
+  # Embed color schemes
+  colors:
+    success: 0x00ff00
+    warning: 0xffff00
+    error: 0xff0000
+    info: 0x0099ff
+    
+  # Embed fields
+  fields:
+    - name: "Repository"
+      value: "{repository}"
+      inline: true
+    - name: "Author"
+      value: "{author}"
+      inline: true
+    - name: "Branch"
+      value: "{branch}"
+      inline: true
+
+# Custom Fields
+custom_fields:
+  # Add custom fields for your organization
+  project: "REChain VC Lab"
+  team: "Development Team"
+  environment: "Production"
+
+# Filtering Rules
+filters:
+  # Only notify for specific branches
+  branches:
+    include: ["main", "develop", "release/*"]
+    exclude: ["feature/*", "bugfix/*"]
+    
+  # Only notify for specific labels
+  labels:
+    include: ["bug", "feature", "security", "release"]
+    exclude: ["documentation", "chore"]
+    
+  # Only notify for specific repositories
+  repositories:
+    include: ["rechain-vc-lab", "rechain-*"]
+    exclude: ["test-*", "temp-*"]
+
+# Rate Limiting
+rate_limiting:
+  # Maximum notifications per hour
+  max_per_hour: 50
+  
+  # Cooldown period between notifications
+  cooldown_seconds: 30
+  
+  # Batch similar notifications
+  batch_similar: true
+
+# Error Handling
+error_handling:
+  # Retry failed notifications
+  retry_attempts: 3
+  
+  # Retry delay in seconds
+  retry_delay: 60
+  
+  # Log errors to GitHub Actions
+  log_errors: true
+
+# Security
+security:
+  # Verify webhook signatures
+  verify_signatures: true
+  
+  # Use HTTPS only
+  require_https: true
+  
+  # Validate payload
+  validate_payload: true
+
+# Discord Specific Settings
+discord_settings:
+  # Mention roles for specific events
+  mentions:
+    security: "@security-team"
+    releases: "@everyone"
+    failures: "@dev-team"
+    
+  # Use threads for related notifications
+  use_threads: true
+  
+  # Thread naming pattern
+  thread_pattern: "{event_type}-{repository}-{timestamp}"
+  
+  # Auto-delete old threads (in days)
+  auto_delete_threads: 7

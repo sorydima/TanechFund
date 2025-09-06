@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <!-- Allow cleartext traffic for localhost and development -->
+        <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">10.0.2.2</domain>
+        <domain includeSubdomains="true">127.0.0.1</domain>
+        
+        <!-- Allow cleartext for blockchain networks -->
+        <domain includeSubdomains="true">mainnet.infura.io</domain>
+        <domain includeSubdomains="true">ropsten.infura.io</domain>
+        <domain includeSubdomains="true">rinkeby.infura.io</domain>
+        <domain includeSubdomains="true">goerli.infura.io</domain>
+        <domain includeSubdomains="true">sepolia.infura.io</domain>
+        <domain includeSubdomains="true">polygon-mainnet.infura.io</domain>
+        <domain includeSubdomains="true">polygon-mumbai.infura.io</domain>
+    </domain-config>
+    
+    <!-- Default configuration for production -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system"/>
+        </trust-anchors>
+    </base-config>
+</network-security-config>

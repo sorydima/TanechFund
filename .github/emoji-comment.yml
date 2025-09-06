@@ -1,0 +1,139 @@
+# Configuration for adding emoji reactions to comments
+# This file is used by the emoji-comment action
+
+# Emojis to add to different types of comments
+reactions:
+  # Thank you messages
+  thank_you:
+    keywords:
+      - "thank you"
+      - "thanks"
+      - "appreciate"
+      - "grateful"
+    emojis:
+      - "🙏"
+      - "❤️"
+      - "👍"
+
+  # Bug reports
+  bug_report:
+    keywords:
+      - "bug"
+      - "error"
+      - "issue"
+      - "problem"
+      - "broken"
+    emojis:
+      - "🐛"
+      - "🔍"
+
+  # Feature requests
+  feature_request:
+    keywords:
+      - "feature"
+      - "enhancement"
+      - "improvement"
+      - "suggestion"
+      - "idea"
+    emojis:
+      - "✨"
+      - "💡"
+
+  # Questions
+  question:
+    keywords:
+      - "question"
+      - "how"
+      - "what"
+      - "why"
+      - "help"
+      - "?"
+    emojis:
+      - "❓"
+      - "🤔"
+
+  # Documentation
+  documentation:
+    keywords:
+      - "documentation"
+      - "docs"
+      - "readme"
+      - "guide"
+      - "tutorial"
+    emojis:
+      - "📚"
+      - "📖"
+
+  # Security
+  security:
+    keywords:
+      - "security"
+      - "vulnerability"
+      - "exploit"
+      - "safe"
+      - "secure"
+    emojis:
+      - "🔒"
+      - "🛡️"
+
+  # Performance
+  performance:
+    keywords:
+      - "performance"
+      - "slow"
+      - "fast"
+      - "optimization"
+      - "speed"
+    emojis:
+      - "⚡"
+      - "🚀"
+
+  # Web3
+  web3:
+    keywords:
+      - "web3"
+      - "blockchain"
+      - "crypto"
+      - "defi"
+      - "nft"
+    emojis:
+      - "⛓️"
+      - "💰"
+
+  # Web4
+  web4:
+    keywords:
+      - "web4"
+      - "movement"
+      - "trajectory"
+      - "identity"
+    emojis:
+      - "🚀"
+      - "🎯"
+
+  # Web5
+  web5:
+    keywords:
+      - "web5"
+      - "creation"
+      - "ai"
+      - "collaboration"
+      - "creative"
+    emojis:
+      - "✨"
+      - "🤖"
+
+# Minimum comment length to add reactions
+minCommentLength: 10
+
+# Maximum number of emojis to add per comment
+maxEmojisPerComment: 3
+
+# Skip reactions for bot comments
+skipBotComments: true
+
+# Skip reactions for comments from repository owners
+skipOwnerComments: false
+
+# Case sensitivity for keyword matching
+caseSensitive: false

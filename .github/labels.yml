@@ -1,0 +1,156 @@
+# GitHub Labels Configuration
+# This file defines the labels used in the repository
+
+# Priority Labels
+- name: "priority: critical"
+  color: "b60205"
+  description: "Critical priority - needs immediate attention"
+
+- name: "priority: high"
+  color: "d93f0b"
+  description: "High priority - important issue"
+
+- name: "priority: medium"
+  color: "fbca04"
+  description: "Medium priority - normal issue"
+
+- name: "priority: low"
+  color: "0e8a16"
+  description: "Low priority - nice to have"
+
+# Type Labels
+- name: "bug"
+  color: "d73a4a"
+  description: "Something isn't working"
+
+- name: "enhancement"
+  color: "a2eeef"
+  description: "New feature or request"
+
+- name: "documentation"
+  color: "0075ca"
+  description: "Improvements or additions to documentation"
+
+- name: "good first issue"
+  color: "7057ff"
+  description: "Good for newcomers"
+
+- name: "help wanted"
+  color: "008672"
+  description: "Extra attention is needed"
+
+# Feature Category Labels
+- name: "web3"
+  color: "f9d0c4"
+  description: "Related to Web3 functionality"
+
+- name: "web4"
+  color: "c2e0c6"
+  description: "Related to Web4 movement features"
+
+- name: "web5"
+  color: "bfd4f2"
+  description: "Related to Web5 creation features"
+
+- name: "ui/ux"
+  color: "e99695"
+  description: "User interface or user experience"
+
+- name: "performance"
+  color: "fef2c0"
+  description: "Performance related"
+
+- name: "security"
+  color: "ff6b6b"
+  description: "Security related"
+
+- name: "social"
+  color: "ffd93d"
+  description: "Social features and community"
+
+- name: "analytics"
+  color: "6f42c1"
+  description: "Analytics and reporting"
+
+# Status Labels
+- name: "status: needs review"
+  color: "fbca04"
+  description: "Needs review from maintainers"
+
+- name: "status: in progress"
+  color: "0e8a16"
+  description: "Work in progress"
+
+- name: "status: blocked"
+  color: "d93f0b"
+  description: "Blocked by another issue"
+
+- name: "status: duplicate"
+  color: "cfd3d7"
+  description: "This issue or pull request already exists"
+
+- name: "status: invalid"
+  color: "e4e669"
+  description: "This doesn't seem right"
+
+- name: "status: wontfix"
+  color: "ffffff"
+  description: "This will not be worked on"
+
+# Platform Labels
+- name: "platform: android"
+  color: "3ddc84"
+  description: "Android specific"
+
+- name: "platform: ios"
+  color: "007aff"
+  description: "iOS specific"
+
+- name: "platform: web"
+  color: "ff6b35"
+  description: "Web specific"
+
+- name: "platform: windows"
+  color: "0078d4"
+  description: "Windows specific"
+
+- name: "platform: macos"
+  color: "000000"
+  description: "macOS specific"
+
+- name: "platform: linux"
+  color: "fcc624"
+  description: "Linux specific"
+
+# Special Labels
+- name: "stale"
+  color: "ffffff"
+  description: "This issue has been automatically marked as stale"
+
+- name: "dependencies"
+  color: "0366d6"
+  description: "Pull requests that update a dependency file"
+
+- name: "github-actions"
+  color: "2088ff"
+  description: "GitHub Actions related"
+
+- name: "ci"
+  color: "28a745"
+  description: "Continuous Integration related"
+
+- name: "breaking-change"
+  color: "b60205"
+  description: "Breaking change"
+
+- name: "question"
+  color: "d876e3"
+  description: "Further information is requested"
+
+- name: "discussion"
+  color: "f9d0c4"
+  description: "Discussion needed"
+
+- name: "idea"
+  color: "c2e0c6"
+  description: "New idea or concept"

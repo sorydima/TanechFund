@@ -1,0 +1,81 @@
+# Configuration for auto-assignment of reviewers
+# This file is used by the auto-assign action
+
+# Add reviewers to pull requests based on the files changed
+addReviewers: true
+addAssignees: false
+addLabels: false
+
+# Reviewers to add to all pull requests
+reviewers:
+  - yourusername
+
+# Assignees to add to all pull requests
+assignees:
+  - yourusername
+
+# Labels to add to all pull requests
+labels:
+  - needs-review
+
+# Skip if the PR is in draft mode
+skipDraft: true
+
+# Skip if the PR is from a bot
+skipBot: true
+
+# Skip if the PR is from the same user
+skipSelf: true
+
+# Number of reviewers to add
+numberOfReviewers: 1
+
+# Use CODEOWNERS file if it exists
+useReviewGroups: false
+useAssigneeGroups: false
+
+# Review groups (if using groups)
+reviewGroups:
+  web3:
+    - yourusername
+  web4:
+    - yourusername
+  web5:
+    - yourusername
+  ui:
+    - yourusername
+  backend:
+    - yourusername
+
+# Assignee groups (if using groups)
+assigneeGroups:
+  web3:
+    - yourusername
+  web4:
+    - yourusername
+  web5:
+    - yourusername
+  ui:
+    - yourusername
+  backend:
+    - yourusername
+
+# Path-based assignment
+pathBasedAssignment:
+  enabled: true
+  rules:
+    - paths: ["lib/providers/web3/**", "lib/screens/web3/**"]
+      reviewers: ["yourusername"]
+      labels: ["web3"]
+    - paths: ["lib/providers/web4/**", "lib/screens/web4/**"]
+      reviewers: ["yourusername"]
+      labels: ["web4"]
+    - paths: ["lib/providers/web5/**", "lib/screens/web5/**"]
+      reviewers: ["yourusername"]
+      labels: ["web5"]
+    - paths: ["lib/widgets/**", "lib/theme/**"]
+      reviewers: ["yourusername"]
+      labels: ["ui"]
+    - paths: ["android/**", "ios/**", "web/**", "windows/**", "macos/**", "linux/**"]
+      reviewers: ["yourusername"]
+      labels: ["platform"]

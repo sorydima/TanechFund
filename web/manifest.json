@@ -1,0 +1,51 @@
+{
+    "name": "REChain VC Lab",
+    "short_name": "REChain VC Lab",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#6366F1",
+    "theme_color": "#8B5CF6",
+    "description": "REChain VC Lab - Web3 Venture Capital Laboratory",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false,
+    "scope": "/",
+    "lang": "en",
+    "dir": "ltr",
+    "categories": [
+        "finance",
+        "business",
+        "productivity"
+    ],
+    "screenshots": [
+        {
+            "src": "icons/Icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "form_factor": "wide"
+        }
+    ],
+    "icons": [
+        {
+            "src": "icons/Icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-maskable-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "icons/Icon-maskable-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
+}

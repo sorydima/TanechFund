@@ -1,0 +1,519 @@
+// REChain VC Lab iOS Debug Configuration
+// This file contains debug-specific build configuration settings
+
+// Include base configuration
+#include "Config.xcconfig"
+
+// Debug-specific overrides
+FLUTTER_BUILD_MODE = debug
+GCC_OPTIMIZATION_LEVEL = 0
+GCC_FAST_MATH = NO
+ENABLE_BITCODE = NO
+ENABLE_TESTABILITY = YES
+DEBUG_INFORMATION_FORMAT = dwarf
+
+// Swift Debug Settings
+SWIFT_OPTIMIZATION_LEVEL = -Onone
+SWIFT_COMPILATION_MODE = singlefile
+
+// Code Signing Debug
+CODE_SIGN_IDENTITY = Apple Development
+CODE_SIGN_STYLE = Automatic
+
+// Debug Build Settings
+IPHONEOS_DEPLOYMENT_TARGET = 12.0
+TARGETED_DEVICE_FAMILY = 1,2
+SUPPORTED_PLATFORMS = iphoneos iphonesimulator
+
+// Debug Architecture
+ARCHS = arm64
+VALID_ARCHS = arm64 armv7 armv7s
+
+// Debug Flutter Settings
+FLUTTER_BUILD_NAME = 1.0.0-debug
+FLUTTER_BUILD_NUMBER = 1
+
+// Debug App Configuration
+PRODUCT_NAME = REChain VC Lab Debug
+PRODUCT_BUNDLE_IDENTIFIER = com.rechain.vc.debug
+PRODUCT_DISPLAY_NAME = REChain VC Lab Debug
+PRODUCT_VERSION = 1.0.0
+PRODUCT_BUILD_NUMBER = 1
+
+// Debug Development Team
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+
+// Debug Provisioning
+PROVISIONING_PROFILE_SPECIFIER = 
+
+// Debug Entitlements
+CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements
+
+// Debug App Transport Security
+NSAppTransportSecurity = YES
+NSAllowsArbitraryLoads = YES
+
+// Debug Background Modes
+UIBackgroundModes = background-processing background-fetch
+
+// Debug Associated Domains
+ASSOCIATED_DOMAINS = applinks:rechain.vc applinks:www.rechain.vc applinks:app.rechain.vc
+
+// Debug CloudKit
+CLOUDKIT_CONTAINER = iCloud.com.rechain.vc.debug
+
+// Debug Push Notifications
+ENABLE_PUSH_NOTIFICATIONS = YES
+
+// Debug In-App Purchases
+ENABLE_IN_APP_PURCHASES = YES
+
+// Debug Apple Sign In
+ENABLE_APPLE_SIGN_IN = YES
+
+// Debug Siri
+ENABLE_SIRI = YES
+
+// Debug Spotlight
+ENABLE_SPOTLIGHT = YES
+
+// Debug Widgets
+ENABLE_WIDGETS = YES
+
+// Debug App Clips
+ENABLE_APP_CLIPS = NO
+
+// Debug TestFlight
+ENABLE_TESTFLIGHT = YES
+
+// Debug Analytics
+ENABLE_ANALYTICS = YES
+ENABLE_CRASHLYTICS = YES
+
+// Debug Performance
+ENABLE_PERFORMANCE_MONITORING = YES
+
+// Debug Remote Config
+ENABLE_REMOTE_CONFIG = YES
+
+// Debug Dynamic Links
+ENABLE_DYNAMIC_LINKS = YES
+
+// Debug Authentication
+ENABLE_FIREBASE_AUTH = YES
+ENABLE_GOOGLE_SIGN_IN = YES
+ENABLE_FACEBOOK_SIGN_IN = YES
+
+// Debug Storage
+ENABLE_FIREBASE_STORAGE = YES
+ENABLE_CLOUD_FIRESTORE = YES
+
+// Debug Functions
+ENABLE_CLOUD_FUNCTIONS = YES
+
+// Debug Messaging
+ENABLE_FIREBASE_MESSAGING = YES
+
+// Debug ML Kit
+ENABLE_ML_KIT = YES
+
+// Debug Vision
+ENABLE_VISION = YES
+
+// Debug Natural Language
+ENABLE_NATURAL_LANGUAGE = YES
+
+// Debug Core ML
+ENABLE_CORE_ML = YES
+
+// Debug ARKit
+ENABLE_ARKIT = NO
+
+// Debug Core Location
+ENABLE_CORE_LOCATION = YES
+
+// Debug MapKit
+ENABLE_MAPKIT = YES
+
+// Debug Contacts
+ENABLE_CONTACTS = YES
+
+// Debug Calendar
+ENABLE_CALENDAR = YES
+
+// Debug Photos
+ENABLE_PHOTOS = YES
+
+// Debug Camera
+ENABLE_CAMERA = YES
+
+// Debug Microphone
+ENABLE_MICROPHONE = YES
+
+// Debug Face ID / Touch ID
+ENABLE_BIOMETRIC_AUTH = YES
+
+// Debug Keychain
+ENABLE_KEYCHAIN = YES
+
+// Debug User Defaults
+ENABLE_USER_DEFAULTS = YES
+
+// Debug Core Data
+ENABLE_CORE_DATA = YES
+
+// Debug SQLite
+ENABLE_SQLITE = YES
+
+// Debug Network
+ENABLE_NETWORK = YES
+ENABLE_WEBSOCKETS = YES
+
+// Debug WebView
+ENABLE_WEBVIEW = YES
+
+// Debug PDF
+ENABLE_PDF = YES
+
+// Debug Printing
+ENABLE_PRINTING = YES
+
+// Debug AirPrint
+ENABLE_AIRPRINT = YES
+
+// Debug Handoff
+ENABLE_HANDOFF = YES
+
+// Debug Spotlight Search
+ENABLE_SPOTLIGHT_SEARCH = YES
+
+// Debug Siri Shortcuts
+ENABLE_SIRI_SHORTCUTS = YES
+
+// Debug Intents
+ENABLE_INTENTS = YES
+
+// Debug CallKit
+ENABLE_CALLKIT = NO
+
+// Debug PushKit
+ENABLE_PUSHKIT = YES
+
+// Debug UserNotifications
+ENABLE_USER_NOTIFICATIONS = YES
+
+// Debug Background App Refresh
+ENABLE_BACKGROUND_APP_REFRESH = YES
+
+// Debug Background Processing
+ENABLE_BACKGROUND_PROCESSING = YES
+
+// Debug Background Fetch
+ENABLE_BACKGROUND_FETCH = YES
+
+// Debug Background Modes
+ENABLE_BACKGROUND_MODES = YES
+
+// Debug App Extensions
+ENABLE_APP_EXTENSIONS = YES
+
+// Debug Today Extensions
+ENABLE_TODAY_EXTENSIONS = YES
+
+// Debug Share Extensions
+ENABLE_SHARE_EXTENSIONS = YES
+
+// Debug Action Extensions
+ENABLE_ACTION_EXTENSIONS = YES
+
+// Debug Photo Editing Extensions
+ENABLE_PHOTO_EDITING_EXTENSIONS = NO
+
+// Debug Broadcast Extensions
+ENABLE_BROADCAST_EXTENSIONS = NO
+
+// Debug Network Extensions
+ENABLE_NETWORK_EXTENSIONS = NO
+
+// Debug VPN Extensions
+ENABLE_VPN_EXTENSIONS = NO
+
+// Debug Intents Extensions
+ENABLE_INTENTS_EXTENSIONS = YES
+
+// Debug Siri Intents Extensions
+ENABLE_SIRI_INTENTS_EXTENSIONS = YES
+
+// Debug Widget Extensions
+ENABLE_WIDGET_EXTENSIONS = YES
+
+// Debug App Clip Extensions
+ENABLE_APP_CLIP_EXTENSIONS = NO
+
+// Debug DriverKit Extensions
+ENABLE_DRIVERKIT_EXTENSIONS = NO
+
+// Debug System Extensions
+ENABLE_SYSTEM_EXTENSIONS = NO
+
+// Debug Endpoint Security Extensions
+ENABLE_ENDPOINT_SECURITY_EXTENSIONS = NO
+
+// Debug Network Extensions
+ENABLE_NETWORK_EXTENSIONS = NO
+
+// Debug VPN Extensions
+ENABLE_VPN_EXTENSIONS = NO
+
+// Debug Packet Tunnel Extensions
+ENABLE_PACKET_TUNNEL_EXTENSIONS = NO
+
+// Debug App Proxy Extensions
+ENABLE_APP_PROXY_EXTENSIONS = NO
+
+// Debug Content Filter Extensions
+ENABLE_CONTENT_FILTER_EXTENSIONS = NO
+
+// Debug DNS Proxy Extensions
+ENABLE_DNS_PROXY_EXTENSIONS = NO
+
+// Debug Endpoint Security Extensions
+ENABLE_ENDPOINT_SECURITY_EXTENSIONS = NO
+
+// Debug System Extensions
+ENABLE_SYSTEM_EXTENSIONS = NO
+
+// Debug DriverKit Extensions
+ENABLE_DRIVERKIT_EXTENSIONS = NO
+
+// Debug App Clip Extensions
+ENABLE_APP_CLIP_EXTENSIONS = NO
+
+// Debug Widget Extensions
+ENABLE_WIDGET_EXTENSIONS = YES
+
+// Debug Siri Intents Extensions
+ENABLE_SIRI_INTENTS_EXTENSIONS = YES
+
+// Debug Intents Extensions
+ENABLE_INTENTS_EXTENSIONS = YES
+
+// Debug Action Extensions
+ENABLE_ACTION_EXTENSIONS = YES
+
+// Debug Share Extensions
+ENABLE_SHARE_EXTENSIONS = YES
+
+// Debug Today Extensions
+ENABLE_TODAY_EXTENSIONS = YES
+
+// Debug App Extensions
+ENABLE_APP_EXTENSIONS = YES
+
+// Debug Background Fetch
+ENABLE_BACKGROUND_FETCH = YES
+
+// Debug Background Processing
+ENABLE_BACKGROUND_PROCESSING = YES
+
+// Debug Background App Refresh
+ENABLE_BACKGROUND_APP_REFRESH = YES
+
+// Debug UserNotifications
+ENABLE_USER_NOTIFICATIONS = YES
+
+// Debug PushKit
+ENABLE_PUSHKIT = YES
+
+// Debug CallKit
+ENABLE_CALLKIT = NO
+
+// Debug Intents
+ENABLE_INTENTS = YES
+
+// Debug Siri Shortcuts
+ENABLE_SIRI_SHORTCUTS = YES
+
+// Debug Spotlight Search
+ENABLE_SPOTLIGHT_SEARCH = YES
+
+// Debug Handoff
+ENABLE_HANDOFF = YES
+
+// Debug AirPrint
+ENABLE_AIRPRINT = YES
+
+// Debug Printing
+ENABLE_PRINTING = YES
+
+// Debug PDF
+ENABLE_PDF = YES
+
+// Debug WebView
+ENABLE_WEBVIEW = YES
+
+// Debug Network
+ENABLE_NETWORK = YES
+ENABLE_WEBSOCKETS = YES
+
+// Debug SQLite
+ENABLE_SQLITE = YES
+
+// Debug Core Data
+ENABLE_CORE_DATA = YES
+
+// Debug User Defaults
+ENABLE_USER_DEFAULTS = YES
+
+// Debug Keychain
+ENABLE_KEYCHAIN = YES
+
+// Debug Face ID / Touch ID
+ENABLE_BIOMETRIC_AUTH = YES
+
+// Debug Microphone
+ENABLE_MICROPHONE = YES
+
+// Debug Camera
+ENABLE_CAMERA = YES
+
+// Debug Photos
+ENABLE_PHOTOS = YES
+
+// Debug Calendar
+ENABLE_CALENDAR = YES
+
+// Debug Contacts
+ENABLE_CONTACTS = YES
+
+// Debug MapKit
+ENABLE_MAPKIT = YES
+
+// Debug Core Location
+ENABLE_CORE_LOCATION = YES
+
+// Debug ARKit
+ENABLE_ARKIT = NO
+
+// Debug Core ML
+ENABLE_CORE_ML = YES
+
+// Debug Natural Language
+ENABLE_NATURAL_LANGUAGE = YES
+
+// Debug Vision
+ENABLE_VISION = YES
+
+// Debug ML Kit
+ENABLE_ML_KIT = YES
+
+// Debug Messaging
+ENABLE_FIREBASE_MESSAGING = YES
+
+// Debug Functions
+ENABLE_CLOUD_FUNCTIONS = YES
+
+// Debug Storage
+ENABLE_FIREBASE_STORAGE = YES
+ENABLE_CLOUD_FIRESTORE = YES
+
+// Debug Authentication
+ENABLE_FIREBASE_AUTH = YES
+ENABLE_GOOGLE_SIGN_IN = YES
+ENABLE_FACEBOOK_SIGN_IN = YES
+
+// Debug Dynamic Links
+ENABLE_DYNAMIC_LINKS = YES
+
+// Debug Remote Config
+ENABLE_REMOTE_CONFIG = YES
+
+// Debug Performance
+ENABLE_PERFORMANCE_MONITORING = YES
+
+// Debug Analytics
+ENABLE_ANALYTICS = YES
+ENABLE_CRASHLYTICS = YES
+
+// Debug TestFlight
+ENABLE_TESTFLIGHT = YES
+
+// Debug App Clips
+ENABLE_APP_CLIPS = NO
+
+// Debug Widgets
+ENABLE_WIDGETS = YES
+
+// Debug Spotlight
+ENABLE_SPOTLIGHT = YES
+
+// Debug Siri
+ENABLE_SIRI = YES
+
+// Debug Apple Sign In
+ENABLE_APPLE_SIGN_IN = YES
+
+// Debug In-App Purchases
+ENABLE_IN_APP_PURCHASES = YES
+
+// Debug Push Notifications
+ENABLE_PUSH_NOTIFICATIONS = YES
+
+// Debug CloudKit
+CLOUDKIT_CONTAINER = iCloud.com.rechain.vc.debug
+
+// Debug Associated Domains
+ASSOCIATED_DOMAINS = applinks:rechain.vc applinks:www.rechain.vc applinks:app.rechain.vc
+
+// Debug Background Modes
+UIBackgroundModes = background-processing background-fetch
+
+// Debug App Transport Security
+NSAppTransportSecurity = YES
+NSAllowsArbitraryLoads = YES
+
+// Debug Flutter Settings
+FLUTTER_BUILD_MODE = debug
+FLUTTER_BUILD_NAME = 1.0.0-debug
+FLUTTER_BUILD_NUMBER = 1
+
+// Debug Release Settings
+GCC_OPTIMIZATION_LEVEL = 0
+GCC_FAST_MATH = NO
+ENABLE_BITCODE = NO
+
+// Debug Debug Settings
+GCC_OPTIMIZATION_LEVEL = 0
+GCC_FAST_MATH = NO
+ENABLE_BITCODE = NO
+ENABLE_TESTABILITY = YES
+DEBUG_INFORMATION_FORMAT = dwarf
+
+// Debug Architecture
+ARCHS = arm64
+VALID_ARCHS = arm64 armv7 armv7s
+
+// Debug Swift Settings
+SWIFT_VERSION = 5.0
+SWIFT_OPTIMIZATION_LEVEL = -Onone
+SWIFT_COMPILATION_MODE = singlefile
+
+// Debug Build Settings
+IPHONEOS_DEPLOYMENT_TARGET = 12.0
+TARGETED_DEVICE_FAMILY = 1,2
+SUPPORTED_PLATFORMS = iphoneos iphonesimulator
+
+// Debug Code Signing
+CODE_SIGN_STYLE = Automatic
+CODE_SIGN_IDENTITY = Apple Development
+PROVISIONING_PROFILE_SPECIFIER = 
+
+// Debug Development Team
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+
+// Debug App Configuration
+PRODUCT_NAME = REChain VC Lab Debug
+PRODUCT_BUNDLE_IDENTIFIER = com.rechain.vc.debug
+PRODUCT_DISPLAY_NAME = REChain VC Lab Debug
+PRODUCT_VERSION = 1.0.0
+PRODUCT_BUILD_NUMBER = 1

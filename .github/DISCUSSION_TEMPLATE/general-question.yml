@@ -1,0 +1,65 @@
+name: General Question
+description: Ask a general question about the project
+title: "[QUESTION] "
+labels: ["question", "help wanted"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for your question! Please provide as much detail as possible to help us give you the best answer.
+
+  - type: textarea
+    id: question
+    attributes:
+      label: What is your question?
+      description: Please describe your question in detail
+      placeholder: What would you like to know about REChain VC Lab?
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Any additional context or information that might be helpful
+      placeholder: Any additional details, screenshots, or context...
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: What category does your question fall under?
+      options:
+        - Installation & Setup
+        - Web3 Features
+        - Web4 Movement
+        - Web5 Creation
+        - Development
+        - Bug Report
+        - Feature Request
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How urgent is this question?
+      options:
+        - Low - Just curious
+        - Medium - Would like to know soon
+        - High - Blocking my work
+        - Critical - Need immediate help
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this question, you agree to follow our Code of Conduct
+      options:
+        - label: I agree to follow the Code of Conduct
+          required: true

@@ -1,0 +1,519 @@
+// REChain VC Lab iOS Test Configuration
+// This file contains general test-specific build configuration settings
+
+// Include base configuration
+#include "Config.xcconfig"
+
+// Test-specific overrides
+FLUTTER_BUILD_MODE = profile
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+ENABLE_TESTABILITY = NO
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+
+// Swift Test Settings
+SWIFT_OPTIMIZATION_LEVEL = -O
+SWIFT_COMPILATION_MODE = wholemodule
+
+// Code Signing Test
+CODE_SIGN_IDENTITY = Apple Development
+CODE_SIGN_STYLE = Automatic
+
+// Test Build Settings
+IPHONEOS_DEPLOYMENT_TARGET = 12.0
+TARGETED_DEVICE_FAMILY = 1,2
+SUPPORTED_PLATFORMS = iphoneos iphonesimulator
+
+// Test Architecture
+ARCHS = arm64
+VALID_ARCHS = arm64 armv7 armv7s
+
+// Test Flutter Settings
+FLUTTER_BUILD_NAME = 1.0.0-test
+FLUTTER_BUILD_NUMBER = 1
+
+// Test App Configuration
+PRODUCT_NAME = REChain VC Lab Test
+PRODUCT_BUNDLE_IDENTIFIER = com.rechain.vc.test
+PRODUCT_DISPLAY_NAME = REChain VC Lab Test
+PRODUCT_VERSION = 1.0.0
+PRODUCT_BUILD_NUMBER = 1
+
+// Test Development Team
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+
+// Test Provisioning
+PROVISIONING_PROFILE_SPECIFIER = 
+
+// Test Entitlements
+CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements
+
+// Test App Transport Security
+NSAppTransportSecurity = YES
+NSAllowsArbitraryLoads = YES
+
+// Test Background Modes
+UIBackgroundModes = background-processing background-fetch
+
+// Test Associated Domains
+ASSOCIATED_DOMAINS = applinks:rechain.vc applinks:www.rechain.vc applinks:app.rechain.vc
+
+// Test CloudKit
+CLOUDKIT_CONTAINER = iCloud.com.rechain.vc.test
+
+// Test Push Notifications
+ENABLE_PUSH_NOTIFICATIONS = YES
+
+// Test In-App Purchases
+ENABLE_IN_APP_PURCHASES = YES
+
+// Test Apple Sign In
+ENABLE_APPLE_SIGN_IN = YES
+
+// Test Siri
+ENABLE_SIRI = YES
+
+// Test Spotlight
+ENABLE_SPOTLIGHT = YES
+
+// Test Widgets
+ENABLE_WIDGETS = YES
+
+// Test App Clips
+ENABLE_APP_CLIPS = NO
+
+// Test TestFlight
+ENABLE_TESTFLIGHT = YES
+
+// Test Analytics
+ENABLE_ANALYTICS = YES
+ENABLE_CRASHLYTICS = YES
+
+// Test Performance
+ENABLE_PERFORMANCE_MONITORING = YES
+
+// Test Remote Config
+ENABLE_REMOTE_CONFIG = YES
+
+// Test Dynamic Links
+ENABLE_DYNAMIC_LINKS = YES
+
+// Test Authentication
+ENABLE_FIREBASE_AUTH = YES
+ENABLE_GOOGLE_SIGN_IN = YES
+ENABLE_FACEBOOK_SIGN_IN = YES
+
+// Test Storage
+ENABLE_FIREBASE_STORAGE = YES
+ENABLE_CLOUD_FIRESTORE = YES
+
+// Test Functions
+ENABLE_CLOUD_FUNCTIONS = YES
+
+// Test Messaging
+ENABLE_FIREBASE_MESSAGING = YES
+
+// Test ML Kit
+ENABLE_ML_KIT = YES
+
+// Test Vision
+ENABLE_VISION = YES
+
+// Test Natural Language
+ENABLE_NATURAL_LANGUAGE = YES
+
+// Test Core ML
+ENABLE_CORE_ML = YES
+
+// Test ARKit
+ENABLE_ARKIT = NO
+
+// Test Core Location
+ENABLE_CORE_LOCATION = YES
+
+// Test MapKit
+ENABLE_MAPKIT = YES
+
+// Test Contacts
+ENABLE_CONTACTS = YES
+
+// Test Calendar
+ENABLE_CALENDAR = YES
+
+// Test Photos
+ENABLE_PHOTOS = YES
+
+// Test Camera
+ENABLE_CAMERA = YES
+
+// Test Microphone
+ENABLE_MICROPHONE = YES
+
+// Test Face ID / Touch ID
+ENABLE_BIOMETRIC_AUTH = YES
+
+// Test Keychain
+ENABLE_KEYCHAIN = YES
+
+// Test User Defaults
+ENABLE_USER_DEFAULTS = YES
+
+// Test Core Data
+ENABLE_CORE_DATA = YES
+
+// Test SQLite
+ENABLE_SQLITE = YES
+
+// Test Network
+ENABLE_NETWORK = YES
+ENABLE_WEBSOCKETS = YES
+
+// Test WebView
+ENABLE_WEBVIEW = YES
+
+// Test PDF
+ENABLE_PDF = YES
+
+// Test Printing
+ENABLE_PRINTING = YES
+
+// Test AirPrint
+ENABLE_AIRPRINT = YES
+
+// Test Handoff
+ENABLE_HANDOFF = YES
+
+// Test Spotlight Search
+ENABLE_SPOTLIGHT_SEARCH = YES
+
+// Test Siri Shortcuts
+ENABLE_SIRI_SHORTCUTS = YES
+
+// Test Intents
+ENABLE_INTENTS = YES
+
+// Test CallKit
+ENABLE_CALLKIT = NO
+
+// Test PushKit
+ENABLE_PUSHKIT = YES
+
+// Test UserNotifications
+ENABLE_USER_NOTIFICATIONS = YES
+
+// Test Background App Refresh
+ENABLE_BACKGROUND_APP_REFRESH = YES
+
+// Test Background Processing
+ENABLE_BACKGROUND_PROCESSING = YES
+
+// Test Background Fetch
+ENABLE_BACKGROUND_FETCH = YES
+
+// Test Background Modes
+ENABLE_BACKGROUND_MODES = YES
+
+// Test App Extensions
+ENABLE_APP_EXTENSIONS = YES
+
+// Test Today Extensions
+ENABLE_TODAY_EXTENSIONS = YES
+
+// Test Share Extensions
+ENABLE_SHARE_EXTENSIONS = YES
+
+// Test Action Extensions
+ENABLE_ACTION_EXTENSIONS = YES
+
+// Test Photo Editing Extensions
+ENABLE_PHOTO_EDITING_EXTENSIONS = NO
+
+// Test Broadcast Extensions
+ENABLE_BROADCAST_EXTENSIONS = NO
+
+// Test Network Extensions
+ENABLE_NETWORK_EXTENSIONS = NO
+
+// Test VPN Extensions
+ENABLE_VPN_EXTENSIONS = NO
+
+// Test Intents Extensions
+ENABLE_INTENTS_EXTENSIONS = YES
+
+// Test Siri Intents Extensions
+ENABLE_SIRI_INTENTS_EXTENSIONS = YES
+
+// Test Widget Extensions
+ENABLE_WIDGET_EXTENSIONS = YES
+
+// Test App Clip Extensions
+ENABLE_APP_CLIP_EXTENSIONS = NO
+
+// Test DriverKit Extensions
+ENABLE_DRIVERKIT_EXTENSIONS = NO
+
+// Test System Extensions
+ENABLE_SYSTEM_EXTENSIONS = NO
+
+// Test Endpoint Security Extensions
+ENABLE_ENDPOINT_SECURITY_EXTENSIONS = NO
+
+// Test Network Extensions
+ENABLE_NETWORK_EXTENSIONS = NO
+
+// Test VPN Extensions
+ENABLE_VPN_EXTENSIONS = NO
+
+// Test Packet Tunnel Extensions
+ENABLE_PACKET_TUNNEL_EXTENSIONS = NO
+
+// Test App Proxy Extensions
+ENABLE_APP_PROXY_EXTENSIONS = NO
+
+// Test Content Filter Extensions
+ENABLE_CONTENT_FILTER_EXTENSIONS = NO
+
+// Test DNS Proxy Extensions
+ENABLE_DNS_PROXY_EXTENSIONS = NO
+
+// Test Endpoint Security Extensions
+ENABLE_ENDPOINT_SECURITY_EXTENSIONS = NO
+
+// Test System Extensions
+ENABLE_SYSTEM_EXTENSIONS = NO
+
+// Test DriverKit Extensions
+ENABLE_DRIVERKIT_EXTENSIONS = NO
+
+// Test App Clip Extensions
+ENABLE_APP_CLIP_EXTENSIONS = NO
+
+// Test Widget Extensions
+ENABLE_WIDGET_EXTENSIONS = YES
+
+// Test Siri Intents Extensions
+ENABLE_SIRI_INTENTS_EXTENSIONS = YES
+
+// Test Intents Extensions
+ENABLE_INTENTS_EXTENSIONS = YES
+
+// Test Action Extensions
+ENABLE_ACTION_EXTENSIONS = YES
+
+// Test Share Extensions
+ENABLE_SHARE_EXTENSIONS = YES
+
+// Test Today Extensions
+ENABLE_TODAY_EXTENSIONS = YES
+
+// Test App Extensions
+ENABLE_APP_EXTENSIONS = YES
+
+// Test Background Fetch
+ENABLE_BACKGROUND_FETCH = YES
+
+// Test Background Processing
+ENABLE_BACKGROUND_PROCESSING = YES
+
+// Test Background App Refresh
+ENABLE_BACKGROUND_APP_REFRESH = YES
+
+// Test UserNotifications
+ENABLE_USER_NOTIFICATIONS = YES
+
+// Test PushKit
+ENABLE_PUSHKIT = YES
+
+// Test CallKit
+ENABLE_CALLKIT = NO
+
+// Test Intents
+ENABLE_INTENTS = YES
+
+// Test Siri Shortcuts
+ENABLE_SIRI_SHORTCUTS = YES
+
+// Test Spotlight Search
+ENABLE_SPOTLIGHT_SEARCH = YES
+
+// Test Handoff
+ENABLE_HANDOFF = YES
+
+// Test AirPrint
+ENABLE_AIRPRINT = YES
+
+// Test Printing
+ENABLE_PRINTING = YES
+
+// Test PDF
+ENABLE_PDF = YES
+
+// Test WebView
+ENABLE_WEBVIEW = YES
+
+// Test Network
+ENABLE_NETWORK = YES
+ENABLE_WEBSOCKETS = YES
+
+// Test SQLite
+ENABLE_SQLITE = YES
+
+// Test Core Data
+ENABLE_CORE_DATA = YES
+
+// Test User Defaults
+ENABLE_USER_DEFAULTS = YES
+
+// Test Keychain
+ENABLE_KEYCHAIN = YES
+
+// Test Face ID / Touch ID
+ENABLE_BIOMETRIC_AUTH = YES
+
+// Test Microphone
+ENABLE_MICROPHONE = YES
+
+// Test Camera
+ENABLE_CAMERA = YES
+
+// Test Photos
+ENABLE_PHOTOS = YES
+
+// Test Calendar
+ENABLE_CALENDAR = YES
+
+// Test Contacts
+ENABLE_CONTACTS = YES
+
+// Test MapKit
+ENABLE_MAPKIT = YES
+
+// Test Core Location
+ENABLE_CORE_LOCATION = YES
+
+// Test ARKit
+ENABLE_ARKIT = NO
+
+// Test Core ML
+ENABLE_CORE_ML = YES
+
+// Test Natural Language
+ENABLE_NATURAL_LANGUAGE = YES
+
+// Test Vision
+ENABLE_VISION = YES
+
+// Test ML Kit
+ENABLE_ML_KIT = YES
+
+// Test Messaging
+ENABLE_FIREBASE_MESSAGING = YES
+
+// Test Functions
+ENABLE_CLOUD_FUNCTIONS = YES
+
+// Test Storage
+ENABLE_FIREBASE_STORAGE = YES
+ENABLE_CLOUD_FIRESTORE = YES
+
+// Test Authentication
+ENABLE_FIREBASE_AUTH = YES
+ENABLE_GOOGLE_SIGN_IN = YES
+ENABLE_FACEBOOK_SIGN_IN = YES
+
+// Test Dynamic Links
+ENABLE_DYNAMIC_LINKS = YES
+
+// Test Remote Config
+ENABLE_REMOTE_CONFIG = YES
+
+// Test Performance
+ENABLE_PERFORMANCE_MONITORING = YES
+
+// Test Analytics
+ENABLE_ANALYTICS = YES
+ENABLE_CRASHLYTICS = YES
+
+// Test TestFlight
+ENABLE_TESTFLIGHT = YES
+
+// Test App Clips
+ENABLE_APP_CLIPS = NO
+
+// Test Widgets
+ENABLE_WIDGETS = YES
+
+// Test Spotlight
+ENABLE_SPOTLIGHT = YES
+
+// Test Siri
+ENABLE_SIRI = YES
+
+// Test Apple Sign In
+ENABLE_APPLE_SIGN_IN = YES
+
+// Test In-App Purchases
+ENABLE_IN_APP_PURCHASES = YES
+
+// Test Push Notifications
+ENABLE_PUSH_NOTIFICATIONS = YES
+
+// Test CloudKit
+CLOUDKIT_CONTAINER = iCloud.com.rechain.vc.test
+
+// Test Associated Domains
+ASSOCIATED_DOMAINS = applinks:rechain.vc applinks:www.rechain.vc applinks:app.rechain.vc
+
+// Test Background Modes
+UIBackgroundModes = background-processing background-fetch
+
+// Test App Transport Security
+NSAppTransportSecurity = YES
+NSAllowsArbitraryLoads = YES
+
+// Test Flutter Settings
+FLUTTER_BUILD_MODE = profile
+FLUTTER_BUILD_NAME = 1.0.0-test
+FLUTTER_BUILD_NUMBER = 1
+
+// Test Release Settings
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+
+// Test Debug Settings
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+ENABLE_TESTABILITY = NO
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+
+// Test Architecture
+ARCHS = arm64
+VALID_ARCHS = arm64 armv7 armv7s
+
+// Test Swift Settings
+SWIFT_VERSION = 5.0
+SWIFT_OPTIMIZATION_LEVEL = -O
+SWIFT_COMPILATION_MODE = wholemodule
+
+// Test Build Settings
+IPHONEOS_DEPLOYMENT_TARGET = 12.0
+TARGETED_DEVICE_FAMILY = 1,2
+SUPPORTED_PLATFORMS = iphoneos iphonesimulator
+
+// Test Code Signing
+CODE_SIGN_STYLE = Automatic
+CODE_SIGN_IDENTITY = Apple Development
+PROVISIONING_PROFILE_SPECIFIER = 
+
+// Test Development Team
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+
+// Test App Configuration
+PRODUCT_NAME = REChain VC Lab Test
+PRODUCT_BUNDLE_IDENTIFIER = com.rechain.vc.test
+PRODUCT_DISPLAY_NAME = REChain VC Lab Test
+PRODUCT_VERSION = 1.0.0
+PRODUCT_BUILD_NUMBER = 1

@@ -1,0 +1,519 @@
+// REChain VC Lab iOS Regression Test Configuration
+// This file contains regression test-specific build configuration settings
+
+// Include base configuration
+#include "Config.xcconfig"
+
+// Regression Test-specific overrides
+FLUTTER_BUILD_MODE = profile
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+ENABLE_TESTABILITY = NO
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+
+// Swift Regression Test Settings
+SWIFT_OPTIMIZATION_LEVEL = -O
+SWIFT_COMPILATION_MODE = wholemodule
+
+// Code Signing Regression Test
+CODE_SIGN_IDENTITY = Apple Development
+CODE_SIGN_STYLE = Automatic
+
+// Regression Test Build Settings
+IPHONEOS_DEPLOYMENT_TARGET = 12.0
+TARGETED_DEVICE_FAMILY = 1,2
+SUPPORTED_PLATFORMS = iphoneos iphonesimulator
+
+// Regression Test Architecture
+ARCHS = arm64
+VALID_ARCHS = arm64 armv7 armv7s
+
+// Regression Test Flutter Settings
+FLUTTER_BUILD_NAME = 1.0.0-regression-test
+FLUTTER_BUILD_NUMBER = 1
+
+// Regression Test App Configuration
+PRODUCT_NAME = REChain VC Lab Regression Test
+PRODUCT_BUNDLE_IDENTIFIER = com.rechain.vc.regression-test
+PRODUCT_DISPLAY_NAME = REChain VC Lab Regression Test
+PRODUCT_VERSION = 1.0.0
+PRODUCT_BUILD_NUMBER = 1
+
+// Regression Test Development Team
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+
+// Regression Test Provisioning
+PROVISIONING_PROFILE_SPECIFIER = 
+
+// Regression Test Entitlements
+CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements
+
+// Regression Test App Transport Security
+NSAppTransportSecurity = YES
+NSAllowsArbitraryLoads = YES
+
+// Regression Test Background Modes
+UIBackgroundModes = background-processing background-fetch
+
+// Regression Test Associated Domains
+ASSOCIATED_DOMAINS = applinks:rechain.vc applinks:www.rechain.vc applinks:app.rechain.vc
+
+// Regression Test CloudKit
+CLOUDKIT_CONTAINER = iCloud.com.rechain.vc.regression-test
+
+// Regression Test Push Notifications
+ENABLE_PUSH_NOTIFICATIONS = YES
+
+// Regression Test In-App Purchases
+ENABLE_IN_APP_PURCHASES = YES
+
+// Regression Test Apple Sign In
+ENABLE_APPLE_SIGN_IN = YES
+
+// Regression Test Siri
+ENABLE_SIRI = YES
+
+// Regression Test Spotlight
+ENABLE_SPOTLIGHT = YES
+
+// Regression Test Widgets
+ENABLE_WIDGETS = YES
+
+// Regression Test App Clips
+ENABLE_APP_CLIPS = NO
+
+// Regression Test TestFlight
+ENABLE_TESTFLIGHT = YES
+
+// Regression Test Analytics
+ENABLE_ANALYTICS = YES
+ENABLE_CRASHLYTICS = YES
+
+// Regression Test Performance
+ENABLE_PERFORMANCE_MONITORING = YES
+
+// Regression Test Remote Config
+ENABLE_REMOTE_CONFIG = YES
+
+// Regression Test Dynamic Links
+ENABLE_DYNAMIC_LINKS = YES
+
+// Regression Test Authentication
+ENABLE_FIREBASE_AUTH = YES
+ENABLE_GOOGLE_SIGN_IN = YES
+ENABLE_FACEBOOK_SIGN_IN = YES
+
+// Regression Test Storage
+ENABLE_FIREBASE_STORAGE = YES
+ENABLE_CLOUD_FIRESTORE = YES
+
+// Regression Test Functions
+ENABLE_CLOUD_FUNCTIONS = YES
+
+// Regression Test Messaging
+ENABLE_FIREBASE_MESSAGING = YES
+
+// Regression Test ML Kit
+ENABLE_ML_KIT = YES
+
+// Regression Test Vision
+ENABLE_VISION = YES
+
+// Regression Test Natural Language
+ENABLE_NATURAL_LANGUAGE = YES
+
+// Regression Test Core ML
+ENABLE_CORE_ML = YES
+
+// Regression Test ARKit
+ENABLE_ARKIT = NO
+
+// Regression Test Core Location
+ENABLE_CORE_LOCATION = YES
+
+// Regression Test MapKit
+ENABLE_MAPKIT = YES
+
+// Regression Test Contacts
+ENABLE_CONTACTS = YES
+
+// Regression Test Calendar
+ENABLE_CALENDAR = YES
+
+// Regression Test Photos
+ENABLE_PHOTOS = YES
+
+// Regression Test Camera
+ENABLE_CAMERA = YES
+
+// Regression Test Microphone
+ENABLE_MICROPHONE = YES
+
+// Regression Test Face ID / Touch ID
+ENABLE_BIOMETRIC_AUTH = YES
+
+// Regression Test Keychain
+ENABLE_KEYCHAIN = YES
+
+// Regression Test User Defaults
+ENABLE_USER_DEFAULTS = YES
+
+// Regression Test Core Data
+ENABLE_CORE_DATA = YES
+
+// Regression Test SQLite
+ENABLE_SQLITE = YES
+
+// Regression Test Network
+ENABLE_NETWORK = YES
+ENABLE_WEBSOCKETS = YES
+
+// Regression Test WebView
+ENABLE_WEBVIEW = YES
+
+// Regression Test PDF
+ENABLE_PDF = YES
+
+// Regression Test Printing
+ENABLE_PRINTING = YES
+
+// Regression Test AirPrint
+ENABLE_AIRPRINT = YES
+
+// Regression Test Handoff
+ENABLE_HANDOFF = YES
+
+// Regression Test Spotlight Search
+ENABLE_SPOTLIGHT_SEARCH = YES
+
+// Regression Test Siri Shortcuts
+ENABLE_SIRI_SHORTCUTS = YES
+
+// Regression Test Intents
+ENABLE_INTENTS = YES
+
+// Regression Test CallKit
+ENABLE_CALLKIT = NO
+
+// Regression Test PushKit
+ENABLE_PUSHKIT = YES
+
+// Regression Test UserNotifications
+ENABLE_USER_NOTIFICATIONS = YES
+
+// Regression Test Background App Refresh
+ENABLE_BACKGROUND_APP_REFRESH = YES
+
+// Regression Test Background Processing
+ENABLE_BACKGROUND_PROCESSING = YES
+
+// Regression Test Background Fetch
+ENABLE_BACKGROUND_FETCH = YES
+
+// Regression Test Background Modes
+ENABLE_BACKGROUND_MODES = YES
+
+// Regression Test App Extensions
+ENABLE_APP_EXTENSIONS = YES
+
+// Regression Test Today Extensions
+ENABLE_TODAY_EXTENSIONS = YES
+
+// Regression Test Share Extensions
+ENABLE_SHARE_EXTENSIONS = YES
+
+// Regression Test Action Extensions
+ENABLE_ACTION_EXTENSIONS = YES
+
+// Regression Test Photo Editing Extensions
+ENABLE_PHOTO_EDITING_EXTENSIONS = NO
+
+// Regression Test Broadcast Extensions
+ENABLE_BROADCAST_EXTENSIONS = NO
+
+// Regression Test Network Extensions
+ENABLE_NETWORK_EXTENSIONS = NO
+
+// Regression Test VPN Extensions
+ENABLE_VPN_EXTENSIONS = NO
+
+// Regression Test Intents Extensions
+ENABLE_INTENTS_EXTENSIONS = YES
+
+// Regression Test Siri Intents Extensions
+ENABLE_SIRI_INTENTS_EXTENSIONS = YES
+
+// Regression Test Widget Extensions
+ENABLE_WIDGET_EXTENSIONS = YES
+
+// Regression Test App Clip Extensions
+ENABLE_APP_CLIP_EXTENSIONS = NO
+
+// Regression Test DriverKit Extensions
+ENABLE_DRIVERKIT_EXTENSIONS = NO
+
+// Regression Test System Extensions
+ENABLE_SYSTEM_EXTENSIONS = NO
+
+// Regression Test Endpoint Security Extensions
+ENABLE_ENDPOINT_SECURITY_EXTENSIONS = NO
+
+// Regression Test Network Extensions
+ENABLE_NETWORK_EXTENSIONS = NO
+
+// Regression Test VPN Extensions
+ENABLE_VPN_EXTENSIONS = NO
+
+// Regression Test Packet Tunnel Extensions
+ENABLE_PACKET_TUNNEL_EXTENSIONS = NO
+
+// Regression Test App Proxy Extensions
+ENABLE_APP_PROXY_EXTENSIONS = NO
+
+// Regression Test Content Filter Extensions
+ENABLE_CONTENT_FILTER_EXTENSIONS = NO
+
+// Regression Test DNS Proxy Extensions
+ENABLE_DNS_PROXY_EXTENSIONS = NO
+
+// Regression Test Endpoint Security Extensions
+ENABLE_ENDPOINT_SECURITY_EXTENSIONS = NO
+
+// Regression Test System Extensions
+ENABLE_SYSTEM_EXTENSIONS = NO
+
+// Regression Test DriverKit Extensions
+ENABLE_DRIVERKIT_EXTENSIONS = NO
+
+// Regression Test App Clip Extensions
+ENABLE_APP_CLIP_EXTENSIONS = NO
+
+// Regression Test Widget Extensions
+ENABLE_WIDGET_EXTENSIONS = YES
+
+// Regression Test Siri Intents Extensions
+ENABLE_SIRI_INTENTS_EXTENSIONS = YES
+
+// Regression Test Intents Extensions
+ENABLE_INTENTS_EXTENSIONS = YES
+
+// Regression Test Action Extensions
+ENABLE_ACTION_EXTENSIONS = YES
+
+// Regression Test Share Extensions
+ENABLE_SHARE_EXTENSIONS = YES
+
+// Regression Test Today Extensions
+ENABLE_TODAY_EXTENSIONS = YES
+
+// Regression Test App Extensions
+ENABLE_APP_EXTENSIONS = YES
+
+// Regression Test Background Fetch
+ENABLE_BACKGROUND_FETCH = YES
+
+// Regression Test Background Processing
+ENABLE_BACKGROUND_PROCESSING = YES
+
+// Regression Test Background App Refresh
+ENABLE_BACKGROUND_APP_REFRESH = YES
+
+// Regression Test UserNotifications
+ENABLE_USER_NOTIFICATIONS = YES
+
+// Regression Test PushKit
+ENABLE_PUSHKIT = YES
+
+// Regression Test CallKit
+ENABLE_CALLKIT = NO
+
+// Regression Test Intents
+ENABLE_INTENTS = YES
+
+// Regression Test Siri Shortcuts
+ENABLE_SIRI_SHORTCUTS = YES
+
+// Regression Test Spotlight Search
+ENABLE_SPOTLIGHT_SEARCH = YES
+
+// Regression Test Handoff
+ENABLE_HANDOFF = YES
+
+// Regression Test AirPrint
+ENABLE_AIRPRINT = YES
+
+// Regression Test Printing
+ENABLE_PRINTING = YES
+
+// Regression Test PDF
+ENABLE_PDF = YES
+
+// Regression Test WebView
+ENABLE_WEBVIEW = YES
+
+// Regression Test Network
+ENABLE_NETWORK = YES
+ENABLE_WEBSOCKETS = YES
+
+// Regression Test SQLite
+ENABLE_SQLITE = YES
+
+// Regression Test Core Data
+ENABLE_CORE_DATA = YES
+
+// Regression Test User Defaults
+ENABLE_USER_DEFAULTS = YES
+
+// Regression Test Keychain
+ENABLE_KEYCHAIN = YES
+
+// Regression Test Face ID / Touch ID
+ENABLE_BIOMETRIC_AUTH = YES
+
+// Regression Test Microphone
+ENABLE_MICROPHONE = YES
+
+// Regression Test Camera
+ENABLE_CAMERA = YES
+
+// Regression Test Photos
+ENABLE_PHOTOS = YES
+
+// Regression Test Calendar
+ENABLE_CALENDAR = YES
+
+// Regression Test Contacts
+ENABLE_CONTACTS = YES
+
+// Regression Test MapKit
+ENABLE_MAPKIT = YES
+
+// Regression Test Core Location
+ENABLE_CORE_LOCATION = YES
+
+// Regression Test ARKit
+ENABLE_ARKIT = NO
+
+// Regression Test Core ML
+ENABLE_CORE_ML = YES
+
+// Regression Test Natural Language
+ENABLE_NATURAL_LANGUAGE = YES
+
+// Regression Test Vision
+ENABLE_VISION = YES
+
+// Regression Test ML Kit
+ENABLE_ML_KIT = YES
+
+// Regression Test Messaging
+ENABLE_FIREBASE_MESSAGING = YES
+
+// Regression Test Functions
+ENABLE_CLOUD_FUNCTIONS = YES
+
+// Regression Test Storage
+ENABLE_FIREBASE_STORAGE = YES
+ENABLE_CLOUD_FIRESTORE = YES
+
+// Regression Test Authentication
+ENABLE_FIREBASE_AUTH = YES
+ENABLE_GOOGLE_SIGN_IN = YES
+ENABLE_FACEBOOK_SIGN_IN = YES
+
+// Regression Test Dynamic Links
+ENABLE_DYNAMIC_LINKS = YES
+
+// Regression Test Remote Config
+ENABLE_REMOTE_CONFIG = YES
+
+// Regression Test Performance
+ENABLE_PERFORMANCE_MONITORING = YES
+
+// Regression Test Analytics
+ENABLE_ANALYTICS = YES
+ENABLE_CRASHLYTICS = YES
+
+// Regression Test TestFlight
+ENABLE_TESTFLIGHT = YES
+
+// Regression Test App Clips
+ENABLE_APP_CLIPS = NO
+
+// Regression Test Widgets
+ENABLE_WIDGETS = YES
+
+// Regression Test Spotlight
+ENABLE_SPOTLIGHT = YES
+
+// Regression Test Siri
+ENABLE_SIRI = YES
+
+// Regression Test Apple Sign In
+ENABLE_APPLE_SIGN_IN = YES
+
+// Regression Test In-App Purchases
+ENABLE_IN_APP_PURCHASES = YES
+
+// Regression Test Push Notifications
+ENABLE_PUSH_NOTIFICATIONS = YES
+
+// Regression Test CloudKit
+CLOUDKIT_CONTAINER = iCloud.com.rechain.vc.regression-test
+
+// Regression Test Associated Domains
+ASSOCIATED_DOMAINS = applinks:rechain.vc applinks:www.rechain.vc applinks:app.rechain.vc
+
+// Regression Test Background Modes
+UIBackgroundModes = background-processing background-fetch
+
+// Regression Test App Transport Security
+NSAppTransportSecurity = YES
+NSAllowsArbitraryLoads = YES
+
+// Regression Test Flutter Settings
+FLUTTER_BUILD_MODE = profile
+FLUTTER_BUILD_NAME = 1.0.0-regression-test
+FLUTTER_BUILD_NUMBER = 1
+
+// Regression Test Release Settings
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+
+// Regression Test Debug Settings
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+ENABLE_TESTABILITY = NO
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+
+// Regression Test Architecture
+ARCHS = arm64
+VALID_ARCHS = arm64 armv7 armv7s
+
+// Regression Test Swift Settings
+SWIFT_VERSION = 5.0
+SWIFT_OPTIMIZATION_LEVEL = -O
+SWIFT_COMPILATION_MODE = wholemodule
+
+// Regression Test Build Settings
+IPHONEOS_DEPLOYMENT_TARGET = 12.0
+TARGETED_DEVICE_FAMILY = 1,2
+SUPPORTED_PLATFORMS = iphoneos iphonesimulator
+
+// Regression Test Code Signing
+CODE_SIGN_STYLE = Automatic
+CODE_SIGN_IDENTITY = Apple Development
+PROVISIONING_PROFILE_SPECIFIER = 
+
+// Regression Test Development Team
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+
+// Regression Test App Configuration
+PRODUCT_NAME = REChain VC Lab Regression Test
+PRODUCT_BUNDLE_IDENTIFIER = com.rechain.vc.regression-test
+PRODUCT_DISPLAY_NAME = REChain VC Lab Regression Test
+PRODUCT_VERSION = 1.0.0
+PRODUCT_BUILD_NUMBER = 1

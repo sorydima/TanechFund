@@ -1,0 +1,295 @@
+# Jira Integration Configuration for REChain®️ VC Lab
+# This configuration enables Jira integration for GitHub events
+
+name: Jira Integration
+
+# Jira Configuration
+jira:
+  # Jira server URL
+  server_url: ${{ secrets.JIRA_SERVER_URL }}
+  
+  # Authentication
+  username: ${{ secrets.JIRA_USERNAME }}
+  api_token: ${{ secrets.JIRA_API_TOKEN }}
+  
+  # Project configuration
+  project:
+    key: "REVC"
+    name: "REChain VC Lab"
+    
+  # Issue types
+  issue_types:
+    bug: "Bug"
+    feature: "Story"
+    task: "Task"
+    epic: "Epic"
+    subtask: "Sub-task"
+
+# Integration Settings
+integration:
+  # Auto-create Jira issues from GitHub issues
+  auto_create_issues: true
+  
+  # Auto-update Jira issues from GitHub events
+  auto_update_issues: true
+  
+  # Link GitHub PRs to Jira issues
+  link_pull_requests: true
+  
+  # Sync issue status
+  sync_status: true
+  
+  # Sync issue comments
+  sync_comments: true
+
+# Mapping Configuration
+mapping:
+  # GitHub labels to Jira issue types
+  label_mapping:
+    "bug": "Bug"
+    "feature": "Story"
+    "enhancement": "Story"
+    "task": "Task"
+    "epic": "Epic"
+    "documentation": "Task"
+    "chore": "Task"
+    
+  # GitHub labels to Jira priorities
+  priority_mapping:
+    "critical": "Highest"
+    "high": "High"
+    "medium": "Medium"
+    "low": "Low"
+    "urgent": "Highest"
+    
+  # GitHub labels to Jira components
+  component_mapping:
+    "frontend": "Frontend"
+    "backend": "Backend"
+    "mobile": "Mobile"
+    "web": "Web"
+    "api": "API"
+    "database": "Database"
+    "security": "Security"
+    "performance": "Performance"
+    
+  # GitHub labels to Jira fix versions
+  version_mapping:
+    "v1.0": "1.0"
+    "v1.1": "1.1"
+    "v2.0": "2.0"
+    "next-release": "Next Release"
+
+# Workflow Configuration
+workflow:
+  # GitHub issue to Jira issue workflow
+  issue_workflow:
+    created:
+      action: "create_jira_issue"
+      fields:
+        summary: "{title}"
+        description: "{body}"
+        issuetype: "{issue_type}"
+        priority: "{priority}"
+        components: "{components}"
+        fixVersions: "{fix_versions}"
+        labels: "{labels}"
+        
+    updated:
+      action: "update_jira_issue"
+      fields:
+        summary: "{title}"
+        description: "{body}"
+        priority: "{priority}"
+        components: "{components}"
+        fixVersions: "{fix_versions}"
+        labels: "{labels}"
+        
+    closed:
+      action: "transition_jira_issue"
+      transition: "Done"
+      
+    labeled:
+      action: "update_jira_issue"
+      fields:
+        priority: "{priority}"
+        components: "{components}"
+        fixVersions: "{fix_versions}"
+        
+  # GitHub PR to Jira issue workflow
+  pr_workflow:
+    opened:
+      action: "link_to_jira_issue"
+      fields:
+        summary: "PR: {title}"
+        description: "{body}"
+        issuetype: "Sub-task"
+        
+    merged:
+      action: "transition_jira_issue"
+      transition: "Done"
+      
+    closed:
+      action: "transition_jira_issue"
+      transition: "Cancelled"
+
+# Field Mapping
+fields:
+  # Standard Jira fields
+  standard:
+    summary: "title"
+    description: "body"
+    issuetype: "issue_type"
+    priority: "priority"
+    components: "components"
+    fixVersions: "fix_versions"
+    labels: "labels"
+    assignee: "assignee"
+    reporter: "author"
+    
+  # Custom Jira fields
+  custom:
+    github_url: "html_url"
+    github_number: "number"
+    github_state: "state"
+    github_created: "created_at"
+    github_updated: "updated_at"
+    github_closed: "closed_at"
+    github_merged: "merged_at"
+
+# Automation Rules
+automation:
+  # Auto-assign issues based on labels
+  auto_assign:
+    enabled: true
+    rules:
+      - label: "frontend"
+        assignee: "frontend-team"
+      - label: "backend"
+        assignee: "backend-team"
+      - label: "mobile"
+        assignee: "mobile-team"
+      - label: "security"
+        assignee: "security-team"
+        
+  # Auto-set fix versions based on milestones
+  auto_fix_version:
+    enabled: true
+    rules:
+      - milestone: "v1.0"
+        fix_version: "1.0"
+      - milestone: "v1.1"
+        fix_version: "1.1"
+      - milestone: "v2.0"
+        fix_version: "2.0"
+        
+  # Auto-set components based on labels
+  auto_components:
+    enabled: true
+    rules:
+      - label: "frontend"
+        component: "Frontend"
+      - label: "backend"
+        component: "Backend"
+      - label: "mobile"
+        component: "Mobile"
+      - label: "web"
+        component: "Web"
+      - label: "api"
+        component: "API"
+      - label: "database"
+        component: "Database"
+      - label: "security"
+        component: "Security"
+      - label: "performance"
+        component: "Performance"
+
+# Synchronization Settings
+sync:
+  # Sync frequency (in minutes)
+  frequency: 15
+  
+  # Sync direction
+  direction: "bidirectional"
+  
+  # Sync fields
+  fields:
+    - "summary"
+    - "description"
+    - "status"
+    - "priority"
+    - "assignee"
+    - "labels"
+    - "comments"
+    
+  # Conflict resolution
+  conflict_resolution: "github_wins"
+
+# Error Handling
+error_handling:
+  # Retry failed operations
+  retry_attempts: 3
+  
+  # Retry delay in seconds
+  retry_delay: 60
+  
+  # Log errors to GitHub Actions
+  log_errors: true
+  
+  # Fallback notification method
+  fallback: "slack"
+
+# Security
+security:
+  # Verify webhook signatures
+  verify_signatures: true
+  
+  # Use HTTPS only
+  require_https: true
+  
+  # Validate payload
+  validate_payload: true
+  
+  # Encrypt sensitive data
+  encrypt_sensitive: true
+
+# Jira Specific Settings
+jira_settings:
+  # Use Jira's built-in GitHub integration
+  use_builtin_integration: false
+  
+  # Custom field mappings
+  custom_fields:
+    github_url: "customfield_10001"
+    github_number: "customfield_10002"
+    github_state: "customfield_10003"
+    
+  # Workflow transitions
+  transitions:
+    open: "To Do"
+    in_progress: "In Progress"
+    closed: "Done"
+    cancelled: "Cancelled"
+    
+  # Issue linking
+  linking:
+    # Link type for GitHub issues
+    issue_link_type: "Relates"
+    
+    # Link type for GitHub PRs
+    pr_link_type: "Implements"
+    
+  # Webhook configuration
+  webhooks:
+    # Jira webhook URL for GitHub
+    github_webhook_url: ${{ secrets.JIRA_GITHUB_WEBHOOK_URL }}
+    
+    # Events to listen for
+    events:
+      - "jira:issue_created"
+      - "jira:issue_updated"
+      - "jira:issue_deleted"
+      - "jira:issue_commented"
+      - "jira:issue_assigned"
+      - "jira:issue_resolved"
+      - "jira:issue_closed"

@@ -1,0 +1,519 @@
+// REChain VC Lab iOS Unit Test Configuration
+// This file contains unit test-specific build configuration settings
+
+// Include base configuration
+#include "Config.xcconfig"
+
+// Unit Test-specific overrides
+FLUTTER_BUILD_MODE = profile
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+ENABLE_TESTABILITY = NO
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+
+// Swift Unit Test Settings
+SWIFT_OPTIMIZATION_LEVEL = -O
+SWIFT_COMPILATION_MODE = wholemodule
+
+// Code Signing Unit Test
+CODE_SIGN_IDENTITY = Apple Development
+CODE_SIGN_STYLE = Automatic
+
+// Unit Test Build Settings
+IPHONEOS_DEPLOYMENT_TARGET = 12.0
+TARGETED_DEVICE_FAMILY = 1,2
+SUPPORTED_PLATFORMS = iphoneos iphonesimulator
+
+// Unit Test Architecture
+ARCHS = arm64
+VALID_ARCHS = arm64 armv7 armv7s
+
+// Unit Test Flutter Settings
+FLUTTER_BUILD_NAME = 1.0.0-unit-test
+FLUTTER_BUILD_NUMBER = 1
+
+// Unit Test App Configuration
+PRODUCT_NAME = REChain VC Lab Unit Test
+PRODUCT_BUNDLE_IDENTIFIER = com.rechain.vc.unit-test
+PRODUCT_DISPLAY_NAME = REChain VC Lab Unit Test
+PRODUCT_VERSION = 1.0.0
+PRODUCT_BUILD_NUMBER = 1
+
+// Unit Test Development Team
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+
+// Unit Test Provisioning
+PROVISIONING_PROFILE_SPECIFIER = 
+
+// Unit Test Entitlements
+CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements
+
+// Unit Test App Transport Security
+NSAppTransportSecurity = YES
+NSAllowsArbitraryLoads = YES
+
+// Unit Test Background Modes
+UIBackgroundModes = background-processing background-fetch
+
+// Unit Test Associated Domains
+ASSOCIATED_DOMAINS = applinks:rechain.vc applinks:www.rechain.vc applinks:app.rechain.vc
+
+// Unit Test CloudKit
+CLOUDKIT_CONTAINER = iCloud.com.rechain.vc.unit-test
+
+// Unit Test Push Notifications
+ENABLE_PUSH_NOTIFICATIONS = YES
+
+// Unit Test In-App Purchases
+ENABLE_IN_APP_PURCHASES = YES
+
+// Unit Test Apple Sign In
+ENABLE_APPLE_SIGN_IN = YES
+
+// Unit Test Siri
+ENABLE_SIRI = YES
+
+// Unit Test Spotlight
+ENABLE_SPOTLIGHT = YES
+
+// Unit Test Widgets
+ENABLE_WIDGETS = YES
+
+// Unit Test App Clips
+ENABLE_APP_CLIPS = NO
+
+// Unit Test TestFlight
+ENABLE_TESTFLIGHT = YES
+
+// Unit Test Analytics
+ENABLE_ANALYTICS = YES
+ENABLE_CRASHLYTICS = YES
+
+// Unit Test Performance
+ENABLE_PERFORMANCE_MONITORING = YES
+
+// Unit Test Remote Config
+ENABLE_REMOTE_CONFIG = YES
+
+// Unit Test Dynamic Links
+ENABLE_DYNAMIC_LINKS = YES
+
+// Unit Test Authentication
+ENABLE_FIREBASE_AUTH = YES
+ENABLE_GOOGLE_SIGN_IN = YES
+ENABLE_FACEBOOK_SIGN_IN = YES
+
+// Unit Test Storage
+ENABLE_FIREBASE_STORAGE = YES
+ENABLE_CLOUD_FIRESTORE = YES
+
+// Unit Test Functions
+ENABLE_CLOUD_FUNCTIONS = YES
+
+// Unit Test Messaging
+ENABLE_FIREBASE_MESSAGING = YES
+
+// Unit Test ML Kit
+ENABLE_ML_KIT = YES
+
+// Unit Test Vision
+ENABLE_VISION = YES
+
+// Unit Test Natural Language
+ENABLE_NATURAL_LANGUAGE = YES
+
+// Unit Test Core ML
+ENABLE_CORE_ML = YES
+
+// Unit Test ARKit
+ENABLE_ARKIT = NO
+
+// Unit Test Core Location
+ENABLE_CORE_LOCATION = YES
+
+// Unit Test MapKit
+ENABLE_MAPKIT = YES
+
+// Unit Test Contacts
+ENABLE_CONTACTS = YES
+
+// Unit Test Calendar
+ENABLE_CALENDAR = YES
+
+// Unit Test Photos
+ENABLE_PHOTOS = YES
+
+// Unit Test Camera
+ENABLE_CAMERA = YES
+
+// Unit Test Microphone
+ENABLE_MICROPHONE = YES
+
+// Unit Test Face ID / Touch ID
+ENABLE_BIOMETRIC_AUTH = YES
+
+// Unit Test Keychain
+ENABLE_KEYCHAIN = YES
+
+// Unit Test User Defaults
+ENABLE_USER_DEFAULTS = YES
+
+// Unit Test Core Data
+ENABLE_CORE_DATA = YES
+
+// Unit Test SQLite
+ENABLE_SQLITE = YES
+
+// Unit Test Network
+ENABLE_NETWORK = YES
+ENABLE_WEBSOCKETS = YES
+
+// Unit Test WebView
+ENABLE_WEBVIEW = YES
+
+// Unit Test PDF
+ENABLE_PDF = YES
+
+// Unit Test Printing
+ENABLE_PRINTING = YES
+
+// Unit Test AirPrint
+ENABLE_AIRPRINT = YES
+
+// Unit Test Handoff
+ENABLE_HANDOFF = YES
+
+// Unit Test Spotlight Search
+ENABLE_SPOTLIGHT_SEARCH = YES
+
+// Unit Test Siri Shortcuts
+ENABLE_SIRI_SHORTCUTS = YES
+
+// Unit Test Intents
+ENABLE_INTENTS = YES
+
+// Unit Test CallKit
+ENABLE_CALLKIT = NO
+
+// Unit Test PushKit
+ENABLE_PUSHKIT = YES
+
+// Unit Test UserNotifications
+ENABLE_USER_NOTIFICATIONS = YES
+
+// Unit Test Background App Refresh
+ENABLE_BACKGROUND_APP_REFRESH = YES
+
+// Unit Test Background Processing
+ENABLE_BACKGROUND_PROCESSING = YES
+
+// Unit Test Background Fetch
+ENABLE_BACKGROUND_FETCH = YES
+
+// Unit Test Background Modes
+ENABLE_BACKGROUND_MODES = YES
+
+// Unit Test App Extensions
+ENABLE_APP_EXTENSIONS = YES
+
+// Unit Test Today Extensions
+ENABLE_TODAY_EXTENSIONS = YES
+
+// Unit Test Share Extensions
+ENABLE_SHARE_EXTENSIONS = YES
+
+// Unit Test Action Extensions
+ENABLE_ACTION_EXTENSIONS = YES
+
+// Unit Test Photo Editing Extensions
+ENABLE_PHOTO_EDITING_EXTENSIONS = NO
+
+// Unit Test Broadcast Extensions
+ENABLE_BROADCAST_EXTENSIONS = NO
+
+// Unit Test Network Extensions
+ENABLE_NETWORK_EXTENSIONS = NO
+
+// Unit Test VPN Extensions
+ENABLE_VPN_EXTENSIONS = NO
+
+// Unit Test Intents Extensions
+ENABLE_INTENTS_EXTENSIONS = YES
+
+// Unit Test Siri Intents Extensions
+ENABLE_SIRI_INTENTS_EXTENSIONS = YES
+
+// Unit Test Widget Extensions
+ENABLE_WIDGET_EXTENSIONS = YES
+
+// Unit Test App Clip Extensions
+ENABLE_APP_CLIP_EXTENSIONS = NO
+
+// Unit Test DriverKit Extensions
+ENABLE_DRIVERKIT_EXTENSIONS = NO
+
+// Unit Test System Extensions
+ENABLE_SYSTEM_EXTENSIONS = NO
+
+// Unit Test Endpoint Security Extensions
+ENABLE_ENDPOINT_SECURITY_EXTENSIONS = NO
+
+// Unit Test Network Extensions
+ENABLE_NETWORK_EXTENSIONS = NO
+
+// Unit Test VPN Extensions
+ENABLE_VPN_EXTENSIONS = NO
+
+// Unit Test Packet Tunnel Extensions
+ENABLE_PACKET_TUNNEL_EXTENSIONS = NO
+
+// Unit Test App Proxy Extensions
+ENABLE_APP_PROXY_EXTENSIONS = NO
+
+// Unit Test Content Filter Extensions
+ENABLE_CONTENT_FILTER_EXTENSIONS = NO
+
+// Unit Test DNS Proxy Extensions
+ENABLE_DNS_PROXY_EXTENSIONS = NO
+
+// Unit Test Endpoint Security Extensions
+ENABLE_ENDPOINT_SECURITY_EXTENSIONS = NO
+
+// Unit Test System Extensions
+ENABLE_SYSTEM_EXTENSIONS = NO
+
+// Unit Test DriverKit Extensions
+ENABLE_DRIVERKIT_EXTENSIONS = NO
+
+// Unit Test App Clip Extensions
+ENABLE_APP_CLIP_EXTENSIONS = NO
+
+// Unit Test Widget Extensions
+ENABLE_WIDGET_EXTENSIONS = YES
+
+// Unit Test Siri Intents Extensions
+ENABLE_SIRI_INTENTS_EXTENSIONS = YES
+
+// Unit Test Intents Extensions
+ENABLE_INTENTS_EXTENSIONS = YES
+
+// Unit Test Action Extensions
+ENABLE_ACTION_EXTENSIONS = YES
+
+// Unit Test Share Extensions
+ENABLE_SHARE_EXTENSIONS = YES
+
+// Unit Test Today Extensions
+ENABLE_TODAY_EXTENSIONS = YES
+
+// Unit Test App Extensions
+ENABLE_APP_EXTENSIONS = YES
+
+// Unit Test Background Fetch
+ENABLE_BACKGROUND_FETCH = YES
+
+// Unit Test Background Processing
+ENABLE_BACKGROUND_PROCESSING = YES
+
+// Unit Test Background App Refresh
+ENABLE_BACKGROUND_APP_REFRESH = YES
+
+// Unit Test UserNotifications
+ENABLE_USER_NOTIFICATIONS = YES
+
+// Unit Test PushKit
+ENABLE_PUSHKIT = YES
+
+// Unit Test CallKit
+ENABLE_CALLKIT = NO
+
+// Unit Test Intents
+ENABLE_INTENTS = YES
+
+// Unit Test Siri Shortcuts
+ENABLE_SIRI_SHORTCUTS = YES
+
+// Unit Test Spotlight Search
+ENABLE_SPOTLIGHT_SEARCH = YES
+
+// Unit Test Handoff
+ENABLE_HANDOFF = YES
+
+// Unit Test AirPrint
+ENABLE_AIRPRINT = YES
+
+// Unit Test Printing
+ENABLE_PRINTING = YES
+
+// Unit Test PDF
+ENABLE_PDF = YES
+
+// Unit Test WebView
+ENABLE_WEBVIEW = YES
+
+// Unit Test Network
+ENABLE_NETWORK = YES
+ENABLE_WEBSOCKETS = YES
+
+// Unit Test SQLite
+ENABLE_SQLITE = YES
+
+// Unit Test Core Data
+ENABLE_CORE_DATA = YES
+
+// Unit Test User Defaults
+ENABLE_USER_DEFAULTS = YES
+
+// Unit Test Keychain
+ENABLE_KEYCHAIN = YES
+
+// Unit Test Face ID / Touch ID
+ENABLE_BIOMETRIC_AUTH = YES
+
+// Unit Test Microphone
+ENABLE_MICROPHONE = YES
+
+// Unit Test Camera
+ENABLE_CAMERA = YES
+
+// Unit Test Photos
+ENABLE_PHOTOS = YES
+
+// Unit Test Calendar
+ENABLE_CALENDAR = YES
+
+// Unit Test Contacts
+ENABLE_CONTACTS = YES
+
+// Unit Test MapKit
+ENABLE_MAPKIT = YES
+
+// Unit Test Core Location
+ENABLE_CORE_LOCATION = YES
+
+// Unit Test ARKit
+ENABLE_ARKIT = NO
+
+// Unit Test Core ML
+ENABLE_CORE_ML = YES
+
+// Unit Test Natural Language
+ENABLE_NATURAL_LANGUAGE = YES
+
+// Unit Test Vision
+ENABLE_VISION = YES
+
+// Unit Test ML Kit
+ENABLE_ML_KIT = YES
+
+// Unit Test Messaging
+ENABLE_FIREBASE_MESSAGING = YES
+
+// Unit Test Functions
+ENABLE_CLOUD_FUNCTIONS = YES
+
+// Unit Test Storage
+ENABLE_FIREBASE_STORAGE = YES
+ENABLE_CLOUD_FIRESTORE = YES
+
+// Unit Test Authentication
+ENABLE_FIREBASE_AUTH = YES
+ENABLE_GOOGLE_SIGN_IN = YES
+ENABLE_FACEBOOK_SIGN_IN = YES
+
+// Unit Test Dynamic Links
+ENABLE_DYNAMIC_LINKS = YES
+
+// Unit Test Remote Config
+ENABLE_REMOTE_CONFIG = YES
+
+// Unit Test Performance
+ENABLE_PERFORMANCE_MONITORING = YES
+
+// Unit Test Analytics
+ENABLE_ANALYTICS = YES
+ENABLE_CRASHLYTICS = YES
+
+// Unit Test TestFlight
+ENABLE_TESTFLIGHT = YES
+
+// Unit Test App Clips
+ENABLE_APP_CLIPS = NO
+
+// Unit Test Widgets
+ENABLE_WIDGETS = YES
+
+// Unit Test Spotlight
+ENABLE_SPOTLIGHT = YES
+
+// Unit Test Siri
+ENABLE_SIRI = YES
+
+// Unit Test Apple Sign In
+ENABLE_APPLE_SIGN_IN = YES
+
+// Unit Test In-App Purchases
+ENABLE_IN_APP_PURCHASES = YES
+
+// Unit Test Push Notifications
+ENABLE_PUSH_NOTIFICATIONS = YES
+
+// Unit Test CloudKit
+CLOUDKIT_CONTAINER = iCloud.com.rechain.vc.unit-test
+
+// Unit Test Associated Domains
+ASSOCIATED_DOMAINS = applinks:rechain.vc applinks:www.rechain.vc applinks:app.rechain.vc
+
+// Unit Test Background Modes
+UIBackgroundModes = background-processing background-fetch
+
+// Unit Test App Transport Security
+NSAppTransportSecurity = YES
+NSAllowsArbitraryLoads = YES
+
+// Unit Test Flutter Settings
+FLUTTER_BUILD_MODE = profile
+FLUTTER_BUILD_NAME = 1.0.0-unit-test
+FLUTTER_BUILD_NUMBER = 1
+
+// Unit Test Release Settings
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+
+// Unit Test Debug Settings
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+ENABLE_TESTABILITY = NO
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+
+// Unit Test Architecture
+ARCHS = arm64
+VALID_ARCHS = arm64 armv7 armv7s
+
+// Unit Test Swift Settings
+SWIFT_VERSION = 5.0
+SWIFT_OPTIMIZATION_LEVEL = -O
+SWIFT_COMPILATION_MODE = wholemodule
+
+// Unit Test Build Settings
+IPHONEOS_DEPLOYMENT_TARGET = 12.0
+TARGETED_DEVICE_FAMILY = 1,2
+SUPPORTED_PLATFORMS = iphoneos iphonesimulator
+
+// Unit Test Code Signing
+CODE_SIGN_STYLE = Automatic
+CODE_SIGN_IDENTITY = Apple Development
+PROVISIONING_PROFILE_SPECIFIER = 
+
+// Unit Test Development Team
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+
+// Unit Test App Configuration
+PRODUCT_NAME = REChain VC Lab Unit Test
+PRODUCT_BUNDLE_IDENTIFIER = com.rechain.vc.unit-test
+PRODUCT_DISPLAY_NAME = REChain VC Lab Unit Test
+PRODUCT_VERSION = 1.0.0
+PRODUCT_BUILD_NUMBER = 1

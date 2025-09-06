@@ -1,0 +1,519 @@
+// REChain VC Lab iOS Shared Configuration
+// This file contains shared build configuration settings
+
+// Include base configuration
+#include "Config.xcconfig"
+
+// Shared-specific overrides
+FLUTTER_BUILD_MODE = profile
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+ENABLE_TESTABILITY = NO
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+
+// Swift Shared Settings
+SWIFT_OPTIMIZATION_LEVEL = -O
+SWIFT_COMPILATION_MODE = wholemodule
+
+// Code Signing Shared
+CODE_SIGN_IDENTITY = Apple Development
+CODE_SIGN_STYLE = Automatic
+
+// Shared Build Settings
+IPHONEOS_DEPLOYMENT_TARGET = 12.0
+TARGETED_DEVICE_FAMILY = 1,2
+SUPPORTED_PLATFORMS = iphoneos iphonesimulator
+
+// Shared Architecture
+ARCHS = arm64
+VALID_ARCHS = arm64 armv7 armv7s
+
+// Shared Flutter Settings
+FLUTTER_BUILD_NAME = 1.0.0-shared
+FLUTTER_BUILD_NUMBER = 1
+
+// Shared App Configuration
+PRODUCT_NAME = REChain VC Lab Shared
+PRODUCT_BUNDLE_IDENTIFIER = com.rechain.vc.shared
+PRODUCT_DISPLAY_NAME = REChain VC Lab Shared
+PRODUCT_VERSION = 1.0.0
+PRODUCT_BUILD_NUMBER = 1
+
+// Shared Development Team
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+
+// Shared Provisioning
+PROVISIONING_PROFILE_SPECIFIER = 
+
+// Shared Entitlements
+CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements
+
+// Shared App Transport Security
+NSAppTransportSecurity = YES
+NSAllowsArbitraryLoads = YES
+
+// Shared Background Modes
+UIBackgroundModes = background-processing background-fetch
+
+// Shared Associated Domains
+ASSOCIATED_DOMAINS = applinks:rechain.vc applinks:www.rechain.vc applinks:app.rechain.vc
+
+// Shared CloudKit
+CLOUDKIT_CONTAINER = iCloud.com.rechain.vc.shared
+
+// Shared Push Notifications
+ENABLE_PUSH_NOTIFICATIONS = YES
+
+// Shared In-App Purchases
+ENABLE_IN_APP_PURCHASES = YES
+
+// Shared Apple Sign In
+ENABLE_APPLE_SIGN_IN = YES
+
+// Shared Siri
+ENABLE_SIRI = YES
+
+// Shared Spotlight
+ENABLE_SPOTLIGHT = YES
+
+// Shared Widgets
+ENABLE_WIDGETS = YES
+
+// Shared App Clips
+ENABLE_APP_CLIPS = NO
+
+// Shared TestFlight
+ENABLE_TESTFLIGHT = YES
+
+// Shared Analytics
+ENABLE_ANALYTICS = YES
+ENABLE_CRASHLYTICS = YES
+
+// Shared Performance
+ENABLE_PERFORMANCE_MONITORING = YES
+
+// Shared Remote Config
+ENABLE_REMOTE_CONFIG = YES
+
+// Shared Dynamic Links
+ENABLE_DYNAMIC_LINKS = YES
+
+// Shared Authentication
+ENABLE_FIREBASE_AUTH = YES
+ENABLE_GOOGLE_SIGN_IN = YES
+ENABLE_FACEBOOK_SIGN_IN = YES
+
+// Shared Storage
+ENABLE_FIREBASE_STORAGE = YES
+ENABLE_CLOUD_FIRESTORE = YES
+
+// Shared Functions
+ENABLE_CLOUD_FUNCTIONS = YES
+
+// Shared Messaging
+ENABLE_FIREBASE_MESSAGING = YES
+
+// Shared ML Kit
+ENABLE_ML_KIT = YES
+
+// Shared Vision
+ENABLE_VISION = YES
+
+// Shared Natural Language
+ENABLE_NATURAL_LANGUAGE = YES
+
+// Shared Core ML
+ENABLE_CORE_ML = YES
+
+// Shared ARKit
+ENABLE_ARKIT = NO
+
+// Shared Core Location
+ENABLE_CORE_LOCATION = YES
+
+// Shared MapKit
+ENABLE_MAPKIT = YES
+
+// Shared Contacts
+ENABLE_CONTACTS = YES
+
+// Shared Calendar
+ENABLE_CALENDAR = YES
+
+// Shared Photos
+ENABLE_PHOTOS = YES
+
+// Shared Camera
+ENABLE_CAMERA = YES
+
+// Shared Microphone
+ENABLE_MICROPHONE = YES
+
+// Shared Face ID / Touch ID
+ENABLE_BIOMETRIC_AUTH = YES
+
+// Shared Keychain
+ENABLE_KEYCHAIN = YES
+
+// Shared User Defaults
+ENABLE_USER_DEFAULTS = YES
+
+// Shared Core Data
+ENABLE_CORE_DATA = YES
+
+// Shared SQLite
+ENABLE_SQLITE = YES
+
+// Shared Network
+ENABLE_NETWORK = YES
+ENABLE_WEBSOCKETS = YES
+
+// Shared WebView
+ENABLE_WEBVIEW = YES
+
+// Shared PDF
+ENABLE_PDF = YES
+
+// Shared Printing
+ENABLE_PRINTING = YES
+
+// Shared AirPrint
+ENABLE_AIRPRINT = YES
+
+// Shared Handoff
+ENABLE_HANDOFF = YES
+
+// Shared Spotlight Search
+ENABLE_SPOTLIGHT_SEARCH = YES
+
+// Shared Siri Shortcuts
+ENABLE_SIRI_SHORTCUTS = YES
+
+// Shared Intents
+ENABLE_INTENTS = YES
+
+// Shared CallKit
+ENABLE_CALLKIT = NO
+
+// Shared PushKit
+ENABLE_PUSHKIT = YES
+
+// Shared UserNotifications
+ENABLE_USER_NOTIFICATIONS = YES
+
+// Shared Background App Refresh
+ENABLE_BACKGROUND_APP_REFRESH = YES
+
+// Shared Background Processing
+ENABLE_BACKGROUND_PROCESSING = YES
+
+// Shared Background Fetch
+ENABLE_BACKGROUND_FETCH = YES
+
+// Shared Background Modes
+ENABLE_BACKGROUND_MODES = YES
+
+// Shared App Extensions
+ENABLE_APP_EXTENSIONS = YES
+
+// Shared Today Extensions
+ENABLE_TODAY_EXTENSIONS = YES
+
+// Shared Share Extensions
+ENABLE_SHARE_EXTENSIONS = YES
+
+// Shared Action Extensions
+ENABLE_ACTION_EXTENSIONS = YES
+
+// Shared Photo Editing Extensions
+ENABLE_PHOTO_EDITING_EXTENSIONS = NO
+
+// Shared Broadcast Extensions
+ENABLE_BROADCAST_EXTENSIONS = NO
+
+// Shared Network Extensions
+ENABLE_NETWORK_EXTENSIONS = NO
+
+// Shared VPN Extensions
+ENABLE_VPN_EXTENSIONS = NO
+
+// Shared Intents Extensions
+ENABLE_INTENTS_EXTENSIONS = YES
+
+// Shared Siri Intents Extensions
+ENABLE_SIRI_INTENTS_EXTENSIONS = YES
+
+// Shared Widget Extensions
+ENABLE_WIDGET_EXTENSIONS = YES
+
+// Shared App Clip Extensions
+ENABLE_APP_CLIP_EXTENSIONS = NO
+
+// Shared DriverKit Extensions
+ENABLE_DRIVERKIT_EXTENSIONS = NO
+
+// Shared System Extensions
+ENABLE_SYSTEM_EXTENSIONS = NO
+
+// Shared Endpoint Security Extensions
+ENABLE_ENDPOINT_SECURITY_EXTENSIONS = NO
+
+// Shared Network Extensions
+ENABLE_NETWORK_EXTENSIONS = NO
+
+// Shared VPN Extensions
+ENABLE_VPN_EXTENSIONS = NO
+
+// Shared Packet Tunnel Extensions
+ENABLE_PACKET_TUNNEL_EXTENSIONS = NO
+
+// Shared App Proxy Extensions
+ENABLE_APP_PROXY_EXTENSIONS = NO
+
+// Shared Content Filter Extensions
+ENABLE_CONTENT_FILTER_EXTENSIONS = NO
+
+// Shared DNS Proxy Extensions
+ENABLE_DNS_PROXY_EXTENSIONS = NO
+
+// Shared Endpoint Security Extensions
+ENABLE_ENDPOINT_SECURITY_EXTENSIONS = NO
+
+// Shared System Extensions
+ENABLE_SYSTEM_EXTENSIONS = NO
+
+// Shared DriverKit Extensions
+ENABLE_DRIVERKIT_EXTENSIONS = NO
+
+// Shared App Clip Extensions
+ENABLE_APP_CLIP_EXTENSIONS = NO
+
+// Shared Widget Extensions
+ENABLE_WIDGET_EXTENSIONS = YES
+
+// Shared Siri Intents Extensions
+ENABLE_SIRI_INTENTS_EXTENSIONS = YES
+
+// Shared Intents Extensions
+ENABLE_INTENTS_EXTENSIONS = YES
+
+// Shared Action Extensions
+ENABLE_ACTION_EXTENSIONS = YES
+
+// Shared Share Extensions
+ENABLE_SHARE_EXTENSIONS = YES
+
+// Shared Today Extensions
+ENABLE_TODAY_EXTENSIONS = YES
+
+// Shared App Extensions
+ENABLE_APP_EXTENSIONS = YES
+
+// Shared Background Fetch
+ENABLE_BACKGROUND_FETCH = YES
+
+// Shared Background Processing
+ENABLE_BACKGROUND_PROCESSING = YES
+
+// Shared Background App Refresh
+ENABLE_BACKGROUND_APP_REFRESH = YES
+
+// Shared UserNotifications
+ENABLE_USER_NOTIFICATIONS = YES
+
+// Shared PushKit
+ENABLE_PUSHKIT = YES
+
+// Shared CallKit
+ENABLE_CALLKIT = NO
+
+// Shared Intents
+ENABLE_INTENTS = YES
+
+// Shared Siri Shortcuts
+ENABLE_SIRI_SHORTCUTS = YES
+
+// Shared Spotlight Search
+ENABLE_SPOTLIGHT_SEARCH = YES
+
+// Shared Handoff
+ENABLE_HANDOFF = YES
+
+// Shared AirPrint
+ENABLE_AIRPRINT = YES
+
+// Shared Printing
+ENABLE_PRINTING = YES
+
+// Shared PDF
+ENABLE_PDF = YES
+
+// Shared WebView
+ENABLE_WEBVIEW = YES
+
+// Shared Network
+ENABLE_NETWORK = YES
+ENABLE_WEBSOCKETS = YES
+
+// Shared SQLite
+ENABLE_SQLITE = YES
+
+// Shared Core Data
+ENABLE_CORE_DATA = YES
+
+// Shared User Defaults
+ENABLE_USER_DEFAULTS = YES
+
+// Shared Keychain
+ENABLE_KEYCHAIN = YES
+
+// Shared Face ID / Touch ID
+ENABLE_BIOMETRIC_AUTH = YES
+
+// Shared Microphone
+ENABLE_MICROPHONE = YES
+
+// Shared Camera
+ENABLE_CAMERA = YES
+
+// Shared Photos
+ENABLE_PHOTOS = YES
+
+// Shared Calendar
+ENABLE_CALENDAR = YES
+
+// Shared Contacts
+ENABLE_CONTACTS = YES
+
+// Shared MapKit
+ENABLE_MAPKIT = YES
+
+// Shared Core Location
+ENABLE_CORE_LOCATION = YES
+
+// Shared ARKit
+ENABLE_ARKIT = NO
+
+// Shared Core ML
+ENABLE_CORE_ML = YES
+
+// Shared Natural Language
+ENABLE_NATURAL_LANGUAGE = YES
+
+// Shared Vision
+ENABLE_VISION = YES
+
+// Shared ML Kit
+ENABLE_ML_KIT = YES
+
+// Shared Messaging
+ENABLE_FIREBASE_MESSAGING = YES
+
+// Shared Functions
+ENABLE_CLOUD_FUNCTIONS = YES
+
+// Shared Storage
+ENABLE_FIREBASE_STORAGE = YES
+ENABLE_CLOUD_FIRESTORE = YES
+
+// Shared Authentication
+ENABLE_FIREBASE_AUTH = YES
+ENABLE_GOOGLE_SIGN_IN = YES
+ENABLE_FACEBOOK_SIGN_IN = YES
+
+// Shared Dynamic Links
+ENABLE_DYNAMIC_LINKS = YES
+
+// Shared Remote Config
+ENABLE_REMOTE_CONFIG = YES
+
+// Shared Performance
+ENABLE_PERFORMANCE_MONITORING = YES
+
+// Shared Analytics
+ENABLE_ANALYTICS = YES
+ENABLE_CRASHLYTICS = YES
+
+// Shared TestFlight
+ENABLE_TESTFLIGHT = YES
+
+// Shared App Clips
+ENABLE_APP_CLIPS = NO
+
+// Shared Widgets
+ENABLE_WIDGETS = YES
+
+// Shared Spotlight
+ENABLE_SPOTLIGHT = YES
+
+// Shared Siri
+ENABLE_SIRI = YES
+
+// Shared Apple Sign In
+ENABLE_APPLE_SIGN_IN = YES
+
+// Shared In-App Purchases
+ENABLE_IN_APP_PURCHASES = YES
+
+// Shared Push Notifications
+ENABLE_PUSH_NOTIFICATIONS = YES
+
+// Shared CloudKit
+CLOUDKIT_CONTAINER = iCloud.com.rechain.vc.shared
+
+// Shared Associated Domains
+ASSOCIATED_DOMAINS = applinks:rechain.vc applinks:www.rechain.vc applinks:app.rechain.vc
+
+// Shared Background Modes
+UIBackgroundModes = background-processing background-fetch
+
+// Shared App Transport Security
+NSAppTransportSecurity = YES
+NSAllowsArbitraryLoads = YES
+
+// Shared Flutter Settings
+FLUTTER_BUILD_MODE = profile
+FLUTTER_BUILD_NAME = 1.0.0-shared
+FLUTTER_BUILD_NUMBER = 1
+
+// Shared Release Settings
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+
+// Shared Debug Settings
+GCC_OPTIMIZATION_LEVEL = s
+GCC_FAST_MATH = YES
+ENABLE_BITCODE = NO
+ENABLE_TESTABILITY = NO
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+
+// Shared Architecture
+ARCHS = arm64
+VALID_ARCHS = arm64 armv7 armv7s
+
+// Shared Swift Settings
+SWIFT_VERSION = 5.0
+SWIFT_OPTIMIZATION_LEVEL = -O
+SWIFT_COMPILATION_MODE = wholemodule
+
+// Shared Build Settings
+IPHONEOS_DEPLOYMENT_TARGET = 12.0
+TARGETED_DEVICE_FAMILY = 1,2
+SUPPORTED_PLATFORMS = iphoneos iphonesimulator
+
+// Shared Code Signing
+CODE_SIGN_STYLE = Automatic
+CODE_SIGN_IDENTITY = Apple Development
+PROVISIONING_PROFILE_SPECIFIER = 
+
+// Shared Development Team
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+
+// Shared App Configuration
+PRODUCT_NAME = REChain VC Lab Shared
+PRODUCT_BUNDLE_IDENTIFIER = com.rechain.vc.shared
+PRODUCT_DISPLAY_NAME = REChain VC Lab Shared
+PRODUCT_VERSION = 1.0.0
+PRODUCT_BUILD_NUMBER = 1
