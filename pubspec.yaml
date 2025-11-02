@@ -16,7 +16,7 @@ dependencies:
   url_launcher: ^6.3.1
   flutter_svg: ^2.2.1
   cached_network_image: ^3.4.1
-  intl: ^0.19.0
+  intl: ^0.20.2
   web3dart: ^2.7.3
   crypto: ^3.0.5
   qr_flutter: ^4.1.0
