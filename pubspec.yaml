@@ -21,7 +21,7 @@ dependencies:
   crypto: ^3.0.5
   qr_flutter: ^4.1.0
   flutter_animate: ^4.5.0
-  lottie: ^3.1.2
+  lottie: ^3.3.2
 
 dev_dependencies:
   flutter_test:
