@@ -1,0 +1,388 @@
+name: Performance Monitoring
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    - cron: '0 2 * * 1'  # Weekly on Monday at 2 AM UTC
+  workflow_dispatch:
+
+jobs:
+  performance-test:
+    name: Performance Tests
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        flutter-version: ['3.13.0', '3.16.0']
+        include:
+          - os: ubuntu-latest
+            platform: web
+            browser: chrome
+          - os: ubuntu-latest
+            platform: android
+            device: emulator
+          - os: macos-latest
+            platform: ios
+            device: simulator
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for performance comparison
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ matrix.flutter-version }}
+          channel: stable
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Install platform dependencies
+        if: matrix.platform == 'android'
+        run: |
+          sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
+          flutter doctor --android-licenses
+
+      - name: Install platform dependencies (iOS)
+        if: matrix.platform == 'ios'
+        run: |
+          sudo xcode-select --switch /Applications/Xcode_15.app
+          flutter doctor
+
+      - name: Install platform dependencies (Web)
+        if: matrix.platform == 'web'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb
+          flutter config --enable-web
+
+      - name: Run Performance Tests
+        id: perf-test
+        run: |
+          # Run performance tests with custom runner
+          flutter drive --driver=test_driver/perf_test.dart \
+            --target=integration_test/app_perf_test.dart \
+            --dart-define=PERF_TESTING=true \
+            --dart-define=PERF_BASELINE=${{ github.sha }} \
+            --no-publish-port
+          
+          # Generate performance report
+          dart run bin/generate_perf_report.dart
+
+      - name: Analyze Performance Metrics
+        id: perf-analysis
+        run: |
+          # Parse performance results
+          node scripts/analyze_perf.js perf_results.json
+          
+          # Compare with previous baseline
+          python scripts/compare_baseline.py \
+            --current perf_results.json \
+            --baseline .github/baselines/perf_baseline_${{ matrix.platform }}.json \
+            --threshold 5
+          
+          # Generate summary
+          echo "Performance regression: $(cat perf_regression.txt)"
+          echo "performance_regression<<EOF" >> $GITHUB_OUTPUT
+          cat perf_report.md
+          EOF
+
+      - name: Upload Performance Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: perf-report-${{ matrix.os }}-${{ matrix.flutter-version }}-${{ matrix.platform }}
+          path: |
+            perf_results.json
+            perf_report.md
+            performance-baseline.json
+
+      - name: Cache Performance Baseline
+        if: github.ref == 'refs/heads/main'
+        uses: actions/cache@v4
+        with:
+          path: .github/baselines/
+          key: perf-baseline-${{ matrix.platform }}-${{ hashFiles('pubspec.yaml') }}-${{ github.sha }}
+
+      - name: Performance Alert
+        if: steps.perf-analysis.outputs.performance_regression == 'true'
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  bundle-analyzer:
+    name: Bundle Analysis
+    runs-on: ubuntu-latest
+    needs: performance-test
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.16.0'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Analyze Android Bundle
+        run: |
+          flutter build apk --analyze-size
+          flutter build appbundle --analyze-size
+
+      - name: Analyze Web Bundle
+        run: |
+          flutter build web --release --analyze-size
+          # Generate bundle report
+          python scripts/web_bundle_analyzer.py build/web/
+
+      - name: Analyze iOS Bundle
+        run: |
+          flutter build ios --release --analyze-size
+          # iOS bundle size analysis
+          scripts/ios_bundle_analyzer.sh
+
+      - name: Generate Bundle Report
+        run: |
+          node scripts/generate_bundle_report.js \
+            android-report.json \
+            web-report.json \
+            ios-report.json \
+            --output bundle-analysis.md \
+            --threshold 100kb
+
+      - name: Upload Bundle Analysis
+        uses: actions/upload-artifact@v4
+        with:
+          name: bundle-analysis-report
+          path: |
+            bundle-analysis.md
+            android-report.json
+            web-report.json
+            ios-report.json
+
+      - name: Bundle Size Alert
+        if: steps.bundle-size.outputs.size_increase > '10'
+        uses: 8398a7/action-slack@v3
+        with:
+          status: failure
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  lighthouse-audit:
+    name: Web Performance Audit
+    runs-on: ubuntu-latest
+    needs: performance-test
+    if: github.ref == 'refs/heads/main' || github.event_name == 'pull_request'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Lighthouse
+        run: npm install -g lighthouse
+
+      - name: Build Web App
+        run: |
+          flutter build web --release --web-renderer canvaskit
+
+      - name: Run Lighthouse Audit
+        id: lighthouse
+        run: |
+          # Serve the web build
+          npx http-server build/web -p 8080 -c-1 &
+          SERVER_PID=$!
+          
+          # Wait for server to start
+          sleep 5
+          
+          # Run Lighthouse audit
+          lighthouse http://localhost:8080 \
+            --output=json \
+            --output-path=lighthouse-report.json \
+            --chrome-flags="--headless --no-sandbox --disable-gpu" \
+            --only-categories=performance,accessibility,seo,Best Practices,pwa
+            
+          # Generate report
+          lighthouse http://localhost:8080 \
+            --output=html \
+            --output-path=lighthouse-report.html \
+            --chrome-flags="--headless --no-sandbox --disable-gpu"
+          
+          # Kill server
+          kill $SERVER_PID
+
+      - name: Analyze Lighthouse Results
+        id: lh-analysis
+        run: |
+          # Parse JSON results
+          node scripts/analyze_lighthouse.js lighthouse-report.json
+          
+          # Extract scores
+          PERFORMANCE_SCORE=$(jq '.categories.performance.score' lighthouse-report.json)
+          ACCESSIBILITY_SCORE=$(jq '.categories.accessibility.score' lighthouse-report.json)
+          SEO_SCORE=$(jq '.categories.seo.score' lighthouse-report.json)
+          
+          echo "performance_score=$PERFORMANCE_SCORE" >> $GITHUB_OUTPUT
+          echo "accessibility_score=$ACCESSIBILITY_SCORE" >> $GITHUB_OUTPUT
+          echo "seo_score=$SEO_SCORE" >> $GITHUB_OUTPUT
+          
+          # Check thresholds
+          if [ $(echo "$PERFORMANCE_SCORE < 0.9" | bc -l) -eq 1 ]; then
+            echo "perf_regression=true" >> $GITHUB_OUTPUT
+          else
+            echo "perf_regression=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Upload Lighthouse Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-audit-report
+          path: |
+            lighthouse-report.json
+            lighthouse-report.html
+
+      - name: Lighthouse Alert
+        if: steps.lh-analysis.outputs.perf_regression == 'true'
+        uses: 8398a7/action-slack@v3
+        with:
+          status: failure
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
+          text: "🚨 Lighthouse Performance Score: ${{ steps.lh-analysis.outputs.performance_score }} (Threshold: 0.9)"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  memory-leak-detection:
+    name: Memory Leak Detection
+    runs-on: ubuntu-latest
+    needs: performance-test
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.16.0'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Install Memory Profiler
+        run: |
+          flutter pub add devtools --dev
+          # Install additional memory analysis tools
+          sudo apt-get update
+          sudo apt-get install -y valgrind
+
+      - name: Run Memory Tests
+        run: |
+          # Run app with memory profiling
+          flutter run --debug --profile=perf/memory_profile.json \
+            --dart-define=MEMORY_TESTING=true \
+            -d emulator
+          
+          # Analyze memory usage
+          dart run bin/memory_analyzer.dart \
+            --profile perf/memory_profile.json \
+            --threshold 50mb \
+            --output memory_report.md
+
+      - name: Upload Memory Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: memory-leak-report
+          path: |
+            memory_profile.json
+            memory_report.md
+
+  benchmark-comparison:
+    name: Benchmark Comparison
+    runs-on: ubuntu-latest
+    needs: [performance-test, bundle-analyzer, lighthouse-audit]
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download Previous Benchmarks
+        uses: actions/download-artifact@v4
+        with:
+          name: perf-report-ubuntu-latest-3.13.0-web
+          path: previous_benchmarks/
+
+      - name: Compare Benchmarks
+        run: |
+          python scripts/benchmark_comparison.py \
+            --current perf_results.json \
+            --previous previous_benchmarks/perf_results.json \
+            --output benchmark_comparison.md \
+            --regression-threshold 5 \
+            --improvement-threshold 3
+
+      - name: Generate Performance Summary
+        run: |
+          node scripts/generate_perf_summary.js \
+            --reports perf_results.json \
+            --lighthouse lighthouse-report.json \
+            --bundle bundle-analysis.md \
+            --output performance_summary.md
+
+      - name: Update Performance Dashboard
+        if: success()
+        run: |
+          # Update performance metrics in repository
+          echo "## Performance Summary" > README_PERF.md
+          cat performance_summary.md >> README_PERF.md
+          
+          # Commit performance summary if changed
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add README_PERF.md
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update performance summary [skip ci]"
+            git push
+          fi
+
+      - name: Performance Regression Alert
+        if: steps.benchmark-comparison.outputs.regression_detected == 'true'
+        uses: 8398a7/action-slack@v3
+        with:
+          status: failure
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
+          text: "🚨 Performance regression detected! See benchmark_comparison.md for details."
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  notify:
+    name: Notify Results
+    runs-on: ubuntu-latest
+    needs: [performance-test, bundle-analyzer, lighthouse-audit, memory-leak-detection, benchmark-comparison]
+    if: always()
+    steps:
+      - name: Send Performance Report
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

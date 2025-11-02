@@ -1,0 +1,147 @@
+# Merge Queue Configuration
+
+# This file configures GitHub's merge queue feature
+# See https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/configuring-your-repositorys-merge-queue
+
+# Merge Queue Settings for Main Branch
+branches:
+  - main:
+      merge_queue:
+        enabled: true
+        # Maximum number of pull requests in the merge queue
+        max_size: 5
+        # Time to wait before starting the merge process
+        batch_timeout: 30
+        # Minimum number of pull requests to batch together
+        min_items_to_batch: 1
+
+# Merge Queue Workflow Configuration
+# The merge queue will run a specific workflow for validation
+merge_queue_workflow: .github/workflows/merge-queue-validation.yml
+
+# Pull Request Requirements for Merge Queue
+pr_requirements:
+  # Required status checks that must pass
+  required_status_checks:
+    - ci.yml
+    - test.yml
+    - code-quality.yml
+  # Required labels for PRs to be eligible for merge queue
+  required_labels:
+    - "approved"
+    - "tests-passed"
+  # Required reviewers
+  required_reviewers:
+    - rechain-maintainers
+  # Conversation must be resolved
+  required_conversation_resolution: true
+
+# Merge Method Configuration
+merge_method: merge
+# Alternative options: squash, rebase
+
+# Merge Commit Message Template
+commit_message_template: |
+  Merge pull request #{{pr_number}} from {{pr_head_repo_branch}}
+  
+  {{pr_title}}
+  
+  {{pr_body}}
+
+# Branch Protection Integration
+# This configuration works with branch-protection.yml
+branch_protection:
+  # Enable merge queue for protected branches
+  protected_branches:
+    - main
+    - develop
+  # Disable direct pushes when merge queue is enabled
+  disable_direct_pushes: true
+
+# Queue Management
+queue_management:
+  # Automatically dismiss stale reviews when PR enters queue
+  dismiss_stale_reviews: true
+  # Require re-approval after conflicts are resolved
+  require_reapproval_after_conflicts: true
+  # Maximum time a PR can stay in queue before timeout
+  max_queue_time: 120  # minutes
+
+# Notification Settings
+notifications:
+  # Notify when PR enters merge queue
+  on_queue_entry: true
+  # Notify when PR leaves merge queue (success/failure)
+  on_queue_exit: true
+  # Notify merge queue administrators
+  admin_notifications: true
+  # Slack/Discord integration (configure in repository settings)
+  integrations:
+    - slack
+    - discord
+
+# Error Handling and Recovery
+error_handling:
+  # Retry failed merges up to 3 times
+  max_retries: 3
+  # Backoff strategy between retries
+  retry_backoff: exponential
+  # Timeout for individual merge operations
+  operation_timeout: 10  # minutes
+
+# Monitoring and Logging
+monitoring:
+  # Enable merge queue metrics
+  metrics_enabled: true
+  # Log merge queue events
+  logging_level: info
+  # Export metrics to external monitoring systems
+  external_monitoring:
+    - prometheus
+    - grafana
+
+# Advanced Configuration
+advanced:
+  # Custom merge queue workflow steps
+  custom_steps:
+    - name: Security Scan
+      run: ./scripts/security-scan.sh
+    - name: Performance Tests
+      run: flutter test --machine > performance.json
+  # Conditional merge queue activation
+  conditions:
+    - branch: main
+      active: true
+    - branch: develop
+      active: true
+    - branch: release/*
+      active: true
+
+# Example Usage
+
+## For Contributors
+1. Create a pull request targeting `main`
+2. Wait for required checks to pass
+3. Get approval from code owners
+4. Add `approved` and `tests-passed` labels
+5. The PR will automatically enter the merge queue
+
+## For Maintainers
+- Monitor the merge queue in the GitHub UI
+- Configure queue size and timeouts as needed
+- Review failed merges and retry if appropriate
+- Monitor queue metrics and performance
+
+# Implementation Notes
+# This configuration file serves as documentation for the merge queue setup
+# Actual configuration is applied through GitHub repository settings and API
+# Use GitHub CLI or API to apply these settings programmatically
+
+# Example GitHub CLI command to enable merge queue:
+# gh api repos/OWNER/REPO/branches/main/protection --method PATCH \
+#   --field 'merge_queue'='{"enabled": true, "max_size": 5}'
+
+# Related Files
+- [.github/workflows/merge-queue-validation.yml](.github/workflows/merge-queue-validation.yml) - Workflow run by merge queue
+- [.github/branch-protection.yml](.github/branch-protection.yml) - Branch protection configuration
+- [.github/CODEOWNERS](CODEOWNERS) - Code owner requirements for reviews
