@@ -1,0 +1,36 @@
+# Code Owners for REChain VC Flutter Project
+
+# Overall project maintainers (replace with actual team members)
+* @rechain-maintainers
+
+# Core Flutter application code
+/lib/ @rechain-flutter-devs
+
+# Android platform code
+/android/ @rechain-android-devs
+
+# iOS platform code
+/ios/ @rechain-ios-devs
+
+# Web platform code
+/web/ @rechain-web-devs
+
+# Desktop platforms
+/macos/ @rechain-desktop-devs
+/windows/ @rechain-desktop-devs
+/linux/ @rechain-desktop-devs
+
+# Documentation
+/docs/ @rechain-docs-team
+
+# CI/CD and workflows
+/.github/ @rechain-devops
+
+# Build scripts
+/scripts/ @rechain-devops
+
+# Assets and resources
+/assets/ @rechain-design-team
+
+# Tests
+/test/ @rechain-qa-team
