@@ -7,7 +7,7 @@ updates:
       interval: "weekly"
       day: "monday"
       time: "09:00"
-      timezone: "UTC"
+      timezone: "UTC" 
     open-pull-requests-limit: 10
     reviewers:
       - "yourusername"
