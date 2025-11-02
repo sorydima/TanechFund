@@ -1,0 +1,447 @@
+name: Accessibility Testing
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+    inputs:
+      full_audit:
+        description: 'Run full accessibility audit (including manual review steps)'
+        required: false
+        default: 'false'
+        type: boolean
+
+jobs:
+  a11y-scan:
+    name: Accessibility Scan
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        browser: [chrome, firefox, webkit]
+        include:
+          - browser: chrome
+            lighthouse_flags: "--headless --no-sandbox --disable-gpu --disable-dev-shm-usage"
+          - browser: firefox
+            lighthouse_flags: "--headless --no-sandbox --disable-gpu"
+          - browser: webkit
+            lighthouse_flags: "--headless --no-sandbox --disable-gpu --disable-web-security"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.16.0'
+          channel: 'stable'
+
+      - name: Install dependencies
+        run: |
+          flutter pub get
+          cd web && npm install && cd ..
+
+      - name: Build Flutter Web
+        run: |
+          flutter build web --release \
+            --web-renderer canvaskit \
+            --dart-define=FLUTTER_ENV=prod \
+            --dart-define=ACCESSIBILITY_TESTING=true
+
+      - name: Install Accessibility Tools
+        run: |
+          # Install Lighthouse
+          npm install -g lighthouse
+          
+          # Install axe-cli
+          npm install -g @axe-core/cli
+          
+          # Install pa11y
+          npm install -g pa11y
+          
+          # Install eslint-plugin-jsx-a11y
+          npm install -g eslint @eslint/js eslint-plugin-jsx-a11y
+          
+          # Install puppeteer for browser automation
+          npm install -g puppeteer
+          
+          # Install Playwright for cross-browser testing
+          npm install -g @playwright/test
+
+      - name: Start Web Server
+        run: |
+          npx http-server build/web -p 8080 -c-1 --cors &
+          SERVER_PID=$!
+          echo "SERVER_PID=$SERVER_PID" >> $GITHUB_ENV
+          sleep 5
+
+      - name: Run Lighthouse Accessibility Audit
+        id: lighthouse-a11y
+        run: |
+          lighthouse http://localhost:8080 \
+            --output=json \
+            --output-path=lighthouse-a11y-${{ matrix.browser }}.json \
+            --only-categories=accessibility \
+            --chrome-flags="${{ matrix.lighthouse_flags }}" \
+            --viewports=375,768,1200 \
+            --screenEmulator=macbookpro \
+            --audit-mode
+            
+          # Extract accessibility score
+          ACCESSIBILITY_SCORE=$(jq '.categories.accessibility.score' lighthouse-a11y-${{ matrix.browser }}.json)
+          echo "lighthouse_score_${{ matrix.browser }}=$ACCESSIBILITY_SCORE" >> $GITHUB_OUTPUT
+          
+          # Check threshold (0.9 = 90%)
+          if (( $(echo "$ACCESSIBILITY_SCORE < 0.9" | bc -l) )); then
+            echo "a11y_regression_${{ matrix.browser }}=true" >> $GITHUB_OUTPUT
+            echo "Lighthouse accessibility score ${{ matrix.browser }}: $ACCESSIBILITY_SCORE (FAILED)" >> a11y-report.md
+          else
+            echo "a11y_regression_${{ matrix.browser }}=false" >> $GITHUB_OUTPUT
+            echo "Lighthouse accessibility score ${{ matrix.browser }}: $ACCESSIBILITY_SCORE (PASSED)" >> a11y-report.md
+          fi
+
+      - name: Run Axe Accessibility Scan
+        run: |
+          axe http://localhost:8080 --exit-codes --save axe-${{ matrix.browser }}-results.json
+          
+          # Parse results
+          if [ -f axe-${{ matrix.browser }}-results.json ]; then
+            VIOLATIONS=$(jq '.violations | length' axe-${{ matrix.browser }}-results.json)
+            echo "axe_violations_${{ matrix.browser }}=$VIOLATIONS" >> $GITHUB_OUTPUT
+            
+            if [ "$VIOLATIONS" -gt 0 ]; then
+              echo "axe_failures_${{ matrix.browser }}=true" >> $GITHUB_OUTPUT
+              echo "### Axe Results for ${{ matrix.browser }}" >> a11y-report.md
+              jq -r '.violations[] | "- **\(.id)**: \(.description)\n  Impact: \(.impact)\n  Elements: \(.nodes[].html)\n"' axe-${{ matrix.browser }}-results.json >> a11y-report.md
+            else
+              echo "axe_failures_${{ matrix.browser }}=false" >> $GITHUB_OUTPUT
+              echo "Axe accessibility scan ${{ matrix.browser }}: PASSED (0 violations)" >> a11y-report.md
+            fi
+          fi
+
+      - name: Run Pa11y Accessibility Test
+        run: |
+          pa11y http://localhost:8080 --reporter json > pa11y-${{ matrix.browser }}-results.json
+          
+          # Parse results
+          PA11Y_ERRORS=$(jq '. | length' pa11y-${{ matrix.browser }}-results.json)
+          echo "pa11y_errors_${{ matrix.browser }}=$PA11Y_ERRORS" >> $GITHUB_OUTPUT
+          
+          if [ "$PA11Y_ERRORS" -gt 0 ]; then
+            echo "pa11y_failures_${{ matrix.browser }}=true" >> $GITHUB_OUTPUT
+            echo "### Pa11y Results for ${{ matrix.browser }}" >> a11y-report.md
+            jq -r '.[].message' pa11y-${{ matrix.browser }}-results.json >> a11y-report.md
+          else
+            echo "pa11y_failures_${{ matrix.browser }}=false" >> $GITHUB_OUTPUT
+            echo "Pa11y accessibility test ${{ matrix.browser }}: PASSED (0 errors)" >> a11y-report.md
+          fi
+
+      - name: Run Playwright Accessibility Tests
+        run: |
+          npx playwright test a11y.spec.ts --project=${{ matrix.browser }} --reporter=junit
+          
+          # Parse test results
+          npx playwright show-report
+          
+          # Extract accessibility test results
+          if [ -f test-results/${{ matrix.browser }}-a11y-results.json ]; then
+            FAILED_TESTS=$(jq '[.suites[].tests[] | select(.status == "failed")] | length' test-results/${{ matrix.browser }}-a11y-results.json)
+            echo "playwright_failed_${{ matrix.browser }}=$FAILED_TESTS" >> $GITHUB_OUTPUT
+            
+            if [ "$FAILED_TESTS" -gt 0 ]; then
+              echo "playwright_failures_${{ matrix.browser }}=true" >> $GITHUB_OUTPUT
+              echo "### Playwright Accessibility Failures for ${{ matrix.browser }}" >> a11y-report.md
+              jq -r '.suites[].tests[] | select(.status == "failed") | "- **\(.title)**: \(.error.message)"' test-results/${{ matrix.browser }}-a11y-results.json >> a11y-report.md
+            else
+              echo "playwright_failures_${{ matrix.browser }}=false" >> $GITHUB_OUTPUT
+              echo "Playwright accessibility tests ${{ matrix.browser }}: PASSED" >> a11y-report.md
+            fi
+          fi
+
+      - name: Generate Comprehensive Report
+        if: always()
+        run: |
+          echo "# Accessibility Testing Report" > a11y-comprehensive-report.md
+          echo "## Browser: ${{ matrix.browser }}" >> a11y-comprehensive-report.md
+          echo "- Lighthouse Score: ${{ steps.lighthouse-a11y.outputs['lighthouse_score_' + matrix.browser ] }}" >> a11y-comprehensive-report.md
+          echo "- Axe Violations: ${{ steps.axe.outputs['axe_violations_' + matrix.browser ] or 0 }}" >> a11y-comprehensive-report.md
+          echo "- Pa11y Errors: ${{ steps.pa11y.outputs['pa11y_errors_' + matrix.browser ] or 0 }}" >> a11y-comprehensive-report.md
+          echo "- Playwright Failures: ${{ steps.playwright.outputs['playwright_failed_' + matrix.browser ] or 0 }}" >> a11y-comprehensive-report.md
+          
+          # Include detailed results
+          if [ -f a11y-report.md ]; then
+            cat a11y-report.md >> a11y-comprehensive-report.md
+          fi
+          
+          # Overall status
+          REGRESSIONS=$(echo "${{ steps.lighthouse-a11y.outputs['a11y_regression_' + matrix.browser ] }}" "${{ steps.axe.outputs['axe_failures_' + matrix.browser ] }}" "${{ steps.pa11y.outputs['pa11y_failures_' + matrix.browser ] }}" "${{ steps.playwright.outputs['playwright_failures_' + matrix.browser ] }}" | grep -c true)
+          if [ "$REGRESSIONS" -gt 0 ]; then
+            echo "## 🚨 ACCESSIBILITY REGRESSION DETECTED" >> a11y-comprehensive-report.md
+            exit 1
+          else
+            echo "## ✅ All Accessibility Tests Passed" >> a11y-comprehensive-report.md
+          fi
+
+      - name: Upload Accessibility Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: a11y-reports-${{ matrix.browser }}
+          path: |
+            lighthouse-a11y-${{ matrix.browser }}.json
+            lighthouse-a11y-${{ matrix.browser }}.html
+            axe-${{ matrix.browser }}-results.json
+            pa11y-${{ matrix.browser }}-results.json
+            test-results/
+            a11y-report.md
+            a11y-comprehensive-report.md
+          retention-days: 30
+
+      - name: Accessibility Alert
+        if: failure()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: failure
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job
+          text: "♿️ *Accessibility Testing Failed*\nBrowser: ${{ matrix.browser }}\nReview reports in artifacts."
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  manual-review:
+    name: Manual Accessibility Review Checklist
+    runs-on: ubuntu-latest
+    needs: a11y-scan
+    if: ${{ github.event.inputs.full_audit == 'true' || contains(needs.a11y-scan.result, 'failure') }}
+    steps:
+      - name: Generate Manual Review Checklist
+        run: |
+          cat > manual-a11y-review.md << 'EOF'
+          # Manual Accessibility Review Checklist
+          
+          ## Screen Reader Testing
+          - [ ] Test with NVDA (Windows)
+          - [ ] Test with JAWS (Windows)
+          - [ ] Test with VoiceOver (macOS/iOS)
+          - [ ] Test with TalkBack (Android)
+          - [ ] Test with ChromeVox (Chrome OS)
+          - [ ] Verify ARIA labels are announced correctly
+          - [ ] Ensure focus management works with screen readers
+          - [ ] Test form controls accessibility
+          
+          ## Keyboard Navigation
+          - [ ] Tab through all interactive elements
+          - [ ] Verify focus indicators are visible
+          - [ ] Test Skip to content links
+          - [ ] Ensure all functionality accessible via keyboard
+          - [ ] Test with sticky elements (headers, sidebars)
+          - [ ] Verify keyboard trap prevention
+          - [ ] Test custom keyboard interactions
+          
+          ## Color Contrast
+          - [ ] Verify 4.5:1 contrast ratio for normal text
+          - [ ] Verify 3:1 contrast ratio for large text
+          - [ ] Test with high contrast mode
+          - [ ] Check color combinations in all states (hover, focus, active)
+          - [ ] Verify sufficient contrast for UI components
+          
+          ## Responsive Design
+          - [ ] Test zoom to 200% without loss of functionality
+          - [ ] Verify responsive images and media
+          - [ ] Test orientation changes (portrait/landscape)
+          - [ ] Ensure touch targets are at least 48x48 pixels
+          - [ ] Test on various screen sizes and resolutions
+          
+          ## Form Accessibility
+          - [ ] All form fields have proper labels
+          - [ ] Error messages are announced to screen readers
+          - [ ] Form validation provides clear feedback
+          - [ ] Required fields are properly indicated
+          - [ ] Autocomplete attributes are used appropriately
+          - [ ] Test form submission with assistive technology
+          
+          ## Media Accessibility
+          - [ ] All videos have captions or transcripts
+          - [ ] Audio content has transcripts
+          - [ ] Images have meaningful alt text
+          - [ ] Complex images have long descriptions
+          - [ ] Decorative images have empty alt attributes
+          - [ ] Test media controls with keyboard and screen readers
+          
+          ## Navigation and Structure
+          - [ ] Page has proper landmark roles (main, navigation, footer)
+          - [ ] Headings follow logical hierarchy (h1-h6)
+          - [ ] Skip links are present and functional
+          - [ ] Breadcrumbs are accessible
+          - [ ] Pagination is keyboard accessible
+          - [ ] Test with heading navigation in screen readers
+          
+          ## Dynamic Content
+          - [ ] Live regions announce dynamic updates
+          - [ ] ARIA live regions have appropriate politeness levels
+          - [ ] Modals and dialogs are properly announced
+          - [ ] Toast notifications are accessible
+          - [ ] Auto-updating content is properly handled
+          
+          ## Internationalization
+          - [ ] Language attributes are set correctly
+          - [ ] RTL (Right-to-Left) language support
+          - [ ] Date/time formats are locale-appropriate
+          - [ ] Currency symbols are localized
+          - [ ] Test with different language settings
+          
+          ## Mobile Accessibility
+          - [ ] Touch target sizes meet WCAG requirements
+          - [ ] Gestures have accessible alternatives
+          - [ ] Screen orientation changes handled properly
+          - [ ] Device motion/position APIs have fallbacks
+          - [ ] Test with mobile screen readers (VoiceOver, TalkBack)
+          
+          ## Testing Tools
+          - [ ] WAVE evaluation tool results
+          - [ ] axe DevTools browser extension audit
+          - [ ] ARC (Accessibility Review Checklist) completed
+          - [ ] Manual testing with actual assistive technology
+          - [ ] User testing with disabled participants
+          
+          ## Documentation
+          - [ ] Accessibility statement created
+          - [ ] Testing methodology documented
+          - [ ] Known issues listed
+          - [ ] Future improvements planned
+          - [ ] Training materials for team
+          
+          ## Compliance
+          - [ ] WCAG 2.1 AA conformance targeted
+          - [ ] Section 508 compliance (US Federal)
+          - [ ] EN 301 549 compliance (European)
+          - [ ] Local accessibility regulations reviewed
+          - [ ] VPAT/ACR report generated
+          EOF
+
+      - name: Create Accessibility Review Issue
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const issueTitle = '♿️ Accessibility Review Required - Automated Scan Results';
+            const issueBody = fs.readFileSync('manual-a11y-review.md', 'utf8');
+            
+            // Check if issue already exists
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              creator: context.actor,
+              state: 'open',
+              labels: ['accessibility', 'review-needed']
+            });
+            
+            if (issues.data.length === 0) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: issueTitle,
+                body: issueBody,
+                labels: ['accessibility', 'review-needed', 'a11y', 'compliance']
+              });
+              core.info('Created accessibility review issue');
+            } else {
+              core.info('Accessibility review issue already exists');
+            }
+
+      - name: Notify Accessibility Team
+        if: failure()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: failure
+          text: "♿️ *Accessibility Testing Failed*\n\nAutomated accessibility scan detected issues. Review the comprehensive report and complete the manual checklist.\n\nReports available in artifacts for all browsers."
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_CHANNEL: accessibility-team
+
+  summary:
+    name: Accessibility Summary
+    runs-on: ubuntu-latest
+    needs: [a11y-scan, manual-review]
+    if: always()
+    steps:
+      - name: Download Reports
+        uses: actions/download-artifact@v4
+        with:
+          path: reports/
+
+      - name: Generate Summary Report
+        run: |
+          echo "# Accessibility Testing Summary" > accessibility-summary.md
+          echo "## Overall Results" >> accessibility-summary.md
+          
+          # Aggregate Lighthouse scores
+          echo "### Lighthouse Scores" >> accessibility-summary.md
+          for browser in chrome firefox webkit; do
+            if [ -f reports/a11y-reports-$browser/a11y-comprehensive-report.md ]; then
+              echo "#### $browser" >> accessibility-summary.md
+              cat reports/a11y-reports-$browser/a11y-comprehensive-report.md >> accessibility-summary.md
+            fi
+          done
+          
+          # Overall compliance status
+          REGRESSIONS=$(find reports/ -name "a11y_regression_*" -type f | xargs grep -l "true" | wc -l)
+          if [ "$REGRESSIONS" -gt 0 ]; then
+            echo "## 🚨 ACCESSIBILITY REGRESSIONS DETECTED" >> accessibility-summary.md
+            echo "Found $REGRESSIONS failing accessibility tests across browsers." >> accessibility-summary.md
+            exit 1
+          else
+            echo "## ✅ All Accessibility Tests Passed" >> accessibility-summary.md
+            echo "All automated accessibility tests passed across all browsers." >> accessibility-summary.md
+          fi
+
+      - name: Upload Summary Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: accessibility-summary-report
+          path: accessibility-summary.md
+          retention-days: 90
+
+      - name: Accessibility Compliance Badge
+        if: success()
+        run: |
+          # Update repository README with accessibility badge
+          if ! grep -q "Accessibility Status" README.md; then
+            sed -i '/## Badges/i\
+![Accessibility](https://img.shields.io/badge/accessibility-WCAG%202.1%20AA-brightgreen.svg)' README.md
+          fi
+
+      - name: Create Accessibility Dashboard Issue
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const summary = fs.readFileSync('accessibility-summary.md', 'utf8');
+            
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '📊 Monthly Accessibility Report - ' + new Date().toISOString().split('T')[0],
+              body: summary + '\n\n**Next Steps:**\n- Review manual testing checklist\n- Plan accessibility improvements\n- Schedule user testing with disabled participants',
+              labels: ['accessibility', 'report', 'compliance'],
+              assignees: ['accessibility-team-lead']
+            });
+
+      - name: Accessibility Success Notification
+        if: success()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: success
+          text: "♿️ *Accessibility Testing PASSED*\n\nAll automated accessibility tests passed across Chrome, Firefox, and WebKit browsers.\n\nReports available in artifacts for detailed review."
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_CHANNEL: accessibility-team

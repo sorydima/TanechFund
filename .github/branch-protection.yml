@@ -1,0 +1,129 @@
+# Branch Protection Configuration
+
+# This file configures branch protection rules for the repository
+# See https://docs.github.com/en/rest/branches/branch-protection for details
+
+# Main Branch Protection
+- pattern: main
+  is_protected: true
+  enforce_admins: true
+  required_status_checks:
+    strict: true
+    contexts:
+      - ci.yml
+      - code-quality.yml
+      - test.yml
+      - build-matrix.yml
+      - dependency-review.yml
+  required_pull_request_reviews:
+    required_approving_review_count: 2
+    dismiss_stale_reviews: true
+    require_code_owner_reviews: true
+    require_last_push_approval: false
+  required_conversation_resolution: true
+  enforce_dismissal: true
+  allow_force_pushes: false
+  allow_deletions: false
+  block:
+    push_restrictions:
+      - rechain-maintainers
+      - rechain-devops
+  linear_history: false
+  allow_fork_syncing: true
+
+# Development Branch Protection
+- pattern: develop
+  is_protected: true
+  enforce_admins: false
+  required_status_checks:
+    strict: true
+    contexts:
+      - ci.yml
+      - test.yml
+  required_pull_request_reviews:
+    required_approving_review_count: 1
+    dismiss_stale_reviews: true
+    require_code_owner_reviews: true
+    require_last_push_approval: false
+  required_conversation_resolution: true
+  enforce_dismissal: true
+  allow_force_pushes: true
+  allow_deletions: false
+  block:
+    push_restrictions:
+      - rechain-devops
+  linear_history: false
+  allow_fork_syncing: true
+
+# Feature Branch Protection (optional)
+- pattern: feature/*
+  is_protected: false
+  enforce_admins: false
+  required_status_checks: null
+  required_pull_request_reviews: null
+  required_conversation_resolution: false
+  enforce_dismissal: false
+  allow_force_pushes: true
+  allow_deletions: true
+  block:
+    push_restrictions: []
+  linear_history: false
+  allow_fork_syncing: true
+
+# Hotfix Branch Protection
+- pattern: hotfix/*
+  is_protected: true
+  enforce_admins: false
+  required_status_checks:
+    strict: true
+    contexts:
+      - ci.yml
+      - test.yml
+  required_pull_request_reviews:
+    required_approving_review_count: 1
+    dismiss_stale_reviews: true
+    require_code_owner_reviews: true
+    require_last_push_approval: false
+  required_conversation_resolution: true
+  enforce_dismissal: true
+  allow_force_pushes: true
+  allow_deletions: false
+  block:
+    push_restrictions:
+      - rechain-devops
+  linear_history: false
+  allow_fork_syncing: true
+
+# Release Branch Protection
+- pattern: release/*
+  is_protected: true
+  enforce_admins: true
+  required_status_checks:
+    strict: true
+    contexts:
+      - ci.yml
+      - build-matrix.yml
+      - code-quality.yml
+  required_pull_request_reviews:
+    required_approving_review_count: 2
+    dismiss_stale_reviews: true
+    require_code_owner_reviews: true
+    require_last_push_approval: false
+  required_conversation_resolution: true
+  enforce_dismissal: true
+  allow_force_pushes: false
+  allow_deletions: false
+  block:
+    push_restrictions:
+      - rechain-maintainers
+      - rechain-devops
+  linear_history: true
+  allow_fork_syncing: true
+
+# Deployment Configuration
+# This configuration can be applied using GitHub CLI or API
+# Example command:
+# gh api repos/OWNER/REPO/branches/main/protection --method PUT --input branch-protection.yml
+
+# Note: This file is for documentation and reference.
+# Actual branch protection is configured through GitHub repository settings or API.
