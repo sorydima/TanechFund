@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:rechain_vc_lab/providers/app_provider.dart';
 import 'package:rechain_vc_lab/providers/auth_provider.dart';
-import 'package:rechain_vc_lab/providers/blockchain_provider.dart';
 import 'package:rechain_vc_lab/providers/notification_provider.dart';
 import 'package:rechain_vc_lab/providers/chat_provider.dart';
 import 'package:rechain_vc_lab/providers/payment_provider.dart';
@@ -16,18 +15,6 @@ import 'package:rechain_vc_lab/providers/analytics_provider.dart';
 import 'package:rechain_vc_lab/providers/social_network_provider.dart';
 import 'package:rechain_vc_lab/providers/metaverse_provider.dart';
 import 'package:rechain_vc_lab/providers/ai_ml_provider.dart';
-import 'package:rechain_vc_lab/providers/cross_chain_bridge_provider.dart';
-import 'package:rechain_vc_lab/providers/blockchain_defi_provider.dart';
-import 'package:rechain_vc_lab/providers/nft_marketplace_provider.dart';
-import 'package:rechain_vc_lab/providers/defi_analytics_provider.dart';
-import 'package:rechain_vc_lab/providers/hardware_wallet_provider.dart';
-import 'package:rechain_vc_lab/providers/dex_trading_provider.dart';
-import 'package:rechain_vc_lab/providers/yield_farming_provider.dart';
-import 'package:rechain_vc_lab/providers/governance_dao_provider.dart';
-import 'package:rechain_vc_lab/providers/web3_identity_provider.dart';
-import 'package:rechain_vc_lab/providers/web3_gaming_provider.dart';
-import 'package:rechain_vc_lab/providers/web3_education_provider.dart';
-import 'package:rechain_vc_lab/providers/web3_healthcare_provider.dart';
 import 'package:rechain_vc_lab/providers/achievements_provider.dart';
 import 'package:rechain_vc_lab/providers/reputation_provider.dart';
 import 'package:rechain_vc_lab/providers/realtime_notifications_provider.dart';
@@ -73,7 +60,6 @@ class REChainApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => AppProvider()),
         ChangeNotifierProvider(create: (_) => AuthProvider()),
-        ChangeNotifierProvider(create: (_) => BlockchainProvider()),
         ChangeNotifierProvider(create: (_) => NotificationProvider()),
                           ChangeNotifierProvider(create: (_) => ChatProvider()),
                   ChangeNotifierProvider(create: (_) => PaymentProvider()),
@@ -86,18 +72,6 @@ class REChainApp extends StatelessWidget {
                     ChangeNotifierProvider(create: (_) => SocialNetworkProvider()),
                     ChangeNotifierProvider(create: (_) => MetaverseProvider()),
                     ChangeNotifierProvider(create: (_) => AIMLProvider()),
-                    ChangeNotifierProvider(create: (_) => BlockchainDeFiProvider()),
-                                         ChangeNotifierProvider(create: (_) => NFTMarketplaceProvider()),
-                     ChangeNotifierProvider(create: (_) => CrossChainBridgeProvider()),
-                                           ChangeNotifierProvider(create: (_) => DeFiAnalyticsProvider()),
-                                             ChangeNotifierProvider(create: (_) => HardwareWalletProvider()),
-                       ChangeNotifierProvider(create: (_) => DEXTradingProvider()),
-                                                 ChangeNotifierProvider(create: (_) => YieldFarmingProvider()),
-                                                  ChangeNotifierProvider(create: (_) => GovernanceDAOProvider()),
-                        ChangeNotifierProvider(create: (_) => Web3IdentityProvider()),
-                      ChangeNotifierProvider(create: (_) => Web3GamingProvider()),
-                      ChangeNotifierProvider(create: (_) => Web3EducationProvider()),
-        ChangeNotifierProvider(create: (_) => Web3HealthcareProvider()),
         ChangeNotifierProvider(create: (_) => AchievementsProvider()),
         ChangeNotifierProvider(create: (_) => ReputationProvider()),
         ChangeNotifierProvider(create: (_) => RealtimeNotificationsProvider()),

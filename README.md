@@ -2,9 +2,9 @@
 
 <div align="center">
   <img src="assets/AppLogo.jpg" alt="REChain VC Lab Logo" width="200" height="200">
-  
-  <h3>🚀 Next-Generation Web3/Web4/Web5 Venture Capital Platform</h3>
-  
+
+  <h3>🚀 Next-Generation Venture Capital Platform</h3>
+
   [![Flutter](https://img.shields.io/badge/Flutter-3.35.2-blue.svg)](https://flutter.dev/)
   [![Dart](https://img.shields.io/badge/Dart-3.9.0-blue.svg)](https://dart.dev/)
   [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -17,16 +17,9 @@ https://api.codemagic.io/apps/68bc414a6623c271121c1cd9/68bc414a6623c271121c1cd8/
 
 ## 🌟 Overview
 
-REChain®️ VC Lab is a revolutionary Flutter application that implements the complete evolution of the internet: **Web3 (Ownership) → Web4 (Movement) → Web5 (Creation)**. Built on the philosophy of Katya AI Systems LLC, this platform empowers users to own their digital world, create movement trajectories, and collaborate with AI to build new digital realities.
+REChain®️ VC Lab is a revolutionary Flutter application that implements the complete evolution of the internet: **Web4 (Movement) → Web5 (Creation)**. Built on the philosophy of Katya AI Systems LLC, this platform empowers users to create movement trajectories and collaborate with AI to build new digital realities.
 
 ## 🎯 Key Features
-
-### 🔗 Web3 - Ownership
-- **Blockchain Integration**: DeFi protocols, NFT marketplaces, DEX trading
-- **Crypto Wallets**: Multi-chain wallet support with secure transactions
-- **Web3 Identity**: Decentralized identity management
-- **Cross-chain Bridges**: Seamless asset transfers across blockchains
-- **DAO Governance**: Decentralized autonomous organization tools
 
 ### 🚀 Web4 - Movement
 - **Movement Trajectories**: Create and track personal development paths
@@ -44,7 +37,7 @@ REChain®️ VC Lab is a revolutionary Flutter application that implements the c
 - **Achievement System**: Gamification with rewards and levels
 - **Reputation System**: Community-driven reputation and ratings
 - **Real-time Notifications**: Instant updates and alerts
-- **Social Network**: Connect with the Web3 community
+- **Social Network**: Connect with the community
 - **Mentorship Platform**: Learn from industry experts
 - **Analytics Dashboard**: Comprehensive insights and reporting
 
@@ -60,13 +53,11 @@ REChain®️ VC Lab is a revolutionary Flutter application that implements the c
 ### Project Structure
 ```
 lib/
-├── providers/          # State management (30+ providers)
-│   ├── web3/          # Web3 functionality
+├── providers/          # State management providers
 │   ├── web4/          # Web4 movement features
 │   ├── web5/          # Web5 creation features
 │   └── social/        # Social and community features
-├── screens/           # UI screens (30+ screens)
-│   ├── web3/          # Web3 interfaces
+├── screens/           # UI screens
 │   ├── web4/          # Web4 movement screens
 │   ├── web5/          # Web5 creation screens
 │   └── social/        # Social features
@@ -146,32 +137,18 @@ The Android project is fully configured with:
 - **Target SDK**: 34 (Android 14)
 - **MultiDex**: Enabled for large apps
 - **ProGuard/R8**: Optimized for release builds
-- **Permissions**: Web3 functionality permissions
+- **Permissions**: Network and storage permissions
 - **Security**: Network security configuration
 
 ### Environment Variables
 Create a `.env` file in the root directory:
 ```env
-# Blockchain RPC URLs
-ETHEREUM_RPC_URL=https://mainnet.infura.io/v3/YOUR_KEY
-POLYGON_RPC_URL=https://polygon-mainnet.infura.io/v3/YOUR_KEY
-
-# API Keys
-INFURA_API_KEY=your_infura_key
-ALCHEMY_API_KEY=your_alchemy_key
-
 # App Configuration
 APP_NAME=REChain VC Lab
 APP_VERSION=1.0.0
 ```
 
 ## 🎨 Design Philosophy
-
-### Web3 - Ownership
-> "Я хозяин своей цифровой реальности"
-- Users own their data, identity, and assets
-- Decentralized protocols and smart contracts
-- Self-custody of digital assets
 
 ### Web4 - Movement
 > "Создавайте новые траектории в цифровом мире"
@@ -199,7 +176,7 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 ## 📊 Project Status
 
 ### Current Version: 1.0.0
-- ✅ Core Web3/Web4/Web5 architecture
+- ✅ Core Web4/Web5 architecture
 - ✅ 30+ providers and screens
 - ✅ Android optimization and builds
 - ✅ Security and performance optimization
@@ -245,5 +222,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <div align="center">
   <p>Built with ❤️ by the REChain VC Lab Team</p>
-  <p>Empowering the future of Web3, Web4, and Web5</p>
+  <p>Empowering the future of Web4 and Web5</p>
 </div>
