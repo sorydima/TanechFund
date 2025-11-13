@@ -2,9 +2,9 @@
 
 This document provides GitHub-specific enhancements and configuration details for the REChain VC Flutter project. It serves as a companion to the main README.md and focuses on repository management, CI/CD workflows, and collaboration features.
 
-https://api.codemagic.io/apps/690b380d70445e478b32d902/690b380d70445e478b32d901/status_badge.svg
+https://api.codemagic.io/apps/6915bcd283aa11ca7b9283c5/6915bcd283aa11ca7b9283c4/status_badge.svg
 
-[![Codemagic build status](https://api.codemagic.io/apps/690b380d70445e478b32d902/690b380d70445e478b32d901/status_badge.svg)](https://codemagic.io/app/690b380d70445e478b32d902/690b380d70445e478b32d901/latest_build)
+[![Codemagic build status](https://api.codemagic.io/apps/6915bcd283aa11ca7b9283c5/6915bcd283aa11ca7b9283c4/status_badge.svg)](https://codemagic.io/app/6915bcd283aa11ca7b9283c5/6915bcd283aa11ca7b9283c4/latest_build)
 
 ## 🚀 Quick Start for Contributors
 
