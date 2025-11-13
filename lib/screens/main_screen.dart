@@ -18,22 +18,8 @@ import 'package:rechain_vc_lab/screens/analytics_screen.dart';
 import 'package:rechain_vc_lab/screens/social_network_screen.dart';
 import 'package:rechain_vc_lab/screens/metaverse_screen.dart';
 import 'package:rechain_vc_lab/screens/ai_ml_screen.dart';
-import 'package:rechain_vc_lab/screens/blockchain_defi_screen.dart';
-import 'package:rechain_vc_lab/screens/cross_chain_bridge_screen.dart';
-import 'package:rechain_vc_lab/screens/nft_marketplace_screen.dart';
-import 'package:rechain_vc_lab/screens/defi_analytics_screen.dart';
-import 'package:rechain_vc_lab/screens/hardware_wallet_screen.dart';
-import 'package:rechain_vc_lab/screens/dex_trading_screen.dart';
-import 'package:rechain_vc_lab/screens/yield_farming_screen.dart';
-import 'package:rechain_vc_lab/screens/governance_dao_screen.dart'; // Added
-import 'package:rechain_vc_lab/screens/web3_identity_screen.dart';
-import 'package:rechain_vc_lab/screens/web3_gaming_screen.dart'; // Added
-import 'package:rechain_vc_lab/screens/web3_education_screen.dart';
-import 'package:rechain_vc_lab/screens/web3_healthcare_screen.dart';
 import 'package:rechain_vc_lab/screens/achievements_screen.dart';
 import 'package:rechain_vc_lab/screens/reputation_screen.dart';
-import 'package:rechain_vc_lab/screens/web4_movement_screen.dart';
-import 'package:rechain_vc_lab/screens/web5_creation_screen.dart';
 import 'package:rechain_vc_lab/providers/achievements_provider.dart';
 import 'package:rechain_vc_lab/providers/reputation_provider.dart';
 import 'package:rechain_vc_lab/providers/realtime_notifications_provider.dart';
@@ -58,30 +44,16 @@ class _MainScreenState extends State<MainScreen> {
     const ChatScreen(),
     const LearningScreen(),
     const PortfolioScreen(),
-            const CompilerScreen(),
-        const InvestmentsScreen(),
-        const MentorshipScreen(),
-                              const AnalyticsScreen(),
-                      const SocialNetworkScreen(),
-                      const MetaverseScreen(),
-                                             const AIMLScreen(),
-                       const BlockchainDeFiScreen(),
-                               const NFTMarketplaceScreen(),
-         const CrossChainBridgeScreen(),
-                                       const DeFiAnalyticsScreen(),
-                                       const HardwareWalletScreen(),
-                            const DEXTradingScreen(),
-                            const YieldFarmingScreen(),
-                            const GovernanceDAOScreen(), // Added
-                                                    const Web3IdentityScreen(), // Added
-                        const Web3GamingScreen(), // Added
-                                const Web3EducationScreen(), // Added
-        const Web3HealthcareScreen(), // Added
-        const AchievementsScreen(), // Added
-        const ReputationScreen(), // Added
-        const Web4MovementScreen(), // Added
-        const Web5CreationScreen(), // Added
-        const ProfileScreen(),
+    const CompilerScreen(),
+    const InvestmentsScreen(),
+    const MentorshipScreen(),
+    const AnalyticsScreen(),
+    const SocialNetworkScreen(),
+    const MetaverseScreen(),
+    const AIMLScreen(),
+    const AchievementsScreen(),
+    const ReputationScreen(),
+    const ProfileScreen(),
   ];
 
   // Метод для автоматической прокрутки к выбранной вкладке
@@ -162,7 +134,7 @@ class _MainScreenState extends State<MainScreen> {
                   height: 4,
                   margin: const EdgeInsets.symmetric(horizontal: 16),
                   child: Row(
-                                         children: List.generate(28, (index) { // Updated count to 28
+                                         children: List.generate(16, (index) {
                      return Expanded(
                        child: Container(
                          margin: const EdgeInsets.symmetric(horizontal: 2),
@@ -201,23 +173,9 @@ class _MainScreenState extends State<MainScreen> {
                           _buildNavItem(10, Icons.people, 'Соцсеть'),
                           _buildNavItem(11, Icons.view_in_ar, 'Метавселенная'),
                           _buildNavItem(12, Icons.smart_toy, 'ИИ/ML'),
-                          _buildNavItem(13, Icons.account_balance_wallet, 'Блокчейн'),
-                          _buildNavItem(14, Icons.image, 'NFT'),
-                          _buildNavItem(15, Icons.swap_horiz, 'Мост'),
-                                                                                           _buildNavItem(16, Icons.analytics, 'DeFi'),
-                                                                     _buildNavItem(17, Icons.security, 'Кошелек'),
-                                    _buildNavItem(18, Icons.swap_horiz, 'DEX'),
-                                    _buildNavItem(19, Icons.agriculture, 'Ферминг'),
-                                    _buildNavItem(20, Icons.account_balance, 'DAO'), // Added
-                                                                    _buildNavItem(21, Icons.verified_user, 'Identity'), // Added
-                                _buildNavItem(22, Icons.games, 'Gaming'), // Added
-                                _buildNavItem(23, Icons.school, 'Education'), // Added
-                                _buildNavItem(24, Icons.medical_services, 'Healthcare'), // Added
-                                _buildNavItem(25, Icons.emoji_events, 'Достижения'), // Added
-                                _buildNavItem(26, Icons.stars, 'Репутация'), // Added
-                                _buildNavItem(27, Icons.trending_up, 'Web4'), // Added
-                                _buildNavItem(28, Icons.auto_awesome, 'Web5'), // Added
-                                _buildNavItem(29, Icons.person, 'Профиль'), // Updated index
+                          _buildNavItem(13, Icons.emoji_events, 'Достижения'),
+                          _buildNavItem(14, Icons.stars, 'Репутация'),
+                          _buildNavItem(15, Icons.person, 'Профиль'),
                         ],
                       ),
                     ),
