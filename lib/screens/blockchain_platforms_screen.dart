@@ -156,9 +156,9 @@ class BlockchainPlatformsScreen extends StatelessWidget {
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 1.1,
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 200,
+        childAspectRatio: 1.2,
         crossAxisSpacing: 16,
         mainAxisSpacing: 16,
       ),
@@ -201,8 +201,8 @@ class BlockchainPlatformsScreen extends StatelessWidget {
           }
         },
         borderRadius: BorderRadius.circular(16),
-        child: Container(
-          padding: const EdgeInsets.all(20),
+          child: Container(
+          padding: const EdgeInsets.all(24),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             gradient: LinearGradient(
@@ -251,8 +251,6 @@ class BlockchainPlatformsScreen extends StatelessWidget {
                   color: Colors.grey[600],
                   height: 1.4,
                 ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
               ),
               
               const Spacer(),

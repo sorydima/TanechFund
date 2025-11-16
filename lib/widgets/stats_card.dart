@@ -18,6 +18,7 @@ class StatsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      margin: const EdgeInsets.only(bottom: 16),
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -36,9 +37,9 @@ class StatsCard extends StatelessWidget {
                 size: 32,
               ),
             ),
-            
+
             const SizedBox(height: 16),
-            
+
             // Значение
             Text(
               value,
@@ -49,9 +50,9 @@ class StatsCard extends StatelessWidget {
                 fontFamily: 'Inter',
               ),
             ),
-            
+
             const SizedBox(height: 8),
-            
+
             // Заголовок
             Text(
               title,

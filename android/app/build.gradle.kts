@@ -29,8 +29,8 @@ android {
         applicationId = "com.rechain.vc"
         minSdk = 24 // Android 7.0 (Nougat) - increased for better performance
         targetSdk = 36 // Android 16 (latest)
-        versionCode = 2
-        versionName = "1.0.1"
+        versionCode = 3
+        versionName = "1.0.2"
         
         // Enable multidex for large apps
         multiDexEnabled = true

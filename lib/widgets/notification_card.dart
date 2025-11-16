@@ -24,13 +24,13 @@ class NotificationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    
+
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: const EdgeInsets.only(bottom: 16),
       elevation: isRead ? 1 : 3,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      color: isRead 
-        ? theme.colorScheme.surface 
+      color: isRead
+        ? theme.colorScheme.surface
         : theme.colorScheme.surface.withOpacity(0.95),
       child: InkWell(
         onTap: onTap,
@@ -40,7 +40,7 @@ class NotificationCard extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: isRead 
+              color: isRead
                 ? theme.colorScheme.outline.withOpacity(0.2)
                 : _getTypeColor(type).withOpacity(0.3),
               width: isRead ? 1 : 2,
@@ -62,9 +62,9 @@ class NotificationCard extends StatelessWidget {
                   size: 24,
                 ),
               ),
-              
+
               const SizedBox(width: 16),
-              
+
               // Содержимое уведомления
               Expanded(
                 child: Column(
@@ -77,7 +77,7 @@ class NotificationCard extends StatelessWidget {
                             title,
                             style: theme.textTheme.titleMedium?.copyWith(
                               fontWeight: isRead ? FontWeight.w500 : FontWeight.w600,
-                              color: isRead 
+                              color: isRead
                                 ? theme.colorScheme.onSurface.withOpacity(0.7)
                                 : theme.colorScheme.onSurface,
                             ),
@@ -117,7 +117,7 @@ class NotificationCard extends StatelessWidget {
                   ],
                 ),
               ),
-              
+
               // Кнопка закрытия
               if (onDismiss != null)
                 IconButton(

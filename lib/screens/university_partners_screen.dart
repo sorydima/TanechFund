@@ -76,6 +76,7 @@ class UniversityPartnersScreen extends StatelessWidget {
         crossAxisSpacing: 16,
         mainAxisSpacing: 16,
       ),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       itemCount: universities.length,
       itemBuilder: (context, index) {
         final uni = universities[index];

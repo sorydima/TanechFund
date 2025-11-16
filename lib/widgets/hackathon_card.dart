@@ -18,9 +18,9 @@ class HackathonCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    
+
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: const EdgeInsets.only(bottom: 16),
       elevation: 4,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: InkWell(
@@ -60,9 +60,9 @@ class HackathonCard extends StatelessWidget {
                   _buildStatusChip(hackathon.status),
                 ],
               ),
-              
+
               const SizedBox(height: 12),
-              
+
               // Описание
               Text(
                 hackathon.description,
@@ -73,9 +73,9 @@ class HackathonCard extends StatelessWidget {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
-              
+
               const SizedBox(height: 16),
-              
+
               // Основная информация
               Row(
                 children: [
@@ -104,9 +104,9 @@ class HackathonCard extends StatelessWidget {
                   ),
                 ],
               ),
-              
+
               const SizedBox(height: 16),
-              
+
               // Дополнительная информация
               Row(
                 children: [
@@ -135,15 +135,15 @@ class HackathonCard extends StatelessWidget {
                   ),
                 ],
               ),
-              
+
               const SizedBox(height: 16),
-              
+
               // Категории
               if (hackathon.categories.isNotEmpty) ...[
                 Wrap(
                   spacing: 8,
                   runSpacing: 4,
-                  children: hackathon.categories.take(3).map((category) => 
+                  children: hackathon.categories.take(3).map((category) =>
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
@@ -166,7 +166,7 @@ class HackathonCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
               ],
-              
+
               // Кнопка регистрации
               if (hackathon.registrationOpen && onRegister != null)
                 SizedBox(

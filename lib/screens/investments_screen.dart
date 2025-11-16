@@ -537,6 +537,7 @@ class _InvestmentsScreenState extends State<InvestmentsScreen> with TickerProvid
       physics: const NeverScrollableScrollPhysics(),
       crossAxisSpacing: 16,
       mainAxisSpacing: 16,
+      childAspectRatio: 1.2,
       children: [
         _buildMetricCard(
           'Всего раундов',

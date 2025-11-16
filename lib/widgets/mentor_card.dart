@@ -98,9 +98,9 @@ class MentorCard extends StatelessWidget {
                   ),
                 ],
               ),
-              
+
               const SizedBox(height: 16),
-              
+
               // Биография
               Text(
                 mentor.bio,
@@ -112,9 +112,9 @@ class MentorCard extends StatelessWidget {
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
               ),
-              
+
               const SizedBox(height: 16),
-              
+
               // Экспертиза
               Wrap(
                 spacing: 8,
@@ -138,9 +138,9 @@ class MentorCard extends StatelessWidget {
                   ),
                 )).toList(),
               ),
-              
+
               const SizedBox(height: 16),
-              
+
               // Статистика и рейтинг
               Row(
                 children: [
@@ -191,9 +191,9 @@ class MentorCard extends StatelessWidget {
                   ),
                 ],
               ),
-              
+
               const SizedBox(height: 16),
-              
+
               // Языки
               Row(
                 children: [
@@ -225,9 +225,9 @@ class MentorCard extends StatelessWidget {
                   ),
                 ],
               ),
-              
+
               const SizedBox(height: 16),
-              
+
               // Кнопка действия
               SizedBox(
                 width: double.infinity,
