@@ -85,9 +85,9 @@ class _SplashScreenState extends State<SplashScreen> {
               const SizedBox(height: 40),
               
               // Название приложения
-              Text(
+              const Text(
                 'REChain®️',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 48,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -100,9 +100,9 @@ class _SplashScreenState extends State<SplashScreen> {
               
               const SizedBox(height: 16),
               
-              Text(
+              const Text(
                 'VC Group Lab',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w600,
                   color: Colors.white70,
@@ -115,9 +115,9 @@ class _SplashScreenState extends State<SplashScreen> {
               
               const SizedBox(height: 8),
               
-              Text(
+              const Text(
                 'Venture Builder • Incubator • Startup Studio',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                   color: Colors.white60,

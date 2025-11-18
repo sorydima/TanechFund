@@ -114,94 +114,94 @@ class _MainScreenState extends State<MainScreen> {
               index: _currentIndex,
               children: _screens,
             ),
-             bottomNavigationBar: Container(
-         decoration: BoxDecoration(
-           color: Theme.of(context).colorScheme.surface,
-           boxShadow: [
-             BoxShadow(
-               color: Colors.black.withOpacity(0.1),
-               blurRadius: 20,
-               offset: const Offset(0, -5),
-             ),
-           ],
-         ),
-         child: SafeArea(
-           child: Column(
-             mainAxisSize: MainAxisSize.min,
-             children: [
-                               // Индикатор текущей вкладки
-                Container(
-                  height: 4,
-                  margin: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Row(
-                                         children: List.generate(16, (index) {
-                     return Expanded(
-                       child: Container(
-                         margin: const EdgeInsets.symmetric(horizontal: 2),
-                         height: 4,
-                         decoration: BoxDecoration(
-                           color: _currentIndex == index 
-                               ? AppTheme.primaryColor 
-                               : Colors.grey.withOpacity(0.3),
-                           borderRadius: BorderRadius.circular(2),
-                         ),
-                       ),
-                     );
-                   }),
-                 ),
-               ),
-               const SizedBox(height: 8),
-                                               // Горизонтальный слайдер с навигационными кнопками
-                Stack(
+            bottomNavigationBar: Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surface,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 20,
+                    offset: const Offset(0, -5),
+                  ),
+                ],
+              ),
+              child: SafeArea(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    SingleChildScrollView(
-                      controller: _scrollController,
-                      scrollDirection: Axis.horizontal,
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    // Индикатор текущей вкладки
+                    Container(
+                      height: 4,
+                      margin: const EdgeInsets.symmetric(horizontal: 16),
                       child: Row(
-                        children: [
-                          _buildNavItem(0, Icons.home, 'Главная'),
-                          _buildNavItem(1, Icons.event, 'Хакатоны'),
-                          _buildNavItem(2, Icons.emoji_events, 'Челленджи'),
-                          _buildNavItem(3, Icons.chat, 'Чаты'),
-                          _buildNavItem(4, Icons.school, 'Обучение'),
-                          _buildNavItem(5, Icons.work, 'Портфолио'),
-                          _buildNavItem(6, Icons.build, 'Компилятор'),
-                          _buildNavItem(7, Icons.trending_up, 'Инвестиции'),
-                          _buildNavItem(8, Icons.psychology, 'Менторство'),
-                          _buildNavItem(9, Icons.analytics, 'Аналитика'),
-                          _buildNavItem(10, Icons.people, 'Соцсеть'),
-                          _buildNavItem(11, Icons.view_in_ar, 'Метавселенная'),
-                          _buildNavItem(12, Icons.smart_toy, 'ИИ/ML'),
-                          _buildNavItem(13, Icons.emoji_events, 'Достижения'),
-                          _buildNavItem(14, Icons.stars, 'Репутация'),
-                          _buildNavItem(15, Icons.person, 'Профиль'),
-                        ],
+                        children: List.generate(16, (index) {
+                          return Expanded(
+                            child: Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 2),
+                              height: 4,
+                              decoration: BoxDecoration(
+                                color: _currentIndex == index 
+                                    ? AppTheme.primaryColor 
+                                    : Colors.grey.withOpacity(0.3),
+                                borderRadius: BorderRadius.circular(2),
+                              ),
+                            ),
+                          );
+                        }),
                       ),
                     ),
-                    // Индикатор прокрутки справа
-                    Positioned(
-                      right: 8,
-                      top: 8,
-                      child: Container(
-                        padding: const EdgeInsets.all(4),
-                        decoration: BoxDecoration(
-                          color: AppTheme.primaryColor.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(4),
+                    const SizedBox(height: 8),
+                    // Горизонтальный слайдер с навигационными кнопками
+                    Stack(
+                      children: [
+                        SingleChildScrollView(
+                          controller: _scrollController,
+                          scrollDirection: Axis.horizontal,
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          child: Row(
+                            children: [
+                              _buildNavItem(0, Icons.home, 'Главная'),
+                              _buildNavItem(1, Icons.event, 'Хакатоны'),
+                              _buildNavItem(2, Icons.emoji_events, 'Челленджи'),
+                              _buildNavItem(3, Icons.chat, 'Чаты'),
+                              _buildNavItem(4, Icons.school, 'Обучение'),
+                              _buildNavItem(5, Icons.work, 'Портфолио'),
+                              _buildNavItem(6, Icons.build, 'Компилятор'),
+                              _buildNavItem(7, Icons.trending_up, 'Инвестиции'),
+                              _buildNavItem(8, Icons.psychology, 'Менторство'),
+                              _buildNavItem(9, Icons.analytics, 'Аналитика'),
+                              _buildNavItem(10, Icons.people, 'Соцсеть'),
+                              _buildNavItem(11, Icons.view_in_ar, 'Метавселенная'),
+                              _buildNavItem(12, Icons.smart_toy, 'ИИ/ML'),
+                              _buildNavItem(13, Icons.emoji_events, 'Достижения'),
+                              _buildNavItem(14, Icons.stars, 'Репутация'),
+                              _buildNavItem(15, Icons.person, 'Профиль'),
+                            ],
+                          ),
                         ),
-                        child: Icon(
-                          Icons.chevron_right,
-                          color: AppTheme.primaryColor,
-                          size: 16,
+                        // Индикатор прокрутки справа
+                        Positioned(
+                          right: 8,
+                          top: 8,
+                          child: Container(
+                            padding: const EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                              color: AppTheme.primaryColor.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: const Icon(
+                              Icons.chevron_right,
+                              color: AppTheme.primaryColor,
+                              size: 16,
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   ],
                 ),
-             ],
-           ),
-         ),
-       ),
+              ),
+            ),
             // Добавляем плавающую кнопку для уведомлений
             floatingActionButton: _buildNotificationsFAB(),
             floatingActionButtonLocation: FloatingActionButtonLocation.endTop,

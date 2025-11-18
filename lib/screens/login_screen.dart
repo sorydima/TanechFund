@@ -84,9 +84,9 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                       const SizedBox(height: 24),
                       
                       // Название
-                      Text(
+                      const Text(
                         'REChain®️ VC Lab',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 32,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,

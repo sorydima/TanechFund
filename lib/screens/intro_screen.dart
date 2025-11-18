@@ -107,10 +107,13 @@ class _IntroScreenState extends State<IntroScreen>
               
               // Bottom navigation
               Positioned(
-                bottom: 0,
                 left: 0,
                 right: 0,
-                child: _buildBottomNavigation(introProvider),
+                bottom: 0,
+                child: SafeArea(
+                  top: false,
+                  child: _buildBottomNavigation(introProvider),
+                ),
               ),
               
               // Skip button
