@@ -1,7 +1,7 @@
 name: rechain_vc_lab
 description: REChain®️ VC Group Lab - Venture Builder, Incubator, and Startup Studio
 publish_to: 'none'
-version: 1.0.3+4
+version: 1.0.4+5
 
 environment:
   sdk: '>=3.0.0 <4.0.0'

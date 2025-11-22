@@ -112,6 +112,7 @@ class _IntroScreenState extends State<IntroScreen>
                 bottom: 0,
                 child: SafeArea(
                   top: false,
+                  bottom: true,
                   child: _buildBottomNavigation(introProvider),
                 ),
               ),

@@ -85,49 +85,53 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
             
             // Индикаторы страниц
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // Точки
-                  Row(
-                    children: List.generate(
-                      _pages.length,
-                      (index) => Container(
-                        margin: const EdgeInsets.only(right: 8),
-                        width: 12,
-                        height: 12,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: _currentPage == index
-                              ? _pages[index].color
-                              : AppTheme.borderColor,
+            SafeArea(
+              top: false,
+              bottom: true,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // Точки
+                    Row(
+                      children: List.generate(
+                        _pages.length,
+                        (index) => Container(
+                          margin: const EdgeInsets.only(right: 8),
+                          width: 12,
+                          height: 12,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: _currentPage == index
+                                ? _pages[index].color
+                                : AppTheme.borderColor,
+                          ),
+                        ).animate().scale(
+                          duration: 200.ms,
+                          curve: Curves.easeInOut,
                         ),
-                      ).animate().scale(
-                        duration: 200.ms,
-                        curve: Curves.easeInOut,
                       ),
                     ),
-                  ),
-                  
-                  // Кнопка Далее/Начать
-                  ElevatedButton(
-                    onPressed: () {
-                      if (_currentPage < _pages.length - 1) {
-                        _pageController.nextPage(
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeInOut,
-                        );
-                      } else {
-                        _completeOnboarding();
-                      }
-                    },
-                    child: Text(
-                      _currentPage < _pages.length - 1 ? 'Далее' : 'Начать',
+                    
+                    // Кнопка Далее/Начать
+                    ElevatedButton(
+                      onPressed: () {
+                        if (_currentPage < _pages.length - 1) {
+                          _pageController.nextPage(
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeInOut,
+                          );
+                        } else {
+                          _completeOnboarding();
+                        }
+                      },
+                      child: Text(
+                        _currentPage < _pages.length - 1 ? 'Далее' : 'Начать',
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],
