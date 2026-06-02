@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
+import 'package:rechain_vc_lab/core/security/biometric_auth.dart';
 import 'package:rechain_vc_lab/providers/auth_provider.dart';
 import 'package:rechain_vc_lab/utils/theme.dart';
 
@@ -21,16 +22,26 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
   bool _isPasswordVisible = false;
   bool _rememberMe = false;
   bool _isLoading = false;
+  bool _isBiometricAvailable = false;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
+    _checkBiometricAvailability();
     
     // Демо данные
     _emailController.text = 'demo@rechain.com';
     _passwordController.text = 'password';
     _walletController.text = '0x742d35Cc6634C0532925a3b8D4C9db96C4b4d8b6';
+  }
+
+  Future<void> _checkBiometricAvailability() async {
+    final biometricAuth = BiometricAuthService();
+    final isAvailable = await biometricAuth.isAvailable;
+    if (mounted) {
+      setState(() => _isBiometricAvailable = isAvailable);
+    }
   }
 
   @override
@@ -297,6 +308,27 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
               ),
             ),
             
+            // Biometric login button
+            if (_isBiometricAvailable) ...[
+              const SizedBox(height: 12),
+              SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: OutlinedButton.icon(
+                  onPressed: _isLoading ? null : _signInWithBiometric,
+                  icon: const Icon(Icons.fingerprint, size: 24),
+                  label: const Text('Войти по отпечатку пальца'),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: AppTheme.primaryColor,
+                    side: BorderSide(color: AppTheme.primaryColor),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+            
             const SizedBox(height: 16),
             
             // Демо данные
@@ -532,23 +564,51 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
     );
   }
 
+  Future<void> _signInWithBiometric() async {
+    setState(() => _isLoading = true);
+    
+    try {
+      final authProvider = Provider.of<AuthProvider>(context, listen: false);
+      final result = await authProvider.signInWithBiometric();
+      
+      if (result.isSuccess && mounted) {
+        Navigator.of(context).pushReplacementNamed('/main');
+      } else if (mounted) {
+        final error = result.error?.message ?? 'Ошибка биометрического входа';
+        _showErrorSnackBar(error);
+      }
+    } catch (e) {
+      if (mounted) {
+        _showErrorSnackBar('Произошла ошибка: $e');
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
+    }
+  }
+
   // Методы входа
   Future<void> _signInWithEmail() async {
-    if (!_formKey.currentState!.validate()) return;
+    if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
+      _showErrorSnackBar('Введите email и пароль');
+      return;
+    }
     
     setState(() => _isLoading = true);
     
     try {
       final authProvider = Provider.of<AuthProvider>(context, listen: false);
-      final success = await authProvider.signInWithEmail(
+      final result = await authProvider.signInWithEmail(
         _emailController.text.trim(),
         _passwordController.text,
       );
       
-      if (success && mounted) {
+      if (result.isSuccess && mounted) {
         Navigator.of(context).pushReplacementNamed('/main');
       } else if (mounted) {
-        _showErrorSnackBar(authProvider.error ?? 'Ошибка входа');
+        final error = result.error?.message ?? 'Ошибка входа';
+        _showErrorSnackBar(error);
       }
     } catch (e) {
       if (mounted) {
@@ -566,12 +626,13 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
     
     try {
       final authProvider = Provider.of<AuthProvider>(context, listen: false);
-      final success = await authProvider.signInWithGoogle();
+      final result = await authProvider.signInWithGoogle();
       
-      if (success && mounted) {
+      if (result.isSuccess && mounted) {
         Navigator.of(context).pushReplacementNamed('/main');
       } else if (mounted) {
-        _showErrorSnackBar(authProvider.error ?? 'Ошибка входа через Google');
+        final error = result.error?.message ?? 'Ошибка входа через Google';
+        _showErrorSnackBar(error);
       }
     } catch (e) {
       if (mounted) {
@@ -589,12 +650,13 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
     
     try {
       final authProvider = Provider.of<AuthProvider>(context, listen: false);
-      final success = await authProvider.signInWithGitHub();
+      final result = await authProvider.signInWithGitHub();
       
-      if (success && mounted) {
+      if (result.isSuccess && mounted) {
         Navigator.of(context).pushReplacementNamed('/main');
       } else if (mounted) {
-        _showErrorSnackBar(authProvider.error ?? 'Ошибка входа через GitHub');
+        final error = result.error?.message ?? 'Ошибка входа через GitHub';
+        _showErrorSnackBar(error);
       }
     } catch (e) {
       if (mounted) {
@@ -617,12 +679,13 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
     
     try {
       final authProvider = Provider.of<AuthProvider>(context, listen: false);
-      final success = await authProvider.connectWallet(_walletController.text.trim());
+      final result = await authProvider.connectWallet(_walletController.text.trim());
       
-      if (success && mounted) {
+      if (result.isSuccess && mounted) {
         Navigator.of(context).pushReplacementNamed('/main');
       } else if (mounted) {
-        _showErrorSnackBar(authProvider.error ?? 'Ошибка подключения кошелька');
+        final error = result.error?.message ?? 'Ошибка подключения кошелька';
+        _showErrorSnackBar(error);
       }
     } catch (e) {
       if (mounted) {
@@ -670,12 +733,13 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
     
     try {
       final authProvider = Provider.of<AuthProvider>(context, listen: false);
-      final success = await authProvider.resetPassword(_emailController.text.trim());
+      final result = await authProvider.resetPassword(_emailController.text.trim());
       
-      if (success && mounted) {
+      if (result.isSuccess && mounted) {
         _showSuccessSnackBar('Инструкции по сбросу пароля отправлены на ваш email');
       } else if (mounted) {
-        _showErrorSnackBar(authProvider.error ?? 'Ошибка сброса пароля');
+        final error = result.error?.message ?? 'Ошибка сброса пароля';
+        _showErrorSnackBar(error);
       }
     } catch (e) {
       if (mounted) {

@@ -10,20 +10,59 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.9
+  
+  # DI
+  get_it: ^8.0.3
+  injectable: ^2.5.0
+  
+  # Logging
+  logger: ^2.5.0
+
+  # Network
   http: ^1.6.0
+  dio: ^5.8.0+1
+  connectivity_plus: ^6.1.4
+  pretty_dio_logger: ^1.4.0
+
+  # API
+  retrofit: ^4.4.2
+
+  # State Management
   provider: ^6.1.2
+  freezed_annotation: ^2.4.1
+  
+  # Storage
   shared_preferences: ^2.5.5
-  url_launcher: ^6.3.1
+  flutter_secure_storage: ^9.2.4
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  
+  # Security
+  local_auth: ^2.3.0
+  crypto: ^3.0.6
+  
+  # UI
   flutter_svg: ^2.2.4
   cached_network_image: ^3.4.1
-  intl: ^0.20.2
   flutter_animate: ^4.5.0
   lottie: ^3.3.2
+  shimmer: ^3.0.0
+  
+  # Image & Cache
+  flutter_cache_manager: ^3.3.1
+  path_provider: ^2.1.5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+
+  # Code Generation
+  injectable_generator: ^2.7.0
+  build_runner: ^2.4.15
+  freezed: ^2.4.5
+  json_serializable: ^6.9.4
+  mockito: ^5.4.5
 
 flutter:
   uses-material-design: true

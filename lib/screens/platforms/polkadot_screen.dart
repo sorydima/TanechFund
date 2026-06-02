@@ -57,7 +57,7 @@ class PolkadotScreen extends StatelessWidget {
         child: Column(
           children: [
             const Icon(
-              Icons.polygon,
+              Icons.hexagon_outlined,
               size: 80,
               color: Colors.white,
             ),

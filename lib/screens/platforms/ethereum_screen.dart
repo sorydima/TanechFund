@@ -160,7 +160,7 @@ class EthereumScreen extends StatelessWidget {
                 const Color(0xFF8B5CF6),
               ),
               _buildFeatureCard(
-                Icons.nft,
+                Icons.collections,
                 'NFT стандарты',
                 'Уникальные токены',
                 const Color(0xFF10B981),

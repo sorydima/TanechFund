@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:rechain_vc_lab/providers/app_provider.dart';
-import 'package:rechain_vc_lab/providers/auth_provider.dart';
+import 'package:rechain_vc_lab/core/error_handler.dart';
+import 'package:rechain_vc_lab/core/logger.dart';
+import 'package:rechain_vc_lab/core/network/network_manager.dart';
+import 'package:rechain_vc_lab/core/storage/cache_service.dart';
+import 'package:rechain_vc_lab/core/stability/health_check_service.dart';
+import 'package:rechain_vc_lab/di/injection.dart';
+import 'package:rechain_vc_lab/providers/theme_provider.dart';
+import 'package:rechain_vc_lab/providers/app_provider_v2.dart';
+import 'package:rechain_vc_lab/providers/auth_provider_v2.dart';
 import 'package:rechain_vc_lab/providers/notification_provider.dart';
 import 'package:rechain_vc_lab/providers/chat_provider.dart';
 import 'package:rechain_vc_lab/providers/payment_provider.dart';
@@ -27,12 +34,43 @@ import 'package:rechain_vc_lab/screens/features_overview_screen.dart';
 import 'package:rechain_vc_lab/screens/navigation_guide_screen.dart';
 import 'package:rechain_vc_lab/screens/login_screen.dart';
 import 'package:rechain_vc_lab/screens/main_screen.dart';
+import 'package:rechain_vc_lab/services/storage_service.dart';
 import 'package:rechain_vc_lab/utils/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Настройка системного UI
+  ErrorHandler.initialize();
+
+  // Инициализация StorageService ДО DI контейнера
+  final storageService = await StorageService.getInstance();
+  AppLogger.info('StorageService initialized');
+
+  // Регистрация StorageService в DI контейнере
+  getIt.registerSingleton<StorageService>(storageService);
+  
+  // Инициализация DI
+  configureDependencies();
+  AppLogger.info('DI container initialized');
+
+  // Инициализация CacheService
+  final cacheService = getIt.get<CacheService>();
+  final cacheInitResult = await cacheService.initialize();
+  if (cacheInitResult.isFailure) {
+    AppLogger.error('CacheService initialization failed', cacheInitResult.error);
+  } else {
+    AppLogger.info('CacheService initialized');
+  }
+
+  // Инициализация HealthCheckService с периодической проверкой
+  final healthCheckService = getIt.get<HealthCheckService>();
+  await healthCheckService.initialize(checkInterval: const Duration(minutes: 2));
+  AppLogger.info('HealthCheckService initialized');
+
+  // Инициализация NetworkManager
+  await getIt.get<NetworkManager>().initialize();
+  AppLogger.info('NetworkManager initialized');
+
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
@@ -42,12 +80,13 @@ void main() async {
     ),
   );
   
-  // Предотвращение поворота экрана
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
   
+  ErrorWidget.builder = ErrorHandler.buildErrorWidget;
+
   runApp(const REChainApp());
 }
 
@@ -56,39 +95,50 @@ class REChainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // V2 провайдеры из DI контейнера
+    final appProviderV2 = getIt.get<AppProviderV2>();
+    final authProviderV2 = getIt.get<AuthProviderV2>();
+    final web4Provider = getIt.get<Web4MovementProvider>();
+
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => AppProvider()),
-        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        // Legacy провайдеры (пока остаются для обратной совместимости)
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => NotificationProvider()),
-                          ChangeNotifierProvider(create: (_) => ChatProvider()),
-                  ChangeNotifierProvider(create: (_) => PaymentProvider()),
-                  ChangeNotifierProvider(create: (_) => LearningProvider()),
-                  ChangeNotifierProvider(create: (_) => PortfolioProvider()),
-                  ChangeNotifierProvider(create: (_) => CompilerProvider()),
-                  ChangeNotifierProvider(create: (_) => InvestmentProvider()),
+        ChangeNotifierProvider(create: (_) => ChatProvider()),
+        ChangeNotifierProvider(create: (_) => PaymentProvider()),
+        ChangeNotifierProvider(create: (_) => LearningProvider()),
+        ChangeNotifierProvider(create: (_) => PortfolioProvider()),
+        ChangeNotifierProvider(create: (_) => CompilerProvider()),
+        ChangeNotifierProvider(create: (_) => InvestmentProvider()),
         ChangeNotifierProvider(create: (_) => MentorshipProvider()),
-                            ChangeNotifierProvider(create: (_) => AnalyticsProvider()),
-                    ChangeNotifierProvider(create: (_) => SocialNetworkProvider()),
-                    ChangeNotifierProvider(create: (_) => MetaverseProvider()),
-                    ChangeNotifierProvider(create: (_) => AIMLProvider()),
+        ChangeNotifierProvider(create: (_) => AnalyticsProvider()),
+        ChangeNotifierProvider(create: (_) => SocialNetworkProvider()),
+        ChangeNotifierProvider(create: (_) => MetaverseProvider()),
+        ChangeNotifierProvider(create: (_) => AIMLProvider()),
         ChangeNotifierProvider(create: (_) => AchievementsProvider()),
         ChangeNotifierProvider(create: (_) => ReputationProvider()),
         ChangeNotifierProvider(create: (_) => RealtimeNotificationsProvider()),
         ChangeNotifierProvider(create: (_) => IntroProvider()),
-        ChangeNotifierProvider(create: (_) => Web4MovementProvider()),
         ChangeNotifierProvider(create: (_) => Web5CreationProvider()),
-                    ],
-                  child: Consumer<AppProvider>(
-        builder: (context, appProvider, child) {
+        
+        // V2 провайдеры из DI
+        ChangeNotifierProvider<AppProviderV2>.value(value: appProviderV2),
+        ChangeNotifierProvider<AuthProviderV2>.value(value: authProviderV2),
+        ChangeNotifierProvider<Web4MovementProvider>.value(value: web4Provider),
+      ],
+      child: Consumer2<ThemeProvider, AppProviderV2>(
+        builder: (context, themeProvider, appProvider, child) {
           return MaterialApp(
             title: 'REChain®️ VC Lab',
             debugShowCheckedModeBanner: false,
-            theme: appProvider.isDarkMode ? AppTheme.darkTheme : AppTheme.lightTheme,
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: themeProvider.themeMode,
             home: const AppRouter(),
             routes: {
               '/login': (context) => const LoginScreen(),
-              '/main': (context) => MainScreen(),
+              '/main': (context) => const MainScreen(),
               '/intro': (context) => const IntroScreen(),
               '/features-overview': (context) => const FeaturesOverviewScreen(),
               '/navigation-guide': (context) => const NavigationGuideScreen(),
@@ -105,31 +155,30 @@ class AppRouter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AppProvider>(
+    return Consumer<AppProviderV2>(
       builder: (context, appProvider, child) {
-        // Если это первый запуск, показываем splash screen
+        if (!appProvider.isAppInitialized) {
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        }
+        
         if (appProvider.isFirstLaunch) {
           return const SplashScreen();
         }
-        
-        // Если не первый запуск, проверяем аутентификацию
-        return Consumer<AuthProvider>(
+
+        return Consumer<AuthProviderV2>(
           builder: (context, authProvider, child) {
-            // Если пользователь аутентифицирован, показываем главный экран или интро
             if (authProvider.isAuthenticated) {
               return Consumer<IntroProvider>(
                 builder: (context, introProvider, child) {
-                  // Show intro if not completed
                   if (!introProvider.isIntroCompleted) {
                     return const IntroScreen();
                   }
-                  
-                  return MainScreen();
+                  return const MainScreen();
                 },
               );
             }
-            
-            // Иначе показываем экран входа
             return const LoginScreen();
           },
         );

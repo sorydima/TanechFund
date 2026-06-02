@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rechain_vc_lab/models/project_model.dart';
 import 'package:rechain_vc_lab/providers/portfolio_provider.dart';
 import 'package:rechain_vc_lab/utils/theme.dart';
 
 class ProjectDetailsScreen extends StatefulWidget {
-  final Project project;
+  final ProjectModel project;
   
   const ProjectDetailsScreen({super.key, required this.project});
 

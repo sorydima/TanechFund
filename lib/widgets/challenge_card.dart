@@ -171,7 +171,7 @@ class ChallengeCard extends StatelessWidget {
       case 'ethereum':
         return Icons.currency_bitcoin;
       case 'polygon':
-        return Icons.polygon;
+        return Icons.hexagon_outlined;
       case 'binance':
         return Icons.currency_exchange;
       case 'solana':

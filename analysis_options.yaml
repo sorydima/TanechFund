@@ -1,5 +1,8 @@
 include: package:flutter_lints/flutter.yaml
 
+# TODO: Перейти на analysis_options_strict.yaml после исправления всех предупреждений
+# include: analysis_options_strict.yaml
+
 linter:
   rules:
     prefer_const_constructors: true

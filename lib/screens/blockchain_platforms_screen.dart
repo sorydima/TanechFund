@@ -5,7 +5,6 @@ import 'package:rechain_vc_lab/screens/platforms/solana_screen.dart';
 import 'package:rechain_vc_lab/screens/platforms/polkadot_screen.dart';
 import 'package:rechain_vc_lab/screens/platforms/ethereum_screen.dart';
 import 'package:rechain_vc_lab/screens/platforms/cardano_screen.dart';
-import 'package:rechain_vc_lab/screens/platforms/cosmos_screen.dart';
 
 class BlockchainPlatformsScreen extends StatelessWidget {
   const BlockchainPlatformsScreen({super.key});
@@ -21,7 +20,6 @@ class BlockchainPlatformsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Заголовок
             Text(
               'Изучайте ведущие блокчейн платформы',
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
@@ -30,19 +28,14 @@ class BlockchainPlatformsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              'Выбирайте платформу и участвуйте в челленджах для получения практического опыта',
+              'Выбирайте платформу и участвуйте в челленджах',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 color: Colors.grey[600],
               ),
             ),
             const SizedBox(height: 24),
-            
-            // Список платформ
-            _buildPlatformsList(),
-            
+            _buildPlatformsList(context),
             const SizedBox(height: 32),
-            
-            // Статистика
             _buildPlatformStats(),
           ],
         ),
@@ -50,107 +43,19 @@ class BlockchainPlatformsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildPlatformsList() {
+  Widget _buildPlatformsList(BuildContext context) {
     final platforms = [
-      {
-        'name': 'Solana',
-        'challenges': 7,
-        'builders': 266103,
-        'color': const Color(0xFF14F195),
-        'description': 'Высокопроизводительный блокчейн для DeFi и NFT',
-        'icon': Icons.flash_on,
-        'route': SolanaScreen(),
-      },
-      {
-        'name': 'Polkadot',
-        'challenges': 49,
-        'builders': 97103,
-        'color': const Color(0xFFE6007A),
-        'description': 'Мультичейн экосистема для Web3',
-        'icon': Icons.polygon,
-        'route': PolkadotScreen(),
-      },
-      {
-        'name': 'Ethereum',
-        'challenges': 67,
-        'builders': 150000,
-        'color': const Color(0xFF627EEA),
-        'description': 'Мировая компьютерная платформа',
-        'icon': Icons.currency_bitcoin,
-        'route': EthereumScreen(),
-      },
-      {
-        'name': 'Cardano',
-        'challenges': 34,
-        'builders': 75000,
-        'color': const Color(0xFF0033CC),
-        'description': 'Научно обоснованная блокчейн платформа',
-        'icon': Icons.hexagon,
-        'route': CardanoScreen(),
-      },
-      {
-        'name': 'Cosmos',
-        'challenges': 28,
-        'builders': 45000,
-        'color': const Color(0xFF2E3148),
-        'description': 'Интернет блокчейнов',
-        'icon': Icons.public,
-        'route': CosmosScreen(),
-      },
-      {
-        'name': 'ImmutableX',
-        'challenges': 5,
-        'builders': 30091,
-        'color': const Color(0xFF6366F1),
-        'description': 'Слой 2 для NFT на Ethereum',
-        'icon': Icons.image,
-        'route': null,
-      },
-      {
-        'name': 'Soroban',
-        'challenges': 6,
-        'builders': 22103,
-        'color': const Color(0xFF7B3FE4),
-        'description': 'Смарт-контракты для Stellar',
-        'icon': Icons.star,
-        'route': null,
-      },
-      {
-        'name': 'VeChain',
-        'challenges': 6,
-        'builders': 178991,
-        'color': const Color(0xFF00D4AA),
-        'description': 'Блокчейн для цепочек поставок',
-        'icon': Icons.inventory,
-        'route': null,
-      },
-      {
-        'name': 'Stacks',
-        'challenges': 6,
-        'builders': 99102,
-        'color': const Color(0xFF5546FF),
-        'description': 'Смарт-контракты для Bitcoin',
-        'icon': Icons.currency_bitcoin,
-        'route': null,
-      },
-      {
-        'name': 'Tezos',
-        'challenges': 3,
-        'builders': 5437,
-        'color': const Color(0xFF2C7DF7),
-        'description': 'Самообновляющийся блокчейн',
-        'icon': Icons.auto_fix_high,
-        'route': null,
-      },
-      {
-        'name': 'Polygon',
-        'challenges': 2,
-        'builders': 6759,
-        'color': const Color(0xFF8247E5),
-        'description': 'Масштабируемое решение для Ethereum',
-        'icon': Icons.polygon,
-        'route': null,
-      },
+      _PlatformData('Solana', 7, 266103, const Color(0xFF14F195), 'Высокопроизводительный блокчейн', Icons.flash_on, const SolanaScreen()),
+      _PlatformData('Polkadot', 49, 97103, const Color(0xFFE6007A), 'Мультичейн экосистема', Icons.network_check, const PolkadotScreen()),
+      _PlatformData('Ethereum', 67, 150000, const Color(0xFF627EEA), 'Мировая компьютерная платформа', Icons.currency_bitcoin, const EthereumScreen()),
+      _PlatformData('Cardano', 34, 75000, const Color(0xFF0033CC), 'Научно обоснованный блокчейн', Icons.hexagon_outlined, const CardanoScreen()),
+      _PlatformData('Cosmos', 28, 45000, const Color(0xFF2E3148), 'Интернет блокчейнов', Icons.public, null),
+      _PlatformData('ImmutableX', 5, 30091, const Color(0xFF6366F1), 'Слой 2 для NFT', Icons.image, null),
+      _PlatformData('Soroban', 6, 22103, const Color(0xFF7B3FE4), 'Смарт-контракты Stellar', Icons.star_outline, null),
+      _PlatformData('VeChain', 6, 178991, const Color(0xFF00D4AA), 'Блокчейн для поставок', Icons.inventory_2_outlined, null),
+      _PlatformData('Stacks', 6, 99102, const Color(0xFF5546FF), 'Смарт-контракты Bitcoin', Icons.currency_bitcoin, null),
+      _PlatformData('Tezos', 3, 5437, const Color(0xFF2C7DF7), 'Самообновляющийся блокчейн', Icons.auto_fix_high, null),
+      _PlatformData('Polygon', 2, 6759, const Color(0xFF8247E5), 'Масштабирование Ethereum', Icons.layers_outlined, null),
     ];
 
     return GridView.builder(
@@ -163,180 +68,70 @@ class BlockchainPlatformsScreen extends StatelessWidget {
         mainAxisSpacing: 16,
       ),
       itemCount: platforms.length,
-      itemBuilder: (context, index) {
-        final platform = platforms[index];
-        return _buildPlatformCard(
-          platform['name'] as String,
-          platform['challenges'] as int,
-          platform['builders'] as int,
-          platform['color'] as Color,
-          platform['description'] as String,
-          platform['icon'] as IconData,
-          platform['route'] as Widget?,
-        );
-      },
+      itemBuilder: (ctx, index) => _buildPlatformCard(ctx, platforms[index]).animate().fadeIn(delay: Duration(milliseconds: index * 50)).scale(begin: const Offset(0.9, 0.9)),
     );
   }
 
-  Widget _buildPlatformCard(
-    String name,
-    int challenges,
-    int builders,
-    Color color,
-    String description,
-    IconData icon,
-    Widget? route,
-  ) {
-    return Builder(
-      builder: (context) => Card(
+  Widget _buildPlatformCard(BuildContext context, _PlatformData platform) {
+    return Card(
       elevation: 4,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: InkWell(
-        onTap: () {
-          if (route != null) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => route!),
-            );
-          }
-        },
+        onTap: platform.route != null ? () => Navigator.push(context, MaterialPageRoute(builder: (_) => platform.route!)) : null,
         borderRadius: BorderRadius.circular(16),
         child: Container(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [
-                color.withOpacity(0.1),
-                color.withOpacity(0.05),
-              ],
+              colors: [platform.color.withOpacity(0.15), platform.color.withOpacity(0.05)],
             ),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Заголовок и иконка
               Row(
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: color.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Icon(icon, color: color, size: 24),
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(color: platform.color.withOpacity(0.2), borderRadius: BorderRadius.circular(10)),
+                    child: Icon(platform.icon, color: platform.color, size: 20),
                   ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Text(
-                      name,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
+                  const SizedBox(width: 10),
+                  Expanded(child: Text(platform.name, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold), maxLines: 1, overflow: TextOverflow.ellipsis)),
                 ],
               ),
-              
-              const SizedBox(height: 16),
-              
-              // Описание
-              Text(
-                description,
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey[600],
-                  height: 1.4,
-                ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-              
+              const SizedBox(height: 12),
+              Text(platform.description, style: TextStyle(fontSize: 12, color: Colors.grey[600], height: 1.3), maxLines: 2, overflow: TextOverflow.ellipsis),
               const Spacer(),
-              
-              // Статистика
               Row(
                 children: [
-                  Expanded(
-                    child: _buildStatItem(
-                      '$challenges',
-                      'Челленджей',
-                      color,
-                    ),
-                  ),
-                  Expanded(
-                    child: _buildStatItem(
-                      _formatNumber(builders),
-                      'Разработчиков',
-                      color,
-                    ),
-                  ),
+                  Expanded(child: _buildStatItem('${platform.challenges}', 'Челленджей', platform.color)),
+                  Expanded(child: _buildStatItem(_formatNumber(platform.builders), 'Разработчиков', platform.color)),
                 ],
               ),
-              
-              const SizedBox(height: 16),
-              
-              // Кнопка
+              const SizedBox(height: 12),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
-                    if (route != null) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => route!),
-                      );
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: color,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  child: Text(
-                    route != null ? 'Смотреть челленджи' : 'Скоро',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 14,
-                    ),
-                  ),
+                  onPressed: platform.route != null ? () => Navigator.push(context, MaterialPageRoute(builder: (_) => platform.route!)) : null,
+                  style: ElevatedButton.styleFrom(backgroundColor: platform.color, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 10), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+                  child: Text(platform.route != null ? 'Челленджи' : 'Скоро', style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
                 ),
               ),
             ],
           ),
         ),
       ),
-    ).animate().fadeIn(duration: 300.ms).scale(begin: 0.8, duration: 300.ms);
-      },
     );
   }
 
   Widget _buildStatItem(String value, String label, Color color) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          value,
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: color,
-          ),
-        ),
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 12,
-            color: Colors.grey[600],
-          ),
-        ),
-      ],
+      children: [Text(value, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: color)), Text(label, style: TextStyle(fontSize: 11, color: Colors.grey[600]))],
     );
   }
 
@@ -344,89 +139,43 @@ class BlockchainPlatformsScreen extends StatelessWidget {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Общая статистика платформ',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 20),
-            Row(
-              children: [
-                Expanded(
-                  child: _buildTotalStatItem(
-                    '185',
-                    'Всего челленджей',
-                    Icons.emoji_events,
-                    AppTheme.primaryColor,
-                  ),
-                ),
-                Expanded(
-                  child: _buildTotalStatItem(
-                    '1M+',
-                    'Разработчиков',
-                    Icons.people,
-                    AppTheme.secondaryColor,
-                  ),
-                ),
-                Expanded(
-                  child: _buildTotalStatItem(
-                    '11',
-                    'Платформ',
-                    Icons.block,
-                    AppTheme.accentColor,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          const Text('Общая статистика', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          const SizedBox(height: 16),
+          Row(children: [
+            Expanded(child: _buildTotalStatItem('185', 'Челленджей', Icons.emoji_events, AppTheme.primaryColor)),
+            Expanded(child: _buildTotalStatItem('1M+', 'Разработчиков', Icons.people, AppTheme.secondaryColor)),
+            Expanded(child: _buildTotalStatItem('11', 'Платформ', Icons.block, AppTheme.accentColor)),
+          ]),
+        ]),
       ),
     );
   }
 
   Widget _buildTotalStatItem(String value, String label, IconData icon, Color color) {
-    return Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: color.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Icon(icon, color: color, size: 24),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          value,
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: color,
-          ),
-        ),
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: 12,
-            color: Colors.grey,
-          ),
-          textAlign: TextAlign.center,
-        ),
-      ],
-    );
+    return Column(children: [
+      Container(padding: const EdgeInsets.all(10), decoration: BoxDecoration(color: color.withOpacity(0.1), borderRadius: BorderRadius.circular(10)), child: Icon(icon, color: color, size: 20)),
+      const SizedBox(height: 6),
+      Text(value, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: color)),
+      Text(label, style: const TextStyle(fontSize: 11, color: Colors.grey), textAlign: TextAlign.center),
+    ]);
   }
 
   String _formatNumber(int number) {
-    if (number >= 1000000) {
-      return '${(number / 1000000).toStringAsFixed(1)}M';
-    } else if (number >= 1000) {
-      return '${(number / 1000).toStringAsFixed(1)}K';
-    }
+    if (number >= 1000000) return '${(number / 1000000).toStringAsFixed(1)}M';
+    if (number >= 1000) return '${(number / 1000).toStringAsFixed(0)}K';
     return number.toString();
   }
 }
+
+class _PlatformData {
+  final String name;
+  final int challenges;
+  final int builders;
+  final Color color;
+  final String description;
+  final IconData icon;
+  final Widget? route;
+  const _PlatformData(this.name, this.challenges, this.builders, this.color, this.description, this.icon, this.route);
+}
+

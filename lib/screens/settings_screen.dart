@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rechain_vc_lab/providers/theme_provider.dart';
 import 'package:rechain_vc_lab/providers/app_provider.dart';
 import 'package:rechain_vc_lab/providers/intro_provider.dart';
 import 'package:rechain_vc_lab/providers/auth_provider.dart';
@@ -171,32 +172,32 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ),
           ),
-          Consumer<AppProvider>(
-            builder: (context, appProvider, child) {
+          Consumer<ThemeProvider>(
+            builder: (context, themeProvider, child) {
               return Column(
                 children: [
                   SwitchListTile(
                     title: const Text('Темная тема'),
                     subtitle: const Text('Использовать темную тему приложения'),
-                    value: appProvider.isDarkMode,
+                    value: themeProvider.isDarkMode,
                     onChanged: (value) {
-                      appProvider.toggleDarkMode();
+                      themeProvider.toggleTheme();
                     },
                     secondary: Icon(
-                      appProvider.isDarkMode ? Icons.dark_mode : Icons.light_mode,
+                      themeProvider.isDarkMode ? Icons.dark_mode : Icons.light_mode,
                       color: AppTheme.primaryColor,
                     ),
                   ),
                   ListTile(
                     title: const Text('Язык'),
-                    subtitle: Text(appProvider.currentLanguage),
+                    subtitle: const Text('Русский'), // TODO: Get from AppProviderV2
                     leading: const Icon(Icons.language),
                     trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                     onTap: _showLanguageDialog,
                   ),
                   ListTile(
                     title: const Text('Валюта'),
-                    subtitle: Text(appProvider.currentCurrency),
+                    subtitle: const Text('RUB'), // TODO: Get from AppProviderV2
                     leading: const Icon(Icons.attach_money),
                     trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                     onTap: _showCurrencyDialog,
@@ -466,7 +467,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ListTile(
               title: Text(language),
               onTap: () {
-                context.read<AppProvider>().setLanguage(language);
+                // TODO: Use AppProviderV2 when language feature is implemented
+                // context.read<AppProviderV2>().setLanguage(language);
                 Navigator.of(context).pop();
               },
             ),
@@ -490,7 +492,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ListTile(
               title: Text(currency),
               onTap: () {
-                context.read<AppProvider>().setCurrency(currency);
+                // TODO: Use AppProviderV2 when currency feature is implemented
+                // context.read<AppProviderV2>().setCurrency(currency);
                 Navigator.of(context).pop();
               },
             ),

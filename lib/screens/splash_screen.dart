@@ -3,7 +3,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'package:rechain_vc_lab/providers/app_provider.dart';
 import 'package:rechain_vc_lab/providers/auth_provider.dart';
-import 'package:rechain_vc_lab/screens/main_screen.dart';
 import 'package:rechain_vc_lab/utils/theme.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -21,27 +20,19 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _navigateToNextScreen() async {
-    // Ждем 3 секунды для показа анимации
     await Future.delayed(const Duration(seconds: 3));
     
-    if (mounted) {
-      final appProvider = Provider.of<AppProvider>(context, listen: false);
-      final authProvider = Provider.of<AuthProvider>(context, listen: false);
-      
-      // Если это первый запуск, показываем интро
-      if (appProvider.isFirstLaunch) {
-        Navigator.of(context).pushReplacementNamed('/intro');
-      }
-      // Если пользователь уже аутентифицирован, показываем главный экран
-      else if (authProvider.isAuthenticated) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => const MainScreen()),
-        );
-      }
-      // Иначе показываем экран входа
-      else {
-        Navigator.of(context).pushReplacementNamed('/login');
-      }
+    if (!mounted) return;
+
+    final appProvider = Provider.of<AppProvider>(context, listen: false);
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+
+    if (appProvider.isFirstLaunch) {
+      Navigator.of(context).pushReplacementNamed('/intro');
+    } else if (authProvider.isAuthenticated) {
+      Navigator.of(context).pushReplacementNamed('/main');
+    } else {
+      Navigator.of(context).pushReplacementNamed('/login');
     }
   }
 

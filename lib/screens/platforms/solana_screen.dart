@@ -156,11 +156,11 @@ class SolanaScreen extends StatelessWidget {
               _buildFeatureCard(
                 Icons.attach_money,
                 'Низкие комиссии',
-                '< $0.01 за транзакцию',
+                r'< $0.01 за транзакцию',
                 const Color(0xFF00D4AA),
               ),
               _buildFeatureCard(
-                Icons.eco,
+                Icons.spa,
                 'Экологичность',
                 'Proof of Stake',
                 const Color(0xFF10B981),
@@ -403,7 +403,7 @@ class SolanaScreen extends StatelessWidget {
           ],
         ),
       ),
-    ).animate().fadeIn(duration: 300.ms).slideX(begin: 0.2, duration: 300.ms);
+    ).animate().fadeIn(duration: const Duration(milliseconds: 300)).slideX(begin: 0.2, duration: const Duration(milliseconds: 300));
   }
 
   Widget _buildLearningPath() {

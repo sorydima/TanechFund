@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
+import 'package:rechain_vc_lab/models/project_model.dart';
 import 'package:rechain_vc_lab/providers/portfolio_provider.dart';
+import 'package:rechain_vc_lab/providers/auth_provider.dart';
 import 'package:rechain_vc_lab/utils/theme.dart';
 import 'package:rechain_vc_lab/screens/project_details_screen.dart';
+import 'package:rechain_vc_lab/core/logger.dart';
 
 class PortfolioScreen extends StatefulWidget {
   const PortfolioScreen({super.key});
@@ -18,14 +21,25 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
   ProjectCategory? _selectedCategory;
   ProjectStatus? _selectedStatus;
   String _searchQuery = '';
+  bool _isRefreshing = false;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<PortfolioProvider>().loadProjects();
+      _loadProjects();
     });
+  }
+
+  Future<void> _loadProjects() async {
+    setState(() => _isRefreshing = true);
+    final provider = context.read<PortfolioProvider>();
+    final result = await provider.loadProjects();
+    if (result.isFailure) {
+      _showErrorSnackBar(result.error?.message ?? 'Ошибка загрузки');
+    }
+    if (mounted) setState(() => _isRefreshing = false);
   }
 
   @override
@@ -46,33 +60,49 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
           IconButton(
             icon: const Icon(Icons.search),
             onPressed: () => _showSearchDialog(),
+            tooltip: 'Поиск',
           ),
           IconButton(
             icon: const Icon(Icons.filter_list),
             onPressed: () => _showFilterDialog(),
+            tooltip: 'Фильтры',
           ),
           IconButton(
-            icon: const Icon(Icons.add),
+            icon: const Icon(Icons.add_circle_outline),
             onPressed: () => _showAddProjectDialog(),
+            tooltip: 'Добавить проект',
           ),
         ],
         bottom: TabBar(
           controller: _tabController,
           isScrollable: true,
+          labelColor: AppTheme.primaryColor,
+          unselectedLabelColor: Colors.grey,
+          indicatorColor: AppTheme.primaryColor,
           tabs: const [
-            Tab(text: 'Все проекты'),
-            Tab(text: 'Мои проекты'),
-            Tab(text: 'Популярные'),
+            Tab(icon: Icon(Icons.grid_view), text: 'Все'),
+            Tab(icon: Icon(Icons.person), text: 'Мои'),
+            Tab(icon: Icon(Icons.trending_up), text: 'Популярные'),
           ],
         ),
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          _buildAllProjectsTab(),
-          _buildMyProjectsTab(),
-          _buildPopularProjectsTab(),
-        ],
+      body: RefreshIndicator(
+        onRefresh: _loadProjects,
+        color: AppTheme.primaryColor,
+        child: TabBarView(
+          controller: _tabController,
+          children: [
+            _buildAllProjectsTab(),
+            _buildMyProjectsTab(),
+            _buildPopularProjectsTab(),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => _showAddProjectDialog(),
+        icon: const Icon(Icons.add),
+        label: const Text('Проект'),
+        backgroundColor: AppTheme.primaryColor,
       ),
     );
   }
@@ -82,7 +112,16 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
     return Consumer<PortfolioProvider>(
       builder: (context, portfolioProvider, child) {
         if (portfolioProvider.isLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(),
+                SizedBox(height: 16),
+                Text('Загрузка проектов...', style: TextStyle(fontSize: 16)),
+              ],
+            ),
+          );
         }
 
         var filteredProjects = portfolioProvider.projects;
@@ -105,7 +144,20 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
         }
 
         if (filteredProjects.isEmpty) {
-          return _buildEmptyState('Проекты не найдены', 'Попробуйте изменить фильтры');
+          return _buildEmptyState(
+            'Проекты не найдены',
+            _searchQuery.isNotEmpty 
+                ? 'Попробуйте изменить поисковый запрос или фильтры'
+                : 'Будьте первым, кто создаст проект!',
+            icon: _searchQuery.isNotEmpty ? Icons.search_off : Icons.folder_open,
+            actionButton: _searchQuery.isEmpty
+                ? ElevatedButton.icon(
+                    onPressed: () => _showAddProjectDialog(),
+                    icon: const Icon(Icons.add),
+                    label: const Text('Создать проект'),
+                  )
+                : null,
+          );
         }
 
         return ListView.builder(
@@ -115,7 +167,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
             final project = filteredProjects[index];
             return _buildProjectCard(project, portfolioProvider)
                 .animate()
-                .fadeIn(delay: Duration(milliseconds: index * 100))
+                .fadeIn(delay: Duration(milliseconds: index * 50))
                 .slideX(begin: 0.3, end: 0);
           },
         );
@@ -125,17 +177,23 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
 
   // Вкладка моих проектов
   Widget _buildMyProjectsTab() {
-    return Consumer<PortfolioProvider>(
-      builder: (context, portfolioProvider, child) {
-        final myProjects = portfolioProvider.getUserProjects('current_user_id');
+    return Consumer2<PortfolioProvider, AuthProvider>(
+      builder: (context, portfolioProvider, authProvider, child) {
+        final userId = authProvider.userId ?? 'current_user_id';
+        final myProjects = portfolioProvider.getUserProjects(userId);
 
         if (myProjects.isEmpty) {
           return _buildEmptyState(
             'У вас пока нет проектов',
             'Создайте свой первый проект и покажите его миру!',
-            actionButton: ElevatedButton(
+            icon: Icons.article_outlined,
+            actionButton: ElevatedButton.icon(
               onPressed: () => _showAddProjectDialog(),
-              child: const Text('Создать проект'),
+              icon: const Icon(Icons.add),
+              label: const Text('Создать проект'),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+              ),
             ),
           );
         }
@@ -147,7 +205,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
             final project = myProjects[index];
             return _buildProjectCard(project, portfolioProvider)
                 .animate()
-                .fadeIn(delay: Duration(milliseconds: index * 100))
+                .fadeIn(delay: Duration(milliseconds: index * 50))
                 .slideX(begin: 0.3, end: 0);
           },
         );
@@ -159,13 +217,25 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
   Widget _buildPopularProjectsTab() {
     return Consumer<PortfolioProvider>(
       builder: (context, portfolioProvider, child) {
+        if (portfolioProvider.isLoading) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
         final popularProjects = portfolioProvider.projects
-            .where((project) => project.likes > 10 || project.rating > 4.5)
+            .where((project) => project.likes > 5 || project.rating > 4.0)
             .toList()
-          ..sort((a, b) => (b.likes + b.rating * 10).compareTo(a.likes + a.rating * 10));
+          ..sort((a, b) {
+            final scoreA = a.likes * 10 + a.rating * 20 + a.views;
+            final scoreB = b.likes * 10 + b.rating * 20 + b.views;
+            return scoreB.compareTo(scoreA);
+          });
 
         if (popularProjects.isEmpty) {
-          return _buildEmptyState('Популярные проекты не найдены', 'Попробуйте позже');
+          return _buildEmptyState(
+            'Популярные проекты не найдены',
+            'Станьте первым, кто наберёт популярность!',
+            icon: Icons.emoji_events_outlined,
+          );
         }
 
         return ListView.builder(
@@ -173,10 +243,10 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
           itemCount: popularProjects.length,
           itemBuilder: (context, index) {
             final project = popularProjects[index];
-            return _buildProjectCard(project, portfolioProvider)
+            return _buildProjectCard(project, portfolioProvider, showRank: true, rank: index + 1)
                 .animate()
-                .fadeIn(delay: Duration(milliseconds: index * 100))
-                .slideX(begin: 0.3, end: 0);
+                .fadeIn(delay: Duration(milliseconds: index * 50))
+                .scale(begin: const Offset(0.9, 0.9), end: const Offset(1.0, 1.0));
           },
         );
       },
@@ -184,7 +254,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
   }
 
   // Карточка проекта
-  Widget _buildProjectCard(Project project, PortfolioProvider provider) {
+  Widget _buildProjectCard(ProjectModel project, PortfolioProvider provider, {bool showRank = false, int rank = 0}) {
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
       elevation: 4,
@@ -195,70 +265,165 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Изображение проекта
-            if (project.images.isNotEmpty)
-              Container(
-                height: 200,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(16),
-                    topRight: Radius.circular(16),
-                  ),
-                  image: DecorationImage(
-                    image: NetworkImage(project.images.first),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                child: Stack(
-                  children: [
-                    // Статус проекта
-                    Positioned(
-                      top: 12,
-                      right: 12,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: _getStatusColor(project.status),
-                          borderRadius: BorderRadius.circular(12),
+            // Изображение проекта с рангом
+            Stack(
+              children: [
+                if (project.images.isNotEmpty)
+                  Container(
+                    height: 200,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(16),
+                        topRight: Radius.circular(16),
+                      ),
+                      image: DecorationImage(
+                        image: NetworkImage(project.images.first),
+                        fit: BoxFit.cover,
+                        onError: (_, __) => null,
+                      ),
+                    ),
+                    child: Stack(
+                      children: [
+                        // Градиент overlay
+                        Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                Colors.transparent,
+                                Colors.black.withOpacity(0.6),
+                              ],
+                            ),
+                          ),
                         ),
+                        // Статус проекта
+                        Positioned(
+                          top: 12,
+                          right: 12,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                            decoration: BoxDecoration(
+                              color: _getStatusColor(project.status),
+                              borderRadius: BorderRadius.circular(12),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.2),
+                                  blurRadius: 4,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: Text(
+                              _getStatusText(project.status),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ),
+                        // Категория проекта
+                        Positioned(
+                          top: 12,
+                          left: 12,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                            decoration: BoxDecoration(
+                              color: _getCategoryColor(project.category),
+                              borderRadius: BorderRadius.circular(12),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.2),
+                                  blurRadius: 4,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: Text(
+                              _getCategoryText(project.category),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                else
+                  Container(
+                    height: 200,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(16),
+                        topRight: Radius.circular(16),
+                      ),
+                      gradient: LinearGradient(
+                        colors: [
+                          AppTheme.primaryColor.withOpacity(0.7),
+                          AppTheme.accentColor.withOpacity(0.7),
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                    ),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.code, size: 64, color: Colors.white.withOpacity(0.8)),
+                          const SizedBox(height: 8),
+                          Text(
+                            'Нет изображения',
+                            style: TextStyle(color: Colors.white.withOpacity(0.9)),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                // Rank badge для популярных проектов
+                if (showRank)
+                  Positioned(
+                    bottom: 12,
+                    left: 12,
+                    child: Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: rank <= 3 ? Colors.amber : Colors.white.withOpacity(0.9),
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.3),
+                            blurRadius: 8,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Center(
                         child: Text(
-                          _getStatusText(project.status),
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
+                          '#$rank',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: rank <= 3 ? Colors.white : AppTheme.primaryColor,
                           ),
                         ),
                       ),
                     ),
-                    // Категория проекта
-                    Positioned(
-                      top: 12,
-                      left: 12,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: _getCategoryColor(project.category),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Text(
-                          _getCategoryText(project.category),
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+                  ),
+              ],
+            ),
 
             // Информация о проекте
             Padding(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -269,23 +434,32 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
                         child: Text(
                           project.title,
                           style: const TextStyle(
-                            fontSize: 20,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      Row(
-                        children: [
-                          const Icon(Icons.star, color: Colors.amber, size: 20),
-                          const SizedBox(width: 4),
-                          Text(
-                            project.rating.toStringAsFixed(1),
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: Colors.amber.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.star, color: Colors.amber, size: 18),
+                            const SizedBox(width: 4),
+                            Text(
+                              project.rating.toStringAsFixed(1),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -295,31 +469,36 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
                   Text(
                     project.description,
                     style: TextStyle(
-                      color: Colors.grey[600],
+                      color: Colors.grey[700],
                       fontSize: 14,
+                      height: 1.4,
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 12),
 
                   // Технологии
                   Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    children: project.technologies.take(3).map((tech) => 
+                    spacing: 6,
+                    runSpacing: 6,
+                    children: project.technologies.take(5).map((tech) => 
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
                           color: AppTheme.primaryColor.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(6),
+                          border: Border.all(
+                            color: AppTheme.primaryColor.withOpacity(0.3),
+                            width: 1,
+                          ),
                         ),
                         child: Text(
                           tech,
                           style: TextStyle(
                             color: AppTheme.primaryColor,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                       ),
@@ -327,27 +506,40 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
                   ),
                   const SizedBox(height: 16),
 
+                  // Разделитель
+                  Divider(color: Colors.grey[300]),
+                  const SizedBox(height: 12),
+
                   // Метаданные и статистика
                   Row(
                     children: [
-                      _buildProjectMeta(Icons.favorite, '${project.likes}'),
+                      _buildProjectMeta(Icons.favorite, '${project.likes}', Colors.red),
                       const SizedBox(width: 16),
-                      _buildProjectMeta(Icons.visibility, '${project.views}'),
+                      _buildProjectMeta(Icons.visibility, '${project.views}', Colors.blue),
                       const SizedBox(width: 16),
-                      _buildProjectMeta(Icons.calendar_today, _formatDate(project.createdAt)),
+                      _buildProjectMeta(Icons.calendar_today, _formatDate(project.createdAt), Colors.grey),
                       const Spacer(),
+                      // Кнопки действий
                       if (project.githubUrl != null)
                         IconButton(
-                          icon: const Icon(Icons.code),
+                          icon: const Icon(Icons.code, size: 22),
                           onPressed: () => _openUrl(project.githubUrl!),
                           tooltip: 'GitHub',
+                          color: Colors.grey[700],
                         ),
                       if (project.liveUrl != null)
                         IconButton(
-                          icon: const Icon(Icons.launch),
+                          icon: const Icon(Icons.launch, size: 22),
                           onPressed: () => _openUrl(project.liveUrl!),
                           tooltip: 'Live Demo',
+                          color: Colors.grey[700],
                         ),
+                      IconButton(
+                        icon: const Icon(Icons.favorite_border, size: 22),
+                        onPressed: () => _likeProject(project, provider),
+                        tooltip: 'Лайк',
+                        color: Colors.grey[700],
+                      ),
                     ],
                   ),
                 ],
@@ -360,16 +552,17 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
   }
 
   // Метаданные проекта
-  Widget _buildProjectMeta(IconData icon, String text) {
+  Widget _buildProjectMeta(IconData icon, String text, Color color) {
     return Row(
       children: [
-        Icon(icon, size: 16, color: Colors.grey[600]),
+        Icon(icon, size: 16, color: color),
         const SizedBox(width: 4),
         Text(
           text,
           style: TextStyle(
-            color: Colors.grey[600],
+            color: color,
             fontSize: 12,
+            fontWeight: FontWeight.w500,
           ),
         ),
       ],
@@ -377,41 +570,78 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
   }
 
   // Пустое состояние
-  Widget _buildEmptyState(String title, String subtitle, {Widget? actionButton}) {
+  Widget _buildEmptyState(String title, String subtitle, {Widget? actionButton, IconData icon = Icons.work_outline}) {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.work_outline,
-            size: 80,
-            color: Colors.grey[400],
-          ),
-          const SizedBox(height: 16),
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.grey,
+      child: Padding(
+        padding: const EdgeInsets.all(32),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                color: AppTheme.primaryColor.withOpacity(0.1),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                icon,
+                size: 64,
+                color: AppTheme.primaryColor.withOpacity(0.6),
+              ),
             ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            subtitle,
-            style: TextStyle(
-              fontSize: 16,
-              color: Colors.grey[600],
-            ),
-            textAlign: TextAlign.center,
-          ),
-          if (actionButton != null) ...[
             const SizedBox(height: 24),
-            actionButton,
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 12),
+            Text(
+              subtitle,
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey[600],
+                height: 1.4,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            if (actionButton != null) ...[
+              const SizedBox(height: 32),
+              actionButton,
+            ],
           ],
-        ],
+        ),
       ),
     );
+  }
+
+  // Лайк проекта
+  Future<void> _likeProject(ProjectModel project, PortfolioProvider provider) async {
+    final result = await provider.likeProject(project.id);
+    if (mounted) {
+      if (result.isSuccess) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Row(
+              children: [
+                const Icon(Icons.favorite, color: Colors.white),
+                const SizedBox(width: 8),
+                Text('Вы оценили проект "${project.title}"'),
+              ],
+            ),
+            backgroundColor: Colors.green,
+            behavior: SnackBarBehavior.floating,
+            duration: const Duration(seconds: 2),
+          ),
+        );
+      } else {
+        _showErrorSnackBar(result.error?.message ?? 'Ошибка');
+      }
+    }
   }
 
   // Диалог поиска
@@ -530,17 +760,147 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
 
   // Диалог добавления проекта
   void _showAddProjectDialog() {
-    // Заглушка для добавления проекта
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Функция добавления проекта будет реализована позже'),
-        backgroundColor: Colors.blue,
+    final titleController = TextEditingController();
+    final descController = TextEditingController();
+    ProjectCategory selectedCategory = ProjectCategory.defi;
+    ProjectStatus selectedStatus = ProjectStatus.inProgress;
+
+    showDialog(
+      context: context,
+      builder: (context) => StatefulBuilder(
+        builder: (context, setDialogState) => AlertDialog(
+          title: const Text('Новый проект'),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: titleController,
+                  decoration: const InputDecoration(
+                    labelText: 'Название',
+                    border: OutlineInputBorder(),
+                    prefixIcon: Icon(Icons.title),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: descController,
+                  decoration: const InputDecoration(
+                    labelText: 'Описание',
+                    border: OutlineInputBorder(),
+                    prefixIcon: Icon(Icons.description),
+                  ),
+                  maxLines: 3,
+                ),
+                const SizedBox(height: 16),
+                DropdownButtonFormField<ProjectCategory>(
+                  value: selectedCategory,
+                  decoration: const InputDecoration(
+                    labelText: 'Категория',
+                    border: OutlineInputBorder(),
+                  ),
+                  items: ProjectCategory.values.map((cat) => DropdownMenuItem(
+                    value: cat,
+                    child: Text(_getCategoryText(cat)),
+                  )).toList(),
+                  onChanged: (value) {
+                    setDialogState(() => selectedCategory = value!);
+                  },
+                ),
+                const SizedBox(height: 16),
+                DropdownButtonFormField<ProjectStatus>(
+                  value: selectedStatus,
+                  decoration: const InputDecoration(
+                    labelText: 'Статус',
+                    border: OutlineInputBorder(),
+                  ),
+                  items: ProjectStatus.values.map((status) => DropdownMenuItem(
+                    value: status,
+                    child: Text(_getStatusText(status)),
+                  )).toList(),
+                  onChanged: (value) {
+                    setDialogState(() => selectedStatus = value!);
+                  },
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Отмена'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                Navigator.pop(context);
+                await _createProject(
+                  titleController.text,
+                  descController.text,
+                  selectedCategory,
+                  selectedStatus,
+                );
+              },
+              child: const Text('Создать'),
+            ),
+          ],
+        ),
       ),
     );
   }
 
+  // Создание проекта
+  Future<void> _createProject(
+    String title,
+    String description,
+    ProjectCategory category,
+    ProjectStatus status,
+  ) async {
+    if (title.isEmpty || description.isEmpty) {
+      _showErrorSnackBar('Заполните название и описание');
+      return;
+    }
+
+    final provider = context.read<PortfolioProvider>();
+    final authProvider = context.read<AuthProvider>();
+    final userId = authProvider.userId ?? 'current_user_id';
+
+    final project = ProjectModel(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      title: title,
+      description: description,
+      userId: userId,
+      category: category,
+      status: status,
+      technologies: const ['Flutter'],
+      images: const [],
+      createdAt: DateTime.now(),
+      tags: const [],
+    );
+
+    final result = await provider.addProject(project);
+    if (mounted) {
+      if (result.isSuccess) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Row(
+              children: [
+                const Icon(Icons.check_circle, color: Colors.white),
+                const SizedBox(width: 8),
+                const Text('Проект успешно создан!'),
+              ],
+            ),
+            backgroundColor: Colors.green,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      } else {
+        _showErrorSnackBar(result.error?.message ?? 'Ошибка создания');
+      }
+    }
+  }
+
   // Показать детали проекта
-  void _showProjectDetails(Project project, PortfolioProvider provider) {
+  void _showProjectDetails(ProjectModel project, PortfolioProvider provider) {
     provider.incrementViews(project.id);
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -551,11 +911,28 @@ class _PortfolioScreenState extends State<PortfolioScreen> with TickerProviderSt
 
   // Открыть URL
   void _openUrl(String url) {
-    // В реальном приложении здесь будет открытие URL
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Открытие: $url'),
-        backgroundColor: Colors.blue,
+        backgroundColor: AppTheme.primaryColor,
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
+  }
+
+  // Уведомления
+  void _showErrorSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Row(
+          children: [
+            const Icon(Icons.error_outline, color: Colors.white),
+            const SizedBox(width: 8),
+            Expanded(child: Text(message)),
+          ],
+        ),
+        backgroundColor: Colors.red,
+        behavior: SnackBarBehavior.floating,
       ),
     );
   }

@@ -1,30 +1,71 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:rechain_vc_lab/main.dart';
+import 'package:rechain_vc_lab/core/result.dart';
+import 'package:rechain_vc_lab/core/app_error.dart';
+import 'package:rechain_vc_lab/models/user_model.dart';
+import 'package:rechain_vc_lab/models/project_model.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  group('Result<T,E>', () {
+    test('Success holds value', () {
+      const result = Success<int, AppError>(42);
+      expect(result.isSuccess, true);
+      expect(result.value, 42);
+      expect(result.error, null);
+    });
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    test('Failure holds error', () {
+      const result = Failure<int, AppError>(AuthError('unauthorized'));
+      expect(result.isFailure, true);
+      expect(result.value, null);
+      expect(result.error, isA<AuthError>());
+    });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    test('when maps both branches', () {
+      const ok = Success<int, AppError>(10);
+      final mapped = ok.when(success: (v) => v * 2, failure: (_) => 0);
+      expect(mapped, 20);
+    });
+  });
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  group('UserModel', () {
+    test('empty user has isEmpty == true', () {
+      expect(UserModel.empty.isEmpty, true);
+      expect(UserModel.empty.isNotEmpty, false);
+    });
+
+    test('fromJson / toJson roundtrip', () {
+      const user = UserModel(
+        id: 'u1',
+        name: 'Alice',
+        email: 'alice@example.com',
+        role: 'admin',
+        permissions: ['read', 'write'],
+      );
+      final json = user.toJson();
+      final restored = UserModel.fromJson(json);
+      expect(restored.id, 'u1');
+      expect(restored.name, 'Alice');
+      expect(restored.permissions, ['read', 'write']);
+    });
+  });
+
+  group('ProjectModel', () {
+    test('copyWith changes only provided fields', () {
+      final project = ProjectModel(
+        id: 'p1',
+        title: 'Old',
+        description: 'Desc',
+        userId: 'u1',
+        category: ProjectCategory.defi,
+        status: ProjectStatus.inProgress,
+        technologies: const ['Flutter'],
+        images: const [],
+        createdAt: DateTime(2024, 1, 1),
+        tags: const [],
+      );
+      final updated = project.copyWith(title: 'New');
+      expect(updated.title, 'New');
+      expect(updated.id, 'p1');
+    });
   });
 }

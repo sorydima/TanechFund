@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:injectable/injectable.dart';
+import 'package:rechain_vc_lab/core/base/base_provider.dart';
+import 'package:rechain_vc_lab/core/logger.dart';
+import 'package:rechain_vc_lab/services/storage_service.dart';
 
 // Web4 Movement Models
 class MovementTrajectory {
@@ -209,55 +212,65 @@ enum StepType {
   sharing,
 }
 
-class Web4MovementProvider extends ChangeNotifier {
+/// Web4 Movement Provider с управлением состоянием траекторий и цифровых идентичностей.
+@singleton
+class Web4MovementProvider extends BaseProvider {
+  final StorageService _storage;
+
   List<MovementTrajectory> _trajectories = [];
   List<DigitalIdentity> _identities = [];
-  bool _isLoading = false;
-  String? _error;
 
   List<MovementTrajectory> get trajectories => _trajectories;
   List<DigitalIdentity> get identities => _identities;
-  bool get isLoading => _isLoading;
-  String? get error => _error;
 
-  // Initialize with demo data
-  Future<void> initialize() async {
-    _isLoading = true;
-    notifyListeners();
+  Web4MovementProvider(this._storage) {
+    initialize();
+  }
 
-    try {
-      await _loadData();
-      if (_trajectories.isEmpty) {
-        await _createDemoData();
-      }
-    } catch (e) {
-      _error = e.toString();
-    } finally {
-      _isLoading = false;
-      notifyListeners();
-    }
+  /// Инициализация провайдера
+  @override
+  void initialize() {
+    _loadData();
   }
 
   Future<void> _loadData() async {
-    final prefs = await SharedPreferences.getInstance();
-    final trajectoriesJson = prefs.getString('web4_trajectories');
-    final identitiesJson = prefs.getString('web4_identities');
+    await execute(
+      () async {
+        final trajectoriesResult = _storage.get<String>('web4_trajectories', '');
+        final identitiesResult = _storage.get<String>('web4_identities', '');
 
-    if (trajectoriesJson != null) {
-      final List<dynamic> trajectoriesList = json.decode(trajectoriesJson);
-      _trajectories = trajectoriesList.map((json) => MovementTrajectory.fromJson(json)).toList();
-    }
+        if (trajectoriesResult.isSuccess && trajectoriesResult.value!.isNotEmpty) {
+          final List<dynamic> trajectoriesList = json.decode(trajectoriesResult.value!);
+          _trajectories = trajectoriesList.map((json) => MovementTrajectory.fromJson(json)).toList();
+        }
 
-    if (identitiesJson != null) {
-      final List<dynamic> identitiesList = json.decode(identitiesJson);
-      _identities = identitiesList.map((json) => DigitalIdentity.fromJson(json)).toList();
-    }
+        if (identitiesResult.isSuccess && identitiesResult.value!.isNotEmpty) {
+          final List<dynamic> identitiesList = json.decode(identitiesResult.value!);
+          _identities = identitiesList.map((json) => DigitalIdentity.fromJson(json)).toList();
+        }
+
+        if (_trajectories.isEmpty) {
+          await _createDemoData();
+        }
+      },
+      errorPrefix: 'Ошибка загрузки данных Web4',
+    );
   }
 
   Future<void> _saveData() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('web4_trajectories', json.encode(_trajectories.map((t) => t.toJson()).toList()));
-    await prefs.setString('web4_identities', json.encode(_identities.map((i) => i.toJson()).toList()));
+    await execute(
+      () async {
+        await _storage.set<String>(
+          'web4_trajectories',
+          json.encode(_trajectories.map((t) => t.toJson()).toList()),
+        );
+        await _storage.set<String>(
+          'web4_identities',
+          json.encode(_identities.map((i) => i.toJson()).toList()),
+        );
+      },
+      errorPrefix: 'Ошибка сохранения данных Web4',
+    );
   }
 
   Future<void> _createDemoData() async {
@@ -343,84 +356,103 @@ class Web4MovementProvider extends ChangeNotifier {
     await _saveData();
   }
 
+  /// Добавление новой траектории
   Future<void> addTrajectory(MovementTrajectory trajectory) async {
     _trajectories.add(trajectory);
     await _saveData();
-    notifyListeners();
   }
 
+  /// Обновление существующей траектории
   Future<void> updateTrajectory(MovementTrajectory trajectory) async {
     final index = _trajectories.indexWhere((t) => t.id == trajectory.id);
     if (index != -1) {
       _trajectories[index] = trajectory;
       await _saveData();
-      notifyListeners();
+    } else {
+      AppLogger.warning('Trajectory not found: ${trajectory.id}');
     }
   }
 
+  /// Удаление траектории
   Future<void> deleteTrajectory(String trajectoryId) async {
     _trajectories.removeWhere((t) => t.id == trajectoryId);
     await _saveData();
-    notifyListeners();
   }
 
+  /// Завершение шага траектории
   Future<void> completeStep(String trajectoryId, String stepId) async {
     final trajectoryIndex = _trajectories.indexWhere((t) => t.id == trajectoryId);
-    if (trajectoryIndex != -1) {
-      final stepIndex = _trajectories[trajectoryIndex].steps.indexWhere((s) => s.id == stepId);
-      if (stepIndex != -1) {
-        final updatedStep = MovementStep(
-          id: _trajectories[trajectoryIndex].steps[stepIndex].id,
-          title: _trajectories[trajectoryIndex].steps[stepIndex].title,
-          description: _trajectories[trajectoryIndex].steps[stepIndex].description,
-          type: _trajectories[trajectoryIndex].steps[stepIndex].type,
-          isCompleted: true,
-          completedAt: DateTime.now(),
-          data: _trajectories[trajectoryIndex].steps[stepIndex].data,
-        );
-
-        final updatedSteps = List<MovementStep>.from(_trajectories[trajectoryIndex].steps);
-        updatedSteps[stepIndex] = updatedStep;
-
-        final completedSteps = updatedSteps.where((s) => s.isCompleted).length;
-        final progress = (completedSteps / updatedSteps.length * 100).round();
-
-        final updatedTrajectory = _trajectories[trajectoryIndex].copyWith(
-          steps: updatedSteps,
-          progress: progress,
-        );
-
-        _trajectories[trajectoryIndex] = updatedTrajectory;
-        await _saveData();
-        notifyListeners();
-      }
+    if (trajectoryIndex == -1) {
+      AppLogger.warning('Trajectory not found: $trajectoryId');
+      return;
     }
+
+    final stepIndex = _trajectories[trajectoryIndex].steps.indexWhere((s) => s.id == stepId);
+    if (stepIndex == -1) {
+      AppLogger.warning('Step not found: $stepId');
+      return;
+    }
+
+    final updatedStep = MovementStep(
+      id: _trajectories[trajectoryIndex].steps[stepIndex].id,
+      title: _trajectories[trajectoryIndex].steps[stepIndex].title,
+      description: _trajectories[trajectoryIndex].steps[stepIndex].description,
+      type: _trajectories[trajectoryIndex].steps[stepIndex].type,
+      isCompleted: true,
+      completedAt: DateTime.now(),
+      data: _trajectories[trajectoryIndex].steps[stepIndex].data,
+    );
+
+    final updatedSteps = List<MovementStep>.from(_trajectories[trajectoryIndex].steps);
+    updatedSteps[stepIndex] = updatedStep;
+
+    final completedSteps = updatedSteps.where((s) => s.isCompleted).length;
+    final progress = (completedSteps / updatedSteps.length * 100).round();
+
+    final updatedTrajectory = _trajectories[trajectoryIndex].copyWith(
+      steps: updatedSteps,
+      progress: progress,
+    );
+
+    _trajectories[trajectoryIndex] = updatedTrajectory;
+    await _saveData();
   }
 
+  /// Добавление цифровой идентичности
   Future<void> addIdentity(DigitalIdentity identity) async {
     _identities.add(identity);
     await _saveData();
-    notifyListeners();
   }
 
+  /// Обновление цифровой идентичности
   Future<void> updateIdentity(DigitalIdentity identity) async {
     final index = _identities.indexWhere((i) => i.id == identity.id);
     if (index != -1) {
       _identities[index] = identity;
       await _saveData();
-      notifyListeners();
+    } else {
+      AppLogger.warning('Identity not found: ${identity.id}');
     }
   }
 
+  /// Получение траекторий по типу
   List<MovementTrajectory> getTrajectoriesByType(MovementType type) {
     return _trajectories.where((t) => t.type == type).toList();
   }
 
+  /// Получение активных траекторий
   List<MovementTrajectory> getActiveTrajectories() {
     return _trajectories.where((t) => t.status == MovementStatus.active).toList();
   }
 
+  /// Получение активных идентичностей
   List<DigitalIdentity> getActiveIdentities() {
     return _identities.where((i) => i.isActive).toList();
+  }
+
+  @override
+  void dispose() {
+    AppLogger.debug('Web4MovementProvider disposed');
+    super.dispose();
   }
 }
