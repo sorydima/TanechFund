@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // Web5 Creation Models
@@ -291,6 +292,7 @@ enum AISpecialty {
   artistic,
 }
 
+@injectable
 class Web5CreationProvider extends ChangeNotifier {
   List<CreationProject> _projects = [];
   List<AICollaborator> _aiCollaborators = [];

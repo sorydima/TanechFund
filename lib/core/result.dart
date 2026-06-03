@@ -32,6 +32,10 @@ sealed class Result<T, E> {
       Failure<T, E>(error: final e) => Failure(e),
     };
   }
+
+  /// Factory методы для создания результатов
+  static Success<T, E> success<T, E>(T value) => Success<T, E>(value);
+  static Failure<T, E> failure<T, E>(E error) => Failure<T, E>(error);
 }
 
 final class Success<T, E> extends Result<T, E> {

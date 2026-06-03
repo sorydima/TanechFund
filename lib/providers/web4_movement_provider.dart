@@ -213,7 +213,7 @@ enum StepType {
 }
 
 /// Web4 Movement Provider с управлением состоянием траекторий и цифровых идентичностей.
-@singleton
+@injectable
 class Web4MovementProvider extends BaseProvider {
   final StorageService _storage;
 

@@ -22,6 +22,8 @@ import '../core/performance/background_sync.dart' as _i222;
 import '../core/performance/memory_optimizer.dart' as _i747;
 import '../core/performance/performance_monitor.dart' as _i1008;
 import '../core/security/biometric_auth.dart' as _i145;
+import '../core/services/did_service.dart' as _i876;
+import '../core/services/ipfs_service.dart' as _i610;
 import '../core/stability/health_check_service.dart' as _i109;
 import '../core/stability/rate_limiter.dart' as _i919;
 import '../core/storage/cache_manager.dart' as _i799;
@@ -33,6 +35,9 @@ import '../domain/repositories/auth_repository.dart' as _i800;
 import '../providers/app_provider_v2.dart' as _i392;
 import '../providers/auth_provider_v2.dart' as _i848;
 import '../providers/web4_movement_provider.dart' as _i1049;
+import '../providers/web4_movement_provider_v2.dart' as _i211;
+import '../providers/web5_creation_provider.dart' as _i305;
+import '../providers/web5_creation_provider_v2.dart' as _i207;
 import '../services/storage_service.dart' as _i306;
 import 'register_module.dart' as _i291;
 
@@ -48,6 +53,7 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final registerModule = _$RegisterModule();
+    gh.factory<_i305.Web5CreationProvider>(() => _i305.Web5CreationProvider());
     gh.singleton<_i747.MemoryOptimizer>(() => _i747.MemoryOptimizer());
     gh.singleton<_i1008.PerformanceMonitor>(() => _i1008.PerformanceMonitor());
     gh.singleton<_i799.CacheManager>(() => _i799.CacheManager());
@@ -63,20 +69,37 @@ extension GetItInjectableX on _i174.GetIt {
       () => registerModule.storageService,
       preResolve: true,
     );
+    gh.singleton<_i876.DIDService>(() => _i876.DIDService());
     gh.singleton<_i145.BiometricAuthService>(
         () => registerModule.biometricAuth(gh<_i152.LocalAuthentication>()));
+    gh.singleton<_i610.IPFSService>(() => _i610.IPFSService(
+          gatewayUrl: gh<String>(),
+          uploadUrl: gh<String>(),
+        ));
     gh.singleton<_i222.BackgroundSyncService>(
         () => _i222.BackgroundSyncService(gh<_i1001.NetworkManager>()));
+    gh.factory<_i1049.Web4MovementProvider>(
+        () => _i1049.Web4MovementProvider(gh<_i306.StorageService>()));
     gh.singleton<_i392.AppProviderV2>(
         () => _i392.AppProviderV2(gh<_i306.StorageService>()));
-    gh.singleton<_i1049.Web4MovementProvider>(
-        () => _i1049.Web4MovementProvider(gh<_i306.StorageService>()));
+    gh.singleton<_i211.Web4MovementProviderV2>(
+        () => _i211.Web4MovementProviderV2(
+              gh<_i876.DIDService>(),
+              gh<_i610.IPFSService>(),
+              gh<_i1049.Web4MovementProvider>(),
+            ));
     gh.singleton<_i637.ISecureStorage>(
         () => registerModule.secureStorage(gh<_i558.FlutterSecureStorage>()));
     gh.factory<_i800.IAuthRepository>(() => _i74.AuthRepository(
           gh<_i637.ISecureStorage>(),
           gh<_i306.StorageService>(),
         ));
+    gh.singleton<_i207.Web5CreationProviderV2>(
+        () => _i207.Web5CreationProviderV2(
+              gh<_i876.DIDService>(),
+              gh<_i610.IPFSService>(),
+              gh<_i305.Web5CreationProvider>(),
+            ));
     gh.singleton<_i109.HealthCheckService>(
         () => registerModule.healthCheckService(
               gh<_i1001.NetworkManager>(),

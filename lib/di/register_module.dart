@@ -6,10 +6,14 @@ import 'package:local_auth/local_auth.dart';
 import 'package:rechain_vc_lab/core/network/dio_client.dart';
 import 'package:rechain_vc_lab/core/network/network_manager.dart';
 import 'package:rechain_vc_lab/core/security/biometric_auth.dart';
+import 'package:rechain_vc_lab/core/services/did_service.dart';
+import 'package:rechain_vc_lab/core/services/ipfs_service.dart';
 import 'package:rechain_vc_lab/core/storage/cache_service.dart';
 import 'package:rechain_vc_lab/core/stability/health_check_service.dart';
 import 'package:rechain_vc_lab/core/stability/rate_limiter.dart';
 import 'package:rechain_vc_lab/core/storage/secure_storage.dart';
+import 'package:rechain_vc_lab/providers/web4_movement_provider.dart';
+import 'package:rechain_vc_lab/providers/web5_creation_provider.dart';
 import 'package:rechain_vc_lab/services/storage_service.dart';
 
 /// Модуль регистрации third-party зависимостей.
@@ -63,3 +67,4 @@ abstract class RegisterModule {
   ) =>
       HealthCheckService(networkManager, storageService, cacheService);
 }
+
