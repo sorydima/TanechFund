@@ -13,7 +13,7 @@ dependencies:
   
   # DI
   get_it: ^8.0.3
-  injectable: ^2.5.0
+  injectable: ^3.0.0
   
   # Logging
   logger: ^2.5.0
@@ -29,7 +29,7 @@ dependencies:
 
   # State Management
   provider: ^6.1.2
-  freezed_annotation: ^2.4.1
+  freezed_annotation: ^3.1.0
   
   # Storage
   shared_preferences: ^2.5.5
@@ -58,11 +58,11 @@ dev_dependencies:
   flutter_lints: ^4.0.0
 
   # Code Generation
-  injectable_generator: ^2.7.0
-  build_runner: ^2.4.15
-  freezed: ^2.4.5
-  json_serializable: ^6.9.4
-  mockito: ^5.4.5
+  injectable_generator: ^3.1.0
+  build_runner: ^2.15.0
+  freezed: ^4.0.0-dev.3
+  json_serializable: ^6.14.0
+  mockito: ^5.7.0
 
 flutter:
   uses-material-design: true
