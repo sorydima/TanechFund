@@ -20,7 +20,7 @@ dependencies:
 
   # Network
   http: ^1.6.0
-  dio: ^5.8.0+1
+  dio: ^5.10.0
   connectivity_plus: ^6.1.4
   pretty_dio_logger: ^1.4.0
 
