@@ -38,6 +38,11 @@ class DID {
     return uuid.substring(uuid.length - 32);
   }
 
+  /// Генерация уникального ID для креденшиалов
+  static String generateCredentialId() {
+    return _uuid();
+  }
+
   Map<String, dynamic> toJson() {
     return {
       'id': id,

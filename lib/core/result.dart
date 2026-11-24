@@ -6,11 +6,13 @@ sealed class Result<T, E> {
   bool get isSuccess => this is Success<T, E>;
   bool get isFailure => this is Failure<T, E>;
 
+  @override
   T? get value => switch (this) {
         Success<T, E>(value: final v) => v,
         Failure<T, E>() => null,
       };
 
+  @override
   E? get error => switch (this) {
         Success<T, E>() => null,
         Failure<T, E>(error: final e) => e,

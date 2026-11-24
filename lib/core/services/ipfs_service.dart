@@ -48,7 +48,7 @@ class IPFSService {
       }
     } catch (e) {
       AppLogger.error('IPFS upload error', e);
-      return Result.failure(e);
+      return Result.failure(e as Exception);
     }
   }
 
@@ -84,7 +84,7 @@ class IPFSService {
       }
     } catch (e) {
       AppLogger.error('IPFS retrieval error', e);
-      return Result.failure(e);
+      return Result.failure(e as Exception);
     }
   }
 
@@ -92,11 +92,11 @@ class IPFSService {
   Future<Result<Map<String, dynamic>, Exception>> getJson(String cid) async {
     final result = await getData(cid);
     if (result.isFailure) {
-      return Result.failure(result.error);
+      return Result.failure(result.error!);
     }
     
     try {
-      return Result.success(Map<String, dynamic>.from(result.value));
+      return Result.success(Map<String, dynamic>.from(result.value!));
     } catch (e) {
       return Result.failure(Exception('Invalid JSON format'));
     }
@@ -106,10 +106,10 @@ class IPFSService {
   Future<Result<String, Exception>> getText(String cid) async {
     final result = await getData(cid);
     if (result.isFailure) {
-      return Result.failure(result.error);
+      return Result.failure(result.error!);
     }
     
-    return Result.success(result.value.toString());
+    return Result.success(result.value!.toString());
   }
 
   /// Проверка существования контента по CID
@@ -119,7 +119,7 @@ class IPFSService {
       final response = await http.get(Uri.parse(url));
       return Result.success(response.statusCode == 200);
     } catch (e) {
-      return Result.failure(e);
+      return Result.failure(e as Exception);
     }
   }
 
@@ -141,7 +141,7 @@ class IPFSService {
       return Result.success(true);
     } catch (e) {
       AppLogger.error('Pin content error', e);
-      return Result.failure(e);
+      return Result.failure(e as Exception);
     }
   }
 
@@ -154,7 +154,7 @@ class IPFSService {
       return Result.success(true);
     } catch (e) {
       AppLogger.error('Unpin content error', e);
-      return Result.failure(e);
+      return Result.failure(e as Exception);
     }
   }
 
@@ -172,7 +172,7 @@ class IPFSService {
       });
     } catch (e) {
       AppLogger.error('Get content info error', e);
-      return Result.failure(e);
+      return Result.failure(e as Exception);
     }
   }
 
@@ -200,7 +200,7 @@ class IPFSService {
       return result;
     } catch (e) {
       AppLogger.error('Upload Web5 project error', e);
-      return Result.failure(e);
+      return Result.failure(e as Exception);
     }
   }
 
@@ -227,7 +227,7 @@ class IPFSService {
       return result;
     } catch (e) {
       AppLogger.error('Upload Web4 trajectory error', e);
-      return Result.failure(e);
+      return Result.failure(e as Exception);
     }
   }
 
@@ -235,32 +235,32 @@ class IPFSService {
   Future<Result<Map<String, dynamic>, Exception>> getWeb5Project(String cid) async {
     final result = await getJson(cid);
     if (result.isFailure) {
-      return Result.failure(result.error);
+      return Result.failure(result.error!);
     }
 
-    final data = result.value;
+    final data = result.value!;
     
     if (data['type'] != 'web5_project') {
       return Result.failure(Exception('Invalid project type'));
     }
 
-    return Result.success(Map<String, dynamic>.from(data['data']));
+    return Result.success(Map<String, dynamic>.from(data['data']!));
   }
 
   /// Получение траектории Web4 из IPFS
   Future<Result<Map<String, dynamic>, Exception>> getWeb4Trajectory(String cid) async {
     final result = await getJson(cid);
     if (result.isFailure) {
-      return Result.failure(result.error);
+      return Result.failure(result.error!);
     }
 
-    final data = result.value;
+    final data = result.value!;
     
     if (data['type'] != 'web4_trajectory') {
       return Result.failure(Exception('Invalid trajectory type'));
     }
 
-    return Result.success(Map<String, dynamic>.from(data['data']));
+    return Result.success(Map<String, dynamic>.from(data['data']!));
   }
 
   void dispose() {
